@@ -1,0 +1,64 @@
+﻿@model SystemViewModels.SystemSetting.HREmployeeBankListViewModelList
+@using PagedList.Mvc;
+<div id="replacetarget_@Model.BreadCrumbController">
+    <div id="content" class="content">
+        <div class="dataTables_wrapper">
+            <div id="mask-container">
+                <div id="mask"></div>
+                <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Bank</th>
+                            <th>Category</th>
+                            <th>Location</th>
+                            <th>Phone</th>
+                            <th>Swift Code</th>
+                            <th>IP</th>
+                            <th>Updated On</th>
+                            <th>Updated By</th>
+                            <th class="text-center">Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.DBModelList)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.BankName</td>
+                                <td>@item.BankCategory</td>
+                                <td>@item.BankLocation</td>
+                                <td>@item.Phone</td>
+                                <td>@item.SwiftCode</td>
+                                <td>@item.TerminalIP</td>
+                                <td>@item.UpdatedOn.ToString()</td>
+                                <td>@item.UpdatedBy</td>
+                                <td class="ace-icon">
+                                    <div>
+                                        <i class="ace-icon @(item.IsActive==true?"fa fa-thumbs-up green":"fa fa-thumbs-down red")) bigger-130" aria-hidden="true"></i>
+                                    </div>
+                                </td>
+                                <td class="ace-icon action-buttons">
+                                    <a href="@Url.Action("_UpdateHREmployeeBankListAsync",new { id=item.Id})" data-ajax-model-SystemStructure="">
+                                        <i class="ace-icon fa fa-pencil green bigger-150" aria-hidden="true" title="Edit"></i>
+                                    </a>
+                                    <a href="@Url.Action("_ReadHREmployeeBankListAsync",new { id=item.Id})" data-ajax-model-SystemStructure=""><i class="ace-icon fa fa-search-plus blue bigger-150" aria-hidden="true" title="View"></i></a>
+                                    <a href="@Url.Action("_DeleteHREmployeeBankListAsync",new { id=item.Id})" data-ajax-model-SystemStructure=""><i class="ace-icon fa fa-trash-o red bigger-150" aria-hidden="true" title="Delete"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div aria-live="polite" role="status" id="example_info" class="dataTables_info">
+                    <div class="row">
+                        <div class="col-md-4">Showing @(Model.DBModelList.PageCount < Model.DBModelList.PageNumber ? 0 : Model.DBModelList.FirstItemOnPage) to @Model.DBModelList.LastItemOnPage of @Model.DBModelList.TotalItemCount entries in @Model.DBModelList.PageCount Pages</div>
+                        <div class="col-md-8 dataTables_paginate paging_simple_numbers" id="example_paginate">@Html.PagedListPager(Model.DBModelList, page => Url.Action("_ListHREmployeeAsync", new { pageNumber = page, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey }))</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

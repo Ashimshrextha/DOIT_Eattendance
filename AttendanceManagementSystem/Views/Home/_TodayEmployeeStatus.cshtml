@@ -1,0 +1,59 @@
+﻿@model SystemViewModels.Home.HomeDashboardViewModelList
+<script src="~/Scripts/highcharts.js"></script>
+<style type="text/css">
+
+    #attendance {
+        width: 100%;
+        opacity:0.5;
+    }
+</style>
+<div id="attendance"></div>
+
+@{
+    var modelDB = Model.DbEmployeeTodayStat.FirstOrDefault();
+}
+<script type="text/javascript">
+        var chart = null;
+        chart=Highcharts.chart('attendance', {
+            chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+            }
+        },
+        title: {
+            text: 'आजको कर्मचारीहरुको स्थिति'
+        },
+        credits: {
+            enabled: false
+        },
+        //tooltip: {
+        //    pointFormat: '{series.name}: <b>{point.percentage:.1f}</b>'
+        //},
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}'
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'कुल संख्या',
+            data: [
+                ['काजमा बसेको',@modelDB.KaajCounter],
+                ['बिदामा बसेको', @modelDB.LeaveCounter],
+                ['उपस्थित',@modelDB.TotalPresentEmployee],
+                ['ढिलो आएको',@modelDB.TotalLateComer],
+                ['चाडो आएको',@modelDB.TotalCheckInEarly]
+            ]
+        }]
+    });
+</script>
+

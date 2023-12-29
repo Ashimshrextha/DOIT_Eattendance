@@ -1,0 +1,36 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeContactViewModel
+
+<div id="printThis">
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+			<tr>
+				<th>आईडी</th>
+                <th>सम्पर्कको प्रकार</th>
+                <th>सम्पर्क</th>
+                <th>सक्रिय अवस्था</th>
+                <th>पूर्वनिर्धारित</th>
+			</tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+            {
+			<tr>
+				<td>@item.Id</td>
+				<td>@item.HREmployeeContactType</td>
+				<td>@item.ContactNumber</td>
+				<td>@(item.IsActive)</td>
+				<td>@(item.IsDefault==true?"Yes":"No")</td>
+			</tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>

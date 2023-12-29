@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f125f23960204dde9b153e97744bec39" Name="Diagram1" ZoomLevel="49">
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.BiometricTemplateType" Width="1.5" PointX="11.625" PointY="58.5" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.City" Width="1.5" PointX="3" PointY="123.125" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.CityCategory" Width="1.5" PointX="0.75" PointY="121.625" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.Country" Width="1.5" PointX="11.625" PointY="53.5" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.CountryDistrict" Width="1.5" PointX="0.75" PointY="124.625" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.CountryState" Width="1.5" PointX="1.5" PointY="130.375" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.DayOfWeekNP" Width="1.5" PointX="9.625" PointY="63.75" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.DeviceLogsManual" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HRCalendar" Width="1.5" PointX="3" PointY="116.125" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HRCompanyAssignNotification" Width="1.5" PointX="16.5" PointY="95.125" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HRCompanyCode" Width="1.5" PointX="1.5" PointY="96.75" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HRCompanyDeviceMonitor" Width="1.5" PointX="2.75" PointY="5.75" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HRCompanyDivisionType" Width="1.5" PointX="6.75" PointY="102" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HRCompanyHistory" Width="1.5" PointX="3" PointY="92.875" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HRCompanyHREmployeeShiftDate" Width="1.5" PointX="8.25" PointY="81.375" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HRCompanyLeaveStatusType" Width="1.5" PointX="14.25" PointY="61.125" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HRCompanyLeaveType" Width="1.5" PointX="3" PointY="54.5" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HRCompanyNotification" Width="1.5" PointX="11.25" PointY="92.875" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HRCompanySystemSupport" Width="1.5" PointX="3" PointY="104.375" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HRCompanyType" Width="1.5" PointX="1.5" PointY="99.375" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HRDesignation" Width="1.5" PointX="9" PointY="56.375" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HRDevice" Width="1.5" PointX="22.25" PointY="80.375" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HRDeviceModel" Width="1.5" PointX="12" PointY="69.5" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HRDeviceModelUserVerficationMode" Width="1.5" PointX="14.25" PointY="99.375" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployee" Width="1.5" PointX="3" PointY="74.625" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeAddress" Width="1.5" PointX="5.25" PointY="91.375" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeAdvanceAmount" Width="1.5" PointX="8.25" PointY="86.375" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeBankAccount" Width="1.5" PointX="8.25" PointY="76.25" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeBankList" Width="1.5" PointX="6.125" PointY="60.75" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeBiometricTemplate" Width="1.5" PointX="14.25" PointY="73.25" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeBloodGroup" Width="1.5" PointX="0.75" PointY="104.75" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeCategory" Width="1.5" PointX="6.5" PointY="55.375" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeCompanyFacility" Width="1.5" PointX="5.25" PointY="191.5" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeContact" Width="1.5" PointX="11.25" PointY="88.375" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeContactType" Width="1.5" PointX="9" PointY="111.75" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeEducation" Width="1.5" PointX="8.25" PointY="69.75" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeEducationType" Width="1.5" PointX="6" PointY="68.75" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeEveryTwelveDaysLeaveBalance" Width="1.5" PointX="5.25" PointY="183.375" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeLeaveBalance" Width="1.5" PointX="5.25" PointY="76.375" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeLeaveHistory" Width="1.5" PointX="13.5" PointY="78.625" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeLeaveManagement" Width="1.5" PointX="5.25" PointY="86.25" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeLoan" Width="1.5" PointX="8.25" PointY="91.875" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeLoanRepaymentSchedule" Width="1.5" PointX="16.5" PointY="89.875" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeLoanTitle" Width="1.5" PointX="6" PointY="110.75" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeMarital" Width="1.5" PointX="0.75" PointY="73.125" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeMedicalRecord" Width="1.5" PointX="5.25" PointY="187.25" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeMessageService" Width="1.5" PointX="5.25" PointY="204.875" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeNationalIdentity" Width="1.5" PointX="14.25" PointY="92.625" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeNationalIdentityType" Width="1.5" PointX="12" PointY="98.875" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeePositionStatusType" Width="1.5" PointX="9" PointY="98.125" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeProperty" Width="1.5" PointX="5.25" PointY="179" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeRelationType" Width="1.5" PointX="0.75" PointY="108.25" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeReligion" Width="1.5" PointX="0.75" PointY="81.75" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeRole" Width="1.5" PointX="3" PointY="63.25" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeSalaryHistory" Width="1.5" PointX="5.25" PointY="195.75" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeServiceType" Width="1.5" PointX="9" PointY="106.5" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeServiceTypeGroup" Width="1.5" PointX="11.25" PointY="107" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeSex" Width="1.5" PointX="0.75" PointY="69.5" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HRLanguage" Width="1.5" PointX="0.75" PointY="76.625" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HRLanguageConversion" Width="1.5" PointX="5.125" PointY="1.625" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HRPublicHoliday" Width="1.5" PointX="6" PointY="81" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.KaajType" Width="1.5" PointX="14.25" PointY="57.125" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.LoanInstallmentMode" Width="1.5" PointX="6" PointY="106.75" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.LoginsHistory" Width="1.5" PointX="7.75" PointY="2" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.MasterLeaveTitle" Width="1.5" PointX="0.75" PointY="56.25" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.MonthNp" Width="1.5" PointX="6" PointY="5.625" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.NumberSystemConversion" Width="1.5" PointX="7.75" PointY="7.75" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="8.75" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.SystemComment" Width="1.5" PointX="11.25" PointY="74.25" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.SystemCommentResponse" Width="1.5" PointX="19.5" PointY="74.25" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.SystemDatabaseBackup" Width="1.5" PointX="3" PointY="109.75" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.SystemDetail" Width="1.5" PointX="3" PointY="2" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.SystemDetailCategory" Width="1.5" PointX="0.75" PointY="1.25" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.SystemLanguage" Width="1.5" PointX="4.75" PointY="8.75" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.SystemMenu" Width="1.5" PointX="9.75" PointY="116.375" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.SystemPermissionByHREmployee" Width="1.5" PointX="14.25" PointY="88.75" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.SystemPermissionByRole" Width="1.5" PointX="19.25" PointY="90.625" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.SystemStructure" Width="1.5" PointX="12" PointY="115.5" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.V_DeviceLogs" Width="1.5" PointX="9.625" PointY="2.375" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdTem__1E05700A" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdTem__39B87777" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__City__IdCityCate__29820FAE" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__City__IdCityCate__7D0E9093" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__City__IdCountry__2A7633E7" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__City__IdCountry__7E02B4CC" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__City__IdCountryD__2B6A5820" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__City__IdCountryD__7EF6D905" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdPer__0697FACD" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdPer__34F3C25A" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdTem__09746778" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdTem__37D02F05" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__CountryDi__IdCou__2D52A092" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__CountryDi__IdCou__7FEAFD3E" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__CountrySt__IdCou__01D345B0" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__CountrySt__IdCou__2E46C4CB" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__CountryDi__IdCou__00DF2177" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__CountryDi__IdCou__2C5E7C59" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdPer__078C1F06" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdPer__35E7E693" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdTem__0880433F" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdTem__36DC0ACC" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__Issue__3296789C" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRCalenda__IdRel__09BF4B92" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRCompany__IdNot__2B947552" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRCompany__IdNot__2F3AE904" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRCompany__IdHRE__481183C6" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdLea__3DD3211E" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdLea__4B8221F7" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRCompany__IdMas__70547F4A" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRC__4727812E" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdLea__03124E03" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdLea__7F80E8EA" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRCompany__IdNot__26CFC035" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRCompany__IdPar__31233176" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRCompany__IdPar__35FCF52C" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRDesigna__IdHRD__076201D4" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRDesigna__IdHRE__693CA210" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRDevice__IdHRDe__330B79E8" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRDevice__IdHRDe__63C3BFDC" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRDeviceM__IdHRD__22CA2527" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRDeviceM__IdHRD__33FF9E21" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRD__525A080F" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdApp__7D98A078" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdBlo__151B244E" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdGen__160F4887" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRE__021E29CA" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRE__03275C9C" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRE__05A3D694" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRE__0D0FEE32" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRE__14A6EE59" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRE__1D114BD1" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRE__2BFE89A6" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRE__2FCF1A8A" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRE__3552E9B6" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRE__46335CF5" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRE__46B27FE2" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRE__531856C7" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRE__603D47BB" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRE__6A5BAED2" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRE__7108AC61" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRE__7E8CC4B1" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRE__7F56CBB8" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRE__HREmployeeEveryTwelveDaysLeaveBalance3" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdMar__17036CC0" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdMot__14270015" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdRec__361203C5" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdRec__7CA47C3F" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdRel__2EA5EC27" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdSen__351DDF8C" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__SystemCom__IdHRE__7132C993" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__SystemCom__IdRec__27B9C2CD" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__SystemCom__IdSen__26C59E94" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__SystemPer__IdHRE__6B0FDBE9" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdLoa__7E62A77F" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdBan__38C4533E" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdBan__61316BF4" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdCon__36470DEF" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdCon__3AAC9BB0" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRE__2B0A656D" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRE__3BA0BFE9" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdMas__331666E0" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdMas__09202D14" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdMas__3BABACE1" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRE__70148828" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRE__7B863AD4" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdIns__6B4FD30B" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdNat__07E124C1" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRPublicH__IdRel__1BDDFBCD" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__SystemPer__IdRol__673F4B05" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdSer__3C94E422" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdSer__6F1576F7" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__SystemCom__IdSys__25D17A5B" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__SystemDet__IdSys__4A18FC72" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__SystemStr__IdSys__2759D01A" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__SystemPer__IdSys__6C040022" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__SystemPer__IdSys__68336F3E" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.DeviceLog" Width="1.5" PointX="11.375" PointY="5.875" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeJobStatu" Width="4.375" PointX="9.375" PointY="5" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.Login" Width="1.5" PointX="0.75" PointY="61.5" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.UserLog" Width="1.5" PointX="3" PointY="68.25" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__UserLogs__IdLogi__5BE2A6F2" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeManualAttendance" Width="1.5" PointX="10.75" PointY="9.25" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HRCompany" Width="1.5" PointX="13.75" PointY="104.125" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HRCompanyDivision" Width="1.5" PointX="16" PointY="106" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeKaajHistory" Width="1.5" PointX="16.5" PointY="78.25" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.MembershipProvider" Width="1.5" PointX="5.25" PointY="72.5" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdCou__239F1926" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRCompany__IdCom__12B3B8EF" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRCompany__IdCom__2C88998B" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRCompany__IdHRC__0EC32C7A" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRCompany__IdHRC__25DB9BFC" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRCompany__IdHRC__471D5F8D" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRCompany__IdHRC__52593CB8" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRCompany__IdHRC__5812160E" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRCompany__IdHRC__6497E884" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRCompany__IdHRC__6D0D32F4" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRCompany__IdHRC__7AF13DF7" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRDesigna__IdHRC__68487DD7" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRDevice__IdHRCo__321755AF" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRDevice__IdHRCo__62CF9BA3" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRC__2818EA29" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHrC__54B68676" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRC__5F7E2DAC" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRC__628FA481" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRC__656C112C" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRC__73E5190C" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRC__7ABC33CD" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRPublicH__IdHRC__797309D9" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__SystemCom__IdHRC__703EA55A" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__SystemDat__IdHRC__5B438874" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRCompany__IdDiv__16644E42" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRCompany__IdDiv__302F0D3D" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdKaa__55AAAAAF" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdApp__3EA749C6" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRE__3CBF0154" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdRec__3DB3258D" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__Membershi__IdHRE__6AEFE058" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdKaa__22AAF4ED" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__Membershi__IdHRE__2CDD9F46" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__Membershi__IdLog__69FBBC1F" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeAttendanceHistory" Width="1.5" PointX="19" PointY="94.5" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRC__32616E72" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdApp__587208C1" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRE__725BF7F6" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HRCompanyShiftRoaster" Width="1.5" PointX="16" PointY="111.375" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRCompany__IdHRC__5827EFFE" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HRCompanyHREmployeeShiftRoaster" Width="1.5" PointX="19.25" PointY="85.25" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRCompany__IdDay__5ED4ED8D" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRCompany__IdHRC__7E4D98E6" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRCompany__IdHRC__5FC911C6" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.LoginLogs" Width="1.5" PointX="0.75" PointY="9.875" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HRCompanyManualAttendance" Width="1.5" PointX="21.5" PointY="86.875" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK_HRCompanyManualAttendance_HRCompany" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK_HRCompanyManualAttendance_HRCompanyLeaveStatusType" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HRCompany__IdHRE__4E1F62D7" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK_HRCompanyManualAttendance_HREmployee" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HREmployeeJobHistory" Width="1.5" PointX="18.25" PointY="56" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRC__1EA48E88" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRC__1F98B2C1" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRD__208CD6FA" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRE__1DB06A4F" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdJob__605321AB" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRE__1CBC4616" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRE__2180FB33" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdHRE__4223A046" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdJob__3BCADD1B" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK__HREmploye__IdJob__7BB05806" />
+        <EntityTypeShape EntityType="EAttendanceSystemDBModel.HRCompanyEmployeeOfficeLog" Width="1.5" PointX="22" PointY="93.75" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK_HRCompanyEmployeeOfficeLogs_HRCompany" />
+        <AssociationConnector Association="EAttendanceSystemDBModel.FK_HRCompanyEmployeeOfficeLogs_HREmployee" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

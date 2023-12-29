@@ -1,0 +1,287 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeViewModel
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+@Html.HiddenFor(model => model.DBModel.Id)
+<div class="col-md-3">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<img class="center-block img-circle img-responsive img-thumbnail" src="~/images/avatars/avatar.png" alt="user-profile" height="100" width="100" />
+			<h4 class="text-center" style="font-size:21px;margin-top:5px">
+				@Model.DBModel.HREmployeeName
+			</h4>
+			<h5 class="ace-icon">
+				<span class="ace-icon label label-success " id="status">@Model.DBModel.HREmployeeSex.HREmployeeSexTitle</span>
+			</h5>
+			<hr />
+			<strong>Office</strong>
+			<p class="text-muted">@Model.DBModel.HRCompany.CompanyName</p>
+			<strong>PIS No.</strong>
+			<p class="text-muted">@Model.DBModel.IdEnroll</p>
+			<strong>Mobile</strong>
+			<p class="text-muted">@Model.DBModel.MobileNumber</p>
+		</div>
+	</div>
+</div>
+<div class="col-md-9">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<!-- Nav tabs -->
+			<ul id="tabstrip" class="nav nav-tabs">
+				<li class="active">
+                    <a href="#HREmployee" data-toggle="tab">
+                        कर्मचारी
+                    </a>
+				</li>
+				<li>
+                    <a href="#HREmployeeJobHistory" data-toggle="tab">
+                        जागिर विवरण
+                    </a>
+				</li>
+				<li>
+                    <a href="#HREmployeeFamilyDetails" data-toggle="tab">
+                        परिवार विवरण
+                    </a>
+				</li>
+				<li>
+                    <a href="#HREmployeeEducation" data-toggle="tab">
+                        शिक्षा
+                    </a>
+				</li>
+				<li>
+                    <a href="#HREmployeeContact" data-toggle="tab">
+                        सम्पर्क
+                    </a>
+				</li>
+				<li>
+                    <a href="#HREmployeeCompanyFacility" data-toggle="tab">
+                        कार्यालय सुविधा
+                    </a>
+				</li>
+				<li>
+                    <a href="#HREmployeeLeaveSummary" data-toggle="tab">
+                        बिदा सारांश
+                    </a>
+				</li>
+				<li>
+                    <a href="#HREmployeeBalanceLeaveSummary" data-toggle="tab">
+                        बचत बिदा सारांश
+                    </a>
+				</li>
+			</ul>
+			<!-- Tab panes -->
+			<div class="tab-content">
+				<div class="tab-pane fade in active" style="padding-top:10px;" id="HREmployee">
+                    <div class="table-responsive">
+                        <h4 class="page-header blue">
+                            <i class="fa bigger-130">व्यक्तिगत जानकारी</i>
+                        </h4>
+                        <table class="table table-border table-striped table-hover table-responsive">
+                            <colgroup>
+                                <col style="width:15%" />
+                                <col style="width:1%" />
+                                <col style="width:34%" />
+                                <col style="width:15%" />
+                                <col style="width:1%" />
+                                <col style="width:34%" />
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <th>कर्मचारी नाम(अंग्रेजी)</th>
+                                    <th>:</th>
+                                    <td class="blue">
+                                        <i class="fa bigger-130">@Model.DBModel.HREmployeeName</i>
+                                    </td>
+                                    <th>कर्मचारी नाम(देवनागरी)</th>
+                                    <th>:</th>
+                                    <td class="blue">
+                                        <i class="fa bigger-130">@Model.DBModel.HREmployeeNameNP</i>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>जन्म स्थान</th>
+                                    <th>:</th>
+                                    <td>
+                                        @Model.DBModel.BirthPlace
+                                    </td>
+                                    <th>कर्मचारी संकेत न.</th>
+                                    <th>:</th>
+                                    <td>
+                                        <i class="fa bigger-130 badge badge-grey">@Model.DBModel.IdEnroll</i>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>मातृभाषा</th>
+                                    <th>:</th>
+                                    <td>@Model.DBModel.HRLanguage.HRLanguageTitle</td>
+                                    <th>रक्त समूह</th>
+                                    <th>:</th>
+                                    <td>@Model.DBModel.HREmployeeBloodGroup.HREmployeeBloodGroupTitle</td>
+                                </tr>
+                                <tr>
+                                    <th>लिङ्ग</th>
+                                    <th>:</th>
+                                    <td>@Model.DBModel.HREmployeeSex.HREmployeeSexTitle</td>
+                                    <th>
+                                        वैवाहिक स्थिति
+                                    </th>
+                                    <th>:</th>
+                                    <td>@Model.DBModel.HREmployeeMarital.HREmployeeMaritalTitle</td>
+                                </tr>
+                                <tr>
+                                    <th>ईमेल</th>
+                                    <th>:</th>
+                                    <td>@Model.DBModel.Email</td>
+                                    <th>मोबाइल</th>
+                                    <th>:</th>
+                                    <td>
+                                        <i class="fa bigger-130 badge badge-grey">@Model.DBModel.MobileNumber</i>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>नियुक्ति मिति</th>
+                                    <th>:</th>
+                                    <td>
+                                        <i class="fa bigger-130 badge badge-success">@Model.DBModel.AppointmentDateNP</i>
+                                    </td>
+                                    <th>
+                                        सेवानिवृत्त मिति
+                                    </th>
+                                    <th>:</th>
+                                    <td>
+                                        <i class="fa bigger-130 badge badge-danger">@Model.DBModel.RetiredDateNP</i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h4 class="page-header blue">
+                            <i class="fa bigger-130">वर्तमान जागीर स्थिति</i>
+                        </h4>
+                        <table class="table table-border table-striped table-hover table-responsive">
+                            <colgroup>
+                                <col style="width:15%" />
+                                <col style="width:1%" />
+                                <col style="width:34%" />
+                                <col style="width:15%" />
+                                <col style="width:1%" />
+                                <col style="width:34%" />
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <th>पद</th>
+                                    <th>:</th>
+                                    <td>
+                                        <i class="fa bigger-130 badge badge-yellow">@Model.DBModel.HRCompany.HRDesignations.FirstOrDefault().HRDesignationTitle</i>
+                                    </td>
+                                    <th>
+                                        शाखा / सेक्शन
+                                    </th>
+                                    <th>:</th>
+                                    <td class="blue">
+                                        <i class="fa bigger-130">@(Model.DBModel.HRCompany.HREmployeeJobHistories.Where(x => x.IdHREmployee == Model.DBModel.Id && x.IsCurrentStatus).Count() > 0 ? Model.DBModel.HRCompany.HREmployeeJobHistories.FirstOrDefault(x => x.IdHREmployee == Model.DBModel.Id && x.IsCurrentStatus).HRCompanyDivision.HRCompanyDivisionName : "")</i>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>कार्यालय</th>
+                                    <th>:</th>
+                                    <td>@Model.DBModel.HRCompany.CompanyName</td>
+                                    <th>कार्यालय (देवनागरी)</th>
+                                    <th>:</th>
+                                    <td>@Model.DBModel.HRCompany.CompanyNameNP</td>
+                                </tr>
+                                <tr>
+                                    <th>कार्यालय कोड</th>
+                                    <th>:</th>
+                                    <td>@Model.DBModel.HRCompany.HRCompanyCode.HRCompanyCodeTitle</td>
+                                    <th>कार्यालय ठेगाना</th>
+                                    <th>:</th>
+                                    <td>@Model.DBModel.HRCompany.Address</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+				</div>
+				<div class="tab-pane fade in" style="padding-top:10px;" id="HREmployeeFamilyDetails">
+				</div>
+				<div class="tab-pane fade in" style="padding-top:10px;" id="HREmployeeEducation">
+				</div>
+				<div class="tab-pane fade in" style="padding-top:10px;" id="HREmployeeContact">
+				</div>
+				<div class="tab-pane fade in" style="padding-top:10px;" id="HREmployeeProperty">
+				</div>
+				<div class="tab-pane fade in" style="padding-top:10px;" id="HREmployeeCompanyFacility">
+				</div>
+				<div class="tab-pane fade in" style="padding-top:10px;" id="HREmployeeBankDetail">
+				</div>
+				<div class="tab-pane fade in" style="padding-top:10px;" id="HREmployeeJobHistory">
+				</div>
+				<div class="tab-pane fade in" style="padding-top:10px;" id="HREmployeeLeaveSummary">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<script type="text/javascript">
+$('#tabstrip a').click(function (e) {
+        e.preventDefault()
+        var tabID = $(this).attr("href").substr(1);
+        $(".tab-pane").each(function () {
+            $(this).empty();
+    });
+    var idEmployee = $('#DBModel_Id').val();
+    var page = $('#PageNumber').val();
+    var pagesize = $('#PageSize').val();
+    var sort = $('#OrderingBy').val();
+    var sortdir = $('#OrderingDirection').val();
+    var searchKey = $('#SearchKey').val();
+    switch (tabID) {
+        case 'HREmployee':
+            url = '/EmployeeManagement/HREmployeeManagement/_ListWrapperHREmployeeAsync?idHREmployee= ' + idEmployee + '&pageNumber=' + page + '&pageSize=' + pagesize + '&orderingBy=' + sort + '&orderingDirection=' + sortdir + '&searchKey=' + searchKey;
+               break;
+			 case 'HREmployeeFamilyDetails':
+            url = '/EmployeeManagement/HREmployeeFamilyDetails/_ListHREmployeeFamilyDetailsAsync?idHREmployee=' + idEmployee + '&pageNumber='  + page + '&pagesize=' + pagesize + '&sort=' + sort + '&sortdir=' + sortdir + '&searchKey=' + searchKey;
+                break;
+			case 'HREmployeeEducation':
+            url = '/EmployeeManagement/HREmployeeEducation/_ListHREmployeeEducationAsync?idHREmployee=' + idEmployee + '&pageNumber=' + page + '&pagesize=' + pagesize + '&sort=' + sort + '&sortdir=' + sortdir + '&searchKey=' + searchKey;
+                break;
+			case 'HREmployeeContact':
+            url = '/EmployeeManagement/HREmployeeContact/_ListHREmployeeContactAsync?idHREmployee=' + idEmployee + '&pageNumber=' + page + '&pagesize=' + pagesize + '&sort=' + sort + '&sortdir=' + sortdir + '&searchKey=' + searchKey;
+                break;
+			case 'HREmployeeCompanyFacility':
+            url = '/EmployeeManagement/HREmployeeCompanyFacility/_ListHREmployeeCompanyFacilityAsync?idHREmployee=' + idEmployee + '&pageNumber=' + page + '&pagesize=' + pagesize + '&sort=' + sort + '&sortdir=' + sortdir + '&searchKey=' + searchKey;
+                break;
+			case 'HREmployeeJobHistory':
+            url = '/EmployeeManagement/HREmployeeJobHistory/_ListHREmployeeJobAsync?idHREmployee='+idEmployee + '&pageNumber=' + page + '&pageSize=' + pagesize + '&orderingBy=' + sort + '&orderingDirection=' + sortdir + '&searchKey=' + searchKey;
+                break;
+            case 'HREmployeeLeaveSummary':
+            url = '/EmployeeManagement/HREmployeeLeaveSummary/_ListLeaveSummaryAsync?idHREmployee=' + idEmployee + '&pageNumber=' + page + '&pageSize=' + pagesize + '&orderingBy=' + sort + '&orderingDirection=' + sortdir + '&searchKey=' + searchKey;
+                break;
+            default:
+                url = "";
+                break;
+        }
+        if (url != "") {
+            var $loading = $('<img src="/Resources/ajaxLoading.gif" alt="loading" class="ui-loading-icon img_loading_center">');
+            $("#" + tabID).html($loading);
+            $.ajax({
+                url: url,
+                cache: false,
+                type: "GET",
+                dataType: "html",
+                success: function (result) {
+                    if (result == '"_Login_"') {
+                        window.location = "/Account/Login";
+                        return;
+                    }
+                    $("#" + tabID).html(result);
+                }
+            });
+            $(this).tab('show')
+        }
+    });</script>

@@ -1,0 +1,179 @@
+﻿@model SystemViewModels.SystemSetting.HRCompanyLeaveTypeViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="form-group row">
+                <div class="col-md-6 col-sm-6 col-lg-6">
+                    @Html.LabelFor(model => model.DataModel.IdHRCompany, new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.DataModel.IdHRCompany, new SelectList(Model.DDLCompany, "Key", "Value"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.IdHRCompany)
+                </div>
+                <div class="col-md-6 col-sm-6 col-lg-6">
+                    @Html.LabelFor(model => model.DataModel.IdMasterLeaveTitle, new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.DataModel.IdMasterLeaveTitle, new SelectList(Model.DDLMasterLeaveTitle, "Key", "Value"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.IdMasterLeaveTitle)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    @Html.LabelFor(model => model.DataModel.SavingLimitDay, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.DataModel.SavingLimitDay, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.SavingLimitDay)
+                </div>
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    @Html.LabelFor(model => model.DataModel.TotalLeaveDay, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.DataModel.TotalLeaveDay, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.TotalLeaveDay)
+                </div>
+                <div class="col-md-4 col-sm-4 col-lg-4" id="Recurring">
+                    @Html.LabelFor(model => model.DataModel.OccuringTime, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.DataModel.OccuringTime, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.OccuringTime)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    @Html.LabelFor(model => model.DataModel.AdditionalDays, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.DataModel.AdditionalDays, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.AdditionalDays)
+                </div>
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    @Html.LabelFor(model => model.DataModel.DocUploadDeadLineDays, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.DataModel.DocUploadDeadLineDays, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.DocUploadDeadLineDays)
+                </div>
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    @Html.LabelFor(model => model.DataModel.ApprovalDeadLineDays, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.DataModel.ApprovalDeadLineDays, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.ApprovalDeadLineDays)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="form-group row">
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    @Html.LabelFor(model => model.DataModel.IsForMale, new { @class = "control-label col-md-12 col-sm-12 col-lg-12" })
+                    @Html.CheckBoxFor(model => model.DataModel.IsForMale, new { @class = "form-control switchYesNo" })
+                    @Html.ValidationMessageFor(model => model.DataModel.IsForMale)
+                </div>
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    @Html.LabelFor(model => model.DataModel.IsForFemale, new { @class = "control-label col-md-12 col-sm-12 col-lg-12" })
+                    @Html.CheckBoxFor(model => model.DataModel.IsForFemale, new { @class = "form-control switchYesNo" })
+                    @Html.ValidationMessageFor(model => model.DataModel.IsForFemale)
+                </div>
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    @Html.LabelFor(model => model.DataModel.EligibleTempStaff, new { @class = "control-label col-md-12 col-sm-12 col-lg-12" })
+                    @Html.CheckBoxFor(model => model.DataModel.EligibleTempStaff, new { @class = "form-control switchYesNo" })
+                    @Html.ValidationMessageFor(model => model.DataModel.EligibleTempStaff)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    @Html.LabelFor(model => model.DataModel.IsIncludeWeekend, new { @class = "control-label col-md-12 col-sm-12 col-lg-12" })
+                    @Html.CheckBoxFor(model => model.DataModel.IsIncludeWeekend, new { @class = "form-control switchDo" })
+                    @Html.ValidationMessageFor(model => model.DataModel.IsIncludeWeekend)
+                </div>
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    @Html.LabelFor(model => model.DataModel.IsIncludePublicHoliday, new { @class = "control-label col-md-12 col-sm-12 col-lg-12" })
+                    @Html.CheckBoxFor(model => model.DataModel.IsIncludePublicHoliday, new { @class = "form-control switchDo" })
+                    @Html.ValidationMessageFor(model => model.DataModel.IsIncludePublicHoliday)
+                </div>
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    @Html.LabelFor(model => model.DataModel.IsSaving, new { @class = "control-label col-md-12 col-sm-12 col-lg-12" })
+                    @Html.CheckBoxFor(model => model.DataModel.IsSaving, new { @class = "form-control BSswitch" })
+                    @Html.ValidationMessageFor(model => model.DataModel.IsSaving)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    @Html.LabelFor(model => model.DataModel.IsReoccuring, new { @class = "control-label col-md-12 col-sm-12 col-lg-12" })
+                    @Html.CheckBoxFor(model => model.DataModel.IsReoccuring, new { @class = "form-control BSswitch" })
+                    @Html.ValidationMessageFor(model => model.DataModel.IsReoccuring)
+                </div>
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    @Html.LabelFor(model => model.DataModel.IsApprovalByHRCompanyHead, new { @class = "control-label col-md-12 col-sm-12 col-lg-12" })
+                    @Html.CheckBoxFor(model => model.DataModel.IsApprovalByHRCompanyHead, new { @class = "form-control switchYesNo" })
+                    @Html.ValidationMessageFor(model => model.DataModel.IsApprovalByHRCompanyHead)
+                </div>
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    @Html.LabelFor(model => model.DataModel.IsContinueLeave, new { @class = "control-label col-md-12 col-sm-12 col-lg-12" })
+                    @Html.CheckBoxFor(model => model.DataModel.IsContinueLeave, new { @class = "form-control BSswitch" })
+                    @Html.ValidationMessageFor(model => model.DataModel.IsContinueLeave)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    @Html.LabelFor(model => model.DataModel.IsDeductFromOther, new { @class = "control-label col-md-12 col-sm-12 col-lg-12" })
+                    @Html.CheckBoxFor(model => model.DataModel.IsDeductFromOther, new { @class = "form-control switchYesNo" })
+                    @Html.ValidationMessageFor(model => model.DataModel.IsDeductFromOther)
+                </div>
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    @Html.LabelFor(model => model.DataModel.EnableHalfDay, new { @class = "control-label col-md-12 col-sm-12 col-lg-12" })
+                    @Html.CheckBoxFor(model => model.DataModel.EnableHalfDay, new { @class = "form-control switchYesNo" })
+                    @Html.ValidationMessageFor(model => model.DataModel.EnableHalfDay)
+                </div>
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    @Html.LabelFor(model => model.DataModel.IsActive, new { @class = "control-label col-md-12 col-sm-12 col-lg-12" })
+                    @Html.CheckBoxFor(model => model.DataModel.IsActive, new { @class = "form-control switchYesNo" })
+                    @Html.ValidationMessageFor(model => model.DataModel.IsActive)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    @Html.LabelFor(model => model.DataModel.IsRecommended, new { @class = "control-label col-md-12 col-sm-12 col-lg-12" })
+                    @Html.CheckBoxFor(model => model.DataModel.IsRecommended, new { @class = "form-control switchDo" })
+                    @Html.ValidationMessageFor(model => model.DataModel.IsRecommended)
+                </div>
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    @Html.LabelFor(model => model.DataModel.IsSataLeave, new { @class = "control-label col-md-12 col-sm-12 col-lg-12" })
+                    @Html.CheckBoxFor(model => model.DataModel.IsSataLeave, new { @class = "form-control switchYesNo" })
+                    @Html.ValidationMessageFor(model => model.DataModel.IsSataLeave)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var a = $('#DataModel_IdMasterLeaveTitle').val();
+        debugger;
+        if (a == '4' || a == '5' || a == '6' || a == '8' || a == '19' || a == '20' || a == '23') {
+            $("#Recurring").show();
+        }
+        else {
+            $("#Recurring").hide();
+        }
+    });
+</script>
+
+
+<script>
+    $('#DataModel_IdMasterLeaveTitle').change(function () {
+        var a = $('#DataModel_IdMasterLeaveTitle').val();
+        debugger;
+        if (a == '4' || a == '5' || a == '6' || a == '8' || a == '19' || a == '20' || a == '23') {
+            $("#Recurring").show();
+        }
+        else {
+            $("#Recurring").hide();
+        }
+    });
+</script>

@@ -1,0 +1,42 @@
+﻿@model SystemViewModels.SystemSecurity.SystemMenuViewModel
+
+<div id="printThis">
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th class="ace-icon">आईडी</th>
+                <th class="ace-icon">मेनु</th>
+                <th class="ace-icon">क्षेत्र</th>
+                <th class="ace-icon">सीएसएस वर्ग</th>
+                <th class="ace-icon">सीएसएस प्रतिमा</th>
+                <th class="ace-icon">पूर्वनिर्धारित युआरयल</th>
+                <th class="ace-icon">अनुक्रम गर्ने</th>
+                <th class="ace-icon">सिर्जना मिति</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+            {
+                <tr>
+                    <td class="ace-icon">@item.Id</td>
+                    <td class="ace-icon">@item.Menu</td>
+                    <td class="ace-icon">@item.Area</td>
+                    <td class="ace-icon">@item.CSSClass</td>
+                    <td class="ace-icon">@item.CSSIcon</td>
+                    <td>@item.DefaultURL</td>
+                    <td class="ace-icon">@item.OrderBy</td>
+                    <td class="ace-icon">@item.CreatedOn.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>

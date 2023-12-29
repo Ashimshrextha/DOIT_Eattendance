@@ -1,0 +1,61 @@
+﻿@model SystemViewModels.SystemSecurity.HREmployeeAttendanceHistoryViewModelList
+@using PagedList.Mvc;
+<div id="replacetarget">
+    <div id="content" class="content">
+        <div class="dataTables_wrapper">
+            <div id="mask-container">
+                <div id="mask"></div>
+                <div class="table-responsive">
+                    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th>IdEmployee</th>
+                                <th>Employee Name</th>
+                                <th>Attendance Date</th>
+                                <th>Device Check IN</th>
+                                <th>Device Check Out</th>
+                                <th>LogIn Time</th>
+                                <th>LogOut Time</th>
+                                <th>CheckIn Time</th>
+                                <th>CheckOut Time</th>
+                                <th>Updated On</th>
+                                <th class="ace-icon">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.DBModelList)
+                            {
+                                <tr>
+                                    <td>@item.HREmployee.Id</td>
+                                    <td>@item.HREmployee.HREmployeeName</td>
+                                    <td>@item.AttendanceDate.DateNp()</td>
+                                    <td>@item.CheckInDeviceNumber</td>
+                                    <td>@item.CheckOutDeviceNumber</td>
+                                    <td>@item.LogInTime</td>
+                                    <td>@item.LogOutTime</td>
+                                    <td>@item.CheckInTime</td>
+                                    <td>@item.CheckOutTime</td>
+                                    <td>@(string.Format("{0:yyyy-MM-dd}", item.UpdatedOn))</td>
+                                    <td class="ace-icon action-buttons">
+                                        <a href="@Url.Action("_UpdateHREmployeeAttendanceHistoryAsync",new { id=item.Id,pageNumber=Model.PageNumber,pageSize=Model.PageSize,orderingBy=Model.OrderingBy,orderingDirection=Model.OrderingDirection,searchKey=Model.SearchKey})" data-ajax-model="">
+                                            <i class="ace-icon fa fa-pencil green bigger-150" aria-hidden="true" title="Edit"></i>
+                                        </a>
+                                        <a href="@Url.Action("_ReadHREmployeeAttendanceHistoryAsync",new { id=item.Id,pageNumber=Model.PageNumber,pageSize=Model.PageSize,orderingBy=Model.OrderingBy,orderingDirection=Model.OrderingDirection,searchKey=Model.SearchKey})" data-ajax-model=""><i class="ace-icon fa fa-search-plus blue bigger-150" aria-hidden="true" title="View"></i></a>
+                                        <a href="@Url.Action("_DeleteHREmployeeAttendanceHistoryAsync",new { id=item.Id,pageNumber=Model.PageNumber,pageSize=Model.PageSize,orderingBy=Model.OrderingBy,orderingDirection=Model.OrderingDirection,searchKey=Model.SearchKey})" data-ajax-model=""><i class="ace-icon fa fa-trash-o red bigger-150" aria-hidden="true" title="Delete"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div aria-live="polite" role="status" id="example_info" class="dataTables_info">
+                    <div class="row">
+                        <div class="col-md-4">Showing @(Model.DBModelList.PageCount < Model.DBModelList.PageNumber ? 0 : Model.DBModelList.FirstItemOnPage) to @Model.DBModelList.LastItemOnPage of @Model.DBModelList.TotalItemCount entries in @Model.DBModelList.PageCount Pages</div>
+                        <div class="col-md-8 dataTables_paginate paging_simple_numbers" id="example_paginate">@Html.PagedListPager(Model.DBModelList, page => Url.Action("_ListHREmployeeAttendanceHistoryAsync", new { pageNumber = page, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey }))</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

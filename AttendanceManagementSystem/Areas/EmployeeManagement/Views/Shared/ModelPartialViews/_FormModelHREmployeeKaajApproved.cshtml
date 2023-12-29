@@ -1,0 +1,203 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeKaajHistoryViewModel
+<link href="~/Content/jasny-bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jasny-bootstrap.min.js"></script>
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+<script src="~/Scripts/bootstrap-multiselect.min.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.KaajModel.IdKaaj)
+@Html.HiddenFor(model => model.KaajModel.IdHREmployee)
+@Html.HiddenFor(model => model.KaajModel.KaajIdApprovedBy)
+@Html.HiddenFor(model => model.KaajModel.Document)
+@Html.HiddenFor(model => model.KaajModel.IdHRCompany)
+@Html.HiddenFor(model => model.KaajModel.ImageName)
+@Html.HiddenFor(model => model.KaajModel.IdJob)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+@*@{
+    var appoinmentDateNp = @Model.EmployeeDetail.AppointmentDateNP;
+    var appoinmentDate = @Model.EmployeeDetail.AppointmentDate;
+}*@
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title row">
+                    <div style="width:70px;" class="pull-left">
+                        <img src="@Model.KaajModel.ImageName" alt="@Model.KaajModel.EmployeeName" height="70" width="70" style="border-radius:100%;" />
+                    </div>
+                    <div class="text-center">
+                        <strong> काज वा प्रशिक्षण को माग पत्र</strong>
+                        <div class="space-6"></div>
+                        <strong> काज वा प्रशिक्षण माग गर्ने कर्मचारीले प्रयोग गर्ने</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <fieldset disabled>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>@Html.LabelFor(model => model.KaajModel.EmployeeName, new { @class = "control-label" })</th>
+                                    <th>@Html.LabelFor(model => model.KaajModel.DesignationTitle, new { @class = "control-label" })</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>@Html.TextBoxFor(model => model.KaajModel.EmployeeName, new { @class = "form-control", @readonly = "readonly" })</th>
+                                    <th> @Html.TextBoxFor(model => model.KaajModel.DesignationTitle, new { @class = "form-control", @readonly = "readonly" })</th>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr>
+                                    <th>@Html.LabelFor(model => model.KaajModel.DivisionName, new { @class = "control-label" })</th>
+                                    <th>@Html.LabelFor(model => model.KaajModel.PISNumber, new { @class = "control-label" })</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>@Html.TextBoxFor(model => model.KaajModel.DivisionName, new { @class = "form-control", @readonly = "readonly" })</th>
+                                    <th>@Html.TextBoxFor(model => model.KaajModel.PISNumber, new { @class = "form-control", @readonly = "readonly" })</th>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr>
+                                    <th>@Html.LabelFor(model => model.KaajModel.Gender, new { @class = "control-label" })</th>
+                                    <th>@Html.LabelFor(model => model.KaajModel.MobileNumber, new { @class = "control-label" })</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>@Html.TextBoxFor(model => model.KaajModel.Gender, new { @class = "form-control", @readonly = "readonly" })</th>
+                                    <th>@Html.TextBoxFor(model => model.KaajModel.MobileNumber, new { @class = "form-control", @readonly = "readonly" })</th>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr>
+                                    <th>@Html.LabelFor(model => model.KaajModel.HRCompanyName, new { @class = "control-label" })</th>
+                                    <th>@Html.LabelFor(model => model.KaajModel.KaajStatus, new { @class = "control-label" })</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>@Html.TextBoxFor(model => model.KaajModel.HRCompanyName, new { @class = "form-control", @readonly = "readonly" })</th>
+                                    <th>@Html.TextBoxFor(model => model.KaajModel.KaajStatus, new { @class = "form-control", @readonly = "readonly" })</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7 col-sm-12 col-xs-12 col-lg-7">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <span class="panel-title text-center">काज वा प्रशिक्षण को माग फारम</span>
+            </div>
+            <div class="panel-body">
+                <fieldset disabled>
+                    <div class="row form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-lg-6">
+                            @Html.LabelFor(model => model.KaajModel.KaajTypeTitle, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.KaajModel.KaajTypeTitle, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-lg-6">
+                            @Html.LabelFor(model => model.KaajModel.KaajYearNP, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.KaajModel.KaajYearNP, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-lg-6">
+                            @Html.LabelFor(model => model.KaajModel.KaajTitle, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.KaajModel.KaajTitle, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-lg-6">
+                            @Html.LabelFor(model => model.KaajModel.KaajShortName, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.KaajModel.KaajShortName, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-lg-6">
+                            @Html.LabelFor(model => model.KaajModel.KaajExpenses, new { @class = "control-label col-md-12 col-sm-12 col-lg-12 col-xs-12" })
+                            @Html.TextBoxFor(model => model.KaajModel.KaajExpenses, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-lg-6">
+                            @Html.LabelFor(model => model.KaajModel.IsNational, new { @class = "control-label col-md-12 col-sm-12 col-lg-12 col-xs-12" })
+                            @Html.TextBoxFor(model => model.KaajModel.IsNational, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-lg-6">
+                            @Html.LabelFor(model => model.KaajModel.KaajFromNP, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.KaajModel.KaajFromNP, new { @class = "form-control", @id = "DateFromNP", @readonly = "readonly", @style = "cursor:pointer" })
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-lg-6">
+                            @Html.LabelFor(model => model.KaajModel.KaajToNP, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.KaajModel.KaajToNP, new { @class = "form-control", @id = "DateToNP", @readonly = "readonly", @style = "cursor:pointer" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-6">
+                            @Html.LabelFor(model => model.KaajModel.VehicleUsedInKaaj, new { @class = "control-label col-md-12 col-sm-12 col-lg-12 col-xs-12" })
+                            @Html.TextBoxFor(model => model.KaajModel.VehicleUsedInKaaj, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-6">
+                            @Html.LabelFor(model => model.KaajModel.KaajCountry, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.KaajModel.KaajCountry, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                            @Html.LabelFor(model => model.KaajModel.kaajPurpose, new { @class = "control-label" })
+                            @Html.TextAreaFor(model => model.KaajModel.kaajPurpose, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-8 col-sm-10 col-lg-9 col-xs-12">
+                            @Html.LabelFor(model => model.KaajModel.KaajLocation, new { @class = "control-label" })
+                            @Html.TextAreaFor(model => model.KaajModel.KaajLocation, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-4 col-sm-2 col-xs-12 col-lg-3">
+                            @Html.LabelFor(model => model.KaajModel.Document, new { @class = "control-label" })
+                            <i class="fa fa-download">@Model.KaajModel.Document</i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+                            @Html.LabelFor(model => model.KaajModel.KaajApprovalEmployeeName, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.KaajModel.KaajApprovalEmployeeName, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-6 col-xs-12 col-lg-4">
+        <div class="panel panel-success">
+            <div class="panel-heading"><h4 class="panel-title">काज वा प्रशिक्षण माग अनुमोदन</h4></div>
+            <div class="panel-body">
+                <div class="form-group row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                        @Html.LabelFor(model => model.KaajModel.KaajApprovalRemark, new { @class = "control-label" })
+                        @Html.TextAreaFor(model => model.KaajModel.KaajApprovalRemark, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.KaajModel.KaajApprovalRemark)
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                        @Html.LabelFor(model => model.KaajModel.IdKaajStatus, new { @class = "control-label" })
+                        @Html.DropDownListFor(model => model.KaajModel.IdKaajStatus, new SelectList(Model.DDLLeaveStatusType, "Key", "Value"), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.KaajModel.IdKaajStatus)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+﻿@using AttendanceManagementSystem.Services
+@{
+    var Menu = CommonServices.Get_SystemMenu();
+}
+<div class="sidebar-shortcuts" id="sidebar-shortcuts" title="Main Menu">
+    <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+        @foreach (var item in Menu)
+        {
+            <a title="@item.Menu" class="@item.CSSClass" href="~/@item.DefaultURL">
+                <i class="ace-icon @item.CSSIcon"></i>
+            </a>
+        }
+    </div>
+    <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+        <span class="btn btn-success"></span>
+        <span class="btn btn-info"></span>
+        <span class="btn btn-warning"></span>
+        <span class="btn btn-danger"></span>
+    </div>
+</div><!-- /.sidebar-shortcuts -->

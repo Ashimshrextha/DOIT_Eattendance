@@ -1,0 +1,210 @@
+﻿@model SystemViewModels.Reports.MonthlyAttendanceReportViewModelList
+<style type="text/css">
+    @@media screen {
+        #printSection {
+            display: none;
+        }
+    }
+
+    @@media print {
+        @@Page {
+            size: landscape;
+            margin: 0.5cm;
+        }
+
+        
+
+        body {
+            -webkit-print-color-adjust: exact;
+            font-family: 'Times New Roman';
+        }
+
+            body * {
+                visibility: hidden;
+            }
+
+        /*table, tbody, thead, tr, th, td {
+            border: 3px solid  !important;
+        }*/
+
+        
+
+        #printSection, #printSection * {
+            -webkit-print-color-adjust: exact;
+            visibility: visible;
+        }
+
+        #printSection {
+            -webkit-print-color-adjust: exact;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        td{
+  word-break: break-all;
+  height:150px;
+  max-width:50px;
+        }
+      
+       
+    }
+</style>
+<div id="printThis" width="100%">
+   
+        @{ Html.RenderPartial("~/Views/Shared/_ReportHeader.cshtml", Model.Header);}
+    
+   
+
+
+    <table style="width: 100%;;table-layout:auto"  class="table table-bordered" id="table2" >
+        <thead >
+            <tr  style="font-size:24px;border:3px solid !important; background-color:lightgray;margin-top:10px;">
+                <th class="text-center" style="font-size:24px;border:3px solid !important">क.संकेत नं.</th>
+                <th style="font-size:24px;min-width:170px;border:3px solid !important"> कर्मचारी नाम</th>
+                <th class="text-center" style="font-size:24px;border:3px solid !important ">पद</th>
+                @foreach (var item in Model.DBReportHeader)
+                {
+                    <th class="text-center" style="font-size:24px;border:3px solid !important; min-width: 60px;">
+                        @item.NumberInNepali <br />
+                        @item.DOWShortNP
+                    </th>
+                }
+            </tr>
+        </thead>
+        <tbody >
+            @foreach (var item in Model.DBModelPrint.OrderBy(x => x.HRDesignationRank).ThenBy(x => x.AppointmentDateNP))
+            {
+            <tr style="font-size:26px;border:3px solid !important;min-width:5px !important; min-height:20px !important;background-color:lightgray;margin-top:10px;">
+                <th class="text-center" style="border:3px solid !important ;">
+                    @item.PISNumber
+                </th>
+                <th style="min-width:170px;border:3px solid !important">
+                    @item.EmployeeName
+                </th>
+                <th class="text-center" style="min-width:170px;border:3px solid">
+                    @item.DesignationTitle
+                </th>
+                <td style="background-color:@item.C1 ; border:3px solid !important ;word-break: break-all; height:auto;max-width:auto" class="text-center">@item.A1</td>
+                <td style="background-color:@item.C2 ; border:3px solid !important;word-break: break-all; height:auto;max-width:auto" class="text-center">@item.A2 </td>
+                <td style="background-color:@item.C3 ; border:3px solid !important; word-break: break-all; height:auto;max-width:auto" class="text-center">@item.A3 </td>
+                <td style="background-color:@item.C4 ; border:3px solid !important; word-break: break-all; height:auto;max-width:auto" class="text-center">@item.A4 </td>
+                <td style="background-color:@item.C5 ; border:3px solid !important ; word-break: break-all; height:auto;max-width:auto" class="text-center">@item.A5 </td>
+                <td style="background-color:@item.C6 ; border:3px solid !important ; word-break: break-all; height:auto;max-width:auto" class="text-center">@item.A6 </td>
+                <td style="background-color:@item.C7 ; border:3px solid !important ;word-break: break-all; height:auto;max-width:auto" class="text-center">@item.A7 </td>
+                <td style="background-color:@item.C8 ; border:3px solid !important ;word-break: break-all; height:auto;max-width:auto;" class="text-center">@item.A8 </td>
+                <td style="background-color:@item.C9 ; border:3px solid !important ;word-break: break-all; height:auto;max-width:auto;" class="text-center">@item.A9 </td>
+                <td style="background-color:@item.C10; border:3px solid !important ;word-break: break-all; height:auto;max-width:auto;" class="text-center">@item.A10</td>
+                <td style="background-color:@item.C11; border:3px solid !important ;word-break: break-all; height:auto;max-width:auto;" class="text-center">@item.A11</td>
+                <td style="background-color:@item.C12; border:3px solid !important ;word-break: break-all; height:auto;max-width:auto;" class="text-center">@item.A12</td>
+                <td style="background-color:@item.C13; border:3px solid !important ;word-break: break-all; height:auto;max-width:auto;" class="text-center">@item.A13</td>
+                <td style="background-color:@item.C14; border:3px solid !important ;word-break: break-all; height:auto;max-width:auto;" class="text-center">@item.A14</td>
+                <td style="background-color:@item.C15; border:3px solid !important ;word-break: break-all; height:auto;max-width:auto;" class="text-center">@item.A15</td>
+                <td style="background-color:@item.C16; border:3px solid !important ;word-break: break-all; height:auto;max-width:auto;" class="text-center">@item.A16</td>
+                <td style="background-color:@item.C17; border:3px solid !important ;word-break: break-all; height:auto;max-width:auto;" class="text-center">@item.A17</td>
+                <td style="background-color:@item.C18; border:3px solid !important ;word-break: break-all; height:auto;max-width:auto;" class="text-center">@item.A18</td>
+                <td style="background-color:@item.C19; border:3px solid !important ;word-break: break-all; height:auto;max-width:auto;" class="text-center">@item.A19</td>
+                <td style="background-color:@item.C20; border:3px solid !important ;word-break: break-all; height:auto;max-width:auto;" class="text-center">@item.A20</td>
+                <td style="background-color:@item.C21; border:3px solid !important ;word-break: break-all; height:auto;max-width:auto;" class="text-center">@item.A21</td>
+                <td style="background-color:@item.C22; border:3px solid !important ;word-break: break-all; height:auto;max-width:auto;" class="text-center">@item.A22</td>
+                <td style="background-color:@item.C23; border:3px solid !important ;word-break: break-all; height:auto;max-width:auto;" class="text-center">@item.A23</td>
+                <td style="background-color:@item.C24; border:3px solid !important ;word-break: break-all; height:auto;max-width:auto;" class="text-center">@item.A24</td>
+                <td style="background-color:@item.C25; border:3px solid !important ;word-break: break-all; height:auto;max-width:auto;" class="text-center">@item.A25</td>
+                <td style="background-color:@item.C26; border:3px solid !important ;word-break: break-all; height:auto;max-width:auto;" class="text-center">@item.A26</td>
+                <td style="background-color:@item.C27; border:3px solid !important ;word-break: break-all; height:auto;max-width:auto;" class="text-center">@item.A27</td>
+                <td style="background-color:@item.C28; border:3px solid !important ;word-break: break-all; height:auto;max-width:auto;" class="text-center">@item.A28</td>
+
+                @if ((!string.IsNullOrEmpty(item.A29)) && string.IsNullOrEmpty(item.A30) && string.IsNullOrEmpty(item.A31) && string.IsNullOrEmpty(item.A32))
+                {
+                    <td style="background-color:@item.C29; border:3px solid !important ;word-break: break-all; height:auto;;max-width:auto;" class="text-center">@item.A29</td>
+                }
+                @if (!string.IsNullOrEmpty(item.A30) && string.IsNullOrEmpty(item.A31) && string.IsNullOrEmpty(item.A32))
+                {
+                    <td style="background-color:@item.C29; border:3px solid !important ;word-break: break-all; height:auto;;max-width:auto;" class="text-center">@item.A29</td>
+                    <td style="background-color:@item.C30; border:3px solid !important ;word-break: break-all; height:auto;max-width:auto;" class="text-center">@item.A30</td>
+                }
+                @if (!string.IsNullOrEmpty(item.A31) && string.IsNullOrEmpty(item.A32))
+                {
+                    <td style="background-color:@item.C29; border:3px solid !important ;word-break: break-all; height:auto;;max-width:auto;" class="text-center">@item.A29</td>
+                    <td style="background-color:@item.C30; border:3px solid !important ;word-break: break-all; height:auto;max-width:auto;" class="text-center">@item.A30</td>
+                    <td style="background-color:@item.C31; border:3px solid !important ;word-break: break-all; height:auto;max-width:auto;" class="text-center">@item.A31</td>
+                }
+                @if (!string.IsNullOrEmpty(item.A32))
+                {
+                    <td style="background-color:@item.C29; border:3px solid !important ;word-break: break-all; height:auto;;max-width:auto;" class="text-center">@item.A29</td>
+                    <td style="background-color:@item.C30; border:3px solid !important ;word-break: break-all; height:auto;max-width:auto;" class="text-center">@item.A30</td>
+                    <td style="background-color:@item.C31; border:3px solid !important ;word-break: break-all; height:auto;max-width:auto;" class="text-center">@item.A31</td>
+                    <td style="background-color:@item.C32; border:3px solid !important ;word-break: break-all; height:auto;max-width:auto;" class="text-center">@item.A32</td>
+
+                }
+
+
+            </tr>
+            }
+        </tbody>
+    </table>
+    @{ Html.RenderPartial("~/Views/Shared/_ReportFooter.cshtml", Model.Header);}
+</div>
+<script type="text/javascript">
+    function ExcelReport(div) {
+        var y = $('div[id$=' + div + ']');
+        var z = $('.non-print', y).remove();
+        //$('.print', y).remove();
+        console.log(z);
+        var x = encodeURIComponent($('div[id$=' + div + ']').html());
+        var z = $('.non-print', y).remove();
+        debugger
+        window.open('data:application/vnd.ms-excel,' + x);
+        e.preventDefault();
+    }
+</script>
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('table').on('scroll', function () {
+            $("#" + this.id + " > *").width($(this).width() + $(this).scrollLeft());
+        });
+    });
+</script>
+@*<script type="text/javascript">
+        document.getElementById("btnPrint").onclick = function () {
+            printElement(document.getElementById("printThis"));
+        }
+
+        function printElement(elem) {
+            var domClone = elem.cloneNode(true);
+            var $printSection = document.getElementById("printSection");
+            if (!$printSection) {
+                var $printSection = document.createElement("div");
+                $printSection.id = "printSection";
+                document.body.appendChild($printSection);
+            }
+            $printSection.innerHTML = "";
+            $printSection.appendChild(domClone);
+            window.print();
+        }
+    </script>*@
+@*<script type="text/javascript">
+        $(document).ready(function () {
+            function PrintElem(elem) {
+                Popup($(elem).html());
+            }
+            function Popup(data) {
+                var mywindow = window.open('', 'प्रिन्ट', 'height=600,width=600');
+                mywindow.document.write('<html><head><title>प्रिन्ट</title></head><body>');
+                mywindow.document.write(data);
+                mywindow.document.write('</body></html>');
+                mywindow.document.close(); // necessary for IE >= 10
+                mywindow.focus(); // necessary for IE >= 10
+                mywindow.print();
+                mywindow.close();
+                return true;
+            }
+        });
+    </script>*@

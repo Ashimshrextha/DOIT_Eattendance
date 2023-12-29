@@ -1,0 +1,46 @@
+﻿@model SystemViewModels.CompanyManagement.HRCompanyHREmployeeShiftRoasterViewModel
+
+<table class="table table-border table-striped">
+    <thead>
+        <tr>
+            <th>Shift Date</th>
+            <th>Remove</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.DDLHRCompanyHREmployeeShiftDate)
+        {
+            <tr>
+                <td>@item.Value</td>
+                <td class="deleterow" id="@item.Key">
+                    <a href="#"> <i class="ace-icon fa fa-trash-o red bigger-150" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    $(".deleterow").on("click", function () {
+        var $killrow = $(this).parent('tr');
+        var value = $(this).attr('id');
+        $.ajax({
+            type: "GET",
+            url: '/CompanyManagement/HRCompanyHREmployeeShiftRoaster/DeleteHRCompanyHREmployeeShiftRoaster',
+            data: { idShiftRoaster: value },
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: successFunc,
+            error: errorFunc
+        });
+        function successFunc(data, status) {
+            $killrow.addClass("danger");
+            $killrow.fadeOut(1000, function () {
+                $(this).remove();
+            });
+        }
+        function errorFunc() {
+            alert('error');
+        }
+    });
+</script>

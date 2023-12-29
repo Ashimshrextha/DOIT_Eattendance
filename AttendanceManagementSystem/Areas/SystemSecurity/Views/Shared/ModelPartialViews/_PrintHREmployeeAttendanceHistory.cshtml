@@ -1,0 +1,45 @@
+﻿@model SystemViewModels.SystemSecurity.HREmployeeAttendanceHistoryViewModel
+
+<div id="printThis">
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>आईडी</th>
+                <th>कर्मचारी नाम</th>
+                <th>हाजिरी मिति</th>
+                <th>Device Check IN</th>
+                <th>Device Check Out</th>
+                <th>आउने समय</th>
+                <th>जाने समय</th>
+                <th>आएको समय</th>
+                <th>गएको समय</th>
+                <th>अपडेट मिति</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+            {
+                <tr>
+                    <td>@item.HREmployee.Id</td>
+                    <td>@item.HREmployee.HREmployeeName</td>
+                    <td>@item.AttendanceDate</td>
+                    <td>@item.CheckInDeviceNumber</td>
+                    <td>@item.CheckOutDeviceNumber</td>
+                    <td>@item.LogInTime</td>
+                    <td>@item.LogOutTime</td>
+                    <td>@item.CheckInTime</td>
+                    <td>@item.CheckOutTime</td>
+                    <td>@(string.Format("{0:yyyy-MM-dd}", item.UpdatedOn))</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>

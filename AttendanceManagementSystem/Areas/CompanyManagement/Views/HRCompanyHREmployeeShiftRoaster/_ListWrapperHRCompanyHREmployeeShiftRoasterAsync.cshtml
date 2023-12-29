@@ -1,0 +1,70 @@
+﻿@model SystemViewModels.CompanyManagement.HRCompanyHREmployeeShiftRoasterViewModelList
+@using SystemStores.GlobalMethod;
+@using SystemStores.ENUMData;
+<div class="breadcrumbs ace-save-state">
+    <div class="nav-search" id="nav-search">
+        <form class="form-search">
+            <span class="input-icon">
+                <input type="text" placeholder="Search By Employee Name..." class="nav-search-input ui-autocomplete-input" id="Search_Shift_Rosater" autocomplete="off" style="width:300px!important;">
+                <i class="ace-icon fa fa-search nav-search-icon"></i>
+            </span>
+            <span class="input-icon">
+                <a class="nav-search-input" href="~/@Model.BreadCrumbBaseURL/_CreateHRCompanyHREmployeeShiftRoasterAsync?idHRCompany=@Model.IdHRCompany&pageNumber=@Model.PageNumber&pageSize=@Model.PageSize&orderingBy=@Model.OrderingBy&orderingDirection=@Model.OrderingDirection" data-ajax-model="">
+                    <i class="ace-icon fa fa-plus  nav-search-icon">@SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Create)</i>
+                </a>
+            </span>
+        </form>
+    </div><!-- /.nav-search -->
+</div>
+@{ Html.RenderPartial("_ListHRCompanyHREmployeeShiftRoasterAsync");}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(function () {
+        $.ajaxSetup({ cache: false });
+            $('#Create_HRCompanyHREmployeeShiftRoaster').click(function (e) {
+            var url;
+                url = '/CompanyManagement/HRCompanyHREmployeeShiftRoaster/_CreateHRCompanyHREmployeeShiftRoasterAsync?idHRCompany='+@Model.IdHRCompany + '&pageNumber=' +'@Model.PageNumber'+'&pageSize=' +'@Model.PageSize'+'&orderingBy=' +'@Model.OrderingBy'+'&orderingDirection=' +'@Model.OrderingDirection';
+            $('#myModalContent').load(url, function () {
+                $('#myModal').modal({
+                    keyboard: true
+                }, 'show');
+                bindAjaxForm(this);
+            });
+            return false;
+        });
+        });
+         
+    });
+    $("#Search_Shift_Rosater").keyup(function () {
+        var searchKey = $("#Search_Shift_Rosater").val();
+
+        var url = "/CompanyManagement/HRCompanyHREmployeeShiftRoaster/_ListHRCompanyHREmployeeShiftRoasterAsync?idHRCompany=@Model.IdHRCompany&pageNumber=1&pageSize=10&orderingBy=Id&orderingDirection=ASC&searchKey="+searchKey;
+        if (url != "") {
+            var $loading = $('<img src="~/images/Icon/ajaxLoading.gif" alt="loading" class="ui-loading-icon img_loading_center">');
+            $("#replacetarget").html($loading);
+            $.ajax({
+                url: url,
+                cache: false,
+                type: "GET",
+                dataType: "html",
+                success: function (result) {
+                    if (result == '"_Login_"') {
+                        window.location = "/Account/Login";
+                        return;
+                    }
+                    $("#replacetarget").html(result);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    if (xhr.status == parseInt(500)) {
+                        window.location = "/Account/Login";
+                        return;
+                    }
+                }
+            });
+            $(this).tab('show')
+        }
+    });
+</script>
+
+

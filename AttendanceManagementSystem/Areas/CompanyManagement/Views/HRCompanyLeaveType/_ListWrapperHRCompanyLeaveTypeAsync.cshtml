@@ -1,0 +1,48 @@
+﻿@model SystemViewModels.SystemSetting.HRCompanyLeaveTypeViewModelList
+@using SystemStores.GlobalMethod;
+@using SystemStores.ENUMData;
+<div class="breadcrumbs ace-save-state">
+    <div class="nav-search" id="nav-search">
+        <form class="form-search">
+            <span class="input-icon">
+                <a class="nav-search-input" href="~/@Model.BreadCrumbBaseURL/_PrintHRCompanyLeaveTypeAsync?idHRCompany=@Model.IdHRCompany" data-ajax-model="">
+                    <i class="ace-icon fa fa-print nav-search-icon">@SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Print)</i>
+                </a>
+            </span>
+            <span class="input-icon">
+                <a class="nav-search-input" href="~/@Model.BreadCrumbBaseURL/_ExportHRCompanyLeaveTypeAsync?idHRCompany=@Model.IdHRCompany">
+                    <i class="ace-icon fa fa-file-excel-o nav-search-icon">@SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Export)</i>
+                </a>
+            </span>
+            <span class="input-icon">
+                <a class="nav-search-input" href="~/@Model.BreadCrumbBaseURL/_CreateHRCompanyLeaveTypeAsync?idHRCompany=@Model.IdHRCompany" data-ajax-model="">
+                    <i class="ace-icon fa fa-plus  nav-search-icon">@SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Create)</i>
+                </a>
+            </span>
+        </form>
+    </div><!-- /.nav-search -->
+</div>
+@{ Html.RenderPartial("_ListHRCompanyLeaveTypeAsync");}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(function () {
+        $.ajaxSetup({ cache: false });
+            $('#Create_HRCompanyLeaveType').click(function (e) {
+            var url;
+                url = '/@Model.BreadCrumbBaseURL' + '/_CreateHRCompanyLeaveTypeAsync?idHRCompany=' +'@Model.IdHRCompany';
+            $('#myModalContent').load(url, function () {
+                $('#myModal').modal({
+                    keyboard: true
+                }, 'show');
+                bindAjaxForm(this);
+            });
+            return false;
+        });
+        });
+    });
+</script>
+
+
+
+

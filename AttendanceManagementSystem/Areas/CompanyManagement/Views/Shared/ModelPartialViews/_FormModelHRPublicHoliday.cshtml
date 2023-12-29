@@ -1,0 +1,81 @@
+﻿@model SystemViewModels.SystemSetting.HRPublicHolidayViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="row form-group">
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.IdHRCompany, new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.DataModel.IdHRCompany, new SelectList(Model.DDLCompany, "Key", "Value"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.IdHRCompany)
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.HRPublicHolidayTitle, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.HRPublicHolidayTitle, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.HRPublicHolidayTitle)
+            </div>
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.HRPublicHolidayShortName, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.HRPublicHolidayShortName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.HRPublicHolidayShortName)
+            </div>
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.IdReligion, new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.DataModel.IdReligion,new SelectList(Model.DDLReligion,"Key","Value"), "--सबै--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.IdReligion)
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.FromdateNp, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.FromdateNp, new { @class = "form-control ",@readonly="readonly", @style = "cursor:pointer" })
+                @Html.ValidationMessageFor(model => model.DataModel.FromdateNp)
+            </div>
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.ToDateNp, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.ToDateNp, new { @class = "form-control ",@readonly="readonly",@style="cursor:pointer" })
+                @Html.ValidationMessageFor(model => model.DataModel.ToDateNp)
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.IsHolidayForMale, new { @class = "control-label" })
+                @Html.CheckBoxFor(model => model.DataModel.IsHolidayForMale, new { @class = "form-control BSswitch" })
+                @Html.ValidationMessageFor(model => model.DataModel.IsHolidayForMale)
+            </div>
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.IsHolidayForFemale, new { @class = "control-label" })
+                @Html.CheckBoxFor(model => model.DataModel.IsHolidayForFemale, new { @class = "form-control BSswitch" })
+                @Html.ValidationMessageFor(model => model.DataModel.IsHolidayForFemale)
+            </div>
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.IsHolidayForDisabled, new { @class = "control-label" })
+                @Html.CheckBoxFor(model => model.DataModel.IsHolidayForDisabled, new { @class = "form-control switchYesNo" })
+                @Html.ValidationMessageFor(model => model.DataModel.IsHolidayForDisabled)
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#DataModel_FromdateNp').nepaliDatePicker({
+            npdMonth: true,
+            npdYear: true
+        });
+        $('#DataModel_ToDateNp').nepaliDatePicker({
+            npdMonth: true,
+            npdYear: true
+        });
+    });
+</script>

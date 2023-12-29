@@ -1,0 +1,82 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeAddressViewModel
+    <script src="~/Scripts/jquery.form.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/RequiredField.js"></script>
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.DataModel.Id)
+    @Html.HiddenFor(model => model.PageNumber)
+    @Html.HiddenFor(model => model.PageSize)
+    @Html.HiddenFor(model => model.OrderingBy)
+    @Html.HiddenFor(model => model.OrderingDirection)
+    @Html.HiddenFor(model => model.SearchKey)
+
+    <div class="row">
+        
+        <div class="col-md-12 col-sm-12 col-lg-12">
+            <div class="col-md-12 col-sm-12 col-lg-12">
+                <div class="form-group row">
+                    <div class="col-md-3 col-sm-3 col-lg-3">
+                        @Html.LabelFor(model => model.DataModel.IdHREmployee, new { @class = "control-label" })
+                        @Html.DropDownListFor(model => model.DataModel.IdHREmployee, new SelectList(Model.DDLEmployee, "Key", "Value"), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.IdHREmployee)
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-lg-3">
+                        @Html.LabelFor(model => model.DataModel.IdPermanentDistrict, new { @class = "control-label" })
+                        @Html.DropDownListFor(model => model.DataModel.IdPermanentDistrict, new SelectList(Model.DDLDistrict,"Key","Value"),new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.IdPermanentDistrict)
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-lg-3">
+                        @Html.LabelFor(model => model.DataModel.IdPermanentCity, new { @class = "control-label" })
+                        @Html.DropDownListFor(model => model.DataModel.IdPermanentCity, new SelectList(Model.DDLCity,"Key","Value"),new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.IdPermanentCity)
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-lg-3">
+                        @Html.LabelFor(model => model.DataModel.IdTemporaryDistrict, new { @class = "control-label" })
+                        @Html.DropDownListFor(model => model.DataModel.IdTemporaryDistrict, new SelectList(Model.DDLDistrict,"Key","Value"),new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.IdTemporaryDistrict)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-lg-12">
+                <div class="form-group row">
+                    <div class="col-md-3 col-sm-3 col-lg-3">
+                        @Html.LabelFor(model => model.DataModel.IdTemporaryCity, new { @class = "control-label" })
+                        @Html.DropDownListFor(model => model.DataModel.IdTemporaryCity, new SelectList(Model.DDLCity,"Key","Value"),new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.IdTemporaryCity)
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-lg-3">
+                        @Html.LabelFor(model => model.DataModel.PermanentWardNumber, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.DataModel.PermanentWardNumber, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.PermanentWardNumber)
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-lg-3">
+                        @Html.LabelFor(model => model.DataModel.TemporaryWardNumber, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.DataModel.TemporaryWardNumber, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.TemporaryWardNumber)
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-lg-3">
+                        @Html.LabelFor(model => model.DataModel.Remark, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.DataModel.Remark, new { @type = "file", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.Remark)
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 col-sm-12 col-lg-12">
+                <div class="form-group row">
+                    <div class="col-md-3 col-sm-3 col-lg-3">
+                        @Html.LabelFor(model => model.DataModel.IsActive, new { @class = "control-label" })
+                        @Html.CheckBoxFor(model => model.DataModel.IsActive, new { @class = "form-control BSwitch" })
+                        @Html.ValidationMessageFor(model => model.DataModel.IsActive)
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-lg-3">
+                        @Html.LabelFor(model => model.DataModel.IsDefault, new { @class = "control-label" })
+                        @Html.CheckBoxFor(model => model.DataModel.IsDefault, new {@class = "form-control BSwitch" })
+                        @Html.ValidationMessageFor(model => model.DataModel.IsDefault)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+

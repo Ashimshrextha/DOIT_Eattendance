@@ -1,0 +1,26 @@
+﻿@model SystemViewModels.SystemFeedback.SystemCommentResponseViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+<div class="row">
+        <div class="row col-md-12 col-sm-12 col-lg-12 form-group">
+            <div class="col-md-3 col-sm-3 col-lg-3">
+                @Html.LabelFor(model => model.DataModel.SenderComment, new { @class = "control-label" })
+                @Html.TextAreaFor(model => model.DataModel.SenderComment, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.SenderComment)
+            </div>
+            <div class="col-md-3 col-sm-3 col-lg-3">
+                @Html.LabelFor(model => model.DataModel.ReceiverComment, new { @class = "control-label" })
+                @Html.TextAreaFor(model => model.DataModel.ReceiverComment, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.ReceiverComment)
+            </div>
+        </div>
+    </div>

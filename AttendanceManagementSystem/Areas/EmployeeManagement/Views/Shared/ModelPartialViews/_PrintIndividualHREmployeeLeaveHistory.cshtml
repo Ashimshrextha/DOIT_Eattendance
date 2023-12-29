@@ -1,0 +1,399 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeLeaveHistoryViewModel
+@{
+    var total = Model.DBModelLeaveSummary.Where(x => x.LeaveValidFromNP == Model.DataModel.LeaveValidFromNP).FirstOrDefault();
+    double totaldays = Convert.ToDouble(total.TotalDays);
+    var LeaveTitleNP = total.LeaveTitleNP;
+
+    int TEST = Model.DataModel.IdMasterLeaveTitle;
+}
+
+
+
+<style>
+    table {
+        width: 80%;
+    }
+
+    table,
+    td,
+    th {
+        text-align: center;
+        border: 1px solid black;
+    }
+
+    @@media print {
+        table {
+            width: 80%;
+        }
+
+        table,
+        td,
+        th {
+            text-align: center;
+            border: 1px solid black;
+        }
+    }
+</style>
+<div class="container" id="printThis">
+    
+    <header>
+        <div style="font-size:18px !important;">
+            @{ Html.RenderPartial("~/Views/Shared/_LeaveKaajReportHeader.cshtml", Model.Header);}
+        </div>
+        <div style="text-align: center; margin-bottom: 20px ;padding-top:15px">
+            <p style="font-weight:bold;">बिदाको निवेदन</p>
+            <table style="width: 100%; border: 1px solid black; text-align:center;">
+                <!-- Table header -->
+                <tr>
+                    <th style="border: 1px solid black; text-align: center">
+                        कर्मचारीले प्रयोग गर्ने
+                    </th>
+                </tr>
+
+            </table>
+            <div style="float:left;line-height:40px; margin-top:40px ">
+
+                <span>नाम : </span><span style="
+                border-bottom: 1px dotted;
+                padding-left: 20px;
+                padding-right: 20px;
+              ">@Model.DataModel.EmployeeName</span>
+
+            <br />
+            <span> पद : </span><span style="
+                border-bottom: 1px dotted;
+                padding-left: 20px;
+                padding-right: 20px;
+              ">@Model.DataModel.Designation</span>
+
+            <br />
+        </div>
+        <div style="float: right; padding-right: 129px; line-height: 40px; margin-top: 40px ">
+
+            <span> शाखाः : </span><span style="
+                border-bottom: 1px dotted;
+                padding-left: 20px;
+                padding-right: 20px;
+              ">@Model.DataModel.Division </span>
+            <br />
+            <span> </span>
+
+            <br />
+        </div>
+    </div>
+    </header>
+<section>
+    <table style="width: 100%; border: 1px solid black; text-align:center;margin-top:10px">
+        <!-- Table header -->
+        <tr>
+            <th style="border: 1px solid black; text-align: center">
+                चिन्ह लगाउने
+            </th>
+            <th style="border: 1px solid black; text-align: center">
+                मागेको विदाको किसिम
+            </th>
+            <th style="border: 1px solid black; text-align: center">
+                विदाको अवधी
+            </th>
+            <th style="border: 1px solid black; text-align: center">
+                कारण
+            </th>
+        </tr>
+
+
+        <tr>
+            <td style="border: 1px solid black">
+                <span style=" padding-left: 20px; padding-right: 20px;">
+                    <span style="font-size: 24px">&#10004;</span>
+                </span>
+            </td>
+            <td style="border: 1px solid black">
+                <span style="padding-left: 20px; padding-right: 20px;">
+                    @LeaveTitleNP
+                </span>
+            </td>
+            <td style="border: 1px solid black">
+                <span style=" padding-left: 20px; padding-right: 20px;">
+                    @totaldays
+                </span>
+            </td>
+            <td style="border: 1px solid black">
+                <span style=" padding-left: 20px; padding-right: 20px;">
+                    @Model.DataModel.LeaveReason
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" style="border: 1px solid black">
+                <span style=" padding-left: 20px; padding-right: 20px;">
+                    विदाको मिति @Model.DataModel.LeaveValidFromNP गतेदेखि मिति @Model.DataModel.LeaveValidToNP सम्म ।
+                </span>
+            </td>
+        </tr>
+
+    </table>
+
+    <div style="float: right; padding-right: 131px; line-height: 40px;">
+
+        <span style="
+                border-bottom: 1px dotted;
+                padding-left: 95px;
+                padding-right: 20px;"></span>
+
+        <br />
+
+        <span> कर्मचारी को  सही वा पत्र  </span>
+
+        <br />
+        <span> मिति:- </span><span style="
+                border-bottom: 1px dotted;
+                padding-left: 60px;
+                padding-right: 20px;
+              "> </span>
+
+        <br />
+
+    </div>
+
+    <table style="width: 100%; border: 1px solid black; text-align: center; border-bottom: 2px solid black; margin-top: 118px; margin-bottom: 25px;">
+        <!-- Table header -->
+        <tr>
+            <th style="border: 1px solid black; text-align: center">
+                कर्मचारी  प्रशासन  शाखाले प्रयोग  गर्ने
+            </th>
+        </tr>
+
+    </table>
+
+    <table style="width: 100%; border: 1px solid black; text-align:center;margin-top:10px">
+        <!-- Table header -->
+        <tr>
+            <th style="border: 1px solid black; text-align: center">
+                विदाको किसिम
+            </th>
+            <th style="border: 1px solid black; text-align: center">
+                अघिको बाँकी
+            </th>
+            <th style="border: 1px solid black; text-align: center">
+                हाल मागेको
+            </th>
+            <th style="border: 1px solid black; text-align: center">
+                अब रहन आउने
+            </th>
+        </tr>
+
+        @foreach (var leave in Model.DBModelLeaveBalanceSummary.Where(x => x.IdMasterLeaveTitle == @TEST))
+        {
+            <tr>
+                <td style="border: 1px solid black">
+                    <span style=" padding-left: 20px; padding-right: 20px;">
+                        @leave.LeaveTitle
+                    </span>
+                </td>
+                <td style="border: 1px solid black">
+                    <span style="padding-left: 20px; padding-right: 20px;">
+                        @leave.AvailableLeave
+                    </span>
+                </td>
+                <td style="border: 1px solid black">
+                    <span style=" padding-left: 20px; padding-right: 20px;">
+                        @leave.TotalTakenLeave
+                    </span>
+                </td>
+                <td style="border: 1px solid black">
+                    <span style=" padding-left: 20px; padding-right: 20px;">
+                        @(@leave.AvailableLeave - @leave.TotalTakenLeave)
+                    </span>
+                </td>
+            </tr>
+        }
+
+
+    </table>
+
+
+
+    <div style="float:left;line-height:40px">
+
+        <span>दस्तखत </span><span style="
+                border-bottom: 1px dotted;
+                padding-left: 93px;
+                padding-right: 20px;
+                margin-left: 25px;"></span><br />
+        <span> कर्मचारी  प्रशासन  शाखा</span><br />
+
+        <span>सिफारिस भएको </span>
+        @if (@Model.DataModel.IdRecommandationBy != null)
+        {
+            <span style="
+                border:1px solid;
+                padding-left: 54px;
+                padding-right: 43px;
+                margin-left: 28px;
+                margin-right: 25px;
+                font-size: 14px">&#10004;</span>
+        }
+        else
+        {
+            <span style="
+                border:1px solid;
+                padding-left: 54px;
+                padding-right: 54px;
+                margin-left: 28px;
+                margin-right: 25px;
+                font-size: 14px"></span>
+        }
+
+        <span>सिफारिस नभएको </span>
+        @if (@Model.DataModel.IdRecommandationBy == null)
+        {
+
+
+            <span style="
+                border:1px solid;
+                padding-left: 54px;
+                padding-right: 43px;
+                margin-left: 25px;
+                font-size: 14px">&#10004;</span>
+        }
+        else
+        {
+            <span style="
+                border:1px solid;
+                padding-left: 54px;
+                padding-right: 54px;
+                margin-left: 25px;
+                font-size: 14px"></span>
+        }
+
+        <br />
+        <span>विदा सकिने मिति  </span><span style="
+                border:1px solid;
+                padding-left: 20px;
+                padding-right: 20px;
+                margin-left: 25px;"> @Model.DataModel.LeaveValidToNP</span><br />
+                <span>निकटतम माथिल्लो अधिकृत </span><span style="
+                border-bottom:1px dotted;
+                padding-left: 93px;
+                padding-right: 20px;
+                margin-left: 25px;
+                margin-right: 25px;"></span>
+                <span>कुनै कुरा जनाउनु पर्ने भए जनाउने </span><span style="
+                border-bottom:1px dotted;
+                padding-left: 93px;
+                padding-right: 20px;
+                margin-left: 25px;"></span><br />
+            </div>
+
+
+
+
+
+            <div style=" border-bottom: 2px solid black; margin-top: 205px; margin-bottom: 10px;"></div>
+            <div style="min-height:5cm; display: inline;float:left ">
+
+                <div style="float:left;line-height:40px">
+
+                    <span>स्वीकृत : </span>
+
+
+
+                    @if (@Model.DataModel.IdLeaveStatus == 3)
+                    {
+                        <span style="
+                border:1px solid;
+                padding-left: 93px;
+                padding-right: 88px;
+                margin-left: 25px;
+                font-size: 14px
+              ">&#10004;</span>
+                    }
+                    else
+                    {
+                        <span style="
+                border:1px solid;
+                padding-left: 93px;
+                padding-right: 88px;
+                margin-left: 25px;
+              "></span>
+                    }
+
+
+                    <br />
+                    <span> अस्वीकृत : </span>
+                    @if (@Model.DataModel.IdLeaveStatus == 4)
+                    {
+
+
+                        <span style="
+                border:1px solid;
+                padding-left: 93px;
+                padding-right: 77px;
+                margin-left: 11px;
+                font-size: 14px
+              ">&#10004;</span>
+                    }
+                    else
+                    {
+                        <span style="
+                border:1px solid;
+                padding-left: 98px;
+                padding-right: 94px;
+                margin-left: 18px;
+                font-size: 14px
+              "></span>
+                    }
+
+
+                    <br />
+                </div>
+
+
+
+
+            </div>
+            <div style="min-height:5cm; display: inline;float:right ">
+                <p style="font-weight:bold">विदा स्वीकृत दिने अधिकारी</p>
+
+                <div style="float:left;line-height:40px">
+
+                    <span>नाम : </span><span style="
+                padding-left: 20px;
+                padding-right: 20px;
+              ">@Model.ApprovalEmployeeName </span>
+
+            <br />
+            <span> पद : </span><span style="
+                padding-left: 20px;
+                padding-right: 20px;
+              ">@Model.ApprovalEmployeeDesignation  </span>
+
+            <br />
+            <span> मिति : </span>
+            <span style="
+                padding-left: 20px;
+                padding-right: 20px;
+              ">@(string.Format("{0:yyyy-MM-dd}", Model.DataModel.ApprovedOn.DateNp())) </span>
+            <br />
+        </div>
+
+
+
+
+    </div>
+
+</section>
+</div>
+
+
+
+
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>

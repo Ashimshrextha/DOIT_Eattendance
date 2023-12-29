@@ -1,0 +1,65 @@
+﻿@model SystemViewModels.DeviceManagement.DeviceLogsViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.DataModel.PunchDate)
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+
+<div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+</div>
+<div class="col-md-12 col-lg-12 col-sm-12">
+    <div class="row form-group">
+        <div class="col-md-4 col-sm-4 col-lg-4">
+            @Html.LabelFor(model => model.DataModel.DeviceNumber, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.DataModel.DeviceNumber, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DataModel.DeviceNumber)
+        </div>
+        <div class="col-md-4 col-sm-4 col-lg-4">
+            @Html.LabelFor(model => model.DataModel.IdEnroll, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.DataModel.IdEnroll, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DataModel.IdEnroll)
+        </div>
+        <div class="col-md-4 col-sm-4 col-lg-4">
+            @Html.LabelFor(model => model.DataModel.IsProcessed, new { @class = "control-label" })
+            @Html.CheckBoxFor(model => model.DataModel.IsProcessed, new { @class = "form-control BSswitch" })
+            @Html.ValidationMessageFor(model => model.DataModel.IsProcessed)
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-4 col-sm-4 col-lg-4">
+            @Html.LabelFor(model => model.DataModel.PunchDate, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.DataModel.PunchDateNp, new { @class = "form-control", @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.DataModel.PunchDate)
+        </div>
+        <div class="col-md-4 col-sm-4 col-lg-4">
+            @Html.LabelFor(model => model.DataModel.VerificationMode, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.DataModel.VerificationMode, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DataModel.VerificationMode)
+        </div>
+        <div class="col-md-4 col-sm-4 col-lg-4">
+            @Html.LabelFor(model => model.DataModel.InOutMode, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.DataModel.InOutMode, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DataModel.InOutMode)
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#DataModel_PunchDateNp').nepaliDatePicker({
+            npdMonth: true,
+            npdYear: true,
+            onChange: function () {
+                $('#DataModel_PunchDate').val(BS2AD($('#DataModel_PunchDateNp').val()));
+            }
+        });
+    });
+</script>

@@ -1,0 +1,322 @@
+﻿@model SystemStores.GlobalModels.BreadCrumbModel
+@using SystemStores.GlobalMethod;
+@using SystemStores.ENUMData;
+@*<style>
+    @@media print {
+        body {
+            margin: 0;
+            color: #000;
+            background-color: #f00;
+        }
+    }
+    .control-label {
+        margin-bottom: 0px
+    }
+
+    .form-control {
+        margin-top: -10px
+    }
+</style>*@
+    <style type="text/css">
+        .control-label {
+            margin-bottom: 0px
+        }
+
+        .form-control {
+            margin-top: -10px
+        }
+    </style>
+<div class="ace-settings-container" id="ace-settings-container">
+    <div class="btn btn-app btn-xs btn-success ace-settings-btn" id="ace-settings-btn">
+        <i class="ace-icon fa fa-cog bigger-130"></i>
+    </div>
+    <div class="ace-settings-box clearfix" id="ace-settings-box">
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="form-group-mini" id="hiddenfile">
+                @Html.Label("ParentOrganization", new { @class = "control-label" })
+                <input type="text" readonly="readonly" class="form-control" id="ParentName" value="" />
+            </div>
+        </div>
+
+        <br />
+        <br />
+
+        <input id="textBrow" list="brow"  class="form-control" placeholder="कार्यालय खोज्नुहोस् !">
+        <datalist id="brow">
+            <select class="form-control select2-hidden-accessible" data-val="true" data-val-number="The field कार्यालय must be a number." id="companyList" name="IdHRCompany" data-select2-id="select2-data-companyList" tabindex="-1" aria-hidden="true">
+            </select>
+            @*@Html.DropDownListFor(model => model.IdHRCompany, new SelectList(Model.DDLCompany, "Key", "Value"), new { @id = "tmp", @class = "form-control" })*@
+
+        </datalist>
+
+
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="form-group-mini">
+                @Html.LabelFor(model => model.IdHRCompany, new { @class = "control-label" })
+                <select class="form-control select2-hidden-accessible" data-val="true" data-val-number="The field कार्यालय must be a number." id="IdHRCompany" name="IdHRCompany" data-select2-id="select2-data-IdHRCompany" tabindex="-1" aria-hidden="true">
+                </select>
+                @*@Html.DropDownListFor(model => model.IdHRCompany, new SelectList(Model.DDLCompany, "Key", "Value"), new { @class = "form-control" })*@
+                @Html.ValidationMessageFor(model => model.IdHRCompany)
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="form-group-mini">
+                @Html.LabelFor(model => model.IdDivision, new { @class = "control-label" })
+                <select class="form-control select2-hidden-accessible" data-val="true" data-val-number="The field शाखा/सेक्सन must be a number." id="IdDivision" name="IdDivision" data-select2-id="select2-data-IdDivision" tabindex="-1" aria-hidden="true">
+                </select>
+                @*@Html.DropDownListFor(model => model.IdDivision, new SelectList(Model.DDLDivision, "Key", "Value"), new { @class = "form-control" })*@
+                @Html.ValidationMessageFor(model => model.IdDivision)
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="form-group-mini">
+                @Html.LabelFor(model => model.IdJobStatus, new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.IdJobStatus, new SelectList(Model.DDLHREmployeePositionStatusType, "Key", "Value"), "--सबै--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdJobStatus)
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="form-group-mini">
+                @Html.LabelFor(model => model.IdHREmployee, new { @class = "control-label" })
+                <select class="form-control select2-hidden-accessible" data-val="true" id="IdHREmployee" data-select2-id="select2-data-IdHREmployee" tabindex="-1" aria-hidden="true">
+                </select>
+                @*@Html.DropDownListFor(model => model.IdHREmployee, new SelectList(Model.DDLEmployee, "Key", "Value"), new { @class = "form-control" })*@
+                @Html.ValidationMessageFor(model => model.IdHREmployee)
+            </div>
+        </div>
+        <div class=" col-md-6 col-lg-6 col-sm-6">
+            <div class="form-group-mini">
+                @Html.LabelFor(model => model.YearNp, new { @class = "control-label" })
+                <select class="form-control select2-hidden-accessible" data-val="true" data-val-number="The field कर्मचारीको नाम must be a number." id="YearNp" name="YearNp" data-select2-id="select2-data-YearNp" tabindex="-1" aria-hidden="true">
+                </select>
+                @*@Html.DropDownListFor(model => model.YearNp, new SelectList(Model.DDLYearNp, "Key", "Value"), new { @class = "form-control" })*@
+                @Html.ValidationMessageFor(model => model.YearNp)
+            </div>
+        </div>
+        <div class=" col-md-6 col-lg-6 col-sm-6">
+            <div class="form-group-mini">
+                @Html.LabelFor(model => model.MonthNp, new { @class = "control-label" })
+                <select class="form-control select2-hidden-accessible" data-val="true" data-val-number="The field कार्यालय must be a number." id="MonthNp" name="MonthNp" data-select2-id="select2-data-tmp" tabindex="-1" aria-hidden="true">
+                </select>
+                @*@Html.DropDownListFor(model => model.MonthNp, new SelectList(Model.DDLMonthNp, "Key", "Value"), new { @class = "form-control" })*@
+                @Html.ValidationMessageFor(model => model.MonthNp)
+            </div>
+        </div>
+        <div class="pull-right">
+            @*<button class="btn btn-sm btn-warning" id="Create_MonthlyAttendanceSheet" data-ajax-model="">
+                    Create
+                </button>*@
+            <button class="btn btn-sm btn-success" id="Search_MonthlyAttendanceSheet">
+                @SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Search)
+            </button>
+            @*<button class="btn btn-sm btn-default" id="Export_MonthlyAttendanceSheet">
+                    Export
+                </button>*@
+            <button class="btn btn-sm btn-info" id="Print_MonthlyAttendanceSheet" data-ajax-model="">
+                @SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Print)
+            </button>
+        </div><!-- /.pull-left -->
+    </div><!-- /.ace-settings-box -->
+</div><!-- /.ace-settings-container -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("input#textBrow").focusout(function () {
+
+            var id = $(this).val();
+            $('#IdHRCompany').val(id);
+            $('#IdHRCompany').trigger('change');
+            // alert($('#IdHRCompany').val());
+            $(this).val($('#IdHRCompany option:selected').text());
+
+
+        });
+        $('#DateNp').nepaliDatePicker({
+            npdMonth: true,
+            npdYear: true,
+            onChange: function () {
+                $('#Date').val(BS2AD($('#DateNp').val()));
+            }
+        });
+        $.ajax({
+            url: "/MonthlyAttendance/CompanyList",
+            type: "GET",
+            cache: true,
+            success: function (response) {
+                console.log('hejdfjkdhlfh', response.list)
+                $.each(response.list, function (key, value) {
+                    $('#companyList').append("<option value='" + value.Key + "'>" + value.Value + "</option>");
+                    $('#IdHRCompany').append("<option value='" + value.Key + "'>" + value.Value + "</option>");
+                })
+                $.each(response.dDLDivision, function (key, value) {
+                    $('#IdDivision').append("<option value='" + value.Key + "'>" + value.Value + "</option>");
+                })
+                $.each(response.dDLEmployee, function (key, value) {
+                    $('#IdHREmployee').append("<option value='" + value.Key + "'>" + value.Value + "</option>");
+                })
+
+                $.each(response.yearNp, function (key, value) {
+                    if (value.Key == @Model.YearNp) {
+
+                        $('#YearNp').append("<option selected='selected' value='" + value.Key + "'>" + value.Value + "</option>");
+                    }
+                    else {
+                        $('#YearNp').append("<option value='" + value.Key + "'>" + value.Value + "</option>");
+
+                    }
+                })
+
+                $.each(response.monthNp, function (key, value) {
+                    if (value.Key == @Model.MonthNp) {
+                        $('#MonthNp').append("<option selected='selected' value='" + value.Key + "'>" + value.Value + "</option>");
+                    }
+                    else
+                    {
+                         $('#MonthNp').append("<option value='" + value.Key + "'>" + value.Value + "</option>");
+                    }
+                })
+
+            }
+
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#IdHRCompany').change(function () {
+            populateDivision($(this).val());
+            populateEmployee($(this).val(), 0);
+        });
+        //$('#IdJobStatus').change(function () {
+        //    populateEmployeeWithJobStstus($('#IdHRCompany').val(), $('#IdDivision').val(), $(this).val());
+        //});
+
+
+        $('#IdDivision').change(function () { populateEmployee($('#IdHRCompany').val(), $(this).val()); });
+
+        function populateEmployee(IdHRCompany, IdDivision) {
+            $.ajax({
+                url: 'MonthlyAttendanceSheet/GetEmployeeByDivisionCompany_Json',
+                type: 'GET',
+                dataType: 'JSON',
+                data: { idHRCompany: IdHRCompany, idDivision: IdDivision },
+                success: function (result) {
+                    var options = $('#IdHREmployee');
+                    $('option', options).remove();
+                    $.each(result, function () {
+                        options.append($('<option/>').val(this.Key).text(this.Value));
+                    });
+                }
+            });
+        }
+
+        function populateEmployeeWithJobStstus(IdHRCompany, IdDivision, IdJobStatus) {
+            $.ajax({
+                url: 'MonthlyAttendanceSheet/GetEmployeeByJobStatus_Json',
+                type: 'GET',
+                dataType: 'JSON',
+                data: { idHRCompany: IdHRCompany, idDivision: IdDivision, idJobStatus: IdJobStatus },
+                success: function (result) {
+                    var options = $('#IdHREmployee');
+                    $('option', options).remove();
+                    $.each(result, function () {
+                        options.append($('<option/>').val(this.Key).text(this.Value));
+                    });
+                }
+            });
+        }
+
+        function populateDivision(IdHRCompany) {
+            $.ajax({
+                url: 'MonthlyAttendanceSheet/GetDivisionByCompany_Json',
+                type: 'GET',
+                dataType: 'JSON',
+                data: { idHRCompany: IdHRCompany },
+                success: function (result) {
+                    var options = $('#IdDivision');
+                    $('option', options).remove();
+                    $.each(result, function () {
+                        options.append($('<option/>').val(this.Key).text(this.Value));
+                    });
+                }
+            });
+        }
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(function () {
+			$.ajaxSetup({ cache: false });
+            $('#Search_MonthlyAttendanceSheet').click(function (e) {
+				var $loading = $('<img src="/images/Icon/ajaxLoading.gif" alt="loading..." class="ui-loading-icon img_loading_center">');
+                $("#replacetarget_MonthlyAttendanceSheet").html($loading);
+				$.ajax({
+                    url: '/@Model.BreadCrumbBaseURL' + '/_ListMonthlyAttendanceSheetAsync',
+					data:
+						{
+							idHRCompany: $('#IdHRCompany').val(),
+                            idHRCompanyDivision: $('#IdDivision').val(),
+                            idJobStatus: $('#IdJobStatus').val(),
+							idHREmployee: $('#IdHREmployee').val(),
+							year: $('#YearNp').val(),
+							month: $('#MonthNp').val(),
+							pageNumber: $('#PageNumber').val(),
+							pageSize: $('#PageSize').val(),
+							orderingBy: $('#OrderingBy').val(),
+							orderingDirection: $('#OrderingDirection').val(),
+							searchKey: $('#SearchKey').val()
+						},
+					cache: false,
+					type: "GET",
+					dataType: "html",
+					success: function (result) {
+						if (result == '"_Login_"') {
+							window.location = "/Account/Login";
+							return;
+						}
+                        $("#replacetarget_MonthlyAttendanceSheet").html(result);
+					}
+				});
+			    return false;
+            });
+		});
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        value = parseInt($('#IdHRCompany').val(), 10) || 0;
+        if (value == 0) {
+            $('#hiddenfile').css('display', 'none');
+        }
+        if (value > 0) {
+            Populate($('#IdHRCompany').val());
+        }
+        $('#IdHRCompany').change(function () {
+            Populate($(this).val());
+        });
+       function Populate(idHRCompany)
+	    {
+		$.ajax({
+            url: '/@Model.BreadCrumbBaseURL/GetParentsCompany',
+            type: 'GET',
+			data: { idHRCompany: idHRCompany},
+            dataType: 'json',
+            success: function (result) {
+                if (result != "Non-static method requires a target.") {
+                    if (result != "static method requires a target.") {
+                        var data = result;
+                        var res = data.split('-');
+                        var name = res[0];
+                        var parentname = res[1];
+                        $('#ParentOrganization').val(res);
+                        var option = $('#ParentName').val(name).css('color', 'green');
+                        $("label[for='ParentOrganization']").text(parentname);
+                        $('#hiddenfile').fadeIn('slow');
+                    }
+                }
+            }
+        });
+	    }
+    });
+</script>

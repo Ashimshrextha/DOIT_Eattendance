@@ -1,0 +1,171 @@
+﻿.nav-list {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-bottom: 0;
+}
+
+.karyalaya .panel-heading {
+    padding: 41px 15px;
+    padding-top: 20px;
+}
+.no-child .panel-heading {
+    padding: 5px 15px;
+}
+
+.panel-group ul {
+    list-style: none;
+}
+
+.panel-group ul, .panel-group li {
+    position: relative;
+    padding-left: 1rem;
+}
+
+    .panel-group li:first-child::before {
+        top: 30px;
+        width: 8px;
+        height: 0;
+    }
+
+    .panel-group li::before {
+        top: 30px;
+        width: 8px;
+        height: 0;
+    }
+    .panel-group li.no-child::before {
+        top: 12px;
+        width: 8px;
+        height: 0;
+    }
+
+    .panel-group li::after {
+        border-left: 2px solid #000;
+        height: 100%;
+        width: 0px;
+        top: 2px;
+    }
+
+    .panel-group ul > li.no-child:last-child::after {
+        height: 20px;
+    }
+    .panel-group ul > li:last-child::after {
+        height: 40px;
+    }
+
+    .panel-group li::after {
+        content: "";
+        position: absolute;
+        left: -8px;
+    }
+
+    .panel-group li::before {
+        content: "----->";
+        position: absolute;
+        left: -8px;
+    }
+
+
+
+
+.form-content-3 {
+    overflow: hidden;
+}
+
+    .form-content-3 .list-group, .form-content-3 .list-group-item {
+        border: none;
+        background-color : transparent;
+    }
+
+    .form-content-3 .nav-list {
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-bottom: 0;
+    }
+
+    .form-content-3 .karyalaya .panel-heading {
+        padding: 20px 12px;
+        padding-top: 20px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+    }
+    .form-content-3  .grid-panel-heading {
+        display: grid;
+        grid-template-columns: 3fr auto;
+    }
+
+    .form-content-3 .no-child .panel-heading {
+        padding: 7px 12px;
+    }
+    .form-content-3 .panel .panel-group {
+        margin-bottom: 0px;
+    }
+    .form-content-3 .panel-group ul {
+        list-style: none;
+    }
+
+    .form-content-3 .panel-group ul, .form-content-3 .panel-group li {
+        position: relative;
+        padding-left: 1rem;
+    }
+
+        .form-content-3 .panel-group li:first-child::before {
+            top: 30px;
+            width: 8px;
+            height: 0;
+        }
+
+        .form-content-3 .panel-group li::before {
+            top: 30px;
+            width: 8px;
+            height: 0;
+        }
+
+        .form-content-3 .panel-group li.no-child::before {
+            top: 15px;
+            width: 8px;
+            height: 0;
+        }
+
+        .form-content-3 .panel-group li::after {
+            border-left: 2px solid #000;
+            height: 100%;
+            width: 0px;
+            top: 2px;
+        }
+
+        .form-content-3 .panel-group ul > li.no-child:last-child::after {
+            height: 25px;
+        }
+
+        .form-content-3 .panel-group ul > li:last-child::after {
+            height: 40px;
+        }
+
+        .form-content-3 .panel-group li::after {
+            content: "";
+            position: absolute;
+            left: -8px;
+        }
+
+        .form-content-3 .panel-group li::before {
+            content: "----->";
+            position: absolute;
+            left: -8px;
+        }
+
+.custom-dropdown ul {
+    background-color: transparent;
+    border-color: none;
+}
+.custom-dropdown dropdown-menu {
+    background-color: transparent;
+    border-color: none;
+    box-shadow:none;
+}
+
+.custom-dropdown .btn-sm {
+    background-color: transparent;
+    border-color: none;
+    border-radius:30px;
+    text-align:center;
+}

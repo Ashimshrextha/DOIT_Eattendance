@@ -1,0 +1,34 @@
+﻿@model SystemViewModels.CompanyManagement.HRCompanyAttendanceViewModellist
+@using SystemStores.GlobalMethod;
+@using SystemStores.ENUMData;
+<div class="breadcrumbs ace-save-state">
+    <div class="nav-search" id="nav-search">
+        <form class="form-search">
+          
+        </form>
+    </div><!-- /.nav-search -->
+</div>
+@{ Html.RenderPartial("_ListHRCompanyAttendanceAsync");}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(function () {
+        $.ajaxSetup({ cache: false });
+            $('#Create_CompanyAttendance').click(function (e) {
+            var url;
+                url = '/@Model.BreadCrumbBaseURL' + '/_CreateHRCompanyAttendanceAsync?idHRCompany=' +'@Model.IdHRCompany';
+            $('#myModalContent').load(url, function () {
+                $('#myModal').modal({
+                    keyboard: true
+                }, 'show');
+                bindAjaxForm(this);
+            });
+            return false;
+        });
+        });
+    });
+</script>
+
+
+
+

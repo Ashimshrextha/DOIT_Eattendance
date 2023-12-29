@@ -1,0 +1,48 @@
+﻿@model SystemViewModels.CompanyManagement.HRCompanyViewModel
+
+<div id="printThis">
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>आईडी</th>
+                <th>कार्यालयको प्रकार</th>
+                <th>कार्यालयको नाम</th>
+                <th>कार्यालयको नाम</th>
+                <th>संक्षिप्त नाम</th>
+                <th>कोड</th>
+                <th>फोन</th>
+                <th>फैक्स</th>
+                <th class="text-center">अवस्था</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.HRCompanyType.CompanyType</td>
+                    <td>@item.CompanyName</td>
+                    <td>@item.CompanyNameNP</td>
+                    <td>@item.CompanyShortName</td>
+                    <td>@item.HRCompanyCode.HRCompanyCodeTitle</td>
+                    <td>@item.PhoneNumber</td>
+                    <td>@item.FaxNumber</td>
+                    <td class="ace-icon">
+                        <div>
+                            <i class="ace-icon @(item.IsActive==true?"fa fa-thumbs-up green":"fa fa-thumbs-down red") bigger-130" aria-hidden="true"></i>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>

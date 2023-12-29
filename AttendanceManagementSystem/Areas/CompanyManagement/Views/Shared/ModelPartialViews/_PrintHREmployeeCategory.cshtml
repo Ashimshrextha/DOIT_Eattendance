@@ -1,0 +1,43 @@
+﻿@model SystemViewModels.SystemSetting.HREmployeeCategoryViewModel
+
+<div id="printThis">
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>आईडी</th>
+                <th>प्रकार</th>
+                <th>संक्षिप्त</th>
+                <th>उच्च प्रकार</th>
+                <th>मध्य प्रकार</th>
+                <th>कम प्रकार</th>
+                <th>अनुक्रम</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.HREmployeeCategoryTitle</td>
+                    <td>@item.HREmployeeCategoryShortName</td>
+                    <td>@item.IsHigherLevelOfficer</td>
+                    <td>@item.IsMidLevelOfficer</td>
+                    <td>@item.IsLowLevelOfficer</td>
+                    <td>@item.HREmployeeCategoryOrder</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>
+
+
+

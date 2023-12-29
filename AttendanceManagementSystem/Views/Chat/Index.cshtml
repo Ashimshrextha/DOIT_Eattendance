@@ -1,0 +1,157 @@
+﻿@model SystemViewModels.Home.HomeDashboardViewModelList
+@using SystemStores.ENUMData;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Chat App</a>
+        </div>
+    </div>
+</nav>
+<div class="container" data-bind="visible: initialized">
+    <div id="error" class="alert alert-danger" data-bind="fadeOut: error, visible: error"></div>
+    <div id="auth" class="form-inline" data-bind="hidden: joined">
+        <input id="usr" type="text" class="form-control input-lg"
+               placeholder="Your display name, at least 5 characters... "
+               data-bind="value: username, valueUpdate:'keyup', hasFocus: !joined(), enterKey: join" />
+        <input id="join" type="button" value="Join" class="btn btn-primary"
+               data-loading-text="Joining..."
+               data-bind="click: join, enable: username.isValid()" />
+    </div>
+    <div id="chat" data-bind="visible: joined">
+        <div class="row">
+            <div class="col-md-2">
+                <ul id="users" class="list-group"
+                    data-bind="template: { name: 'userTemplate', foreach: users }"></ul>
+                <script type="text/html" id="userTemplate">
+                    <li class="list-group-item" data-bind="text: username"></li>
+                </script>
+                <input id="leave" type="button" value="Leave" class="btn btn-primary"
+                       data-bind="click: leave" />
+            </div>
+            <div class="col-md-10">
+                <div id="messagesContainer" style="overflow-y: scroll; height: 600px"
+                     data-bind="event: { scroll: handleUserScroll }">
+                    <ul id="messages" class="list-group"
+                        data-bind="template: { name: 'messageTemplate', foreach: messages }"></ul>
+                    <script type="text/html" id="messageTemplate">
+                        <li class="list-group-item">
+                            <span data-bind="html: text"></span>
+                            <span class="badge" data-bind="text: username"></span>
+                        </li>
+                    </script>
+                </div>
+                <div class="form-inline">
+                    <input id="msg" type="text" class="form-control input-lg"
+                           placeholder="Type in your message here... " style="width: 80%"
+                           data-bind="value: newMessageText, valueUpdate: 'afterkeyup', enterKey: sendMessage, hasFocus: joined()"
+                           autocomplete="off" />
+                    <input id="broadcast" type="button" value="Send" class="btn btn-primary"
+                           data-bind="click: sendMessage, enable: newMessageText.isValid()" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+
+        $("input[placeholder]").each(function () {
+            $(this).attr('size', $(this).attr('placeholder').length);
+        });
+
+        var chat = new chatViewModel($.connection.chatHub);
+        ko.validation.init({ insertMessages: false });
+        ko.applyBindings(chat);
+        $.connection.hub.start().done(function () {
+            chat.initialized(true);
+        });
+    });
+</script>*@
+@*<h2>
+        Welcome @(Request.IsAuthenticated ? Model.SessionDetails.Email : "Guest") - Say hello!
+    </h2>*@
+    <div class="chat-panel panel panel-default" style="display:flex;align-items:center;flex-direction: column;">
+        <div class="panel-heading">
+            <i class="fa fa-paper-plane fa-fw"></i>
+        </div>
+        <div class="panel-body" id="chat">
+            <div id="discussion"></div>
+            <input type="hidden" id="displayname" />
+            <input type="hidden" id="avatar" />
+        </div>
+        <div class="panel-footer">
+            <div class="input-group">
+                <textarea id="message" name="message" class="form-control input-sm" placeholder="Type your message here..." rows="2"></textarea>
+
+                <span class="input">
+                    <input type="button" class="btn btn-default" id="sendmessage" value="Send">
+                </span>
+            </div>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
+    {
+        <center style="width:100%;">
+            <div class="links col-md-6">
+                <div>
+                    @Html.ActionLink("Users", "ActiveUsers", "Home")
+                </div>
+                <div>
+                    @Html.ActionLink("Account", "Account", "Home")
+                </div>
+                <div>
+                    <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+                </div>
+            </div>
+        </center>
+    }
+    @section scripts {
+        <script src="~/Scripts/jquery.signalR-2.3.0.min.js"></script>
+        <script src="~/signalr/hubs"></script>
+        <script>
+            $(function () {
+                var chat = $.connection.chatHub;
+                var position = "right";
+                var name = "@Model.SessionDetails.Email"
+                var avatar = "@Model.SessionDetails.Email"
+                var avatar = "@Model.SessionDetails.Email"
+                chat.client.addNewMessageToPage = function (name, message, avatar, value) {
+                    if (name != "@Model.SessionDetails.Email") {
+                        position = "left";
+                    }
+                    else {
+                        position = "right";
+                    }
+                    $('#discussion').append('<div id="messageDiv" style="width:60%;float:' + position + ';">' +
+                        '<figure style="float:' + position + ';width: 11%; min-width: 60px;"><img src="' + avatar + '" title=' + name + '><figcaption style="text-align: center; margin-top: -5%; font-size: 90%;">'+name+'</figcaption></figure>' +
+                        '<div style = "float:' + position + '; margin-'+position+': 2%;" class= "message" ><div style="width: 100%;float:' + position +';margin-'+position+': 1%; margin-bottom: 1%;font-size: 12px; font-weight: lighter;"> @DateTime.Now.ToString("HH:mm") </div><div> ' + htmlEncode(message) + '</div></div >');
+                    $("#discussion").append("<div style='clear:both'/>")
+                    $(".panel-body").animate({ scrollTop: $('.panel-body').prop("scrollHeight") }, 1000);
+                }
+                $('#displayname').val(name);
+                $('#avatar').val(avatar);
+                $('#message').focus();
+                $.connection.hub.start().done(function () {
+                    $('#sendmessage').click(function () {
+                        if ($('#message').val().replace(/\s/g, "") != "") {
+                            chat.server.send(name, $('#message').val(), avatar);
+                        }
+                        $('#message').val('').focus();
+                    });
+                });
+                $('#message').keyup(function (event) {
+                    if (event.keyCode == 13) {
+                        $('#sendmessage').trigger('click');
+                    }
+                });
+            });
+            function htmlEncode(value) {
+                var encodedValue = $('<div />').text(value).html();
+                return encodedValue;
+            }
+        </script>
+    }

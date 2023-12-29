@@ -1,0 +1,109 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeViewModel
+<div class="panel panel-default">
+    <div class="panel-heading"><h4 class="panel-title">राष्ट्रिय पहिचानपत्र जानकारी</h4></div>
+    <div class="panel-body">
+        <div class="col-md-12 col-sm-12 col-lg-12">
+            <div class="col-md-9 col-sm-9 col-lg-9">
+                <div class="form-group row">
+                    <div class="col-md-4 col-sm-4 col-lg-4">
+                        @Html.LabelFor(model => model.DataModelNIdentity.IdNationalIdentityType, new { @class = "control-label" })
+                        @Html.DropDownListFor(model => model.DataModelNIdentity.IdNationalIdentityType, new SelectList(Model.DDLNationalIdentityType, "Key", "Value"), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModelNIdentity.IdNationalIdentityType)
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-lg-4">
+                        @Html.LabelFor(model => model.DataModelNIdentity.IdentityNumber, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.DataModelNIdentity.IdentityNumber, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModelNIdentity.IdentityNumber)
+                        <span id="check_IdNumber" class="field-validation-error"></span>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-lg-4">
+                        @Html.LabelFor(model => model.DataModelNIdentity.IssueDistrict, new { @class = "control-label" })
+                        @Html.DropDownListFor(model => model.DataModelNIdentity.IssueDistrict, new SelectList(Model.DDLDistrict, "Key", "Value"), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModelNIdentity.IssueDistrict)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4 col-sm-4 col-lg-4">
+                        @Html.LabelFor(model => model.DataModelNIdentity.IssueDateNP, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.DataModelNIdentity.IssueDateNP, new { @class = "form-control", @readonly = "readonly", @style = "cursor:pointer" })
+                        @Html.ValidationMessageFor(model => model.DataModelNIdentity.IssueDateNP)
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-lg-4" id="expirydate">
+                        @Html.LabelFor(model => model.DataModelNIdentity.ExpiryDateNP, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.DataModelNIdentity.ExpiryDateNP, new { @class = "form-control", @readonly = "readonly", @style = "cursor:pointer" })
+                        @Html.ValidationMessageFor(model => model.DataModelNIdentity.ExpiryDateNP)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3 col-lg-3 pull-right">
+                <div class="form-group pull-right">
+                    <div class="form-inline" data-toggle="tooltip" data-placement="top" title="Please Upload Only JPG & PNG File & File Should be less than 1 mb in size">
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
+                                <img src="@Model.DataModel.Document" style="width:150px;height:200px;" />
+                            </div>
+                            <div>
+                                <span class="hidden">
+                                    <input type="file" name="NationalIdentity">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#expirydate').hide();
+        $('#DataModelNIdentity_IdNationalIdentityType').change(function () {
+            if ($(this).val() == 1) {
+                $('#expirydate').hide();
+            }
+            else {
+                $('#expirydate').show();
+            }
+        });
+
+        //check national identity  number
+        $('#DataModelNIdentity_IdentityNumber').keyup(function () {
+            CheckNationalIdentityNumber($(this).val());
+        });
+
+        function CheckNationalIdentityNumber(IdNumber) {
+            if (IdNumber.length > 3) {
+                $.ajax({
+                    url: '/HREmployeeManagement/CheckNationalIdentity_Json',
+                    type: 'GET',
+                    data: { identityNumber: IdNumber },
+                    dataType: 'JSON',
+                    success: function (result) {
+                        if (result == "Available") {
+                            $('#check_IdNumber').text(IdNumber + " " + result).css('color', 'green');
+                        }
+                        else {
+                            //$('#DataModelNIdentity_IdentityNumber').val('');
+                            $('#check_IdNumber').text(IdNumber + " " + result).css('color', 'red');
+                        }
+                    }
+                });
+            }
+            else {
+                $('#check_IdNumber').text('').css('color', '');
+            }
+        }
+
+
+        $('#DataModelNIdentity_IssueDateNP').nepaliDatePicker({
+            npdMonth: true,
+            npdYear: true
+        });
+
+        $('#DataModelNIdentity_ExpiryDateNP').nepaliDatePicker({
+            npdMonth: true,
+            npdYear: true
+        });
+    });
+</script>

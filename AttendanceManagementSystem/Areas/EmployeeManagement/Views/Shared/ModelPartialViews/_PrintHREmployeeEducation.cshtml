@@ -1,0 +1,43 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeEducationViewModel
+
+<div id="printThis">
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+			<tr>
+				<th>आईडी</th>
+                <th>शिक्षा प्रकार</th>
+                <th>कलेज </th>
+                <th>कलेज ठेगाना</th>
+				<th>ठेगाना</th>
+                <th>स्कोर</th>
+                <th>सुरूको मिति</th>
+                <th>अन्तिम मिति</th>
+                <th class="text-center">जागिर अवस्था</th>
+			</tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+            {
+			<tr>
+				<td>@item.Id</td>
+				<td>@item.HREmployeeEducationType.EducationType</td>
+				<td>@item.CollegeName</td>
+				<td>@item.CollegeAddress</td>
+				<td>@item.DegreeName</td>
+				<td>@item.Score</td>
+				<td>@item.StartedDate</td>
+				<td>@item.EndDate</td>
+			</tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>

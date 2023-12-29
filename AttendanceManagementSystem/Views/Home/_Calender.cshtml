@@ -1,0 +1,26 @@
+﻿@model SystemViewModels.Home.HomeDashboardViewModelList
+<link href="~/Content/SuperAdminDasboard.css" rel="stylesheet" />
+<link href="~/Content/fullcalendar.min.css" rel="stylesheet" />
+<link href="~/Content/fullcalendercustom.css" rel="stylesheet" />
+<script src="~/Scripts/moment.min.js"></script>
+<script src="~/Scripts/fullcalendar.min.js"></script>
+
+<div id='calendar'></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            defaultDate: '2018-08-29',
+            defaultView: 'month',
+            editable: true,
+
+        });
+
+    });
+
+</script>

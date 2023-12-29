@@ -1,0 +1,585 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeJobHistoryViewModel
+<link href="~/Content/jasny-bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jasny-bootstrap.min.js"></script>
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.DataModel.IdHREmployee)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+
+<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+   
+    <div class="table-responsive">
+        <div class="panel panel-success">
+            <div class="panel-body">
+                <div class="form-group row">
+                    <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+
+
+
+                        @Html.LabelFor(model => model.DataModel.IdHREmployee, new { @class = "control-label" })
+
+
+                        <select class="form-control select2-hidden-accessible" id="Idhremployee" name="DataModel.IdHREmployee" data-select2-id="select2-data-DataModel_IdHREmployee" tabindex="-1" aria-hidden="true">
+                        </select>
+
+                        @*@Html.DropDownListFor(model => model.DataModel.IdHREmployee, new SelectList(Model.DDLEmployee, "Key", "Value"), new { @class = "form-control" })*@
+
+                        @Html.ValidationMessageFor(model => model.DataModel.IdHREmployee)
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                        @Html.LabelFor(model => model.DataModel.IdHRCompany, new { @class = "control-label" })
+
+                        <select class="form-control select2-hidden-accessible" data-val="true" data-val-number="The field कार्यालय must be a number." data-val-required="The कार्यालय field is required." id="DataModel_IdHRCompany" name="DataModel.IdHRCompany" data-select2-id="select2-data-DataModel_IdHRCompany" tabindex="-1" aria-hidden="true">
+                        </select>
+
+                        @*@Html.DropDownListFor(model => model.DataModel.IdHRCompany, new SelectList(Model.DDLCompany, "Key", "Value"), new { @class = "form-control" })*@
+                        @Html.ValidationMessageFor(model => model.DataModel.IdHRCompany)
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                        @Html.LabelFor(model => model.DataModel.IdHRCompanyDivision, new { @class = "control-label" })
+
+
+                        <select class="form-control select2-hidden-accessible" data-val="true" data-val-number="The field शाखा must be a number." data-val-range="कृपया  शाखा चयन गर्नुहोस्" data-val-range-max="Infinity" data-val-range-min="1" data-val-required="कृपया  शाखा चयन गर्नुहोस्" id="DataModel_IdHRCompanyDivision" name="DataModel.IdHRCompanyDivision" data-select2-id="select2-data-DataModel_IdHRCompanyDivision" tabindex="-1" aria-hidden="true">
+                        </select>
+
+                        @*  @Html.DropDownListFor(model => model.DataModel.IdHRCompanyDivision, new SelectList(Model.DDLDivision, "Key", "Value"), new { @class = "form-control" })*@
+
+
+
+                        @Html.ValidationMessageFor(model => model.DataModel.IdHRCompanyDivision)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                        @Html.LabelFor(model => model.DataModel.IdHREmployeePositionStatusType, new { @class = "control-label" })
+
+                        <select class="form-control select2-hidden-accessible" data-val="true" data-val-number="The field जागिर किसिम must be a number." data-val-range="कृपया  जागिर किसिम चयन गर्नुहोस्" data-val-range-max="Infinity" data-val-range-min="1" data-val-required="कृपया  जागिर किसिम चयन गर्नुहोस्" id="DataModel_IdHREmployeePositionStatusType" name="DataModel.IdHREmployeePositionStatusType" data-select2-id="select2-data-DataModel_IdHREmployeePositionStatusType" tabindex="-1" aria-hidden="true">
+                            <option value="">चयन गर्नुहोस्</option>
+                        </select>
+
+                        @*@Html.DropDownListFor(model => model.DataModel.IdHREmployeePositionStatusType, new SelectList(Model.DDLHREmployeePositionStatusType, "Key", "Value"), "चयन गर्नुहोस्", new { @class = "form-control" })*@
+                        @Html.ValidationMessageFor(model => model.DataModel.IdHREmployeePositionStatusType)
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                        @Html.LabelFor(model => model.DataModel.IdHREmployeeServiceType, new { @class = "control-label" })
+
+                        <select class="form-control select2-hidden-accessible" data-val="true" data-val-number="The field सिभिल सेवा प्रकार must be a number." data-val-range="कृपया  सिभिल सेवा प्रकार चयन गर्नुहोस्" data-val-range-max="Infinity" data-val-range-min="1" data-val-required="कृपया  सिभिल सेवा प्रकार चयन गर्नुहोस्" id="DataModel_IdHREmployeeServiceType" name="DataModel.IdHREmployeeServiceType" data-select2-id="select2-data-DataModel_IdHREmployeeServiceType" tabindex="-1" aria-hidden="true">
+                        </select>
+
+                        @*@Html.DropDownListFor(model => model.DataModel.IdHREmployeeServiceType, new SelectList(Model.DDLServiceType, "Key", "Value"), new { @class = "form-control" })*@
+
+
+
+
+                        @Html.ValidationMessageFor(model => model.DataModel.IdHREmployeeServiceType)
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                        @Html.LabelFor(model => model.DataModel.IdHRDesignation, new { @class = "control-label" })
+
+                        <select class="form-control select2-hidden-accessible" data-val="true" data-val-number="The field पद must be a number." data-val-range="कृपया  पद चयन गर्नुहोस्" data-val-range-max="Infinity" data-val-range-min="1" data-val-required="कृपया  पद चयन गर्नुहोस्" id="DataModel_IdHRDesignation" name="DataModel.IdHRDesignation" data-select2-id="select2-data-DataModel_IdHRDesignation" tabindex="-1" aria-hidden="true">
+                        </select>
+                        @*@Html.DropDownListFor(model => model.DataModel.IdHRDesignation, new SelectList(Model.DDLDesignation, "Key", "Value"), new { @class = "form-control" })*@
+
+
+                        @Html.ValidationMessageFor(model => model.DataModel.IdHRDesignation)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                        @Html.LabelFor(model => model.DataModel.IdHREmployeeJobStatus, new { @class = "control-label" })
+                        <select class="form-control select2-hidden-accessible" data-val="true" data-val-number="The field जागिर अवस्था must be a number." data-val-range="कृपया  जागिर अवस्था चयन गर्नुहोस्" data-val-range-max="Infinity" data-val-range-min="1" data-val-required="कृपया  जागिर अवस्था चयन गर्नुहोस्" id="DataModel_IdHREmployeeJobStatus" name="DataModel.IdHREmployeeJobStatus" onchange="checkValid()" data-select2-id="select2-data-DataModel_IdHREmployeeJobStatus" tabindex="-1" aria-hidden="true">
+                        </select>
+                        @*   @Html.DropDownListFor(model => model.DataModel.IdHREmployeeJobStatus, new SelectList(Model.DDLJobStatus, "Key", "Value"), new { @class = "form-control", @onChange = "checkValid()" })*@
+                        @Html.ValidationMessageFor(model => model.DataModel.IdHREmployeeJobStatus)
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                        @Html.LabelFor(model => model.DataModel.JoiningDateNp, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.DataModel.JoiningDateNp, new { @class = "form-control", @readonly = "readonly", @style = "cursor:pointer" })
+                        @Html.ValidationMessageFor(model => model.DataModel.JoiningDateNp)
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+
+                        <span id="retirement">
+                            @Html.Label("सेवानिवृत्त लागु हुने मिति", new { @class = "control-label" })
+                        </span>
+
+                        <span id="kickout">
+                            @Html.Label("निलम्वन हुने मिति", new { @class = "control-label" })
+                        </span>
+
+                        <span id="resignation">
+                            @Html.Label("राजिनामा लागु हुने मिति", new { @class = "control-label" })
+                        </span>
+
+                        <span id="death">
+                            @Html.Label("निधन भएको मिति", new { @class = "control-label" })
+                        </span>
+                        <span id="moveOut">
+                            @Html.Label("रमाना लागु हुने मिति", new { @class = "control-label" })
+                        </span>
+
+
+                        <span id="kaajOut">
+                            @Html.Label("काज लागु हुने मिति", new { @class = "control-label" })
+                        </span>
+
+                        <span id="promotion">
+                            @Html.Label("बढुवा लागु हुने मिति", new { @class = "control-label" })
+                        </span>
+
+
+
+                        @*@Html.LabelFor(model => model.DataModel.ExpiryDateNP, new { @class = "control-label" })*@
+                        @Html.TextBoxFor(model => model.DataModel.ExpiryDateNP, new { @class = "form-control", @style = "cursor:pointer" })
+                        @Html.ValidationMessageFor(model => model.DataModel.ExpiryDateNP)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        @Html.LabelFor(model => model.DataModel.IsHead, new { @class = "control-label" })
+                                        @Html.CheckBoxFor(model => model.DataModel.IsHead, new { @class = "BSswitch" })
+                                        @Html.ValidationMessageFor(model => model.DataModel.IsHead)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        @Html.LabelFor(model => model.DataModel.FinalApprove, new { @class = "control-label" })
+                                        @Html.CheckBoxFor(model => model.DataModel.FinalApprove, new { @class = "BSswitch" })
+                                        @Html.ValidationMessageFor(model => model.DataModel.FinalApprove)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                        @*@Html.LabelFor(model => model.DataModel.ImplementationDateNp, new { @class = "control-label" })*@
+                        @Html.Label("रमाना मिति", new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.DataModel.ImplementationDateNp, new { @class = "form-control", @style = "cursor:pointer" })
+                        @Html.ValidationMessageFor(model => model.DataModel.ImplementationDateNp)
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                        @Html.LabelFor(model => model.DataModel.DecisionDateNP, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.DataModel.DecisionDateNP, new { @class = "form-control", @style = "cursor:pointer" })
+                        @Html.ValidationMessageFor(model => model.DataModel.DecisionDateNP)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3 col-sm-3 col-lg-3 col-xs-12">
+                        @Html.LabelFor(model => model.DataModel.DocumentName, new { @class = "control-label" }) @Html.ValidationMessageFor(model => model.DataModel.DocumentName)
+                        <div class="form-inline" data-toggle="tooltip" data-placement="top" title="Please Upload Only JPG & PNG File & File Should be less than 1 mb in size">
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
+                                    <img src="~/images/ramanapatra.jpg" style="width:150px;height:200px;" />
+                                </div>
+                                <div>
+                                    <span class="hidden">
+                                        <input type="file" name="DocumentUpload">
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+           
+            <div hidden>
+                <select id="crudType" style="display: none;" hidden>
+                    <option selected="selected" value="@Model.CRUDAction.ToString()">@Model.CRUDAction.ToString()</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#DataModel_IdHRCompany').change(function () {
+            PopulateCivilServiceType($(this).val());
+            PopulateDesignation($(this).val());
+            PopulateDivision($(this).val());
+        });
+        function PopulateCivilServiceType(idCompany) {
+            $.ajax({
+                url: '/HREmployeeManagement/GetCivilServiceTypeByCompany_Json',
+                type: 'GET',
+                dataType: 'JSON',
+                data: { idHRCompany: idCompany },
+                success: function (result) {
+                    var options = $('#DataModel_IdHREmployeeServiceType');
+                    $('option', options).remove();
+                    $.each(result, function () {
+                        options.append($('<option/>').val(this.Key).text(this.Value));
+                    });
+                }
+            });
+        }
+        function PopulateDesignation(idCompany) {
+            $.ajax({
+                url: '/HREmployeeManagement/GetDesignationByCompany_Json',
+                type: 'GET',
+                dataType: 'JSON',
+                data: { idHRCompany: idCompany },
+                success: function (result) {
+                    var options = $('#DataModel_IdHRDesignation');
+                    $('option', options).remove();
+                    $.each(result, function () {
+                        options.append($('<option/>').val(this.Key).text(this.Value));
+                    });
+                }
+            });
+        }
+        function PopulateDivision(idCompany) {
+            $.ajax({
+                url: '/HREmployeeManagement/GetDivisionByCompany_Json',
+                type: 'GET',
+                dataType: 'JSON',
+                data: { idHRCompany: idCompany },
+                success: function (result) {
+                    var options = $('#DataModel_IdHRCompanyDivision');
+                    $('option', options).remove();
+                    $.each(result, function () {
+                        options.append($('<option/>').val(this.Key).text(this.Value));
+                    });
+                }
+            });
+        }
+
+
+        var date = new Date();
+        date = date.getDate();
+
+
+
+
+        if (@Model.DataModel.IdHREmployeeJobStatus== 5) {
+
+            $("#kickout").hide();
+            $("#resignation").hide();
+            $("#death").hide();
+            $("#moveOut").hide();
+            $("#kaajOut").hide();
+            $("#promotion").hide();
+            $("#retirement").show();
+        }
+        else if (@Model.DataModel.IdHREmployeeJobStatus== 7) {
+
+            $("#resignation").hide();
+            $("#death").hide();
+            $("#moveOut").hide();
+            $("#retirement").hide();
+            $("#kaajOut").hide();
+            $("#promotion").hide();
+            $("#kickout").show();
+        }
+        else if (@Model.DataModel.IdHREmployeeJobStatus == 17) {
+
+            $("#kickout").hide();
+            $("#death").hide();
+            $("#moveOut").hide();
+            $("#retirement").hide();
+            $("#kaajOut").hide();
+            $("#promotion").hide();
+            $("#resignation").show();
+        }
+        else if (@Model.DataModel.IdHREmployeeJobStatus== 19) {
+
+
+            $("#kickout").hide();
+            $("#resignation").hide();
+            $("#moveOut").hide();
+            $("#retirement").hide();
+            $("#kaajOut").hide();
+            $("#promotion").hide();
+            $("#death").show();
+        }
+        else if (@Model.DataModel.IdHREmployeeJobStatus== 4) {
+
+
+            $("#kickout").hide();
+            $("#resignation").hide();
+            $("#moveOut").hide();
+            $("#retirement").hide();
+            $("#death").hide();
+            $("#kaajOut").hide();
+            $("#promotion").show();
+        }
+        else if (@Model.DataModel.IdHREmployeeJobStatus== 9) {
+
+
+            $("#kickout").hide();
+            $("#resignation").hide();
+            $("#moveOut").hide();
+            $("#retirement").hide();
+            $("#death").hide();
+            $("#promotion").hide();
+            $("#kaajOut").show();
+        }
+        else {
+
+            $("#kickout").hide();
+            $("#resignation").hide();
+            $("#death").hide();
+            $("#retirement").hide();
+            $("#kaajOut").hide();
+            $("#promotion").hide();
+            $("#moveOut").show();
+        }
+
+
+
+
+        $('#DataModel_ExpiryDateNP').nepaliDatePicker({
+            npdMonth: true,
+            npdYear: true,
+
+            disableBefore: $('#DataModel_JoiningDateNp').val().split('-')[1] + '/' + $('#DataModel_JoiningDateNp').val().split('-')[2] + '/' + $('#DataModel_JoiningDateNp').val().split('-')[0]
+        });
+
+        $('#DataModel_JoiningDateNp').nepaliDatePicker({
+            npdMonth: true,
+            npdYear: true,
+
+        });
+        $('#DataModel_ImplementationDateNp').nepaliDatePicker({
+            npdMonth: true,
+            npdYear: true
+        });
+        $('#DataModel_DecisionDateNP').nepaliDatePicker({
+            npdMonth: true,
+            npdYear: true
+        });
+
+   
+
+
+        if (@Model.DataModel.IdHREmployee> 0) {
+            let IdHRCompany = @Model.DataModel.IdHRCompany;
+            let IdHREmployee = @Model.DataModel.IdHREmployee;
+
+            let IdHRCompanyDivision = @Model.DataModel.IdHRCompanyDivision;
+            let IdHREmployeePositionStatusType = @Model.DataModel.IdHREmployeePositionStatusType;
+            let IdHREmployeeServiceType = @Model.DataModel.IdHREmployeeServiceType;
+            let IdHRDesignation = @Model.DataModel.IdHRDesignation;
+            let IdHREmployeeJobStatus = @Model.DataModel.IdHREmployeeJobStatus;
+            let crudType = $("#crudType").val();
+
+            $.ajax({
+                url: "/HREmployeeJobHistory/CompanyList?IdHRCompany=" + IdHRCompany + "&IdHREmployee=" + IdHREmployee + "&crudType=" + crudType,
+                type: "GET",
+                cache: true,
+                success: function (response) {
+
+                    $.each(response.dDLCompany, function (key, value) {
+                        if (value.Key == IdHRCompany)
+                        {
+                            console.log(value.Key)
+                            $('#DataModel_IdHRCompany').append("<option selected='selected' value='" + value.Key + "'>" + value.Value + "</option>");
+                        } else
+                        {
+                            $('#DataModel_IdHRCompany').append("<option value='" + value.Key + "'>" + value.Value + "</option>");
+                        }
+                    })
+                    $.each(response.dDLDivision, function (key, value) {
+                        if (value.Key == IdHRCompanyDivision) {
+                            console.log(value.Key)
+                            $('#DataModel_IdHRCompanyDivision').append("<option selected='selected' value='" + value.Key + "'>" + value.Value + "</option>");
+                        }
+                        else
+                        {
+                            $('#DataModel_IdHRCompanyDivision').append("<option value='" + value.Key + "'>" + value.Value + "</option>");
+
+                        }
+                    })
+                    $.each(response.dDLServiceType, function (key, value) {
+                        if (value.Key == IdHREmployeeServiceType) {
+                            console.log(value.Key)
+                            $('#DataModel_IdHREmployeeServiceType').append("<option selected='selected' value='" + value.Key + "'>" + value.Value + "</option>");
+                        } else
+                        {
+                            $('#DataModel_IdHREmployeeServiceType').append("<option value='" + value.Key + "'>" + value.Value + "</option>");
+
+                        }
+                    })
+
+                    $.each(response.dDLDesignation, function (key, value) {
+                        if (value.Key == IdHRDesignation) {
+                            console.log(value.Key)
+                            $('#DataModel_IdHRDesignation').append("<option selected='selected' value='" + value.Key + "'>" + value.Value + "</option>");
+                        } else {
+                            $('#DataModel_IdHRDesignation').append("<option value='" + value.Key + "'>" + value.Value + "</option>");
+                        }
+                    })
+
+                }
+
+            });
+            $.ajax({
+                url: "/HREmployeeJobHistory/CompanyEmployeeList?IdHRCompany=" + IdHRCompany + "&IdHREmployee=" + IdHREmployee,
+                type: "GET",
+                cache: true,
+                success: function (response) {
+                    console.log('hh', response)
+                    console.log('IdHREmployee', IdHREmployee)
+
+
+
+                    $.each(response.dDLEmployee, function (key, value) {
+                        if (value.Key == IdHREmployee) {
+                            console.log(value.Key)
+                            $('#Idhremployee').append("<option selected='selected' value='" + value.Key + "'>" + value.Value + "</option>");
+                        } else {
+                            $('#Idhremployee').append("<option value='" + value.Key + "'>" + value.Value + "</option>");
+                        }
+                    })
+
+
+                }
+
+            });
+
+            $.ajax({
+                url: "/HREmployeeJobHistory/BasicInfo?IdHRCompany=" + IdHRCompany + "&IdHREmployee=" + IdHREmployee,
+                type: "GET",
+                cache: true,
+                success: function (response) {
+
+
+
+                    $.each(response.dDLHREmployeePositionStatusType, function (key, value) {
+                        if (value.Key == IdHREmployeePositionStatusType) {
+                            console.log(value.Key)
+                            $('#DataModel_IdHREmployeePositionStatusType').append("<option selected='selected' value='" + value.Key + "'>" + value.Value + "</option>");
+                        } else {
+                            $('#DataModel_IdHREmployeePositionStatusType').append("<option value='" + value.Key + "'>" + value.Value + "</option>");
+
+                        }
+                    })
+                    $.each(response.dDLJobStatus, function (key, value) {
+                        if (value.Key == IdHREmployeeJobStatus) {
+                            console.log(value.Key)
+                            $('#DataModel_IdHREmployeeJobStatus').append("<option selected='selected' value='" + value.Key + "'>" + value.Value + "</option>");
+                        } else {
+                            $('#DataModel_IdHREmployeeJobStatus').append("<option value='" + value.Key + "'>" + value.Value + "</option>");
+                        }
+                    })
+
+
+                }
+
+            });
+
+        }
+
+
+    });
+
+
+</script>
+<script>
+    $('select').select2({
+        width: '100%',
+        dropdownAutoWidth: true
+    });
+    function checkValid() {
+
+        //$("#moveOut").hide();
+        //$("#kickout").hide();
+        //$("#resignation").hide();
+        //$("#death").hide();
+        //$("#moveOut").hide();
+        let id = $("#DataModel_IdHREmployeeJobStatus").val();
+
+        if (id == 5) {
+
+            $("#kickout").hide();
+            $("#resignation").hide();
+            $("#death").hide();
+            $("#moveOut").hide();
+            $("#kaajOut").hide();
+            $("#promotion").hide();
+            $("#retirement").show();
+
+
+
+        }
+        else if (id == 7) {
+
+            $("#resignation").hide();
+            $("#death").hide();
+            $("#moveOut").hide();
+            $("#retirement").hide();
+            $("#kaajOut").hide();
+            $("#promotion").hide();
+            $("#kickout").show();
+        }
+        else if (id == 17) {
+
+            $("#kickout").hide();
+            $("#death").hide();
+            $("#moveOut").hide();
+            $("#retirement").hide();
+            $("#kaajOut").hide();
+            $("#promotion").hide();
+            $("#resignation").show();
+
+        }
+        else if (id == 19) {
+
+            $("#kickout").hide();
+            $("#resignation").hide();
+            $("#moveOut").hide();
+            $("#retirement").hide();
+            $("#kaajOut").hide();
+            $("#promotion").hide();
+            $("#death").show();
+
+        }
+        else if (id== 4) {
+
+
+            $("#kickout").hide();
+            $("#resignation").hide();
+            $("#moveOut").hide();
+            $("#retirement").hide();
+            $("#death").hide();
+            $("#kaajOut").hide();
+            $("#promotion").show();
+        }
+        else if (id== 9) {
+            $("#kickout").hide();
+            $("#resignation").hide();
+            $("#moveOut").hide();
+            $("#retirement").hide();
+            $("#death").hide();
+            $("#promotion").hide();
+            $("#kaajOut").show();
+        }
+        else {
+
+            $("#kickout").hide();
+            $("#resignation").hide();
+            $("#death").hide();
+            $("#retirement").hide();
+            $("#kaajOut").hide();
+            $("#promotion").hide();
+            $("#moveOut").show();
+        }
+    }
+
+</script>

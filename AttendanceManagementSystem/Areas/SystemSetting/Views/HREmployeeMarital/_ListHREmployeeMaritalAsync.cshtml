@@ -1,0 +1,51 @@
+﻿@model SystemViewModels.SystemSetting.HREmployeeMaritalViewModelList
+@using PagedList.Mvc;
+<div id="replacetarget">
+    <div id="content" class="content">
+        <div class="dataTables_wrapper">
+            <div id="mask-container">
+                <div id="mask"></div>
+                <div class="table-responsive">
+                    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th>नाम</th>
+                                <th>अपडेट गर्ने</th>
+                                <th>अवस्था</th>
+                                <th class="ace-icon">कार्य</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.DBModelList)
+                            {
+                                <tr>
+                                    <td>@item.HREmployeeMaritalTitle</td>
+                                    <td>@item.UpdatedBy</td>
+                                    <td class="ace-icon">
+                                        <div>
+                                            <i class="ace-icon @(item.IsActive==true?"fa fa-thumbs-up green":"fa fa-thumbs-down red") bigger-130" aria-hidden="true"></i>
+                                        </div>
+                                    </td>
+                                    <td class="ace-icon action-buttons">
+                                        <a href="@Url.Action("_UpdateHREmployeeMaritalAsync",new { id=item.Id,pageNumber=Model.PageNumber,pageSize=Model.PageSize,orderingBy=Model.OrderingBy,orderingDirection=Model.OrderingDirection,searchKey=Model.SearchKey})" data-ajax-model="">
+                                            <i class="ace-icon fa fa-pencil green bigger-150" aria-hidden="true" title="Edit"></i>
+                                        </a>
+                                        <a href="@Url.Action("_ReadHREmployeeMaritalAsync",new { id=item.Id,pageNumber=Model.PageNumber,pageSize=Model.PageSize,orderingBy=Model.OrderingBy,orderingDirection=Model.OrderingDirection,searchKey=Model.SearchKey})" data-ajax-model=""><i class="ace-icon fa fa-search-plus blue bigger-150" aria-hidden="true" title="View"></i></a>
+                                        <a href="@Url.Action("_DeleteHREmployeeMaritalAsync",new { id=item.Id,pageNumber=Model.PageNumber,pageSize=Model.PageSize,orderingBy=Model.OrderingBy,orderingDirection=Model.OrderingDirection,searchKey=Model.SearchKey})" data-ajax-model=""><i class="ace-icon fa fa-trash-o red bigger-150" aria-hidden="true" title="Delete"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div aria-live="polite" role="status" id="example_info" class="dataTables_info">
+                    <div class="row">
+                        <div class="col-md-4">Showing @(Model.DBModelList.PageCount < Model.DBModelList.PageNumber ? 0 : Model.DBModelList.FirstItemOnPage) to @Model.DBModelList.LastItemOnPage of @Model.DBModelList.TotalItemCount entries in @Model.DBModelList.PageCount Pages</div>
+                        <div class="col-md-8 dataTables_paginate paging_simple_numbers" id="example_paginate">@Html.PagedListPager(Model.DBModelList, page => Url.Action("_ListHREmployeeAsync", new { pageNumber = page, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey }))</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

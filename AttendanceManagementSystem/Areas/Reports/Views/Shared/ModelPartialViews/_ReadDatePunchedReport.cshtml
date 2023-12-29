@@ -1,0 +1,57 @@
+﻿
+@model SystemViewModels.DeviceManagement.DeviceDatePunchedLogsViewModelList
+
+<div id="printThis">
+    @{ Html.RenderPartial("~/Views/Shared/_ReportHeader.cshtml", Model.Header);}
+    <div class="table-responsive">
+        <table class="table table-border table-hover">
+            <thead>
+                <tr>
+                    @*<th>कार्यालय कोड</th>*@
+                    <th>उपकरण नं.</th>
+                    <th>कर्मचारी नं.</th>
+                    <th>पंच नेपाली मिति</th>
+                    <th>पंच मिति</th>
+                    <th>आई.पी</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.DbGetDeviceLogs.OrderByDescending(x=>x.PunchDate))
+                {
+                    <tr>
+                        @*<td>
+                            <i class="ace-icon fa bigger-110 badge badge-yellow"></i>
+                        </td>*@
+                        <td>
+                            <i class="ace-icon fa bigger-110 badge badge-sucess">@item.DeviceNumber</i>
+                        </td>
+                        <td>@item.IdEnroll</td>
+                        <td>
+                            <i class="ace-icon fa bigger-110 badge badge-yellow">@item.PunchDate.Date.DateNp()</i>
+                        </td>
+                        <td>
+                            <i class="ace-icon fa bigger-110 badge badge-yellow">@item.PunchDate</i>
+                        </td>
+                        <td>@item.TerminalIP</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>
+<script type="text/javascript">
+    function ExcelReport(div) {
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('div[id$=' + div + ']').html()));
+        e.preventDefault();
+    }
+</script>

@@ -1,0 +1,77 @@
+﻿@model SystemViewModels.Reports.ShiftRoasterReportViewModelList
+@using SystemStores.ENUMData;
+@using SystemStores.GlobalMethod;
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="myModalLabel">@Model.ModalTitle</h4>
+</div>
+<div class="modal-body maxheight">
+    <div id="printThis">
+        @{ Html.RenderPartial("~/Views/Shared/_ReportHeader.cshtml", Model.Header);}
+        <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+            <thead>
+                <tr>
+                    <th class="text-center">क.संकेत नं.</th>
+                    <th>कर्मचारीको नाम</th>
+                    <th class="ace-icon">पद</th>
+                    <th class="text-center">मिति</th>
+                    <th class="text-center">शिफ्ट शीर्षक</th>
+                    <th class="text-center">चेकइन</th>
+                    <th class="text-center">चेकआउट</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.DBModelList)
+                {
+                    <tr>
+                        <td class="text-center">
+                            <i class="ace-icon fa bigger-110 badge badge-yellow">@item.PISNumber</i>
+                        </td>
+                        <td class="blue">
+                            <i class="ace-icon fa bigger-130">@item.EmployeeName</i>
+                        </td>
+                        <td class="text-center">
+                            <i class="ace-icon fa bigger-110 badge badge-yellow">@item.HRDesignationShortName</i>
+                        </td>
+                        <td class="text-center">
+                            <i class="ace-icon fa bigger-110 badge badge-grey">@item.ShiftDate.DateNp()</i>
+                        </td>
+                        <td class="text-center">
+                            <i class="ace-icon fa bigger-110 badge badge-success">@item.ShiftTitle</i>
+                        </td>
+                        <td class="green">
+                            <i class="ace-icon fa bigger-130">@item.LoginTime</i>
+                        </td>
+                        <td class="text-center">
+                            <i class="ace-icon fa bigger-110 badge badge-danger">@item.LogoutTime</i>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="modal-footer">
+    <button id="@Model.CancelButtonID" class="btn btn-danger btn-app btn-sm" type="button" data-dismiss="modal">@SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Cancel)</button>
+    @if (Model.CRUDAction == EnumGlobal.CRUDType.PRINT)
+    {
+        <button type="button" class="btn btn-info btn-app btn-sm" onclick="ExcelReport('printThis')">@SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Export)</button>
+    }
+    @if (Model.OnlyCancelButton == false)
+    {
+        <input id="@Model.SubmitButtonID" class="btn btn-app btn-success btn-sm" type="@Model.SubmitButtonType" value="@SystemGlobalMethod.GetButtonText(Model.SubmitButtonText)" />
+    }
+</div>
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });</script>
+<script type="text/javascript">
+    function ExcelReport(div) {
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('div[id$=' + div + ']').html()));
+        e.preventDefault();
+    }</script>
+

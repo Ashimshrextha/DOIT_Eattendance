@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>ई हाजिरी प्रणाली</title>
+    <meta name="description" content="EAttendance System Nepal DOIT" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+
+    <link rel="stylesheet" href="~/Content/font-awesome/4.5.0/css/font-awesome.min.css" />
+
+    <link rel="stylesheet" href="~/Content/fonts.googleapis.com.css" />
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/Content/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+
+    <link rel="stylesheet" href="~/Content/ace-skins.min.css" />
+    <link rel="stylesheet" href="~/Content/ace-rtl.min.css" />
+    <link href="~/Content/bootstrap-switch.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
+    <script src="~/Scripts/Menu/customNepaliConverter.js"></script>
+    <script src="~/Scripts/Menu/customChart.js"></script>
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/ace-extra.min.js"></script>
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <script src="~/Scripts/bootstrap-switch.min.js"></script>
+    <script src="~/Scripts/bootstrap-notify.min.js"></script>
+    <script src="~/Scripts/BindAjaxForm.js"></script>
+    <link href="~/Content/nepali.datepicker.v2.2.min.css" rel="stylesheet" />
+    <link href="~/Scripts/Menu/style.css" rel="stylesheet" />
+    <script src="~/Scripts/ClockDateTime.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        .scroll-table {
+            max-height: 40em;
+        }
+
+        .pagination-container .pagination .active a {
+            pointer-events: none;
+            cursor: default;
+        }
+
+        .pagination-container .pagination .PagedList-ellipses a {
+            pointer-events: none;
+            cursor: default;
+        }
+    </style>
+</head>
+<body class="no-skin">
+
+    <section class="home">
+        <div id="p_sidebar" class="main-sidebar">
+        </div>
+        @{ Html.RenderPartial("_TopHeaderUserProfile");}
+        <div id="secondary-sidebar">
+            <div class="sidebar-list">
+            </div>
+        </div>
+        @RenderBody()
+
+    </section>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <script type="text/javascript">
+        if ('ontouchstart' in document.documentElement) document.write("<script src='~/Scripts/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/respond.min.js"></script>
+    <script src="~/Scripts/jquery-ui.custom.min.js"></script>
+    <script src="~/Scripts/jquery.ui.touch-punch.min.js"></script>
+    <script src="~/Scripts/jquery.easypiechart.min.js"></script>
+    <script src="~/Scripts/jquery.sparkline.index.min.js"></script>
+    <script src="~/Scripts/jquery.flot.min.js"></script>
+    <script src="~/Scripts/jquery.flot.pie.min.js"></script>
+    <script src="~/Scripts/jquery.flot.resize.min.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+    <script src="~/Scripts/nepali.datepicker.v2.2.min.js"></script>
+    <!-- ace scripts -->
+    <script src="~/Scripts/ace-elements.min.js"></script>
+    <script src="~/Scripts/ace.min.js"></script>
+    <script src="~/Scripts/Menu/script.js"></script>
+    <script>
+        $('select').select2({
+            width: '100%',
+            dropdownAutoWidth: true
+        });
+    </script>
+</body>
+</html>
+

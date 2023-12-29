@@ -1,0 +1,39 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeLeaveBalanceViewModel
+@{ 
+    var lastYear = Model.lastYearNp;
+}
+
+<div id="printThis">
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>आईडी</th>
+                <th>बिदाको प्रकार</th>
+                <th>वर्ष </th>
+                <th>जम्मा बिदा </th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.HRCompanyLeaveType.MasterLeaveTitle.LeaveTitleNP</td>
+                    <td>@item.LeaveYear</td>
+                    <td>@item.TotalLeave</td>                    
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>
+

@@ -1,0 +1,46 @@
+﻿@model SystemViewModels.SystemSetting.HRDesignationViewModel
+
+<div id="printThis">
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>आईडी</th>
+                <th>प्रकार</th>
+                <th>पद</th>
+                <th>संक्षिप्त नाम</th>
+                <th>Order</th>
+                <th>Rank</th>
+                <th>तलब</th>
+                <th>ग्रेड नं.</th>
+                <th>Grade Rate</th>
+                <th>Allowance</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.HREmployeeCategory.HREmployeeCategoryTitle</td>
+                    <td>@item.HRDesignationTitle</td>
+                    <td>@item.HRDesignationShortName</td>
+                    <td>@item.HRDesignationOrder</td>
+                    <td>@item.HRDesignationRank</td>
+                    <td>@item.BasicSalary</td>
+                    <td>@item.SalaryIncrementNumber</td>
+                    <td>@item.SalaryIncrementRate</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>
+

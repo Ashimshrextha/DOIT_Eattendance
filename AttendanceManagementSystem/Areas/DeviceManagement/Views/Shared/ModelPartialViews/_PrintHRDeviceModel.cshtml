@@ -1,0 +1,44 @@
+﻿@model SystemViewModels.DeviceManagement.HRDeviceModelViewModel
+
+
+<div id="printThis">
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>आईडी</th>
+                <th>उपकरण मोडेल</th>
+                <th>वास्तविक समय छ/छैन</th>
+                <th>सक्रिय छ/छैन </th>
+                <th>अपडेट गर्ने</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.HRDeviceModel1</td>
+                    <td class="ace-icon">
+                        <div>
+                            <i class="ace-icon @(item.IsRealTime==true?"fa fa-thumbs-up green":"fa fa-thumbs-down red") bigger-130" aria-hidden="true"></i>
+                        </div>
+                    </td>
+                    <td class="ace-icon">
+                        <div>
+                            <i class="ace-icon @(item.IsActive==true?"fa fa-thumbs-up green":"fa fa-thumbs-down red") bigger-130" aria-hidden="true"></i>
+                        </div>
+                    </td>
+                    <td>@item.UpdatedBy</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>

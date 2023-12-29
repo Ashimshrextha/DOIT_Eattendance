@@ -1,0 +1,37 @@
+﻿@model SystemViewModels.SystemSetting.HREmployeeRelationTypeViewModel
+
+<div id="printThis">
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>नाम</th>
+                <th>अपडेट गर्ने</th>
+                <th>अवस्था</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+            {
+                <tr>
+                    <td>@item.RelationType</td>
+                    <td>@item.UpdatedBy</td>
+                    <td class="ace-icon">
+                        <div>
+                            <i class="ace-icon @(item.IsActive==true?"fa fa-thumbs-up green":"fa fa-thumbs-down red") bigger-130" aria-hidden="true"></i>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>
+

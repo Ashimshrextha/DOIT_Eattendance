@@ -1,0 +1,86 @@
+﻿@model SystemViewModels.SystemSecurity.HREmployeeAttendanceHistoryViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+<link href="~/Content/bootstrap-timepicker.min.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-timepicker.min.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.DataModel.IsCheckInEarlyReasonApproved)
+@Html.HiddenFor(model => model.DataModel.IsCheckOutEarlyReasonApproved)
+@Html.HiddenFor(model => model.DataModel.IsLateReasonApproved)
+@Html.HiddenFor(model => model.DataModel.IsShiftCompleted)
+@Html.HiddenFor(model => model.DataModel.Remark)
+@Html.HiddenFor(model => model.DataModel.LateReason)
+@Html.HiddenFor(model => model.DataModel.ApprovedBy)
+@Html.HiddenFor(model => model.DataModel.CheckInEarlyReason)
+@Html.HiddenFor(model => model.DataModel.CheckInEarly)
+@Html.HiddenFor(model => model.DataModel.CheckOutEarly)
+@Html.HiddenFor(model => model.DataModel.CreatedOn)
+@Html.HiddenFor(model => model.DataModel.UpdatedOn)
+@Html.HiddenFor(model => model.DataModel.TotalOverTimeInMin)
+@Html.HiddenFor(model => model.DataModel.TotalWorkedInMin)
+@Html.HiddenFor(model => model.DataModel.TotalWorkingInMin)
+@Html.HiddenFor(model => model.DataModel.IdJobHistory)
+@Html.HiddenFor(model => model.DataModel.LateBy)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+
+<div class="row">
+    
+    <div class="col-md-12 col-sm-12 col-lg-12 form-group">
+        <div class="col-md-3 col-sm-3 col-lg-3">
+            @Html.LabelFor(model => model.DataModel.IdHREmployee, new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.DataModel.IdHREmployee, new SelectList(Model.DDLEmployee, "Key", "Value"), new { @class = "form-control", @readonly = "Readonly" })
+            @Html.ValidationMessageFor(model => model.DataModel.IdHREmployee)
+        </div>
+        <div class="col-md-3 col-sm-3 col-lg-3">
+            @Html.LabelFor(model => model.DataModel.AttendanceDate, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.DataModel.AttendanceDate, new { @class = "form-control datepicker" })
+            @Html.ValidationMessageFor(model => model.DataModel.AttendanceDate)
+        </div>
+        <div class="col-md-3 col-sm-3 col-lg-3">
+            @Html.LabelFor(model => model.DataModel.CheckInDeviceNumber, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.DataModel.CheckInDeviceNumber, new { @class = "form-control", @readonly = "Readonly" })
+            @Html.ValidationMessageFor(model => model.DataModel.CheckInDeviceNumber)
+        </div>
+        <div class="col-md-3 col-sm-3 col-lg-3">
+            @Html.LabelFor(model => model.DataModel.CheckOutDeviceNumber, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.DataModel.CheckOutDeviceNumber, new { @class = "form-control", @readonly = "Readonly" })
+            @Html.ValidationMessageFor(model => model.DataModel.CheckOutDeviceNumber)
+        </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-lg-12 form-group">
+        <div class="col-md-3 col-sm-3 col-lg-3">
+            @Html.LabelFor(model => model.DataModel.LogInTime, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.DataModel.LogInTime, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DataModel.LogInTime)
+        </div>
+        <div class="col-md-3 col-sm-3 col-lg-3">
+            @Html.LabelFor(model => model.DataModel.LogOutTime, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.DataModel.LogOutTime, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DataModel.LogOutTime)
+        </div>
+        <div class="col-md-3 col-sm-3 col-lg-3">
+            @Html.LabelFor(model => model.DataModel.CheckInTime, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.DataModel.CheckInTime, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DataModel.CheckInTime)
+        </div>
+        <div class="col-md-3 col-sm-3 col-lg-3">
+            @Html.LabelFor(model => model.DataModel.CheckOutTime, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.DataModel.CheckOutTime, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DataModel.CheckOutTime)
+        </div>
+    </div>
+</div>
+
+
+@*<script type="text/javascript">
+        $(function () {
+            $('#DataModel_LogOutTime,#DataModel_LogInTime,#DataModel_CheckInTime,#DataModel_CheckOutTime').timepicker();
+        });
+    </script>*@

@@ -1,0 +1,70 @@
+﻿@model SystemViewModels.Reports.MonthlyEarlyandLateReportViewModellist
+@using PagedList.Mvc;
+
+<div id="replacetarget">
+    <div id="content" class="content">
+        <div class="dataTables_wrapper">
+            <div id="mask-container">
+                <div id="mask"></div>
+                <div class="table-responsive scroll-table">
+                    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover">
+                       
+                        <thead>
+                            <tr>
+                                <th  class="text-center">संकेत नं.</th>
+                                <th  class="text-center">नाम</th>
+                                <th  class="ace-icon">पद</th>
+                                <th  class="text-center">ढिलो आएको</th>
+                                <th  class="text-center">छिटो गएको</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.DBModelListRange)
+                            {
+                                <tr>
+                                    <td class="blue ace-icon">
+                                        <i class="ace-icon fa bigger-110">@item.PISNumber</i>
+                                    </td>
+                                    <td class="ace-icon blue">
+                                            <i class="ace-icon fa bigger-130">
+                                                @(item.EmployeeName)
+                                            </i>
+                                        
+                                    </td>
+                                    <td class="ace-icon blue">
+                                            <i class="ace-icon fa bigger-110">@item.HRDesignationShortName</i>
+                                            </td>
+                                    <td class="text-center">
+                                        <a class="blue" href="@Model.BreadCrumbController/_ReadLateReportAsync?idHRCompany=@Model.IdHRCompany &idHREmployee=@item.IdHREmployee&startDateNp=@Model.FromDateNp&ToDateNp=@Model.TodateDateNp" data-ajax-model="">
+                                            <i class="fa fa-search-plus fa bigger-110"> @item.TotalLateBy</i>
+                                        </a>
+
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="blue" href="@Model.BreadCrumbController/_ReadEarlyCheckOutReportAsync?idHRCompany=@Model.IdHRCompany &idHREmployee=@item.IdHREmployee&startDateNp=@Model.FromDateNp&ToDateNp=@Model.TodateDateNp" data-ajax-model="">
+                                            <i class="fa fa-search-plus fa bigger-110"> @item.TotalCheckOutEarly</i>
+                                        </a>
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div aria-live="polite" role="status" id="example_info" class="dataTables_info">
+                    <div class="row">
+                        <div class="col-md-4">Showing @(Model.DBModelListRange.PageCount < Model.DBModelListRange.PageNumber ? 0 : Model.DBModelListRange.FirstItemOnPage) to @Model.DBModelListRange.LastItemOnPage of @Model.DBModelListRange.TotalItemCount entries in @Model.DBModelListRange.PageCount Pages</div>
+                        <div class="col-md-8 dataTables_paginate paging_simple_numbers" id="example_paginate">@Html.PagedListPager(Model.DBModelListRange, page => Url.Action("_ListEarlyandLateReportAsync", new { idHRCompany = Model.IdHRCompany, idHRCompanyDivision = Model.IdDivision, idJobStatus = Model.IdJobStatus, idHREmployee = Model.IdHREmployee, startDateNP =Model.FromDateNp, toDateNp = Model.TodateDateNp, pageNumber = page, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey }))</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

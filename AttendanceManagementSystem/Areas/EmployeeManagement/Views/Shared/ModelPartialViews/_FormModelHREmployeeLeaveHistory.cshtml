@@ -1,0 +1,215 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeLeaveHistoryViewModel
+
+<link href="~/Content/jasny-bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jasny-bootstrap.min.js"></script>
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.DataModel.IdJob)
+@Html.HiddenFor(model => model.DataModel.DesignationRank)
+@Html.HiddenFor(model => model.DataModel.IdHRCompany)
+@Html.HiddenFor(model => model.DataModel.IdHREmployee)
+@Html.HiddenFor(model => model.DataModel.ImageName)
+@Html.HiddenFor(model => model.DataModel.HRCompanyName)
+@Html.HiddenFor(model => model.DataModel.JobStatus)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+
+@{
+    var appoinmentDateNp = Model.DataModel.AppoinmentDateNP;
+    
+}
+<div>
+    <input class="form-control hidden" id="Appoinment" name="Appoinment" type="text" value=@appoinmentDateNp />
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title row">
+                    <div style="width:70px;" class="pull-left">
+                        <img src="@Model.DataModel.ImageName" alt="@Model.DataModel.EmployeeName" height="70" width="70" style="border-radius:100%;" />
+                    </div>
+                    <div class="text-center">
+                        <strong>बिदाको माग पत्र</strong>
+                        <div class="space-6"></div>
+                        <strong> बिदा माग गर्ने कर्मचारीले प्रयोग गर्ने</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>@Html.LabelFor(model => model.DataModel.EmployeeName, new { @class = "control-label" })</th>
+                                <th>@Html.LabelFor(model => model.DataModel.Designation, new { @class = "control-label" })</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>@Html.TextBoxFor(model => model.DataModel.EmployeeName, new { @class = "form-control", @readonly = "readonly" })</th>
+                                <th> @Html.TextBoxFor(model => model.DataModel.Designation, new { @class = "form-control", @readonly = "readonly" })</th>
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <th>@Html.LabelFor(model => model.DataModel.Division, new { @class = "control-label" })</th>
+                                <th>@Html.LabelFor(model => model.DataModel.PISNumber, new { @class = "control-label" })</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>@Html.TextBoxFor(model => model.DataModel.Division, new { @class = "form-control", @readonly = "readonly" })</th>
+                                <th>@Html.TextBoxFor(model => model.DataModel.PISNumber, new { @class = "form-control", @readonly = "readonly" })</th>
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <th>@Html.LabelFor(model => model.DataModel.Gender, new { @class = "control-label" })</th>
+                                <th>@Html.LabelFor(model => model.DataModel.Mobile, new { @class = "control-label" })</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>@Html.TextBoxFor(model => model.DataModel.Gender, new { @class = "form-control", @readonly = "readonly" })</th>
+                                <th>@Html.TextBoxFor(model => model.DataModel.Mobile, new { @class = "form-control", @readonly = "readonly" })</th>
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <th>@Html.LabelFor(model => model.DataModel.HRCompanyName, new { @class = "control-label" })</th>
+                                <th>@Html.LabelFor(model => model.DataModel.JobStatus, new { @class = "control-label" })</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>@Html.TextBoxFor(model => model.DataModel.HRCompanyName, new { @class = "form-control", @readonly = "readonly" })</th>
+                                <th>@Html.TextBoxFor(model => model.DataModel.JobStatus, new { @class = "form-control", @readonly = "readonly" })</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-lg-6 col-xs-12">
+        <div class="panel panel-success">
+            <div class="panel-heading"><h4 class="panel-title">बिदा माग गर्ने फारम    @Html.ValidationSummary(true, "", new { @class = "text-danger" })</h4></div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.LabelFor(model => model.DataModel.IdLeaveType, new { @class = "control-label" })
+                                    @Html.ValidationMessageFor(model => model.DataModel.IdLeaveType)
+                                </th>
+                                <th>@Html.LabelFor(model => model.DataModel.CurrentYearBalanceLeaveDay, new { @class = "control-label" })</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>
+                                    @Html.DropDownListFor(model => model.DataModel.IdLeaveType, new SelectList(Model.DDLLeaveType, "Key", "Value"), new { @class = "form-control" })
+                                </th>
+                                <th>
+                                    @Html.TextBoxFor(model => model.DataModel.CurrentYearBalanceLeaveDay, new { @class = "form-control", @readonly = "readonly" })
+                                </th>
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.LabelFor(model => model.DataModel.LeaveValidFromNP, new { @class = "control-label" })
+                                    @Html.ValidationMessageFor(model => model.DataModel.LeaveValidFromNP)
+                                </th>
+                                <th>
+                                    @Html.LabelFor(model => model.DataModel.LeaveValidToNP, new { @class = "control-label" })
+                                    @Html.ValidationMessageFor(model => model.DataModel.LeaveValidToNP)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>
+                                    @Html.TextBoxFor(model => model.DataModel.LeaveValidFromNP, new { @class = "form-control", @id = "DateFromNP", @readonly = "readonly", @style = "cursor:pointer" })
+                                </th>
+                                <th>
+                                    @Html.TextBoxFor(model => model.DataModel.LeaveValidToNP, new { @class = "form-control", @id = "DateToNP", @readonly = "readonly", @style = "cursor:pointer" })
+                                </th>
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <th class="halfDay">@Html.LabelFor(model => model.DataModel.IsHalfDayCount, new { @class = "control-label" }) @Html.ValidationMessageFor(model => model.DataModel.IsHalfDayCount)</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th class="halfDay">
+                                    @Html.CheckBoxFor(model => model.DataModel.IsHalfDayCount, new { @class = "form-control switchYesNo" })
+                                </th>
+                                <th>
+
+                                </th>
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <th>@Html.LabelFor(model => model.DataModel.IdApprovedBy, new { @class = "control-label" }) @Html.ValidationMessageFor(model => model.DataModel.IdApprovedBy)</th>
+                                <th>@Html.LabelFor(model => model.DataModel.IdRecommandationBy, new { @class = "control-label recommend" })</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>@Html.DropDownListFor(model => model.DataModel.IdApprovedBy, new SelectList(Model.DDLApprovalEmployee, "Key", "Value"), "चयन गर्नुहोस्", new { @class = "form-control" })</th>
+                                <th> @Html.DropDownListFor(model => model.DataModel.IdRecommandationBy, new SelectList(Model.DDLRecommendEmployee, "Key", "Value"), "चयन गर्नुहोस्", new { @class = "form-control recommend" })</th>
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <th>@Html.LabelFor(model => model.DataModel.LeaveReason, new { @class = "control-label" }) @Html.ValidationMessageFor(model => model.DataModel.LeaveReason)</th>
+                                <th>@Html.LabelFor(model => model.DataModel.Document, new { @class = "control-label" }) @Html.ValidationMessageFor(model => model.DataModel.Document)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>
+                                    @Html.TextAreaFor(model => model.DataModel.LeaveReason, new { @class = "form-control", @style = "height:150px;" })
+                                </th>
+                                <th>
+                                    <div class="form-inline" data-toggle="tooltip" data-placement="top" title="Please Upload Only JPG & PNG File & File Should be less than 1 mb in size">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
+                                                <img src="~/images/leaveformupload.png" style="width:150px;height:200px;" />
+                                            </div>
+                                            <div>
+                                                <span class="hidden">
+                                                    <input type="file" name="FormDocument">
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-lg-6 col-xs-12">
+        @{ Html.RenderPartial("_GetHREmployeeLeaveSummaryAsync");}
+    </div>
+</div>
+<script src="~/Scripts/CustomScripts/HREmployeeLeaveHistory.js"></script>
+

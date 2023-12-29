@@ -1,0 +1,64 @@
+﻿@model SystemViewModels.SystemSetting.HREmployeeBankListViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+<div class="row">
+    
+    <div class="row col-md-12 col-sm-12 col-lg-12 form-group">
+        <div class="col-md-3 col-sm-3 col-lg-3">
+            @Html.LabelFor(model => model.DataModel.BankName, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.DataModel.BankName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DataModel.BankName)
+        </div>
+        <div class="col-md-3 col-sm-3 col-lg-3">
+            @Html.LabelFor(model => model.DataModel.BankCategory, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.DataModel.BankCategory, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DataModel.BankCategory)
+        </div>
+        <div class="col-md-3 col-sm-3 col-lg-3">
+            @Html.LabelFor(model => model.DataModel.BankLocation, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.DataModel.BankLocation, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DataModel.BankLocation)
+        </div>
+    </div>
+    <div class="row col-md-12 col-sm-12 col-lg-12 form-group">
+        <div class="col-md-3 col-sm-3 col-lg-3">
+            @Html.LabelFor(model => model.DataModel.Phone, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.DataModel.Phone, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DataModel.Phone)
+        </div>
+        <div class="col-md-3 col-sm-3 col-lg-3">
+            @Html.LabelFor(model => model.DataModel.Fax, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.DataModel.Fax, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DataModel.Fax)
+        </div>
+        <div class="col-md-3 col-sm-3 col-lg-3">
+            @Html.LabelFor(model => model.DataModel.SwiftCode, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.DataModel.SwiftCode, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DataModel.SwiftCode)
+        </div>
+        <div class="col-md-3 col-sm-3 col-lg-3">
+            @Html.LabelFor(model => model.DataModel.IBAN, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.DataModel.IBAN, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DataModel.IBAN)
+        </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-lg-12">
+        <div class="col-md-3 col-sm-3 col-lg-3">
+            @Html.LabelFor(model => model.DataModel.IsActive, new { @class = "control-label" })
+            @Html.CheckBoxFor(model => model.DataModel.IsActive, new { @class = "BSswitch" })
+            @Html.ValidationMessageFor(model => model.DataModel.IsActive)
+        </div>
+    </div>
+</div>
+
+
+

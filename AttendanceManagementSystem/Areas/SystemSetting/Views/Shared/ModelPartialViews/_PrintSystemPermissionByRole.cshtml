@@ -1,0 +1,51 @@
+﻿@model SystemViewModels.SystemSetting.SystemPermissionByRoleViewModel
+
+<div id="printThis">
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>भुमिका नाम</th>
+                <th>प्रणाली संरचना</th>
+                <th>थप्नुहोस्</th>
+                <th>सम्पादन गर्नुहोस्</th>
+                <th>पढ्नुहोस्</th>
+                <th>छाप्नुहोस्</th>
+                <th>डाउनलोड गर्नुहोस्</th>
+                <th>Export</th>
+                <th>अपडेट गर्ने</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+            {
+                <tr>
+                    <td>@item.HREmployeeRole.HRRoleTitle</td>
+                    <td>@item.SystemStructure.ActionName</td>
+                    <td class="ace-icon">
+                    </td>
+                    <td class="ace-icon">
+                    </td>
+                    <td class="ace-icon">
+                    </td>
+                    <td class="ace-icon">
+                    </td>
+                    <td class="ace-icon">
+                    </td>
+                    <td class="ace-icon">
+                    </td>
+                    <td>@item.UpdatedBy</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>
+

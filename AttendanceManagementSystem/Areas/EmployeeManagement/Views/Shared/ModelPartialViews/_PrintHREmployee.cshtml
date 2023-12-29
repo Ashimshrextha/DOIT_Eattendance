@@ -1,0 +1,52 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeViewModel
+<div id="printThis">
+    @{ Html.RenderPartial("~/Views/Shared/_ReportHeader.cshtml", Model.Header);}
+    <table style="width: 100%;" class="table table-bordered" border="1">
+        <thead>
+            <tr>
+                <th class="text-center">कार्यालय कोड</th>
+                <th class="text-center">कर्मचारी संकेत नं.</th>
+                <th class="text-center">कर्मचारी नाम</th>
+                <th class="text-center">लिङ्ग</th>
+                <th class="text-center">पद</th>
+                <th class="text-center">नियुक्ति मिति</th>
+                <th class="text-center">शाखा/सेक्सन</th>
+                <th class="text-center">मोबाइल</th>
+                <th class="text-center">ई-मेल</th>
+                <th class="text-center">अवस्था</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelEmp)
+            {
+            <tr>
+                <td class="text-center">@item.HRCompanyCodeTitle</td>
+                <td class="text-center">@item.PISNumber</td>
+                <td>@item.HREmployeeNameNP</td>
+                <td class="text-center">@item.HREmployeeSexTitleNP</td>
+                <td class="text-center">@item.HRDesignationTitle</td>
+                <td class="text-center">@item.AppointmentDateNP</td>
+                <td class="text-center">@item.HRCompanyDivisionShortName</td>
+                <td class="text-center">@item.MobileNumber</td>
+                <td class="text-center">@item.Email</td>
+                <td class="text-center">@item.JobStatus</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>
+<script type="text/javascript">
+    function ExcelReport(div) {
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('div[id$=' + div + ']').html()));
+        e.preventDefault();
+    }
+</script>

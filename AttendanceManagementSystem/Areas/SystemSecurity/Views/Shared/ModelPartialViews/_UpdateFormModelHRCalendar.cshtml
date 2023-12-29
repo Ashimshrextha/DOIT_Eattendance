@@ -1,0 +1,124 @@
+﻿@model SystemViewModels.SystemSecurity.HRCalendarViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.DataModel.NepYear)
+@Html.HiddenFor(model => model.DataModel.EngYear)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+
+<div class="row">
+    
+    <div class="col-md-12 col-sm-12 col-lg-12">
+        <div class="row col-md-12 col-sm-12 col-lg-12 form-group">
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.NepDate, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.NepDate, new { @class = "form-control", @readonly = "Readonly" })
+                @Html.ValidationMessageFor(model => model.DataModel.NepDate)
+            </div>
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.NepMonth, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.NepMonth, new { @class = "form-control ", @readonly = "Readonly" })
+                @Html.ValidationMessageFor(model => model.DataModel.NepMonth)
+            </div>
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.NepDay, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.NepDay, new { @class = "form-control", @readonly = "Readonly" })
+                @Html.ValidationMessageFor(model => model.DataModel.NepDay)
+            </div>
+        </div>
+        <div class="row col-md-12 col-sm-12 col-lg-12 form-group">
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.EngDate, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.EngDate, new { @class = "form-control", @readonly = "Readonly" })
+                @Html.ValidationMessageFor(model => model.DataModel.EngDate)
+            </div>
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.EngMonth, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.EngMonth, new { @class = "form-control ", @readonly = "Readonly" })
+                @Html.ValidationMessageFor(model => model.DataModel.EngMonth)
+            </div>
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.EngDay, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.EngDay, new { @class = "form-control ", @readonly = "Readonly" })
+                @Html.ValidationMessageFor(model => model.DataModel.EngDay)
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-lg-12">
+        <div class="row col-md-12 col-sm-12 col-lg-12 form-group">
+            <div class="col-md-6 col-sm-6 col-lg-6">
+                @Html.LabelFor(model => model.DataModel.EventName, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.EventName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.EventName)
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-lg-6">
+                @Html.LabelFor(model => model.DataModel.FestivalName, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.FestivalName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.FestivalName)
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-lg-12">
+        <div class="row col-md-12 col-sm-12 col-lg-12 form-group">
+            <div class="col-md-6 col-sm-6 col-lg-6">
+                @Html.LabelFor(model => model.DataModel.IsWeekendHoliday, new { @class = "control-label" })
+                @Html.CheckBoxFor(model => model.DataModel.IsWeekendHoliday, new { @class = "form-control BSswitch" })
+                @Html.ValidationMessageFor(model => model.DataModel.IsWeekendHoliday)
+            </div>
+            <div class="col-md-6 col-sm-6 col-lg-6">
+                @Html.LabelFor(model => model.DataModel.IsPublicHoliday, new { @class = "control-label" })
+                @Html.CheckBoxFor(model => model.DataModel.IsPublicHoliday, new { @class = "form-control BSswitch" })
+                @Html.ValidationMessageFor(model => model.DataModel.IsPublicHoliday)
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-lg-12">
+        <div class="row col-md-12 col-sm-12 col-lg-12 form-group">
+            <div class="col-md-6 col-sm-6 col-lg-6">
+                @Html.LabelFor(model => model.DataModel.IsHolidayForMale, new { @class = "control-label" })
+                @Html.CheckBoxFor(model => model.DataModel.IsHolidayForMale, new { @class = "form-control BSswitch" })
+                @Html.ValidationMessageFor(model => model.DataModel.IsHolidayForMale)
+            </div>
+            <div class="col-md-6 col-sm-6 col-lg-6">
+                @Html.LabelFor(model => model.DataModel.IsHolidayForFemale, new { @class = "control-label" })
+                @Html.CheckBoxFor(model => model.DataModel.IsHolidayForFemale, new { @class = "form-control BSswitch" })
+                @Html.ValidationMessageFor(model => model.DataModel.IsHolidayForFemale)
+            </div>
+        </div>
+    </div>
+</div>
+@*<script>
+        $(document).ready(function () {
+            $('#DataModel_NepDate').nepaliDatePicker({
+                npdMonth: true,
+                npdYear: true,
+                onChange: function () {
+                    var a = BS2AD($('#DataModel_NepDate').val());
+                    var abc = a.split('-');
+                    var newDate = abc[0] + '-' + abc[1] + '-' + abc[2];
+                    $('#DataModel_EngDate').val(newDate);
+                }
+            });
+            $('#DataModel_EngDate').change(function () {
+                var a = $("#DataModel_EngDate").val();
+                $('#DataModel_NepDate').val(AD2BS(a));
+            });
+        });
+    </script>*@
+@*<script>
+        $(document).ready(function () {
+            $('#DataModel_NepDate').click(function () {
+                var dat = $(this).val();
+                var month = dat.split('');
+                $('#DataModel_NepMonth').val(month);
+            });
+        });
+    </script>*@

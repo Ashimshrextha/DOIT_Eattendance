@@ -1,0 +1,56 @@
+﻿@model SystemViewModels.CompanyManagement.HRCompanyHREmployeeShiftRoasterViewModelList
+@using PagedList.Mvc;
+<div id="replacetarget">
+    <div id="content" class="content">
+        <div class="dataTables_wrapper">
+            <div id="mask-container">
+                <div id="mask"></div>
+                <div class="table-responsive">
+                    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th class="text-center">आईडी</th>
+                                <th>कर्मचारीको नाम</th>
+                                <th class="text-center">पद</th>
+                                <th>शाखा</th>
+                                <th class="text-center">कुल शिफ्ट</th>
+                                <th class="text-center">कार्य</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.DBModelEmp.OrderBy(x=>x.HRDesignationRank).ThenBy(x=>x.AppointmentDateNP))
+                            {
+                            <tr>
+                                <td class="text-center">@item.IdHREmployee</td>
+                                <td class="blue">
+                                    <i class="ace-icon bigger-100 fa">@item.EmployeeName</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="ace-icon bigger-100 fa badge badge-yellow">@item.HRDesignationTitle</i>
+                                </td>
+                                <td class="green">
+                                    <i class="ace-icon bigger-100 fa">@item.HRCompanyDivisionName</i>
+                                </td>
+                                <td class="text-center">
+                                    <i class="ace-icon fa">@item.TotalShiftDate</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <a href="@Url.Action("_ReadHRCompanyHREmployeeShiftRoasterAsync",new { idHREmployee=item.IdHREmployee})" data-ajax-model=""><i class="ace-icon fa fa-search-plus blue bigger-150" aria-hidden="true" title="View"></i></a>
+                                    <a href="@Url.Action("_DeleteHRCompanyHREmployeeShiftRoasterAsync",new { idHREmployee=item.IdHREmployee})" data-ajax-model=""><i class="ace-icon fa fa-trash-o red bigger-150" aria-hidden="true" title="Delete"></i></a>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div aria-live="polite" role="status" id="example_info" class="dataTables_info">
+                    <div class="row">
+                        <div class="col-md-4">Showing @(Model.DBModelEmp.PageCount < Model.DBModelEmp.PageNumber ? 0 : Model.DBModelEmp.FirstItemOnPage) to @Model.DBModelEmp.LastItemOnPage of @Model.DBModelEmp.TotalItemCount entries in @Model.DBModelEmp.PageCount Pages</div>
+                        <div class="col-md-8 dataTables_paginate paging_simple_numbers" id="example_paginate">@Html.PagedListPager(Model.DBModelEmp, page => Url.Action("_ListHRCompanyHREmployeeShiftRoasterAsync", new { idHRCompany = Model.IdHRCompany, pageNumber = page, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey }))</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,32 @@
+﻿@model SystemViewModels.SystemSecurity.HRCompanyCodeViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+
+<div class="row">
+    
+    <div class="col-md-12 col-sm-12 col-lg-12">
+        <div class="row col-md-12 col-sm-12 col-lg-12 form-group">
+            <div class="col-md-6 col-sm-6 col-lg-6">
+                @Html.LabelFor(model => model.DataModel.HRCompanyCodeTitle, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.HRCompanyCodeTitle, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.HRCompanyCodeTitle)
+            </div>
+            <div class="col-md-6 col-sm-6 col-lg-6">
+                @Html.LabelFor(model => model.DataModel.HRCompanyCodeNP, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.HRCompanyCodeNP, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.HRCompanyCodeNP)
+            </div>
+        </div>
+    </div>
+</div>
+
+

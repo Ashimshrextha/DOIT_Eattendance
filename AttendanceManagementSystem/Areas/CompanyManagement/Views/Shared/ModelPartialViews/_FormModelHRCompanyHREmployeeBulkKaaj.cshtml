@@ -1,0 +1,201 @@
+﻿@model SystemViewModels.CompanyManagement.HRCompanyHREmployeeBulkKaajViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+<link href="~/Content/jasny-bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jasny-bootstrap.min.js"></script>
+<script src="~/Scripts/bootstrap-multiselect.min.js"></script>
+
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.IdHRCompany)
+@Html.HiddenFor(model => model.DataModel.IdHrCompany)
+@Html.HiddenFor(model => model.DataModel.FiscalYear)
+@Html.HiddenFor(model => model.DataModel.IdCountry)
+@Html.HiddenFor(model => model.DataModel.IdKaajStatus)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+
+
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+        <div class="form-group row">
+            <div class="col-md-3 col-sm-3 col-lg-3 col-xs-12">
+                @Html.LabelFor(model => model.DataModel.IdHrCompany, new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.DataModel.IdHrCompany, new SelectList(Model.DDLCompany, "Key", "Value"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.IdHrCompany)
+            </div>
+            <div class="col-md-3 col-sm-3 col-lg-3 col-xs-12">
+                @Html.LabelFor(model => model.DataModel.IdKaajType, new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.DataModel.IdKaajType, new SelectList(Model.DDLKaajType, "Key", "Value"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.IdKaajType)
+            </div>
+            <div class="col-md-3 col-sm-3 col-lg-3 col-xs-12">
+                @Html.LabelFor(model => model.DataModel.KaajFromNP, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.KaajFromNP, new { @class = "form-control", @readonly = "readonly", @style = "cursor:pointer" })
+                @Html.ValidationMessageFor(model => model.DataModel.KaajFromNP)
+            </div>
+            <div class="col-md-3 col-sm-3 col-lg-3 col-xs-12">
+                @Html.LabelFor(model => model.DataModel.KaajToNP, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.KaajToNP, new { @class = "form-control", @readonly = "readonly", @style = "cursor:pointer" })
+                @Html.ValidationMessageFor(model => model.DataModel.KaajToNP)
+            </div>
+
+        </div>
+        <div class="row form-group">
+            <div class="col-md-3 col-sm-3 col-xs-12 col-lg-3">
+                @Html.LabelFor(model => model.DataModel.KaajTitle, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.KaajTitle, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.KaajTitle)
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-12 col-lg-3">
+                @Html.LabelFor(model => model.DataModel.KaajShortName, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.KaajShortName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.KaajShortName)
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-12 col-lg-3">
+                @Html.LabelFor(model => model.DataModel.KaajExpenses, new { @class = "control-label col-md-12 col-sm-12 col-lg-12 col-xs-12" })
+                @Html.CheckBoxFor(model => model.DataModel.KaajExpenses, new { @class = "form-control BSswitch" })
+                @Html.ValidationMessageFor(model => model.DataModel.KaajExpenses)
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-12 col-lg-3">
+                @Html.LabelFor(model => model.DataModel.IsNational, new { @class = "control-label col-md-12 col-sm-12 col-lg-12 col-xs-12" })
+                @Html.CheckBoxFor(model => model.DataModel.IsNational, new { @class = "form-control switchYesNo" })
+                @Html.ValidationMessageFor(model => model.DataModel.IsNational)
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-12 col-sm-12 col-xs-12 col-lg-6">
+                @Html.LabelFor(model => model.DataModel.VehicleUsedInKaaj, new { @class = "control-label dropdown-toggle col-md-12 col-sm-12 col-lg-12 col-xs-12" })
+                @Html.ListBoxFor(model => Model.ddlKajVehicalSelected, new SelectList(Model.DDLVehicleType, "Key", "Value"), new { @class = "form-control", multiple = "multiple" })
+                @Html.ValidationMessageFor(model => model.DataModel.VehicleUsedInKaaj)
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-12 col-lg-3">
+                @Html.LabelFor(model => model.DataModel.IdCountry, new { @class = "control-label" })
+                @Html.DropDownListFor(model => Model.DataModel.IdCountry, new SelectList(Model.DDLCountry, "Key", "Value"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.IdCountry)
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-12 col-lg-3">
+
+                @Html.LabelFor(model => model.DataModel.IdApprovedBy, new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.DataModel.IdApprovedBy, new SelectList(Model.DDLApprovalEmployee, "Key", "Value"), "चयन गर्नुहोस्", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.IdApprovedBy)
+
+
+
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+                @Html.LabelFor(model => model.DataModel.KaajPurpose, new { @class = "control-label" })
+                @Html.TextAreaFor(model => model.DataModel.KaajPurpose, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.KaajPurpose)
+            </div>
+            <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+                @Html.LabelFor(model => model.DataModel.KaajLocation, new { @class = "control-label" })
+                @Html.TextAreaFor(model => model.DataModel.KaajLocation, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.KaajLocation)
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+            <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12"></div>
+            <div class="col-md-9 col-sm-9 col-lg-9 col-xs-12">
+                <div class="table-responsive">
+                    <table class="table table-border table-responsive table-striped">
+                        <thead>
+                            <tr>
+                                <th>क.संकेत न.</th>
+                                <th>कर्मचारीको नाम</th>
+                                <th>पद</th>
+                                <th>
+                                    <input type="checkbox" id="select_all" class="form-control" /><span>  <input type="button" class=" form-control  btn btn-sm  btn-info CheckUncheck" value="Uncheck all" disabled /></span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.DBEmployeeList.Count; i++)
+                            {
+                                <tr>
+                                    @Html.HiddenFor(model => model.DBEmployeeList[i].IdHREmployee)
+                                    <td>@Model.DBEmployeeList[i].PISNumber</td>
+                                    <td>@Model.DBEmployeeList[i].EmployeeName</td>
+                                    <td>@Model.DBEmployeeList[i].DesignationTitle</td>
+                                    <td>
+                                        @Html.CheckBoxFor(model => model.DBEmployeeList[i].IsChecked, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.DBEmployeeList[i].IsChecked)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#select_all').prop('checked', true);
+
+
+        $('#DataModel_KaajToNP').nepaliDatePicker({
+            npdMonth: true,
+            npdYear: true
+        });
+        $('#DataModel_KaajFromNP').nepaliDatePicker({
+            npdMonth: true,
+            npdYear: true
+        });
+
+      
+    });
+</script>
+
+
+<script type="text/javascript">
+
+    $("#select_all").click(function () {
+
+
+        if ($('#select_all').prop('checked') == false) {
+            this.checked = false;
+            $('.CheckUncheck').val('Check All')
+            $("INPUT[type='checkbox']").each(function () {
+                this.checked = false;
+            });
+
+
+
+        }
+        if ($('#select_all').prop('checked') == true) {
+            $('.CheckUncheck').val('UnCheck All')
+            this.checked = true;
+            $("INPUT[type='checkbox']").each(function () {
+                this.checked = true;
+            });
+
+        }
+
+
+    });
+    $('#ddlKajVehicalSelected').multiselect({
+        includeSelectAllOption: true,
+        nSelectedText: 'चयन',
+        nonSelectedText: 'चयन गर्नुहोस्',
+        buttonWidth: 250,
+        numberDisplayed: 5
+    });
+
+</script>
+
+
+

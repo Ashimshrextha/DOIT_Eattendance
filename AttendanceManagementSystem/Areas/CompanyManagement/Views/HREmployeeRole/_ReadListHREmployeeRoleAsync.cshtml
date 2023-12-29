@@ -1,0 +1,68 @@
+﻿@model SystemViewModels.SystemSetting.HREmployeeRoleViewModelList
+@using PagedList.Mvc;
+@using SystemStores.ENUMData;
+
+<div id="replacetarget">
+    <div id="content" class="content">
+        <div class="dataTables_wrapper">
+            <div id="mask-container">
+                <div id="mask"></div>
+                <div class="table-responsive">
+                    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th class="text-center">आईडी</th>
+                                <th class="text-center">कार्या.कोड</th>
+                                <th class="text-center">भूमिकाको प्रकार</th>
+                                <th>शीर्षक</th>
+                                <th class="text-center">जम्मा कर्मचारी</th>
+                                <th class="text-center">अपडेट गर्ने</th>
+                                <th class="text-center">अपडेट मिति</th>
+                                <th class="text-center">अवस्था</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.DBModelList)
+                            {
+                                <tr>
+                                    <td class="text-center">@item.Id</td>
+                                    <td class="text-center">
+                                        <i class="ace-icon fa bigger-110 badge badge-yellow">@item.HRCompany.HRCompanyCode.HRCompanyCodeTitle</i>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="ace-icon fa bigger-110 badge badge-yellow">@Enum.GetName(typeof(EnumGlobal.RoleType), item.IdRoleType)</i>
+                                    </td>
+                                    <td class="blue">
+                                        <i class="fa bigger-120">@item.HRRoleTitle</i>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="fa bigger-110 badge badge-info">@item.MembershipProviders.Count</i>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="ace-icon fa bigger-110 badge badge-grey">@item.UpdatedBy</i>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="ace-icon fa bigger-110 badge badge-grey">@string.Format("{0:yyyy-MM-dd}", item.UpdatedOn)</i>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="ace-icon @(item.IsActive==true?"fa fa-thumbs-up green" : "fa fa-thumbs-down red") bigger-130" aria-hidden="true"></i>
+                                    </td>
+                                   
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div aria-live="polite" role="status" id="example_info" class="dataTables_info">
+                    <div class="row">
+                        <div class="col-md-4">Showing @(Model.DBModelList.PageCount < Model.DBModelList.PageNumber ? 0 : Model.DBModelList.FirstItemOnPage) to @Model.DBModelList.LastItemOnPage of @Model.DBModelList.TotalItemCount entries in @Model.DBModelList.PageCount Pages</div>
+                        <div class="col-md-8 dataTables_paginate paging_simple_numbers" id="example_paginate">@Html.PagedListPager(Model.DBModelList, page => Url.Action("_ListHREmployeeRoleAsync", new { idHRCompany = Model.IdHRCompany, pageNumber = page, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey }))</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

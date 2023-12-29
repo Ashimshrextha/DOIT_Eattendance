@@ -1,0 +1,382 @@
+﻿@using AttendanceManagementSystem.Services;
+@using SystemStores.ENUMData;
+@model SystemViewModels.Home.HomeDashboardViewModelList
+
+@{
+    var userdetail = CommonServices.UserSession();
+
+}
+
+
+
+<div class="p-home-content">
+    <div class="dash-welcome">
+        <span class="dash-date">
+            <span id="Nep-bar"></span><span>,</span>
+            <span id="Nep-day"></span>
+        </span>
+        <div class="dash-welcome-status">
+            <div class="welcome">नमस्ते !  @userdetail.Name </div>
+           
+        </div>
+    </div>
+  
+
+
+    <div class="dash-multi-card">
+        <div class="header">कर्मचारीहरुको विवरण</div>
+        <div class="multi-card-section">
+            <div class="p-card-section">
+                <div class="p-card-section-header">कुल कर्मचारीहरु</div>
+                <div class="p-card-section-footer" id="EmployeeCount">
+                    <div id="loadingemployee" class="loader" style="display: none;">    </div>
+                </div>
+            </div>
+
+            <div class="p-card-section">
+                <div class="p-card-section-header">उपस्थित कर्मचारीहरु</div>
+                <div class="p-card-section-footer text-success" id="EmployeePresentCount">     <div id="loadingpresentemployee" class="loader" style="display: none;"></div>  </div>
+            </div>
+
+            <div class="p-card-section">
+                <div class="p-card-section-header">अनुपस्थित। बिदामा भएका</div>
+                <div class="p-card-section-footer text-warning"><span id="absentCountToday"></span>| <span id="leaveempCountToday"></span> <div id="loadingAbsentemployee" class="loader" style="display: none;"></div> </div>
+            </div>
+
+            <div class="p-card-section">
+                <div class="p-card-section-header">काजमा भएका कर्मचारीहरु</div>
+                <div class="p-card-section-footer text-primary" id="employeeOnKaaj"> <div id="loadingKaajemployee" class="loader" style="display: none;"></div> </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="employee-table">
+        <div class="employee-table-top">
+            <div class="p-tab-menu">
+                <div class="active-table">
+                    कुल कर्मचारीहरु
+                </div>
+                <div class="text-gray p-text-size-14">
+                    उपस्थित कर्मचारीहरु
+                </div>
+                <div class="text-gray p-text-size-14">
+                    अनुपास्थित कर्मचारीहरु
+                </div>
+                <div class="text-gray p-text-size-14">
+                    बिदामा भएका कर्मचारीहरु
+                </div>
+                <div class="text-gray p-text-size-14">
+                    काजमा भएका कर्मचारीहरु
+                </div>
+                <div class="text-gray p-text-size-14">
+                    दैनेक लग
+                </div>
+                <div class="text-gray p-text-size-14">
+                    ढिलो आएका
+                </div>
+                <div class="text-gray p-text-size-14">
+                    हिजो छिटो गएका
+                </div>
+            </div>
+            
+        </div>
+
+        <div id="tableContainer" class="table-responsive">
+        </div>
+
+
+
+    </div>
+</div>
+<script src="~/Scripts/Menu/customChart.js"></script>
+<script src="~/Scripts/Menu/customNepaliConverter.js"></script>
+<script>
+
+    $(document).ready(function () {
+        const currentDate = new Date();
+        var yearID = @Model.YearNp;
+        var monthID = @Model.MonthNp;
+        var dayID = @Model.TodayDayNp;
+
+        const dayIndex = currentDate.getDay();
+        var todayNp = ConvEnglishToNepaliNum(yearID) + ' ' + ConvNepaliMonth(monthID) + ' ' + ConvEnglishToNepaliNum(dayID)
+        var dayName = ConvertNepaliDayName(dayIndex)
+        $("#Nep-bar").html(dayName)
+        $("#Nep-day").html(todayNp)
+
+
+        $.ajax({
+            url: "/Home/EmployeeCount/",
+            beforeSend: function () {
+                $('#loadingemployee').show();
+            },
+            success: function (response) {
+                $('#loadingemployee').hide();
+                $("#EmployeeCount").html(ConvEnglishToNepaliNum(response));
+            },
+            error: function () {
+                $('#loadingemployee').hide();
+                $("#EmployeeCount").html('0');
+            }
+        });
+        $.ajax({
+            url: "/Home/EmployeePresentCount",
+            type: "GET",
+            cache: true,
+            beforeSend: function () {
+                $('#loadingpresentemployee').show();
+            },
+            success: function (response) {
+                $('#loadingpresentemployee').hide();
+                $("#EmployeePresentCount").html(ConvEnglishToNepaliNum(response))
+            },
+            error: function () {
+                $('#loadingpresentemployee').hide();
+                $("#EmployeePresentCount").html('0');
+            }
+        });
+        $.ajax({
+            url: "/Home/AbsentEmployeeList",
+            type: "GET",
+             cache: true,
+             beforeSend: function () {
+                 $('#loadingAbsentemployee').show();
+             },
+             success: function (response) {
+                 $('#loadingAbsentemployee').hide();
+                 $("#absentCountToday").html(ConvEnglishToNepaliNum(response.listCount))
+             },
+             error: function () {
+                 $('#loadingAbsentemployee').hide();
+                 $("#absentCountToday").html('0')
+             }
+
+        });
+        $.ajax({
+            url: "/Home/superadminleaveEmployeeByOfficeList",
+            type: "GET",
+            cache: true,
+            beforeSend: function () {
+                $('#loadingKaajemployee').show();
+            },
+            success: function (response) {
+                $('#loadingKaajemployee').hide();
+                $("#leaveempCountToday").html(ConvEnglishToNepaliNum(response.listCount))
+            },
+            error: function () {
+                $('#loadingKaajemployee').hide();
+                $("#leaveempCountToday").html('0')
+            }
+        });
+        $.ajax({
+            url: "/Home/KaajEmployeeList",
+            type: "GET",
+            cache: true,
+            beforeSend: function () {
+                $('#loadingKaajemployee').show();
+            },
+            success: function (response) {
+                console.log('kklll',response)
+                $('#loadingKaajemployee').hide();
+                $("#employeeOnKaaj").html(ConvEnglishToNepaliNum(response.listCount))
+            },
+            error: function () {
+                $('#loadingKaajemployee').hide();
+                $("#employeeOnKaaj").html('0')
+            }
+        });
+
+
+
+
+
+
+        $.ajax({
+            url: "/Home/SuperAdminTotalEmployeeList/",
+            type: 'GET',
+            data: {
+                IdHRCompany: 1,
+                PageNumber: 1
+            },
+            success: function (data) {
+
+                let paginationInfo = data.pagination;
+                let employees = data.list;
+
+                converttotable(data);
+
+            },
+            error: function (xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+
+
+
+
+
+
+
+
+    });
+
+</script>
+
+
+
+<script>
+    function employeelist(action, pageNumber) {
+        let hitPageNumber = 1;
+        if (action === 'previous') {
+            if (pageNumber != 1) {
+                hitPageNumber == pageNumber - 1;
+            }
+        }
+        else if (action === 'next') {
+            hitPageNumber = pageNumber
+        }
+        else {
+            hitPageNumber = pageNumber;
+        }
+
+        employeeinfo(hitPageNumber)
+    }
+
+    function employeeinfo(pagenumber) {
+        $.ajax({
+            url: "/home/superadmintotalemployeelist/",
+            type: 'get',
+            data: {
+                idhrcompany: 1,
+                pagenumber: pagenumber,
+            },
+            success: function (data) {
+
+                const paginationinfo = data.pagination;
+                const employees = data.list;
+
+                converttotable(data);
+
+            },
+            error: function (xhr, status, error) {
+                console.error('error:', error);
+            }
+        });
+    }
+
+    function converttotable(data) {
+
+        let employee_table = $('#tableContainer')
+        if (employee_table[0]) {
+            $('#employee_table').remove();
+            $('#employee_pagination').remove();
+        }
+        let tableHTML = '';
+        let paginationHTML = '';
+        $('#tableContainer').append(tableHTML).append(paginationHTML);
+        let employees = data.list
+
+        let totalPages = data.pagination.PageCount;
+        let pageNumber = data.pagination.PageNumber;
+        tableHTML = `
+                <table id='employee_table' class="table employee_table">
+                    <thead>
+                        <tr class="active">
+                            <th >क्र.स.</th>
+                            <th >संकेत नं</th>
+                            <th >कर्मचारी नाम</th>
+                            <th>पद</th>
+                        </tr>
+                    </thead>
+                    <tbody id="employeeTableBody">
+                    </tbody>
+                </table>
+            `;
+        paginationHTML = `
+                   <div id='employee_pagination' class="table-footer employee_pagination">
+                       <nav>
+                             <ul class="pagination">
+                                 <li>
+                                     <a onclick="employeelist('previous', ${pageNumber})" aria-label="Previous">
+                                         <span aria-hidden="true">«</span>
+                                     </a>
+                                 </li>
+                                 ${Array.from({ length: totalPages }, (_, index) => `
+                                     <li${index + 1 === pageNumber ? ' class="active"' : ''}>
+                                         <a onclick="employeelist(${index + 1}, ${index + 1})">${index + 1}</a>
+                                     </li>`).join('')}
+                                 <li>
+                                     <a onclick="employeelist('next', ${totalPages})" aria-label="Next">
+                                         <span aria-hidden="true">»</span>
+                                     </a>
+                                 </li>
+                             </ul>
+                       </nav>
+                   </div>
+               `;
+        $('#tableContainer').append(tableHTML).append(paginationHTML);
+        let tableBody = $('#employeeTableBody');
+        tableBody[0].innerHTML = ''
+        employees.forEach((employee, index) => {
+            const row = `
+                               <tr>
+                                   <td>${index + 1}</td>
+                                   <td>${employee.PISNumber}</td>
+                                   <td>${employee.HREmployeeNameNP}</td>
+                                   <td>${employee.HRDesignationTitle}</td>
+                               </tr> `;
+            tableBody.append(row);
+        });
+
+    }
+
+</script>
+
+
+
+
+
+<script>
+    // Get the animated text element
+    const animatedText = document.getElementById('animatedText');
+
+    // Function to stop the animation
+    function stopAnimation() {
+        animatedText.style.animationPlayState = 'paused';
+    }
+
+    // Add a touch event listener to the text
+    animatedText.addEventListener('touchstart', stopAnimation);
+
+    // You can also add a click event listener for non-touch devices
+    animatedText.addEventListener('click', stopAnimation);
+
+
+
+</script>
+
+<style>
+    .page-content {
+        Background: white !important
+    }
+    .loader {
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid #3498db;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 2s linear infinite;
+        margin: 20px auto;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>

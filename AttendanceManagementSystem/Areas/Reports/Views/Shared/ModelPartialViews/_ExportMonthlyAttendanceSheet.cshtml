@@ -1,0 +1,149 @@
+﻿@model SystemViewModels.Reports.MonthlyAttendanceSheetViewModelList
+<div id="printThis">
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>आईडी</th>
+                <th>क संकेत नं.</th>
+                <th>नाम</th>
+                <th>पद</th>
+                <th>आए/गएको</th>
+                <th>१</th>
+                <th>२</th>
+                <th>३</th>
+                <th>४</th>
+                <th>५</th>
+                <th>६</th>
+                <th>७</th>
+                <th>८</th>
+                <th>९</th>
+                <th>१०</th>
+                <th>११</th>
+                <th>१२</th>
+                <th>१३</th>
+                <th>१४</th>
+                <th>१५</th>
+                <th>१६</th>
+                <th>१७</th>
+                <th>१८</th>
+                <th>१९</th>
+                <th>२०</th>
+                <th>२१</th>
+                <th>२२</th>
+                <th>२३</th>
+                <th>२४</th>
+                <th>२५</th>
+                <th>२६</th>
+                <th>२७</th>
+                <th>२८</th>
+                <th>२९</th>
+                <th>३०</th>
+                <th>३१</th>
+                <th>३२</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelPrint.GroupBy(x => new { x.IdHREmployee, x.IdEnroll, x.HREmployeeName, x.Designation, x.DesignationRank }).OrderBy(x => x.Key.DesignationRank))
+            {
+                <tr>
+                    <th rowspan="2">@item.Key.IdHREmployee</th>
+                    <th rowspan="2">@item.Key.IdEnroll</th>
+                    <th rowspan="2">@item.Key.HREmployeeName</th>
+                    <th rowspan="2">@item.Key.Designation</th>
+                    @foreach (var data in item.Where(x => x.Mode == "IN"))
+                    {
+                        <td>आएको</td>
+                        <td>@data.C1</td>
+                        <td>@data.C2</td>
+                        <td>@data.C3</td>
+                        <td>@data.C4</td>
+                        <td>@data.C5</td>
+                        <td>@data.C6</td>
+                        <td>@data.C7</td>
+                        <td>@data.C8</td>
+                        <td>@data.C9</td>
+                        <td>@data.C10</td>
+                        <td>@data.C11</td>
+                        <td>@data.C12</td>
+                        <td>@data.C13</td>
+                        <td>@data.C14</td>
+                        <td>@data.C15</td>
+                        <td>@data.C16</td>
+                        <td>@data.C17</td>
+                        <td>@data.C18</td>
+                        <td>@data.C19</td>
+                        <td>@data.C20</td>
+                        <td>@data.C21</td>
+                        <td>@data.C22</td>
+                        <td>@data.C23</td>
+                        <td>@data.C24</td>
+                        <td>@data.C25</td>
+                        <td>@data.C26</td>
+                        <td>@data.C27</td>
+                        <td>@data.C28</td>
+                        <td>@data.C29</td>
+                        <td>@data.C30</td>
+                        <td>@data.C31</td>
+                        <td>@data.C32</td>
+                    }
+                </tr>
+                foreach (var data2 in item.Where(x => x.Mode == "OUT"))
+                {
+                    <tr>
+                        <td>गएको</td>
+                        <td>@data2.C1</td>
+                        <td>@data2.C2</td>
+                        <td>@data2.C3</td>
+                        <td>@data2.C4</td>
+                        <td>@data2.C5</td>
+                        <td>@data2.C6</td>
+                        <td>@data2.C7</td>
+                        <td>@data2.C8</td>
+                        <td>@data2.C9</td>
+                        <td>@data2.C10</td>
+                        <td>@data2.C11</td>
+                        <td>@data2.C12</td>
+                        <td>@data2.C13</td>
+                        <td>@data2.C14</td>
+                        <td>@data2.C15</td>
+                        <td>@data2.C16</td>
+                        <td>@data2.C17</td>
+                        <td>@data2.C18</td>
+                        <td>@data2.C19</td>
+                        <td>@data2.C20</td>
+                        <td>@data2.C21</td>
+                        <td>@data2.C22</td>
+                        <td>@data2.C23</td>
+                        <td>@data2.C24</td>
+                        <td>@data2.C25</td>
+                        <td>@data2.C26</td>
+                        <td>@data2.C27</td>
+                        <td>@data2.C28</td>
+                        <td>@data2.C29</td>
+                        <td>@data2.C30</td>
+                        <td>@data2.C31</td>
+                        <td>@data2.C32</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            $('#btnPrint').click(function () {
+                $('#printThis').printThis();
+            });
+    });
+    function ExcelRepoort(div) {
+        console.log(div);
+        console.log("Starting");
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('div[id$=' + div + ']').html()));
+        console.log("Completed");
+        e.preventDefault();
+    }
+</script>
+
+

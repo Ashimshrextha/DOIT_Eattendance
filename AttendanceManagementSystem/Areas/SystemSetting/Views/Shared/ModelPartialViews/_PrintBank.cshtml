@@ -1,0 +1,45 @@
+﻿@model SystemViewModels.SystemSetting.HREmployeeBankListViewModel
+
+<div id="printThis">
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>आईडी</th>
+                <th>बैंक</th>
+                <th>प्रकार</th>
+                <th>स्थान</th>
+                <th>फोन</th>
+                <th>स्विफ्ट कोड</th>
+                <th>आई.पी</th>
+                <th>अपडेट मिति</th>
+                <th>अपडेट गर्ने</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.BankName</td>
+                    <td>@item.BankCategory</td>
+                    <td>@item.BankLocation</td>
+                    <td>@item.Phone</td>
+                    <td>@item.SwiftCode</td>
+                    <td>@item.TerminalIP</td>
+                    <td>@item.UpdatedOn.ToString()</td>
+                    <td>@item.UpdatedBy</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>
+

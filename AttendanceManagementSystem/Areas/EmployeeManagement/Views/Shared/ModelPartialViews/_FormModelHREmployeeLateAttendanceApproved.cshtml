@@ -1,0 +1,118 @@
+﻿@model SystemViewModels.SystemSecurity.HREmployeeAttendanceHistoryViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+@Html.HiddenFor(model => model.DataModel.LateReason)
+
+
+
+<div class="col-md-12 col-sm-12 col-lg-12">
+    <table class="table table-border table-hover">
+        <colgroup>
+            <col style="width:14%" />
+            <col style="width:1%" />
+            <col style="width:35%" />
+            <col style="width:14%" />
+            <col style="width:1%" />
+            <col style="width:35%" />
+        </colgroup>
+        <tbody>
+            <tr>
+                <th class="text-right">@Html.Label("कार्यालय", new { @class = "control-label" })</th>
+                <th>:</th>
+                <td class="blue">
+                    <i class="ace-icon fa bigger-130"> @Html.DisplayFor(model => model.DBModelEmployee.CompanyNameNP, new { @class = "form-control" })</i>
+                </td>
+                <th class="text-right">@Html.Label("शाखा/सेक्सन", new { @class = "control-label" })</th>
+                <th>:</th>
+                <td class="blue">
+                    <i class="ace-icon fa bigger-130">@Html.DisplayFor(model => model.DBModelEmployee.HRCompanyDivisionName, new { @class = "form-control" })</i>
+                </td>
+            </tr>
+            <tr>
+                <th class="text-right">@Html.Label("पद", new { @class = "control-label" })</th>
+                <th>:</th>
+                <td class="blue">
+                    <i class="ace-icon fa bigger-130"> @Html.DisplayFor(model => model.DBModelEmployee.HRDesignationTitle, new { @class = "form-control" })</i>
+                </td>
+            </tr>
+            <tr>
+                <th class="text-right"> @Html.Label("कर्मचारी", new { @class = "control-label" })</th>
+                <th>:</th>
+                <td class="green">
+                    <i class="ace-icon fa bigger-130">@Html.DisplayFor(model => model.DBModelEmployee.HREmployeeNameNP, new { @class = "form-control" })</i>
+                </td>
+            </tr>
+            <tr>
+                <th class="text-right"> @Html.LabelFor(model => model.DataModel.AttendanceDate, new { @class = "control-label" })</th>
+                <th>:</th>
+                <td>
+                    <i class="ace-icon fa bigger-130 badge badge-success">@Model.DataModel.AttendanceDate.DateNp()</i>
+                </td>
+                <th class="text-right"> @Html.LabelFor(model => model.DataModel.LogInTime, new { @class = "control-label" })</th>
+                <th>:</th>
+                <td>
+                    <i class="ace-icon fa bigger-130 badge badge-success">@Html.DisplayFor(model => model.DataModel.LogInTime, new { @class = "form-control" })</i>
+                </td>
+            </tr>
+            <tr>
+                <th class="text-right"> @Html.LabelFor(model => model.DataModel.CheckInTime, new { @class = "control-label" })</th>
+                <th>:</th>
+                <td>
+                    <i class="ace-icon fa bigger-130 badge badge-danger">@Html.DisplayFor(model => model.DataModel.CheckInTime, new { @class = "form-control" })</i>
+                </td>
+                <th class="text-right"> @Html.LabelFor(model => model.DataModel.LateBy, new { @class = "control-label" })</th>
+                <th>:</th>
+                <td>
+                    <i class="ace-icon fa bigger-130 badge badge-danger">
+                        @Html.DisplayFor(model => model.DataModel.LateBy, new { @class = "form-control" })
+                    </i>
+                </td>
+            </tr>
+            <tr>
+                <th class="text-right"> @Html.LabelFor(model => model.DataModel.Remark, new { @class = "control-label" })</th>
+                <th>:</th>
+                <td>
+                    @Html.TextAreaFor(model => model.DataModel.Remark, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.Remark)
+                </td>
+                <th class="text-right"> @Html.LabelFor(model => model.DataModel.LateReason, new { @class = "control-label" })</th>
+                <th>:</th>
+                <td class="green">
+                    <i class="ace-icon fa bigger-130"> @Html.DisplayFor(model => model.DataModel.LateReason, new { @class = "form-control" })</i>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th class="text-right">@Html.LabelFor(model => model.DataModel.IdApprovedBy, new { @class = "control-label" })</th>
+                <th>:</th>
+                <td>
+                    @Html.DropDownListFor(model => model.DataModel.IdApprovedBy, new SelectList(Model.DDLApprovalEmployee, "Key", "Value"), new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.DataModel.IdApprovedBy)
+                </td>
+                <th class="text-right">@Html.LabelFor(model => model.DataModel.IsLateReasonApproved, new { @class = "control-label" })</th>
+                <th>:</th>
+                <td>
+                    @Html.CheckBoxFor(model => model.DataModel.IsLateReasonApproved, new { @class = "form-control BSswitch" })
+                    @Html.ValidationMessageFor(model => model.DataModel.IsLateReasonApproved)
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<script>
+    $('select').select2({
+        width: '100%',
+        dropdownAutoWidth: true
+    });
+</script>

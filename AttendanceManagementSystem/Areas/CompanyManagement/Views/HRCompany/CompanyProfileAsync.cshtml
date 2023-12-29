@@ -1,0 +1,21 @@
+﻿@model SystemViewModels.CompanyManagement.HRCompanyViewModelList
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="~/@Model.BreadCrumbBaseURL">@Model.BreadCrumbTitle</a>
+        </li>
+        <li class="active">@Model.BreadCrumbTitle</li>
+    </ul>
+</div>
+<div class="page-content">
+    @{ Html.RenderPartial("_SettingContainer");}
+    <div class="row">
+        <div id="replacetarget_HRCompanyProfile">
+            @{ Html.RenderPartial("_Tabbed");}
+        </div>
+    </div>
+</div>

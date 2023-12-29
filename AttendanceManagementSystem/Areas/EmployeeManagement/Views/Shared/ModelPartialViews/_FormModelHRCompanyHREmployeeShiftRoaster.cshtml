@@ -1,0 +1,89 @@
+﻿@model SystemViewModels.CompanyManagement.HRCompanyHREmployeeShiftRoasterViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+<script src="~/Scripts/bootstrap-multiselect.min.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.IdHREmployee)
+@Html.HiddenFor(model => model.DataModel.IdHREmployee)
+@Html.HiddenFor(model => model.DataModel.IdHRCompany)
+@Html.HiddenFor(model => model.IdHRCompany)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+
+
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+        <div class="form-group row">
+            <div class="col-md-2 col-sm-2 col-xs-12 col-lg-2">
+                @Html.LabelFor(model => model.DataModel.EffectiveFromDateNP, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.EffectiveFromDateNP, new { @class = "form-control", @readonly = "readonly", @style = "cursor:pointer" })
+                @Html.ValidationMessageFor(model => model.DataModel.EffectiveFromDateNP)
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-12 col-lg-2">
+                @Html.LabelFor(model => model.DataModel.EffectiveToDateNP, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.EffectiveToDateNP, new { @class = "form-control", @readonly = "readonly", @style = "cursor:pointer" })
+                @Html.ValidationMessageFor(model => model.DataModel.EffectiveToDateNP)
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+        <div class="table-responsive">
+            <table class="table table-border">
+                <colgroup>
+                    <col style="width:15%" />
+                    <col style="width:10%" />
+                    <col style="width:75%" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>हप्ताको दिन</th>
+                        <th>सप्ताहांत हो/होइन</th>
+                        <th>शिफ्ट शीर्षक</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.DataModelList.Count; i++)
+                    {
+                        <tr>
+                            @Html.HiddenFor(model => model.DataModelList[i].IdDayOfWeekNP)
+                            @Html.HiddenFor(model => model.DataModelList[i].DOWNP)
+                            <td style="font-weight:bold;font-size:15px;">
+                                @Model.DataModelList[i].DOWNP
+                            </td>
+                            <td>
+                                @Html.CheckBoxFor(model => model.DataModelList[i].IsWeekend, new { @class = "form-control switchYesNo" })
+                                @Html.ValidationMessageFor(model => model.DataModelList[i].IsWeekend)
+                            </td>
+                            <td>
+                                <span class="dropdown-toggle"></span>
+                                @Html.ListBoxFor(model => model.DataModelList[i].DDLShiftRoasterSelected, new SelectList(Model.DDLHRCompanyShiftRoaster, "Key", "Value"), new { @class = "form-control drpdown", multiple = "multiple" })<br />
+                                @Html.ValidationMessageFor(model => model.DataModelList[i].DOWNP)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.drpdown').multiselect();
+
+        $('#DataModel_EffectiveFromDateNP').nepaliDatePicker({
+            npdMonth: true,
+            npdYear: true
+        });
+        $('#DataModel_EffectiveToDateNP').nepaliDatePicker({
+            npdMonth: true,
+            npdYear: true
+        });
+    });
+</script>

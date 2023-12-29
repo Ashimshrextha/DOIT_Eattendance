@@ -1,0 +1,44 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeFamilyDetailsViewModel
+
+<div id="printThis">
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>आईडी</th>
+                <th>पुरा नाम</th>
+                <th>देवनागरी</th>
+                <th>लिङ्ग</th>
+                <th>मोबाइल</th>
+                <th>ईमेल</th>
+                <th>नियुक्ती मिति</th>
+                <th>अवस्था</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+            {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.HREmployeeNameNP</td>
+                <td>@item.HREmployeeName</td>
+                <td>@item.HREmployeeSex.HREmployeeSexTitle</td>
+                <td>@item.MobileNumber</td>
+                <td>@item.Email</td>
+                <td>@item.AppointmentDate.ToShortDateString()</td>
+                <td>@item.Status</td>
+
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>

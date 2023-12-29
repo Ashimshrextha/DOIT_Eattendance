@@ -1,0 +1,38 @@
+﻿@using AttendanceManagementSystem.Services;
+@using SystemStores.ENUMData;
+@using SystemStores.GlobalMethod;
+@{
+    var userdetail = CommonServices.UserSession();
+}
+<div class="footer">
+    <div class="footer-inner">
+        <div class="footer-content">
+            <span class="bigger-120">
+                <span class="blue bolder">
+                    सूचना प्रविधि विभाग
+                </span>
+                &copy; @DateTime.Now.Date.DateNp().Substring(0, 4)
+            </span>
+            &nbsp; &nbsp;
+            &nbsp; &nbsp;
+            <span class="bigger-120 fa-pull-left">
+                <span class="fa bigger-100"><b>प्रयोगकर्ताको नाम &nbsp; : &nbsp;</b></span>
+            </span>&nbsp; &nbsp;&nbsp;
+            <span class="bigger-120 fa-pull-left">
+                <span class="fa bigger-120">@userdetail.UserName</span>
+            </span>
+            &nbsp; &nbsp;<span class="blue">|</span>&nbsp; &nbsp;
+            &nbsp; &nbsp;<span class="green">IP</span>&nbsp; &nbsp;
+            <span class="bigger-120">
+                <span class="fa bigger-120">@SystemGlobalMethod.RemoteTerminalId</span>
+            </span>
+            &nbsp; &nbsp;
+            <span class="bigger-120 fa-pull-right">
+                <span class="fa bigger-120" id="date_time"></span>
+            </span>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">window.onload = date_time('date_time');</script>

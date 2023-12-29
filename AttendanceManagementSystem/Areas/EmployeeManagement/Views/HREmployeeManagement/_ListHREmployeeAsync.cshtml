@@ -1,0 +1,212 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeViewModelList
+@using PagedList.Mvc;
+
+<div id="replacetarget">
+    <div id="content" class="content">
+        <div class="dataTables_wrapper">
+            <div id="mask-container">
+                <div id="mask"></div>
+                <div class="table-responsive">
+                    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th class="text-center">आईडी</th>
+                                <th class="text-center">क.संकेत नं.</th>
+                                <th class="text-center">हाजिरी आईडी</th>
+                                <th style="min-width:200px;">कर्मचारी नाम</th>
+                                <th class="text-center">लिङ्ग</th>
+                                <th class="text-center">पद</th>
+                                <th class="text-center">शुरु नियुक्ति मिति</th>
+                                <th class="text-center">कार्यालय</th>
+                                <th class="text-center">शाखा/सेक्सन</th>
+                                <th class="text-center">मोबाइल</th>
+                                <th class="text-center">अवस्था</th>
+                                <th class="text-center">भूमिका</th>
+                                @if (Model.SessionDetails.IdRoleType == 1 || Model.SessionDetails.IdRoleType == 4)
+                                {
+                                    <th class="text-center">बिदा/काज</th>
+                                }
+                                <th class="text-center">कार्य</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.SessionDetails.IdRoleType == 0)
+                            {
+                                foreach (var item in Model.DBModelEmp)
+                                {
+                                    <tr>
+                                        <td class="text-center">@item.Id</td>
+                                        <td class="text-center">
+                                            <i class="ace-icon fa bigger-110 badge badge-grey">@item.PISNumber</i>
+                                        </td>
+                                        <td class="text-center">
+                                            <i class="ace-icon fa bigger-110 badge badge-grey">@item.IdEnroll</i>
+                                        </td>
+                                        <td style="min-width:200px;">
+                                            <a class="@(item.HREmployeeSexTitle == "Male" ? "green" : "blue")" href="@Model.BreadCrumbController/EmployeeProfileAsync?idHREmployee=@item.Id&pageNumber=1&pageSize=20&orderingBy=@Model.OrderingBy&orderingDirection=@Model.OrderingDirection">
+                                                <i class="ace-icon fa fa-search-plus bigger-130">
+                                                    @(item.HREmployeeNameNP)
+                                                </i>
+                                            </a>
+                                        </td>
+                                        <td class="text-center">
+                                            <i class="ace-icon fa bigger-110 badge @(item.HREmployeeSexTitle == "Male" ? "badge-success" : "badge-info")">@item.HREmployeeSexTitleNP</i>
+                                        </td>
+                                        <td class="blue">
+                                            <i class="ace-icon fa bigger-120">@item.HRDesignationTitle</i>
+                                        </td>
+                                        <td class="text-center">
+                                            <i class="ace-icon fa bigger-110 badge badge-grey">@item.AppointmentDateNP</i>
+                                        </td>
+                                        <td class="ace-icon">
+                                            <i class="ace-icon fa bigger-120 badge badge-yellow">@item.HRCompanyCodeTitle</i>
+                                        </td>
+                                        <td class="text-center">
+                                            <i class="fa bigger-110 badge badge-yellow">@item.HRCompanyDivisionShortName</i>
+                                        </td>
+                                        <td class="text-center">
+                                            <i class="fa bigger-110 badge badge-grey">@item.MobileNumber</i>
+                                        </td>
+                                        <td class="ace-icon">
+                                            <div>
+                                                <i class="ace-icon fa bigger-130 badge badge-success" aria-hidden="true">@item.JobStatus</i>
+                                            </div>
+                                        </td>
+                                        <td class="ace-icon">@item.RoleTitle</td>
+                                        @if ((Model.SessionDetails.IdRoleType == 1 || Model.SessionDetails.IdRoleType == 4) && item.JobStatus != "सेवानिवृत्त")
+                                        {
+                                            <td class="ace-icon action-buttons">
+                                                <a href="@Url.Action("_CreateHREmployeeLeaveHistoryAsync", "HREmployeeLeaveHistory", new { idHREmployee = item.Id })" data-ajax-model="">
+                                                    <i class="ace-icon fa fa-plus red bigger-150" aria-hidden="true" title="Create Leave"></i>
+                                                </a>
+                                                <a href="@Url.Action("_CreateHREmployeeKaajHistoryAsync", "HREmployeeKaajHistory", new { idHREmployee = item.Id })" data-ajax-model="">
+                                                    <i class="ace-icon fa fa-plus blue bigger-150" aria-hidden="true" title="Create Kaaj"></i>
+                                                </a>
+                                            </td>
+                                        }
+                                        <td class="ace-icon action-buttons">
+                                            @if (item.JobStatus != "सेवानिवृत्त")
+                                            {
+                                                <a href="@Url.Action("_UpdateHREmployeeAsync", new { id = item.Id, pageNumber = Model.PageNumber, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey,status=Model.IdActiveEmployee })" data-ajax-model="">
+                                                    <i class="ace-icon fa fa-pencil green bigger-150" aria-hidden="true" title="Edit"></i>
+                                                </a>
+                                            }
+
+                                            @if (Model.SessionDetails.IdRoleType == 0)
+                                            {
+                                                <a href="@Url.Action("_DeleteHREmployeeAsync", new { id = item.Id, pageNumber = Model.PageNumber, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey })" data-ajax-model=""><i class="ace-icon fa fa-trash-o red bigger-150" aria-hidden="true" title="Delete"></i></a>
+                                            }
+                                        </td>
+
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                foreach (var item in Model.DBModelEmp)
+                                {
+                        <tr>
+                            <td class="text-center">@item.Id</td>
+                            <td class="text-center">
+                                <i class="ace-icon fa bigger-110 badge badge-grey">@item.PISNumber</i>
+                            </td>
+                            <td class="text-center">
+                                <i class="ace-icon fa bigger-110 badge badge-grey">@item.IdEnroll</i>
+                            </td>
+                            <td style="min-width:200px;">
+                                <a class="@(item.HREmployeeSexTitle == "Male" ? "green" : "blue")" href="@Model.BreadCrumbController/EmployeeProfileAsync?idHREmployee=@item.Id&pageNumber=1&pageSize=20&orderingBy=@Model.OrderingBy&orderingDirection=@Model.OrderingDirection">
+                                    <i class="ace-icon fa fa-search-plus bigger-130">
+                                        @(item.HREmployeeNameNP)
+                                    </i>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <i class="ace-icon fa bigger-110 badge @(item.HREmployeeSexTitle == "Male" ? "badge-success" : "badge-info")">@item.HREmployeeSexTitleNP</i>
+                            </td>
+                            <td class="blue">
+                                <i class="ace-icon fa bigger-120">@item.HRDesignationTitle</i>
+                            </td>
+                            <td class="text-center">
+                                <i class="ace-icon fa bigger-110 badge badge-grey">@item.AppointmentDateNP</i>
+                            </td>
+                            <td class="ace-icon">
+                                <i class="ace-icon fa bigger-120 badge badge-yellow">@item.HRCompanyCodeTitle</i>
+                            </td>
+                            <td class="text-center">
+                                <i class="fa bigger-110 badge badge-yellow">@item.HRCompanyDivisionShortName</i>
+                            </td>
+                            <td class="text-center">
+                                <i class="fa bigger-110 badge badge-grey">@item.MobileNumber</i>
+                            </td>
+                            <td class="ace-icon">
+                                <div>
+                                    <i class="ace-icon fa bigger-130 badge badge-success" aria-hidden="true">@item.JobStatus</i>
+                                </div>
+                            </td>
+                            <td class="ace-icon">@item.RoleTitle</td>
+                            @if ((Model.SessionDetails.IdRoleType == 1 || Model.SessionDetails.IdRoleType == 4) && item.JobStatus != "सेवानिवृत्त")
+                            {
+                                if ((Model.SessionDetails.IdRoleType == 1 || Model.SessionDetails.IdRoleType == 4) && item.JobStatus != "राजिनामा")
+                                {
+                                    if ((Model.SessionDetails.IdRoleType == 1 || Model.SessionDetails.IdRoleType == 4) && item.JobStatus != "निधन")
+                                    {
+                                        if ((Model.SessionDetails.IdRoleType == 1 || Model.SessionDetails.IdRoleType == 4) && item.JobStatus != "निलम्बित")
+                                        {
+                                            <td class="ace-icon action-buttons">
+                                                <a href="@Url.Action("_CreateHREmployeeLeaveHistoryAsync", "HREmployeeLeaveHistory", new { idHREmployee = item.Id })" data-ajax-model="">
+                                                    <i class="ace-icon fa fa-plus red bigger-150" aria-hidden="true" title="Create Leave"></i>
+                                                </a>
+                                                <a href="@Url.Action("_CreateHREmployeeKaajHistoryAsync", "HREmployeeKaajHistory", new { idHREmployee = item.Id })" data-ajax-model="">
+                                                    <i class="ace-icon fa fa-plus blue bigger-150" aria-hidden="true" title="Create Kaaj"></i>
+                                                </a>
+                                            </td>
+                                        }
+                                    }
+                                }
+                            }
+                            <td class="ace-icon action-buttons">
+                                @if (item.JobStatus != "सेवानिवृत्त")
+                                {
+                                    if (item.JobStatus != "राजिनामा")
+                                    {
+                                        if (item.JobStatus != "निधन")
+                                        {
+                                            if (item.JobStatus != "निलम्बित")
+                                            {
+                                                <a href="@Url.Action("_UpdateHREmployeeAsync", new { id = item.Id, pageNumber = Model.PageNumber, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey,status= Model.IdActiveEmployee})" data-ajax-model="">
+                                                    <i class="ace-icon fa fa-pencil green bigger-150" aria-hidden="true" title="Edit"></i>
+                                                </a>
+                                            }
+                                        }
+                                    }
+                                }
+                                @if (Model.SessionDetails.IdRoleType == 0)
+                                {
+                                    <a href="@Url.Action("_DeleteHREmployeeAsync", new { id = item.Id, pageNumber = Model.PageNumber, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey })" data-ajax-model=""><i class="ace-icon fa fa-trash-o red bigger-150" aria-hidden="true" title="Delete"></i></a>
+                                }
+                            </td>
+
+                        </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div aria-live="polite" role="status" id="example_info" class="dataTables_info">
+                    <div class="row">
+                        <div class="col-md-4">Showing @(Model.DBModelEmp.PageCount < Model.DBModelEmp.PageNumber ? 0 : Model.DBModelEmp.FirstItemOnPage) to @Model.DBModelEmp.LastItemOnPage of @Model.DBModelEmp.TotalItemCount entries in @Model.DBModelEmp.PageCount Pages</div>
+                        <div class="col-md-8 dataTables_paginate paging_simple_numbers" id="example_paginate">@Html.PagedListPager(Model.DBModelEmp, page => Url.Action("_ListHREmployeeAsync", new { idHRCompany = Model.IdHRCompany, active = Model.IdActiveEmployee, pageNumber = page, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey }))</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('table').on('scroll', function () {
+            $("#" + this.id + " > *").width($(this).width() + $(this).scrollLeft());
+        });
+    });
+</script>

@@ -1,0 +1,184 @@
+﻿@model SystemViewModels.CompanyManagement.HRCompanyViewModel
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+@Html.HiddenFor(model => model.DataModel.Id)
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h4 class="text-center" style="font-size:21px;margin-top:5px">
+                @Model.DataModel.CompanyNameNP
+            </h4>
+            <!-- Nav tabs -->
+            <ul id="tabstrip" class="nav nav-tabs">
+                <li class="active">
+                    <a href="#HRCompany" data-toggle="tab">
+                        कार्यालय विवरण
+                    </a>
+                </li>
+                <li>
+                    <a href="#HREmployeeServiceType" data-toggle="tab">
+                        सेवा प्रकार
+                    </a>
+                </li>
+                <li>
+                    <a href="#HRCompanyShreni" data-toggle="tab">
+                        श्रेणी/तह
+                    </a>
+                </li>
+                <li>
+                    <a href="#HRCompanyDivisionType" data-toggle="tab">
+                        प्रकार/सेक्सन प्रकार
+                    </a>
+                </li>
+                <li>
+                    <a href="#HRCompanyDivision" data-toggle="tab">
+                        शाखा/सेक्सन
+                    </a>
+                </li>
+                <li>
+                    <a href="#HRDesignation" data-toggle="tab">
+                        पद
+                    </a>
+                </li>
+                <li>
+                    <a href="#HRCompanyLeaveType" data-toggle="tab">
+                        बिदा प्रकार
+                    </a>
+                </li>
+                <li>
+                    <a href="#HREmployeeRole" data-toggle="tab">
+                        भुमिका प्रकार
+                    </a>
+                </li>
+                <li>
+                    <a href="#HRPublicHoliday" data-toggle="tab">
+                        सार्वजनिक बिदा
+                    </a>
+                </li>
+                <li>
+                    <a href="#HRComapnyAttendanceDevice" data-toggle="tab">
+                        हाजिरी उपकरण
+                    </a>
+                </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane fade in active" style="padding-top:10px;" id="HRCompany">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HREmployeeServiceType">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HRCompanyShreni">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HRCompanyDivisionType">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HRCompanyDivision">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HRDesignation">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HRCompanyLeaveType">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HREmployeeRole">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HRPublicHoliday">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HRComapnyAttendanceDevice">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        //$(".tab-pane").each(function () {
+        //    $(this).empty();
+        //});
+        var idHRCompany = $('#DataModel_Id').val();
+        var page = $('#PageNumber').val();
+        var pagesize = $('#PageSize').val();
+        var sort = $('#OrderingBy').val();
+        var sortdir = $('#OrderingDirection').val();
+        var searchKey = $('#SearchKey').val();
+        $.ajax({
+            url: '/CompanyManagement/HRCompany/_ListWrapperHRCompanyAsync',
+            type: 'GET',
+            data: { idHRCompany: idHRCompany, pageNumber: 1, pageSize: pagesize, orderingBy: '@Model.OrderingBy', orderingDirection: '@Model.OrderingDirection', searchKey: '' },
+            success: function (result) {
+                if (result == '"_Login_"') {
+                    window.location = "/Account/Login";
+                    return;
+                }
+                $("#HRCompany").html(result);
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $('#tabstrip a').click(function (e) {
+        e.preventDefault()
+        var tabID = $(this).attr("href").substr(1);
+        $(".tab-pane").each(function () {
+            $(this).empty();
+        });
+        var idHRCompany = $('#DataModel_Id').val();
+        var page = $('#PageNumber').val();
+        var pagesize = $('#PageSize').val();
+        var sort = $('#OrderingBy').val();
+        var sortdir = $('#OrderingDirection').val();
+        var searchKey = $('#SearchKey').val();
+        switch (tabID) {
+            case 'HRCompany':
+                url = '/CompanyManagement/HRCompany/_ListWrapperHRCompanyAsync?idHRCompany= ' + idHRCompany + '&pageNumber=' + page + '&pageSize=' + pagesize + '&orderingBy=' + sort + '&orderingDirection=' + sortdir + '&searchKey=' + searchKey;
+                break;
+            case 'HREmployeeServiceType':
+                url = '/CompanyManagement/HREmployeeServiceType/_ReadListHREmployeeServiceTypeAsync?idHRCompany=' + idHRCompany + '&pageNumber=' + page + '&pagesize=' + pagesize + '&sort=' + sort + '&sortdir=' + sortdir + '&searchKey=' + searchKey;
+                break;
+            case 'HRCompanyShreni':
+                url = '/CompanyManagement/HREmployeeCategory/_ReadListHREmployeeCategoryAsync/TahAsync?idHRCompany=' + idHRCompany + '&pageNumber=' + page + '&pagesize=' + pagesize + '&sort=' + sort + '&sortdir=' + sortdir + '&searchKey=' + searchKey;
+                break;
+            case 'HRCompanyDivisionType':
+                url = '/CompanyManagement/HRCompanyDivisionType/_ReadListHRDivisionTypeAsync?idHRCompany=' + idHRCompany + '&pageNumber=' + page + '&pagesize=' + pagesize + '&sort=' + sort + '&sortdir=' + sortdir + '&searchKey=' + searchKey;
+                break;
+            case 'HRCompanyDivision':
+                url = '/CompanyManagement/HRCompanyDivision/_ReadListHRDivisionAsync?idHRCompany=' + idHRCompany + '&pageNumber=' + page + '&pagesize=' + pagesize + '&sort=' + sort + '&sortdir=' + sortdir + '&searchKey=' + searchKey;
+                break;
+            case 'HRDesignation':
+                url = '/CompanyManagement/HRDesignation/_ReadListHRDesignationAsync?idHRCompany=' + idHRCompany + '&pageNumber=' + page + '&pagesize=' + pagesize + '&sort=' + sort + '&sortdir=' + sortdir + '&searchKey=' + searchKey;
+                break;
+            case 'HRCompanyLeaveType':
+                url = '/CompanyManagement/HRCompanyLeaveType/_ReadListHRCompanyLeaveTypeAsync?idHRCompany=' + idHRCompany + '&pageNumber=' + page + '&pagesize=' + pagesize + '&sort=' + sort + '&sortdir=' + sortdir + '&searchKey=' + searchKey;
+                break;
+            case 'HREmployeeRole':
+                url = '/CompanyManagement/HREmployeeRole/_ReadListHREmployeeRoleAsync?idHRCompany=' + idHRCompany + '&pageNumber=' + page + '&pagesize=' + pagesize + '&sort=' + sort + '&sortdir=' + sortdir + '&searchKey=' + searchKey;
+                break;
+            case 'HRPublicHoliday':
+                url = '/CompanyManagement/HRPublicHoliday/_ReadListHRPublicHolidayAsync?idHRCompany=' + idHRCompany + '&pageNumber=' + page + '&pagesize=' + pagesize + '&sort=' + sort + '&sortdir=' + sortdir + '&searchKey=' + searchKey;
+                break;
+            case 'HRComapnyAttendanceDevice':
+                url = '/CompanyManagement/HRDevice/_ReadListHRDeviceAsync?idHRCompany=' + idHRCompany + '&pageNumber=' + page + '&pagesize=' + pagesize + '&sort=' + sort + '&sortdir=' + sortdir + '&searchKey=' + searchKey;
+                break;
+            default:
+                url = "";
+                break;
+        }
+        if (url != "") {
+            var $loading = $('<img src="/Resources/ajaxLoading.gif" alt="loading" class="ui-loading-icon img_loading_center">');
+            $("#" + tabID).html($loading);
+            $.ajax({
+                url: url,
+                cache: false,
+                type: "GET",
+                dataType: "html",
+                success: function (result) {
+                    if (result == '"_Login_"') {
+                        window.location = "/Account/Login";
+                        return;
+                    }
+                    $("#" + tabID).html(result);
+                }
+            });
+            $(this).tab('show')
+        }
+    });</script>

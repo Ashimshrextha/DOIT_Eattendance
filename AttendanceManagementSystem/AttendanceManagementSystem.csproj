@@ -1,0 +1,1783 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.Compilers.3.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.3.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{140A7DB7-EA5E-4AA5-906C-BB79B8D401A4}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AttendanceManagementSystem</RootNamespace>
+    <AssemblyName>AttendanceManagementSystem</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net47\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNet.Highcharts, Version=4.0.0.0, Culture=neutral, PublicKeyToken=88854f873df851bf, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNet.Highcharts.4.0\lib\DotNet.Highcharts.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus, Version=5.2.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.5.2.0\lib\net45\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.1\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.9.1\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.9.1\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.9.1\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.9.1\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.9.1\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.2\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.4.1\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.4.1\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation, Version=1.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.5\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.6.2\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="OfficeOpenXml.Core.ExcelPackage, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OfficeOpenXml.Core.ExcelPackage.1.0.0\lib\net46\OfficeOpenXml.Core.ExcelPackage.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="Riss.Devices">
+      <HintPath>..\DLL\Riss.Devices.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.4.7.0\lib\net46\System.IO.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Threading.Tasks" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Abstractions, Version=3.3.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net47\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Configuration, Version=5.2.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net47\Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.8.6.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net47\Unity.Container.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Interception, Version=5.5.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net47\Unity.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Interception.Configuration, Version=5.1.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net47\Unity.Interception.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mvc5, Version=1.3.0.0, Culture=neutral, PublicKeyToken=43da31bc42a85347, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Mvc5.1.3.0\lib\net45\Unity.Mvc5.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RegistrationByConvention, Version=2.1.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net47\Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ServiceLocation, Version=2.1.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.6\lib\net47\Unity.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AI.Agent.Intercept">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Auth\ExceptionFilter.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Areas\CompanyManagement\CompanyManagementAreaRegistration.cs" />
+    <Compile Include="Areas\CompanyManagement\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\CompanyManagement\Controllers\HRCompanyOfficeLogsController.cs" />
+    <Compile Include="Areas\CompanyManagement\Controllers\HRCompanyAttendanceController.cs" />
+    <Compile Include="Areas\CompanyManagement\Controllers\HRCompanyController.cs" />
+    <Compile Include="Areas\CompanyManagement\Controllers\HRCompanyDivisionController.cs" />
+    <Compile Include="Areas\CompanyManagement\Controllers\HRCompanyDivisionTypeController.cs" />
+    <Compile Include="Areas\CompanyManagement\Controllers\HRCompanyHREmployeeBulkKaajController.cs" />
+    <Compile Include="Areas\CompanyManagement\Controllers\HRCompanyHREmployeeCovidKaajController.cs" />
+    <Compile Include="Areas\CompanyManagement\Controllers\HRCompanyHREmployeeShiftRoasterController.cs" />
+    <Compile Include="Areas\CompanyManagement\Controllers\HRCompanyLeaveTypeController.cs" />
+    <Compile Include="Areas\CompanyManagement\Controllers\HRCompanyNotificationController.cs" />
+    <Compile Include="Areas\CompanyManagement\Controllers\HRCompanyShiftRoasterController.cs" />
+    <Compile Include="Areas\CompanyManagement\Controllers\HRCompanySystemSupportController.cs" />
+    <Compile Include="Areas\CompanyManagement\Controllers\HRDesignationController.cs" />
+    <Compile Include="Areas\CompanyManagement\Controllers\HRDeviceController.cs" />
+    <Compile Include="Areas\CompanyManagement\Controllers\HREmployeeBulkAttendanceApprovedController.cs" />
+    <Compile Include="Areas\CompanyManagement\Controllers\HREmployeeBulkAttendanceController.cs" />
+    <Compile Include="Areas\CompanyManagement\Controllers\HREmployeeCategoryController.cs" />
+    <Compile Include="Areas\CompanyManagement\Controllers\HREmployeeRoleController.cs" />
+    <Compile Include="Areas\CompanyManagement\Controllers\HREmployeeServiceTypeController.cs" />
+    <Compile Include="Areas\CompanyManagement\Controllers\HREmployeeServiceTypeGroupController.cs" />
+    <Compile Include="Areas\CompanyManagement\Controllers\HRPublicHolidayController.cs" />
+    <Compile Include="Areas\DeviceManagement\Controllers\BiometricTemplateTypeController.cs" />
+    <Compile Include="Areas\DeviceManagement\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\DeviceManagement\Controllers\DeviceLogsController.cs" />
+    <Compile Include="Areas\DeviceManagement\Controllers\DeviceLogsFetcherController.cs" />
+    <Compile Include="Areas\DeviceManagement\Controllers\DeviceManagerController.cs" />
+    <Compile Include="Areas\DeviceManagement\Controllers\HRDeviceModelController.cs" />
+    <Compile Include="Areas\DeviceManagement\Controllers\HRDeviceModelUserVerficationModeController.cs" />
+    <Compile Include="Areas\DeviceManagement\Controllers\HREmployeeBiometricTemplateController.cs" />
+    <Compile Include="Areas\DeviceManagement\DeviceManagementAreaRegistration.cs" />
+    <Compile Include="Areas\EmployeeManagement\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\EmployeeManagement\Controllers\EarlyCheckoutAttendanceApprovalController.cs" />
+    <Compile Include="Areas\EmployeeManagement\Controllers\HRCompanyAttendanceController.cs" />
+    <Compile Include="Areas\EmployeeManagement\Controllers\HRCompanyHREmployeeShiftRoasterController.cs" />
+    <Compile Include="Areas\EmployeeManagement\Controllers\HREmployeeAddressController.cs" />
+    <Compile Include="Areas\EmployeeManagement\Controllers\HREmployeeCompanyFacilityController.cs" />
+    <Compile Include="Areas\EmployeeManagement\Controllers\HREmployeeKaajSummaryController.cs" />
+    <Compile Include="Areas\EmployeeManagement\Controllers\HREmployeeLateAttendanceApprovedController.cs" />
+    <Compile Include="Areas\EmployeeManagement\Controllers\HREmployeeContactController.cs" />
+    <Compile Include="Areas\EmployeeManagement\Controllers\HREmployeeEducationController.cs" />
+    <Compile Include="Areas\EmployeeManagement\Controllers\HREmployeeJobHistoryController.cs" />
+    <Compile Include="Areas\EmployeeManagement\Controllers\HREmployeeKaajHistoryController.cs" />
+    <Compile Include="Areas\EmployeeManagement\Controllers\HrEmployeeKaajApprovedController.cs" />
+    <Compile Include="Areas\EmployeeManagement\Controllers\HrEmployeeLeaveApprovedController.cs" />
+    <Compile Include="Areas\EmployeeManagement\Controllers\HREmployeeLeaveBalanceController.cs" />
+    <Compile Include="Areas\EmployeeManagement\Controllers\HREmployeeLeaveHistoryController.cs" />
+    <Compile Include="Areas\EmployeeManagement\Controllers\HREmployeekaajRecommendController.cs" />
+    <Compile Include="Areas\EmployeeManagement\Controllers\HREmployeeLeaveManagementController.cs" />
+    <Compile Include="Areas\EmployeeManagement\Controllers\HREmployeeLeaveRecommendController.cs" />
+    <Compile Include="Areas\EmployeeManagement\Controllers\HREmployeeFamilyDetailsController.cs" />
+    <Compile Include="Areas\EmployeeManagement\Controllers\HREmployeeLeaveSummaryController.cs" />
+    <Compile Include="Areas\EmployeeManagement\Controllers\HREmployeeLoginController.cs" />
+    <Compile Include="Areas\EmployeeManagement\Controllers\HREmployeeManagementController.cs" />
+    <Compile Include="Areas\EmployeeManagement\EmployeeManagementAreaRegistration.cs" />
+    <Compile Include="Areas\Reports\Controllers\AbsentReportController.cs" />
+    <Compile Include="Areas\Reports\Controllers\DailyReportController.cs" />
+    <Compile Include="Areas\Reports\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Reports\Controllers\DatePunchedReportController.cs" />
+    <Compile Include="Areas\Reports\Controllers\EarlyCheckoutAttendanceReportController.cs" />
+    <Compile Include="Areas\Reports\Controllers\KaajReportController.cs" />
+    <Compile Include="Areas\Reports\Controllers\LateAttendanceReportController.cs" />
+    <Compile Include="Areas\Reports\Controllers\LeaveBalanceReportController.cs" />
+    <Compile Include="Areas\Reports\Controllers\LeaveReportController.cs" />
+    <Compile Include="Areas\Reports\Controllers\MonthlyAttendanceController.cs" />
+    <Compile Include="Areas\Reports\Controllers\MonthlyAttendanceSheetController.cs" />
+    <Compile Include="Areas\Reports\Controllers\MonthlyAttendanceSummaryController.cs" />
+    <Compile Include="Areas\Reports\Controllers\EarlyandLateReportController.cs" />
+    <Compile Include="Areas\Reports\Controllers\MonthlyEarlyandLateReportController.cs" />
+    <Compile Include="Areas\Reports\Controllers\ShiftRoasterReportsController.cs" />
+    <Compile Include="Areas\Reports\Controllers\UserLogsController.cs" />
+    <Compile Include="Areas\Reports\Controllers\WorkedReportController.cs" />
+    <Compile Include="Areas\Reports\Controllers\YearlyAttendanceController.cs" />
+    <Compile Include="Areas\Reports\Controllers\YearlyAttendanceSheetController.cs" />
+    <Compile Include="Areas\Reports\ReportsAreaRegistration.cs" />
+    <Compile Include="Areas\SystemFeedback\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\SystemFeedback\Controllers\SystemAboutController.cs" />
+    <Compile Include="Areas\SystemFeedback\Controllers\SystemCommentController.cs" />
+    <Compile Include="Areas\SystemFeedback\Controllers\SystemManualController.cs" />
+    <Compile Include="Areas\SystemFeedback\SystemFeedbackAreaRegistration.cs" />
+    <Compile Include="Areas\SystemSecurity\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\SystemSecurity\Controllers\HRCalendarController.cs" />
+    <Compile Include="Areas\SystemSecurity\Controllers\HRLanguageConversionController.cs" />
+    <Compile Include="Areas\SystemSecurity\Controllers\MasterLeaveTitleController.cs" />
+    <Compile Include="Areas\SystemSecurity\Controllers\SystemDatabaseBackupController.cs" />
+    <Compile Include="Areas\SystemSecurity\Controllers\SystemDetailCategoryController.cs" />
+    <Compile Include="Areas\SystemSecurity\Controllers\SystemDetailController.cs" />
+    <Compile Include="Areas\SystemSecurity\Controllers\SystemMenuController.cs" />
+    <Compile Include="Areas\SystemSecurity\Controllers\SystemStructureController.cs" />
+    <Compile Include="Areas\SystemSecurity\SystemSecurityAreaRegistration.cs" />
+    <Compile Include="Areas\SystemSetting\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\SystemSetting\Controllers\EmployeePermissionController.cs" />
+    <Compile Include="Areas\SystemSetting\Controllers\HRCompanyCodeController.cs" />
+    <Compile Include="Areas\SystemSetting\Controllers\HRCompanyTypeController.cs" />
+    <Compile Include="Areas\SystemSetting\Controllers\HREmployeeAttendanceHistoryController.cs" />
+    <Compile Include="Areas\SystemSetting\Controllers\HREmployeeBankListController.cs" />
+    <Compile Include="Areas\SystemSetting\Controllers\HREmployeeBloodGroupController.cs" />
+    <Compile Include="Areas\SystemSetting\Controllers\HREmployeeContactTypeController.cs" />
+    <Compile Include="Areas\SystemSetting\Controllers\HREmployeeGenderController.cs" />
+    <Compile Include="Areas\SystemSetting\Controllers\HREmployeeJobStatusController.cs" />
+    <Compile Include="Areas\SystemSetting\Controllers\HREmployeeMaritalController.cs" />
+    <Compile Include="Areas\SystemSetting\Controllers\HREmployeeNationalIdentityTypeController.cs" />
+    <Compile Include="Areas\SystemSetting\Controllers\HREmployeeRelationTypeController.cs" />
+    <Compile Include="Areas\SystemSetting\Controllers\HRLanguageController.cs" />
+    <Compile Include="Areas\SystemSetting\Controllers\SystemPermissionByHREmployeeController.cs" />
+    <Compile Include="Areas\SystemSetting\Controllers\SystemPermissionByRoleController.cs" />
+    <Compile Include="Areas\SystemSetting\SystemSettingAreaRegistration.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ChatController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JSONController.cs" />
+    <Compile Include="Controllers\JsonResult.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="HUBCenter\DeviceLogsHub.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CommonServices.cs" />
+    <Compile Include="Services\Helper.cs" />
+    <Compile Include="Services\ContextModel.cs" />
+    <Compile Include="App_Auth\Authentication.cs" />
+    <Compile Include="SignalR\Hubs\ChatHub.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_FormModelBank.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_FormModelHRCompanyType.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_FormModelHRDesignation.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_FormModelHREmployeeBloodGroup.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_FormModelHREmployeeGender.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_FormModelHREmployeeJobStatus.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_FormModelHREmployeeMarital.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_FormModelHREmployeeNationalIdentityType.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_FormModelHREmployeeRelationType.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_FormModelHRLanguage.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_FormModelSystemPermissionByRole.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_PrintBank.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_PrintHRCompanyLeaveType.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_PrintHRCompanyType.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_PrintHRDesignation.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_PrintHREmployeeBloodGroup.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_PrintHREmployeeGender.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_PrintHREmployeeJobStatus.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_PrintHREmployeeMarital.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_PrintHREmployeeNationalIdentityType.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_PrintHREmployeeRelationType.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_PrintHRLanguage.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_PrintSystemPermissionByRole.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_ReadModelSystemPermissionByRole.cshtml" />
+    <Content Include="Content\ace.min.css" />
+    <Content Include="Content\app.css" />
+    <Content Include="Content\backgroundimages\meteorshower2.jpg" />
+    <Content Include="Content\backgroundimages\pattern.jpg" />
+    <Content Include="Content\bootstrap-select.min.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\export.css" />
+    <Content Include="Content\fullcalendercustom.css" />
+    <Content Include="Content\jasny-bootstrap.css" />
+    <Content Include="Content\jasny-bootstrap.min.css" />
+    <Content Include="Content\jquery-ui-timepicker.css" />
+    <Content Include="Content\jquery.datetimepicker.min.css" />
+    <Content Include="Content\JsTree\32px.png" />
+    <Content Include="Content\JsTree\40px.png" />
+    <Content Include="Content\JsTree\jstree-style.css" />
+    <Content Include="Content\JsTree\jstree-style.min.css" />
+    <Content Include="Content\JsTree\throbber.gif" />
+    <Content Include="Content\login.css" />
+    <Content Include="Content\marquee.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\SuperAdminDasboard.css" />
+    <Content Include="Content\Watermark.css" />
+    <Content Include="images\avatars\avatar.png" />
+    <Content Include="images\avatars\avatar1.png" />
+    <Content Include="images\avatars\avatar2.png" />
+    <Content Include="images\avatars\avatar3.png" />
+    <Content Include="images\avatars\avatar4.png" />
+    <Content Include="images\avatars\avatar5.png" />
+    <Content Include="images\avatars\avatar6.png" />
+    <Content Include="images\avatars\avatar7.png" />
+    <Content Include="images\avatars\profile-pic.jpg" />
+    <Content Include="images\avatars\user.jpg" />
+    <Content Include="images\bootstrap-colorpicker\alpha-horizontal.png" />
+    <Content Include="images\bootstrap-colorpicker\alpha.png" />
+    <Content Include="images\bootstrap-colorpicker\hue-horizontal.png" />
+    <Content Include="images\bootstrap-colorpicker\hue.png" />
+    <Content Include="images\bootstrap-colorpicker\saturation.png" />
+    <Content Include="images\email\email1.png" />
+    <Content Include="images\email\email2.png" />
+    <Content Include="images\email\email3.png" />
+    <Content Include="images\email\email4.png" />
+    <Content Include="images\gallery\image-1.jpg" />
+    <Content Include="images\gallery\image-2.jpg" />
+    <Content Include="images\gallery\image-3.jpg" />
+    <Content Include="images\gallery\image-4.jpg" />
+    <Content Include="images\gallery\image-5.jpg" />
+    <Content Include="images\gallery\image-6.jpg" />
+    <Content Include="images\gallery\thumb-1.jpg" />
+    <Content Include="images\gallery\thumb-2.jpg" />
+    <Content Include="images\gallery\thumb-3.jpg" />
+    <Content Include="images\gallery\thumb-4.jpg" />
+    <Content Include="images\gallery\thumb-5.jpg" />
+    <Content Include="images\gallery\thumb-6.jpg" />
+    <Content Include="images\gifnepal.gif" />
+    <Content Include="images\Icon\Achievement-Icon.png" />
+    <Content Include="images\Icon\ajaxLoading.gif" />
+    <Content Include="images\Icon\Cancel-icon.png" />
+    <Content Include="images\Icon\change_password.png" />
+    <Content Include="images\Icon\Delete-icon.png" />
+    <Content Include="images\Icon\detail-icon.png" />
+    <Content Include="images\Icon\details_close.png" />
+    <Content Include="images\Icon\details_open.png" />
+    <Content Include="images\Icon\Download-Icon.png" />
+    <Content Include="images\Icon\edit-icon.png" />
+    <Content Include="images\Icon\No-Profile-Image.png" />
+    <Content Include="images\Icon\Print-Icon.png" />
+    <Content Include="images\Icon\spinner-16x16.gif" />
+    <Content Include="images\leaveformupload.png" />
+    <Content Include="images\logo\logo.png" />
+    <Content Include="images\menu-asset\emblem.png" />
+    <Content Include="images\menu-asset\icons\bell.png" />
+    <Content Include="images\menu-asset\icons\dashboard.png" />
+    <Content Include="images\menu-asset\icons\down-arrow.png" />
+    <Content Include="images\menu-asset\icons\email.png" />
+    <Content Include="images\menu-asset\icons\food.png" />
+    <Content Include="images\menu-asset\icons\info.png" />
+    <Content Include="images\menu-asset\icons\magic-wand.png" />
+    <Content Include="images\menu-asset\icons\menu.png" />
+    <Content Include="images\menu-asset\icons\settings.png" />
+    <Content Include="images\menu-asset\icons\speaker.png" />
+    <Content Include="images\menu-asset\icons\user.png" />
+    <Content Include="images\menu-asset\kxp_fav.png" />
+    <Content Include="images\ndp_bg_wave.png" />
+    <Content Include="images\ndp_buttons.png" />
+    <Content Include="images\ndp_date_bg.png" />
+    <Content Include="images\nepal.png" />
+    <Content Include="images\placeholder\165x90.png" />
+    <Content Include="images\placeholder\255x150.png" />
+    <Content Include="images\placeholder\530x270.png" />
+    <Content Include="images\placeholder\550x280.png" />
+    <Content Include="Content\ace-ie.min.css" />
+    <Content Include="Content\ace-part2.min.css" />
+    <Content Include="Content\ace-rtl.min.css" />
+    <Content Include="Content\ace-skins.min.css" />
+    <Content Include="Content\bootstrap-colorpicker.min.css" />
+    <Content Include="Content\bootstrap-datepicker3.min.css" />
+    <Content Include="Content\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\bootstrap-duallistbox.min.css" />
+    <Content Include="Content\bootstrap-editable.min.css" />
+    <Content Include="Content\bootstrap-multiselect.min.css" />
+    <Content Include="Content\bootstrap-switch.css" />
+    <Content Include="Content\bootstrap-switch.min.css" />
+    <Content Include="Content\bootstrap-timepicker.min.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\chosen.min.css" />
+    <Content Include="Content\colorbox.min.css" />
+    <Content Include="Content\daterangepicker.min.css" />
+    <Content Include="Content\dropzone.min.css" />
+    <Content Include="Content\font-awesome\4.5.0\css\font-awesome.min.css" />
+    <Content Include="Content\font-awesome\4.5.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts.googleapis.com.css" />
+    <Content Include="Content\fullcalendar.min.css" />
+    <Content Include="Content\jquery-ui.custom.min.css" />
+    <Content Include="Content\jquery-ui.min.css" />
+    <Content Include="Content\jquery.gritter.min.css" />
+    <Content Include="Content\nepali.datepicker.v2.2.min.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\prettify.min.css" />
+    <Content Include="Content\select2.min.css" />
+    <Content Include="Content\ui.jqgrid.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\SystemSetting\Views\web.config" />
+    <Content Include="Areas\SystemSecurity\Views\web.config" />
+    <Content Include="Areas\Reports\Views\web.config" />
+    <Content Include="Areas\DeviceManagement\Views\web.config" />
+    <Content Include="Areas\EmployeeManagement\Views\web.config" />
+    <Content Include="Areas\EmployeeManagement\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeAddress\Index.cshtml" />
+    <Content Include="Areas\SystemFeedback\Views\web.config" />
+    <Content Include="Areas\EmployeeManagement\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Reports\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\SystemFeedback\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemMenu\Index.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemStructure\Index.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeManagement\Index.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeManagement\_Tabbed.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\CRUDViews\_CRUDHREmployee.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_FormModelHREmployee.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemMenu\_ListSystemMenuAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\HRLanguageConversion\_ListHRLanguageConversionAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\HRLanguageConversion\Index.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\HRLanguageConversion\_ActionHRLanguageConversion.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\web.config" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompany\Index.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompany\_Tabbed.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompany\_ListHRCompanyAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompany\_DeleteHRCompanyAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompany\_CreateHRCompanyAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompany\_ListWrapperHRCompanyAsync.cshtml" />
+    <Content Include="Content\font-awesome\4.5.0\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\font-awesome\4.5.0\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\font-awesome\4.5.0\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\font-awesome\4.5.0\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="images\ramanapatra.jpg" />
+    <Content Include="Scripts\amcharts.js" />
+    <Content Include="Scripts\BindAjaxForm.js" />
+    <Content Include="Scripts\bootstrap-notify.js" />
+    <Content Include="Scripts\bootstrap-notify.min.js" />
+    <Content Include="Scripts\bootstrap-select.js" />
+    <Content Include="Scripts\Chart.min.js" />
+    <Content Include="Scripts\Chat\bootstrap.min.js" />
+    <Content Include="Scripts\Chat\jquery-3.0.0.min.js" />
+    <Content Include="Scripts\Chat\jquery.signalR-2.3.0.min.js" />
+    <Content Include="Scripts\Chat\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\ClockDateTime.js" />
+    <Content Include="Scripts\CustomScript.js" />
+    <Content Include="Scripts\CustomScripts\BiometricTemplate.js" />
+    <Content Include="Scripts\CustomScripts\HREmployeeKaajHistory.js" />
+    <Content Include="Scripts\CustomScripts\HREmployeeLeaveHistory.js" />
+    <Content Include="Scripts\CustomScripts\ReportSearchAction.js" />
+    <Content Include="Scripts\data.js" />
+    <Content Include="Scripts\drilldown.js" />
+    <Content Include="Scripts\export-data.js" />
+    <Content Include="Scripts\export.js" />
+    <Content Include="Scripts\export.min.js" />
+    <Content Include="Scripts\exporting.js" />
+    <Content Include="Scripts\fabric.min.js" />
+    <Content Include="Scripts\FileSaver.min.js" />
+    <Content Include="Scripts\funnel.js" />
+    <Content Include="Scripts\highcharts-3d.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\adapters\standalone-framework.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\adapters\standalone-framework.src.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\highcharts-3d.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\highcharts-3d.src.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\highcharts-all.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\highcharts-more.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\highcharts-more.src.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\highcharts.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\highcharts.src.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\canvas-tools.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\canvas-tools.src.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\data.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\data.src.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\drilldown.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\drilldown.src.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\exporting.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\exporting.src.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\funnel.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\funnel.src.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\heatmap.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\heatmap.src.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\no-data-to-display.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\no-data-to-display.src.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\solid-gauge.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\solid-gauge.src.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\themes\dark-blue.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\themes\dark-green.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\themes\dark-unica.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\themes\gray.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\themes\grid-light.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\themes\grid.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\themes\sand-signika.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\themes\skies.js" />
+    <Content Include="Scripts\highcharts.js" />
+    <Content Include="Scripts\highstock.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Areas\SystemSecurity\Views\SystemStructure\_ListSystemStructureAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemStructure\_ActionSystemStructure.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\CRUDViews\_CRUDSystemStructure.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\ModelPartialViews\_FormModelSystemStructure.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\ModelPartialViews\_FormModelSystemMenu.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemMenu\_CreateSystemMenuAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\CRUDViews\_CRUDSystemMenu.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\Dashboard\_ListDashboardAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Dashboard\_ListDashboardAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\Dashboard\_ListDashboardAsync.cshtml" />
+    <Content Include="Areas\SystemFeedback\Views\Dashboard\_ListDashboardAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Dashboard\_ListDashboardAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Dashboard\_ListDashboardAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Dashboard\_ListDashboardAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemMenu\_ReadSystemMenuAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemMenu\_UpdateSystemMenuAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemMenu\_DeleteSystemMenuAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompany\_PrintHRCompanyAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemStructure\_CreateSystemStructureAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemStructure\_PrintSystemStructureAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemStructure\_DeleteSystemStructureAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemStructure\_UpdateSystemStructureAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemStructure\_ReadSystemStructureAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\CRUDViews\_CRUDHRDesignation.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\CRUDViews\_CRUDHREmployeeCategory.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeJobStatus\Index.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeJobStatus\_ListHREmployeeJobStatusAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeJobStatus\_CreateHREmployeeJobStatusAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeJobStatus\_ReadHREmployeeJobStatusAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeJobStatus\_UpdateHREmployeeJobStatusAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeJobStatus\_DeleteHREmployeeJobStatusAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeJobStatus\_PrintHREmployeeJobStatusAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\CRUDViews\_CRUDHREmployeeJobStatus.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeBankList\Index.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeBankList\_ListHREmployeeBankListAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\CRUDViews\_CRUDHREmployeeBloodGroup.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\CRUDViews\_CRUDHREmployeeGender.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\CRUDViews\_CRUDHREmployeeMarital.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\CRUDViews\_CRUDHREmployeeRelationType.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\CRUDViews\_CRUDHREmployeeRole.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\CRUDViews\_CRUDHRLanguage.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\CRUDViews\_CRUDSystemPermissionByRole.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\Shared\CRUDViews\_CRUDDeviceLogs.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\Shared\ModelPartialViews\_FormModelDeviceLogs.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\DeviceLogs\Index.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\DeviceLogs\_ListDeviceLogsAsync.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\DeviceLogs\_CreateDeviceLogsAsync.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\DeviceLogs\_ReadDeviceLogsAsync.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\DeviceLogs\_UpdateDeviceLogsAsync.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\DeviceLogs\_DeleteDeviceLogsAsync.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\DeviceLogs\_PrintDeviceLogsAsync.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\Shared\ModelPartialViews\_PrintDeviceLogs.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\Shared\_NotificationPanel.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\ModelPartialViews\_PrintSystemStructure.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeManagement\_ListHREmployeeAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeManagement\_CreateHREmployeeAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeManagement\_ReadHREmployeeAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeManagement\_UpdateHREmployeeAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeManagement\_DeleteHREmployeeAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeManagement\_PrintHREmployeeAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_PrintHREmployee.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\CRUDViews\_CRUDHRCompany.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_FormModelHRCompany.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_PrintHRCompany.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompany\_UpdateHRCompanyAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\CRUDViews\_CRUDHRDivision.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_FormModelHRDivision.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_PrintHRDivision.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_PrintHRDivisionType.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_FormModelHRDivisionType.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\CRUDViews\_CRUDHRDivisionType.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\CRUDViews\_CRUDHRCompanyType.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\CRUDViews\_CRUDHRDevice.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_FormModelHRDevice.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_PrintHRDevice.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HRCompanyType\Index.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HRCompanyType\_ListHRCompanyTypeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HRCompanyType\_CreateHRCompanyTypeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\CRUDViews\_CRUDHRCompanyType.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HRCompanyType\_ReadHRCompanyTypeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HRCompanyType\_UpdateHRCompanyTypeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HRCompanyType\_DeleteHRCompanyTypeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HRCompanyType\_PrintHRCompanyTypeAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\UserLogs\Index.cshtml" />
+    <Content Include="Areas\Reports\Views\UserLogs\_ListUserLogsAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\CRUDViews\_CRUDUserLogs.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_PrintUserLogs.cshtml" />
+    <Content Include="Areas\Reports\Views\UserLogs\_PrintUserLogsAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeBankList\_ListBankAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeBankList\_CreateBankAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeBankList\_ReadBankAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeBankList\_UpdateBankAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeBankList\_DeleteBankAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeBankList\_PrintBankAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\CRUDViews\_CRUDBank.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HRLanguage\Index.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HRLanguage\_ListHRLanguageAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HRLanguage\_CreateHRLanguageAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HRLanguage\_ReadHRLanguageAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HRLanguage\_UpdateHRLanguageAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HRLanguage\_DeleteHRLanguageAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HRLanguage\_PrintHRLanguageAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\CRUDViews\_CRUDHREmployeeServiceType.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeBloodGroup\Index.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeBloodGroup\_ListHREmployeeBloodGroupAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeBloodGroup\_CreateHREmployeeBloodGroupAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeBloodGroup\_ReadHREmployeeBloodGroupAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeBloodGroup\_UpdateHREmployeeBloodGroupAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeBloodGroup\_DeleteHREmployeeBloodGroupAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeBloodGroup\_PrintHREmployeeBloodGroupAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeNationalIdentityType\Index.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeNationalIdentityType\_ListHREmployeeNationalIdentityTypeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeNationalIdentityType\_CreateHREmployeeNationalIdentityTypeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeNationalIdentityType\_ReadHREmployeeNationalIdentityTypeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeNationalIdentityType\_UpdateHREmployeeNationalIdentityTypeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeNationalIdentityType\_DeleteHREmployeeNationalIdentityTypeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeNationalIdentityType\_PrintHREmployeeNationalIdentityTypeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\CRUDViews\_CRUDHREmployeeNationalIdentityType.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\CRUDViews\_CRUDHRPublicHoliday.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeRelationType\Index.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeRelationType\_ListHREmployeeRelationTypeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeRelationType\_CreateHREmployeeRelationTypeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeRelationType\_ReadHREmployeeRelationTypeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeRelationType\_UpdateHREmployeeRelationTypeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeRelationType\_DeleteHREmployeeRelationTypeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeRelationType\_PrintHREmployeeRelationTypeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeMarital\Index.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeMarital\_ListHREmployeeMaritalAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeMarital\_CreateHREmployeeMaritalAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeMarital\_ReadHREmployeeMaritalAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeMarital\_UpdateHREmployeeMaritalAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeMarital\_DeleteHREmployeeMaritalAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeMarital\_PrintHREmployeeMaritalAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeGender\Index.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeGender\_ListHREmployeeGenderAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeGender\_CreateHREmployeeGenderAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeGender\_ReadHREmployeeGenderAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeGender\_UpdateHREmployeeGenderAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeGender\_DeleteHREmployeeGenderAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeGender\_PrintHREmployeeGenderAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\SystemPermissionByRole\Index.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\SystemPermissionByRole\_ListSystemPermissionByRoleAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\SystemPermissionByRole\_CreateSystemPermissionByRoleAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\SystemPermissionByRole\_ReadSystemPermissionByRoleAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\SystemPermissionByRole\_UpdateSystemPermissionByRoleAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\SystemPermissionByRole\_PrintSystemPermissionByRoleAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\HRLanguageConversion\_CreateHRLanguageConversionAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\HRLanguageConversion\_ReadHRLanguageConversionAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\HRLanguageConversion\_UpdateHRLanguageConversionAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\HRLanguageConversion\_DeleteHRLanguageConversionAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\HRLanguageConversion\_PrintHRLanguageConversionAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\CRUDViews\_CRUDHRLanguageConversion.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\ModelPartialViews\_FormModelHRLanguageConversion.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\ModelPartialViews\_PrintHRLanguageConversion.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemDetail\Index.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemDetail\_ListSystemDetailAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemDetail\_CreateSystemDetailAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemDetail\_ReadSystemDetailAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemDetail\_UpdateSystemDetailAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemDetail\_DeleteSystemDetailAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemDetail\_PrintSystemDetailAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\CRUDViews\_CRUDSystemDetail.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\ModelPartialViews\_FormModelSystemDetail.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemDetailCategory\Index.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemDetailCategory\_ListSystemDetailCategoryAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemDetailCategory\_CreateSystemDetailCategoryAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemDetailCategory\_ReadSystemDetailCategoryAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemDetailCategory\_UpdateSystemDetailCategoryAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemDetailCategory\_DeleteSystemDetailCategoryAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemDetailCategory\_PrintSystemDetailCategoryAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\CRUDViews\_CRUDSystemDetailCategory.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\ModelPartialViews\_FormModelSystemDetailCategory.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\ModelPartialViews\_PrintSystemDetail.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\ModelPartialViews\_PrintSystemDetailCategory.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_FormModelHREmployeeJob.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeManagement\_ListWrapperHREmployeeAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeManagement\EmployeeProfileAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveHistory\Index.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveHistory\_ListHREmployeeLeaveHistoryAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveHistory\_CreateHREmployeeLeaveHistoryAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveHistory\_ReadHREmployeeLeaveHistoryAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveHistory\_UpdateHREmployeeLeaveHistoryAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveHistory\_DeleteHREmployeeLeaveHistoryAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveHistory\_PrintHREmployeeLeaveHistoryAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\CRUDViews\_CRUDHREmployeeLeaveHistory.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_FormModelHREmployeeLeaveHistory.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_PrintHREmployeeLeaveHistory.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\CRUDViews\_CRUDHREmployeeJob.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_PrintHREmployeeJob.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveSummary\_ListWrapperLeaveSumaryAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveSummary\_ListLeaveSummaryAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemMenu\_PrintSystemMenuAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\ModelPartialViews\_PrintSystemMenu.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\CRUDViews\_CRUDHREmployeeContact.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\CRUDViews\_CRUDHREmployeeEducation.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_FormModelHREmployeeEducation.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_FormModelHREmployeeContact.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_PrintHREmployeeContact.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_PrintHREmployeeEducation.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_FormModelHREmployeeCompanyFacility.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_PrintHREmployeeCompanyFacility.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\CRUDViews\_CRUDHREmployeeCompanyFacility.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeFamilyDetails\_DeleteHREmployeeFamilyDetailsAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeFamilyDetails\_ListHREmployeeFamilyDetailsAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeFamilyDetails\_ListWrapperHREmployeeFamilyDetailsAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeFamilyDetails\_PrintHREmployeeFamilyDetailsAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeFamilyDetails\_ReadHREmployeeFamilyDetailsAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeFamilyDetails\_UpdateHREmployeeFamilyDetailsAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanySystemSupport\Index.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanySystemSupport\_ListHRCompanySystemSupportAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\CRUDViews\_CRUDHRCompanySystemSupport.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_FormModelHRCompanySystemSupport.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_PrintHRCompanySystemSupport.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanySystemSupport\_CreateHRCompanySystemSupportAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanySystemSupport\_ReadHRCompanySystemSupportAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanySystemSupport\_UpdateHRCompanySystemSupportAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanySystemSupport\_DeleteHRCompanySystemSupportAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanySystemSupport\_PrintHRCompanySystemSupportAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveRecommend\Index.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveRecommend\_ListHREmployeeLeaveRecommendAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveRecommend\_ReadHREmployeeLeaveRecommendAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveRecommend\_UpdateHREmployeeLeaveRecommendAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveRecommend\_PrintHREmployeeLeaveRecommendAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\CRUDViews\_CRUDHREmployeeLeaveRecommend.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_FormModelHREmployeeLeaveRecommend.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HrEmployeeLeaveApproved\Index.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HrEmployeeLeaveApproved\_ListHrEmployeeLeaveApprovedAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HrEmployeeLeaveApproved\_ReadHrEmployeeLeaveApprovedAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HrEmployeeLeaveApproved\_UpdateHrEmployeeLeaveApprovedAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\CRUDViews\_CRUDHREmployeeLeaveApproved.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_FormModelHREmployeeLeaveApproved.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\CRUDViews\_CRUDHREmployeeFamilyDetails.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_FormModelHREmployeeFamilyDetails.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_PrintHREmployeeFamilyDetails.cshtml" />
+    <Content Include="Areas\Reports\Views\MonthlyAttendance\Index.cshtml" />
+    <Content Include="Areas\Reports\Views\MonthlyAttendance\_ListMonthlyAttendanceAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\HRCalendar\Index.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\HRCalendar\_ListHRCalendarAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\HRCalendar\_CreateHRCalendarAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\HRCalendar\_ReadHRCalendarAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\HRCalendar\_UpdateHRCalendarAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\HRCalendar\_DeleteHRCalendarAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\HRCalendar\_PrintHRCalendarAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\CRUDViews\_CRUDHRCalendar.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\ModelPartialViews\_FormModelHRCalendar.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\ModelPartialViews\_PrintHRCalendar.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeKaajHistory\Index.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeKaajHistory\_ListHREmployeeKaajHistoryAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeKaajHistory\_CreateHREmployeeKaajHistoryAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeKaajHistory\_ReadHREmployeeKaajHistoryAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeKaajHistory\_UpdateHREmployeeKaajHistoryAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeKaajHistory\_DeleteHREmployeeKaajHistoryAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeKaajHistory\_PrintHREmployeeKaajHistoryAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\CRUDViews\_CRUDHREmployeeKaajHistory.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_FormModelHREmployeeKaajHistory.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_PrintHREmployeeKaajHistory.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\CRUDViews\_CRUDHREmployeeKaajRecommend.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_FormModelHREmployeeKaajRecommend.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HrEmployeeKaajApproved\Index.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HrEmployeeKaajApproved\_ListHrEmployeeKaajApprovedAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HrEmployeeKaajApproved\_ReadHrEmployeeKaajApprovedAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HrEmployeeKaajApproved\_UpdateHrEmployeeKaajApprovedAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\CRUDViews\_CRUDHREmployeeKaajApproved.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_FormModelHREmployeeKaajApproved.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_PrintHREmployeeKaajRecommend.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_PrintHREmployeeKaajApproved.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_PrintHREmployeeLeaveRecommend.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_PrintHREmployeeLeaveApproved.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyNotification\Index.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyNotification\_ListHRCompanyNotificationAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyNotification\_CreateHRCompanyNotificationAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyNotification\_ReadHRCompanyNotificationAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyNotification\_UpdateHRCompanyNotificationAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyNotification\_DeleteHRCompanyNotificationAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyNotification\_PrintHRCompanyNotificationAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\MonthlyAttendanceSheet\_ListMonthlyAttendanceSheetAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\MonthlyAttendanceSheet\_PrintMonthlyAttendanceSheetAsync.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\BiometricTemplateType\Index.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\BiometricTemplateType\_CreateBiometricTemplateTypeAsync.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\BiometricTemplateType\_DeleteBiometricTemplateTypeAsync.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\BiometricTemplateType\_ListBiometricTemplateTypeAsync.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\BiometricTemplateType\_PrintBiometricTemplateTypeAsync.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\BiometricTemplateType\_ReadBiometricTemplateTypeAsync.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\BiometricTemplateType\_UpdateBiometricTemplateTypeAsync.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\CRUDViews\_CRUDHREmployeeAttendanceHistory.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\CRUDViews\_CRUDHRCompanyCode.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\ModelPartialViews\_FormModelHREmployeeAttendanceHistory.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\ModelPartialViews\_PrintHREmployeeAttendanceHistory.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\ModelPartialViews\_FormModelHRCompanyCode.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\ModelPartialViews\_PrintHRCompanyCode.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_FormModelHRCompanyNotification.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_PrintHRCompanyNotification.cshtml" />
+    <Content Include="Areas\Reports\Views\MonthlyAttendanceSheet\_ExportMonthlyAttendanceSheetAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\MonthlyAttendanceSheet\_Action.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\CRUDViews\_CRUDMonthlyAttendanceSheet.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_PrintMonthlyAttendanceSheet.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_ExportMonthlyAttendanceSheet.cshtml" />
+    <Content Include="Areas\Reports\Views\DailyReport\Index.cshtml" />
+    <Content Include="Areas\Reports\Views\DailyReport\_ListDailyReportAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\DailyReport\_PrintDailyReportAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\AbsentReport\Index.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\CRUDViews\_CRUDAbsentReport.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_PrintAbsentReport.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\CRUDViews\_CRUDSystemDatabaseBackup.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\ModelPartialViews\_FormModelSystemDatabaseBackup.cshtml" />
+    <Content Include="Areas\Reports\Views\LateAttendanceReport\Index.cshtml" />
+    <Content Include="Areas\Reports\Views\LateAttendanceReport\_ListLateAttendanceReportAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\CRUDViews\_CRUDLateAttendanceReport.cshtml" />
+    <Content Include="Areas\Reports\Views\AbsentReport\_PrintAbsentReportAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\AbsentReport\_ListAbsentReportAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_ExportAbsentReport.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_PrintDailyReport.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\CRUDViews\_CRUDDailyReport.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\CRUDViews\_CRUDCurrentYearLeaveSummary.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_ExportCurrentYearLeaveSummary.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_PrintCurrentYearLeaveSummary.cshtml" />
+    <Content Include="Areas\Reports\Views\KaajReport\Index.cshtml" />
+    <Content Include="Areas\Reports\Views\KaajReport\_ListKaajReportAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\KaajReport\_ExportKaajReportAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\KaajReport\_PrintKaajReportAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\CRUDViews\_CRUDKaajReport.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_PrintKaajReport.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_ExportKaajReport.cshtml" />
+    <Content Include="Areas\Reports\Views\KaajReport\_ReadKaajReportAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_FormModelKaajReport.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompany\CompanyProfileAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\CRUDViews\_CRUDHREmployeeServiceType.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_FormModelHREmployeeServiceType.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_ExportYearlyAttendanceSheet.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\CRUDViews\_CRUDYearlyAttendance.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_ExportYearlyAttendance.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_PrintYearlyAttendance.cshtml" />
+    <Content Include="Areas\Reports\Views\YearlyAttendance\Index.cshtml" />
+    <Content Include="Areas\Reports\Views\YearlyAttendance\_ListYearlyAttendanceAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\YearlyAttendance\_ExportYearlyAttendanceAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\YearlyAttendance\_PrintYearlyAttendanceAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\WorkedReport\Index.cshtml" />
+    <Content Include="Areas\Reports\Views\WorkedReport\_ListWorkedReportAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\WorkedReport\_ExportWorkedReportAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\WorkedReport\_PrintWorkedReportAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\MonthlyAttendanceSummary\Index.cshtml" />
+    <Content Include="Areas\Reports\Views\MonthlyAttendanceSummary\_ListMonthlyAttendanceSummaryAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\MonthlyAttendanceSummary\_ExportMonthlyAttendanceSummaryAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\MonthlyAttendanceSummary\_PrintMonthlyAttendanceSummaryAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\MonthlyAttendance\_ExportMonthlyAttendanceAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\MonthlyAttendance\_PrintMonthlyAttendanceAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\LeaveBalanceReport\_PrintLeaveBalanceReportAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\LeaveBalanceReport\_ExportLeaveBalanceReportAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\LeaveBalanceReport\_ListLeaveBalanceReportAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\LeaveBalanceReport\Index.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\CRUDViews\_CRUDLeaveBalanceReport.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_ExportLeaveBalanceReport.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_PrintLeaveBalanceReport.cshtml" />
+    <Content Include="Areas\Reports\Views\LeaveReport\Index.cshtml" />
+    <Content Include="Areas\Reports\Views\LeaveReport\_ListLeaveReportAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\LeaveReport\_ExportLeaveReportAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\LeaveReport\_PrintLeaveReportAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\CRUDViews\_CRUDLeaveReport.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_ExportLeaveReport.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_PrintLeaveReport.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\CRUDViews\_CRUDHRCompanyNotification.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\Shared\ModelPartialViews\_FormModelBiometricTemplateType.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\Shared\ModelPartialViews\_FormModelHRDeviceModel.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\Shared\ModelPartialViews\_FormModelHREmployeeBiometricTemplate.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\Shared\ModelPartialViews\_PrintHRDeviceModel.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\Shared\CRUDViews\_CRUDBiometricTemplateType.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\Shared\CRUDViews\_CRUDHRDeviceModel.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\Shared\CRUDViews\_CRUDHREmployeeBiometricTemplate.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\HREmployeeBiometricTemplate\Index.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\HREmployeeBiometricTemplate\_CreateHREmployeeBiometricTemplateAsync.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\HREmployeeBiometricTemplate\_DeleteHREmployeeBiometricTemplateAsync.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\HREmployeeBiometricTemplate\_ListHREmployeeBiometricTemplateAsync.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\HREmployeeBiometricTemplate\_PrintHREmployeeBiometricTemplateAsync.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\HREmployeeBiometricTemplate\_ReadHREmployeeBiometricTemplateAsync.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\HREmployeeBiometricTemplate\_UpdateHREmployeeBiometricTemplateAsync.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\HRDeviceModel\Index.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\HRDeviceModel\_CreateHRDeviceModelAsync.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\HRDeviceModel\_DeleteHRDeviceModelAsync.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\HRDeviceModel\_ListHRDeviceModelAsync.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\HRDeviceModel\_PrintHRDeviceModelAsync.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\HRDeviceModel\_ReadHRDeviceModelAsync.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\HRDeviceModel\_UpdateHRDeviceModelAsync.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\DeviceLogsFetcher\Index.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\DeviceLogsFetcher\_ListDeviceLogsFetcherAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Dashboard\_Office.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Dashboard\_OfficeTypes.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Dashboard\_KaajApproval.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Dashboard\_KaajRequest.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Dashboard\_LeaveApproval.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Dashboard\_LeaveRequest.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Dashboard\_PendingLeaveChart.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\CRUDViews\_CRUDHRDesignation.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_FormModelHRDesignation.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_PrintHRDesignation.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\CRUDViews\_CRUDHRCompanyLeaveType.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_FormModelHRCompanyLeaveType.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\CRUDViews\_CRUDHRPublicHoliday.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_FormModelHRPublicHoliday.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_PrintHRPublicHoliday.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_PrintHRCompanyLeaveType.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\SystemPermissionByRole\_Action.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompany\_ListChildHRCompany.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\CRUDViews\_CRUDHREmployeeCategory.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\CRUDViews\_CRUDHREmployeeRole.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_FormModelHREmployeeCategory.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_PrintHREmployeeCategory.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_FormModelHREmployeeRole.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_PrintHREmployeeRole.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveBalance\Index.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\SystemPermissionByHREmployee\_Action.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\SystemPermissionByHREmployee\_CreateSystemPermissionByHREmployeeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\SystemPermissionByHREmployee\_ListSystemPermissionByHREmployeeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\SystemPermissionByHREmployee\_PrintSystemPermissionByHREmployeeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\SystemPermissionByHREmployee\_ReadSystemPermissionByHREmployeeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\SystemPermissionByHREmployee\_UpdateSystemPermissionByHREmployeeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\SystemPermissionByHREmployee\Index.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\CRUDViews\_CRUDSystemPermissionByHREmployee.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_FormModelSystemPermissionByHREmployee.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_PrintSystemPermissionByHREmployee.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_ReadModelSystemPermissionByHREmployee.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveBalance\_ListWrapperHREmployeeLeaveBalanceAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveBalance\_ListHREmployeeLeaveBalanceAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveBalance\_CreateHREmployeeLeaveBalanceAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveBalance\_ReadHREmployeeLeaveBalanceAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveBalance\_UpdateHREmployeeLeaveBalanceAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveBalance\_DeleteHREmployeeLeaveBalanceAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveBalance\_PrintHREmployeeLeaveBalanceAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\CRUDViews\_CRUDHREmployeeLeaveBalance.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_FormModelHREmployeeLeaveBalance.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_PrintHREmployeeLeaveBalance.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRDevice\_ListHRDeviceAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeRole\_CreateHREmployeeRoleAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeRole\_DeleteHREmployeeRoleAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeRole\_ListHREmployeeRoleAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeRole\_ListWrapperHREmployeeRoleAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeRole\_PrintHREmployeeRoleAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeRole\_ReadHREmployeeRoleAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeRole\_UpdateHREmployeeRoleAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyDivision\_ListWrapperHRDivisionAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyDivision\_ListHRDivisionAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyDivision\_CreateHRDivisionAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyDivision\_ReadHRDivisionAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyDivision\_UpdateHRDivisionAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyDivision\_DeleteHRDivisionAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyDivision\_PrintHRDivisionAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyDivisionType\_ListWrapperHRDivisionTypeAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyDivisionType\_ListHRDivisionTypeAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyDivisionType\_CreateHRDivisionTypeAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyDivisionType\_ReadHRDivisionTypeAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyDivisionType\_UpdateHRDivisionTypeAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyDivisionType\_DeleteHRDivisionTypeAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyDivisionType\_PrintHRDivisionTypeAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRDesignation\_ListHRDesignationAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRDesignation\_ListWrapperHRDesignationAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRDesignation\_CreateHRDesignationAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRDesignation\_ReadHRDesignationAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRDesignation\_UpdateHRDesignationAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRDesignation\_DeleteHRDesignationAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRDesignation\_ExportHRDesignationAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRDesignation\_PrintHRDesignationAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRDevice\_ListWrapperHRDeviceAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRDevice\_CreateHRDeviceAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRDevice\_ReadHRDeviceAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRDevice\_UpdateHRDeviceAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRDevice\_DeleteHRDeviceAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRDevice\_PrintHRDeviceAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeCategory\_ListWrapperHREmployeeCategoryAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeCategory\_ListHREmployeeCategoryAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeCategory\_CreateHREmployeeCategoryAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeCategory\_ReadHREmployeeCategoryAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeCategory\_UpdateHREmployeeCategoryAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeCategory\_DeleteHREmployeeCategoryAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeCategory\_PrintHREmployeeCategoryAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeServiceType\_ListWrapperHREmployeeServiceTypeAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeServiceType\_ListHREmployeeServiceTypeAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeServiceType\_CreateHREmployeeServiceTypeAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeServiceType\_ReadHREmployeeServiceTypeAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeServiceType\_UpdateHREmployeeServiceTypeAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeServiceType\_DeleteHREmployeeServiceTypeAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeServiceType\_PrintHREmployeeServiceTypeAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRPublicHoliday\_ListHRPublicHolidayAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRPublicHoliday\_ListWrapperHRPublicHolidayAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRPublicHoliday\_CreateHRPublicHolidayAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRPublicHoliday\_ReadHRPublicHolidayAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRPublicHoliday\_UpdateHRPublicHolidayAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRPublicHoliday\_DeleteHRPublicHolidayAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRPublicHoliday\_PrintHRPublicHolidayAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyLeaveType\_ListHRCompanyLeaveTypeAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyLeaveType\_ListWrapperHRCompanyLeaveTypeAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyLeaveType\_CreateHRCompanyLeaveTypeAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyLeaveType\_ReadHRCompanyLeaveTypeAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyLeaveType\_UpdateHRCompanyLeaveTypeAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyLeaveType\_DeleteHRCompanyLeaveTypeAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyLeaveType\_PrintHRCompanyLeaveTypeAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_PrintHREmployeeServiceType.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeJobHistory\_ListWrapperHREmployeeJobAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeJobHistory\_ListHREmployeeJobAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeJobHistory\_CreateHREmployeeJobAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeJobHistory\_ReadHREmployeeJobAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeJobHistory\_UpdateHREmployeeJobAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeJobHistory\_DeleteHREmployeeJobAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeJobHistory\_PrintHREmployeejobAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeCompanyFacility\_ListWrapperHREmployeeCompanyFacilityAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeCompanyFacility\_ListHREmployeeCompanyFacilityAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeCompanyFacility\_CreateHREmployeeCompanyFacilityAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeCompanyFacility\_ReadHREmployeeCompanyFacilityAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeCompanyFacility\_UpdateHREmployeeCompanyFacilityAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeCompanyFacility\_DeleteHREmployeeCompanyFacilityAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeCompanyFacility\_PrintHREmployeeCompanyFacilityAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeContact\_ListWrapperHREmployeeContactAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeContact\_ListHREmployeeContactAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeContact\_CreateHREmployeeContactAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeContact\_ReadHREmployeeContactAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeContact\_UpdateHREmployeeContactAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeContact\_PrintHREmployeeContactAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeContact\_DeleteHREmployeeContactAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeEducation\_ListWrapperHREmployeeEducationAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeEducation\_CreateHREmployeeEducationAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeEducation\_ReadHREmployeeEducationAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeEducation\_UpdateHREmployeeEducationAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeEducation\_DeleteHREmployeeEducationAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeEducation\_PrintHREmployeeEducationAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeEducation\_ListHREmployeeEducationAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeAddress\_ListWrapperHREmployeeAddressAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeAddress\_ListHREmployeeAddressAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeAddress\_CreateHREmployeeAddressAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeAddress\_ReadHREmployeeAddressAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeAddress\_UpdateHREmployeeAddressAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeAddress\_DeleteHREmployeeAddressAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeAddress\_PrintHREmployeeAddressAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\CRUDViews\_CRUDHREmployeeAddress.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_FormModelHREmployeeAddress.cshtml" />
+    <Content Include="Areas\Reports\Views\LeaveBalanceReport\_Action.cshtml" />
+    <Content Include="Areas\Reports\Views\LeaveReport\_Action.cshtml" />
+    <Content Include="Areas\Reports\Views\MonthlyAttendance\_Action.cshtml" />
+    <Content Include="Areas\Reports\Views\LateAttendanceReport\_Action.cshtml" />
+    <Content Include="Areas\Reports\Views\KaajReport\_Action.cshtml" />
+    <Content Include="Areas\Reports\Views\DailyReport\_Action.cshtml" />
+    <Content Include="Areas\Reports\Views\MonthlyAttendanceSummary\_Action.cshtml" />
+    <Content Include="Areas\Reports\Views\WorkedReport\_Action.cshtml" />
+    <Content Include="Areas\Reports\Views\YearlyAttendance\_Action.cshtml" />
+    <Content Include="Areas\Reports\Views\AbsentReport\_Action.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\SystemDatabaseBackup\Index.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\SystemDatabaseBackup\_ListSystemDatabaseBackupAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\SystemDatabaseBackup\_CreateSystemDatabaseBackupAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\SystemDatabaseBackup\_ReadSystemDatabaseBackupAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\SystemDatabaseBackup\_UpdateSystemDatabaseBackupAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\SystemDatabaseBackup\_DeleteSystemDatabaseBackupAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\SystemDatabaseBackup\_PrintSystemDatabaseBackupAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HRCompanyCode\Index.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HRCompanyCode\_ListHRCompanyCodeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HRCompanyCode\_CreateHRCompanyCodeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HRCompanyCode\_ReadHRCompanyCodeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HRCompanyCode\_UpdateHRCompanyCodeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HRCompanyCode\_DeleteHRCompanyCodeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HRCompanyCode\_PrintHRCompanyCodeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeAttendanceHistory\Index.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeAttendanceHistory\_ListHREmployeeAttendanceHistoryAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeAttendanceHistory\_CreateHREmployeeAttendanceHistoryAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeAttendanceHistory\_ReadHREmployeeAttendanceHistoryAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeAttendanceHistory\_UpdateHREmployeeAttendanceHistoryAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeAttendanceHistory\_DeleteHREmployeeAttendanceHistoryAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeAttendanceHistory\_PrintHREmployeeAttendanceHistoryAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\CRUDViews\_CRUDHRCompanyCode.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\CRUDViews\_CRUDHREmployeeAttendanceHistory.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_FormModelHRCompanyCode.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_PrintHRCompanyCode.cshtml" />
+    <Content Include="Areas\Reports\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_PrintLateAttendanceReport.cshtml" />
+    <Content Include="Areas\Reports\Views\LateAttendanceReport\_PrintLateAttendanceReportAsync.cshtml" />
+    <Content Include="Areas\SystemFeedback\Views\SystemAbout\Index.cshtml" />
+    <Content Include="Areas\SystemFeedback\Views\SystemManual\Index.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemDatabaseBackup\Index.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemDatabaseBackup\_ListSystemDatabaseBackupAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\SystemDatabaseBackup\_ReadSystemDatabaseBackupAsync.cshtml" />
+    <Content Include="Areas\SystemFeedback\Views\SystemComment\Index.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLogin\_ListWrapperHREmployeeLoginAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLogin\_ListHREmployeeLoginAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLogin\_CreateHREmployeeLoginAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLogin\_ReadHREmployeeLoginAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLogin\_UpdateHREmployeeLoginAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLogin\_DeleteHREmployeeLoginAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLogin\_PrintHREmployeeLoginAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\CRUDViews\_CRUDHREmployeeLogin.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_FormModelHREmployeeLogin.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeServiceType\_ReadListHREmployeeServiceTypeAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeCategory\_ReadListHREmployeeCategoryAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyDivision\_ReadListHRDivisionAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyDivisionType\_ReadListHRDivisionTypeAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRDesignation\_ReadListHRDesignationAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyLeaveType\_ReadListHRCompanyLeaveTypeAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeRole\_ReadListHREmployeeRoleAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRPublicHoliday\_ReadListHRPublicHolidayAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRDevice\_ReadListHRDeviceAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_DeleteHREmployee.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\CRUDViews\_CRUDWorkedReport.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_PrintWorkedReport.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_DeleteHREmployeeLeaveHistory.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeKaajRecommend\_ListHREmployeeKaajRecommendAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeKaajRecommend\_PrintHREmployeeKaajRecommendAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeKaajRecommend\_ReadHREmployeeKaajRecommendAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeKaajRecommend\_UpdateHREmployeeKaajRecommendAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeKaajRecommend\Index.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveHistory\_CancelHREmployeeLeaveHistoryAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_CancelHREmployeeLeaveHistory.cshtml" />
+    <Content Include="Areas\Reports\Views\LateAttendanceReport\_UpdateLateAttendanceReportAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_FormModelLateAttendanceReport.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLateAttendanceApproved\Index.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLateAttendanceApproved\_ListHREmployeeLateAttendanceApprovedAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLateAttendanceApproved\_ReadHREmployeeLateAttendanceApprovedAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLateAttendanceApproved\_UpdateHREmployeeLateAttendanceApprovedAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLateAttendanceApproved\_DeleteHREmployeeLateAttendanceApprovedAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLateAttendanceApproved\_PrintHREmployeeLateAttendanceApprovedAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_FormModelHREmployeeLateAttendanceApproved.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\CRUDViews\_CRUDHREmployeeLateAttendanceApproved.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeContactType\Index.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeContactType\_CreateHREmployeeContactTypeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeContactType\_DeleteHREmployeeContactTypeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeContactType\_ListHREmployeeContactTypeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeContactType\_PrintHREmployeeContactTypeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeContactType\_ReadHREmployeeContactTypeAsync.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\HREmployeeContactType\_UpdateHREmployeeContactTypeAsync.cshtml" />
+    <Content Include="Areas\SystemFeedback\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\CRUDViews\_CRUDMonthlyAttendance.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_PrintMonthlyAttendance.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeFamilyDetails\_CreateHREmployeeFamilyDetailsAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_PrintHREmployeeLateAttendanceApproved.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_PrintMonthlyAttendanceSummary.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\CRUDViews\_CRUDMonthlyAttendanceSummary.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLogin\_ResetPasswordAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_PrintHREmployeeLogin.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveSummary\_PrintLeaveSummaryAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\CRUDViews\_CRUDHREmployeeLeaveSummary.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_PrintHREmployeeLeaveSummary.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_FormModelHREmployeeLeaveSummary.cshtml" />
+    <Content Include="Areas\Reports\Views\LeaveBalanceReport\_ReadLeaveBalanceAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\CRUDViews\_CRUDHRCompanyWorkingTime.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_ReadHREmployeeRoaster.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_PrintHREmployeeRoaster.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeManagement\_CreateNationalIdentity.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_FormModelReadHREmployee.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyShiftRoaster\_ListWrapperHRCompanyShiftRoasterAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyShiftRoaster\_ListHRCompanyShiftRoasterAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyShiftRoaster\_CreateHRCompanyShiftRoasterAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyShiftRoaster\_ReadHRCompanyShiftRoasterAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyShiftRoaster\_UpdatedHRCompanyShiftRoasterAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyShiftRoaster\_DeleteHRCompanyShiftRoasterAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\CRUDViews\_CRUDHRCompanyShiftRoaster.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_FormModelHRCompanyShiftRoaster.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_PrintHRCompanyShiftRoaster.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyShiftRoaster\_PrintHRCompanyShiftRoasterAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HRCompanyHREmployeeShiftRoaster\_ListWrapperHRCompanyHREmployeeShiftRoasterAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HRCompanyHREmployeeShiftRoaster\_ListHRCompanyHREmployeeShiftRoasterAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HRCompanyHREmployeeShiftRoaster\_CreateHRCompanyHREmployeeShiftRoasterAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\CRUDViews\_CRUDHRCompanyHREmployeeShiftRoaster.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_FormModelHRCompanyHREmployeeShiftRoaster.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyHREmployeeShiftRoaster\_ListWrapperHRCompanyHREmployeeShiftRoasterAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyHREmployeeShiftRoaster\_ListHRCompanyHREmployeeShiftRoasterAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyHREmployeeShiftRoaster\_CreateHRCompanyHREmployeeShiftRoasterAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\CRUDViews\_CRUDHRCompanyHREmployeeShiftRoaster.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_FormModelHRCompanyHREmployeeShiftRoaster.cshtml" />
+    <Content Include="Areas\SystemFeedback\Views\SystemComment\_CreateSystemCommentAsync.cshtml" />
+    <Content Include="Areas\SystemFeedback\Views\SystemComment\_DeleteSystemCommentAsync.cshtml" />
+    <Content Include="Areas\SystemFeedback\Views\SystemComment\_ListSystemCommentAsync.cshtml" />
+    <Content Include="Areas\SystemFeedback\Views\SystemComment\_ReadSystemCommentResponseAsync.cshtml" />
+    <Content Include="Areas\SystemFeedback\Views\SystemComment\_UpdateSystemCommentAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyHREmployeeShiftRoaster\_ReadHRCompanyHREmployeeShiftRoasterAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_FormModelReadHRCompanyHREmployeeShiftRoaster.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_PrintHRCompanyHREmployeeShiftRoaster.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HRCompanyHREmployeeShiftRoaster\_ReadHRCompanyHREmployeeShiftRoasterAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_ReadHRCompanyHREmployeeShiftRoaster.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HRCompanyHREmployeeShiftRoaster\_PrintHRCompanyHREmployeeShiftRoasterAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_PrintHRCompanyHREmployeeShiftRoaster.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyHREmployeeShiftRoaster\_GetHRCompanyHREmployeeShiftRoasterAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveManagement\_ListWrapperHREmployeeLeaveManagementAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveManagement\_ListHREmployeeLeaveManagementAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveManagement\_CreateHREmployeeLeaveManagementAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\CRUDViews\_CRUDHREmployeeLeaveManagement.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_FormModelHREmployeeLeaveManagement.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveManagement\_UpdateHREmployeeLeaveManagementAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveManagement\_DeleteHREmployeeLeaveManagementAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveManagement\_ReadHREmployeeLeaveManagementAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyHREmployeeShiftRoaster\_DeleteHRCompanyHREmployeeShiftRoasterAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_DeleteHRCompanyHREmployeeShiftRoaster.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HRCompanyHREmployeeShiftRoaster\_UpdateHRCompanyHREmployeeShiftRoasterAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_UpdateFormModelHRCompanyHREmployeeShiftRoaster.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeKaajSummary\_ListWrapperKaajSumaryAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeKaajSummary\_ListKaajSummaryAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeKaajSummary\_ReadKaajSummaryAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\ShiftRoasterReports\Index.cshtml" />
+    <Content Include="Areas\Reports\Views\ShiftRoasterReports\_ListShiftRoasterReports.cshtml" />
+    <Content Include="Areas\Reports\Views\ShiftRoasterReports\_Action.cshtml" />
+    <Content Include="Areas\Reports\Views\ShiftRoasterReports\_PrintShiftRoasterReportAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveSummary\_DeleteHREmployeeLeaveHistoryAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeKaajSummary\_DeleteHREmployeeKaajHistoryAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\MonthlyAttendanceSummary\_ReadMonthlyAttendanceSummaryAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_ReadMonthlyAttendanceSummary.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeManagement\EmployeeProfileSearchAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\MasterLeaveTitle\Index.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\MasterLeaveTitle\_ListMasterLeaveTitleAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\MasterLeaveTitle\_CreateMasterLeaveTitleAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\MasterLeaveTitle\_DeleteMasterLeaveTitleAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\MasterLeaveTitle\_ReadMasterLeaveTitleAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\MasterLeaveTitle\_PrintMasterLeaveTitleAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\MasterLeaveTitle\_UpdateMasterLeaveTitleAsync.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\CRUDViews\_CRUDMasterLeaveTitle.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\ModelPartialViews\_FormModelMasterLeaveTitle.cshtml" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveHistory\_GetHREmployeeLeaveSummaryAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_ReadHRCompany.cshtml" />
+    <Content Include="Areas\SystemFeedback\Views\Shared\CRUDViews\_CRUDSystemComment.cshtml" />
+    <Content Include="Areas\SystemFeedback\Views\Shared\CRUDViews\_CRUDSystemCommentResponse.cshtml" />
+    <Content Include="Areas\SystemFeedback\Views\Shared\ModelPartialViews\_FormModelSystemComment.cshtml" />
+    <Content Include="Areas\SystemFeedback\Views\Shared\ModelPartialViews\_FormModelSystemCommentResponse.cshtml" />
+    <Content Include="Areas\SystemSecurity\Views\Shared\ModelPartialViews\_UpdateFormModelHRCalendar.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\CRUDViews\_CRUDHREmployeeContactType.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_FormModelHREmployeeContactType.cshtml" />
+    <Content Include="Areas\SystemSetting\Views\Shared\ModelPartialViews\_PrintHREmployeeContactType.cshtml" />
+    <Content Include="Areas\Reports\Views\MonthlyAttendanceSheet\Index.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeKaajHistory\_GetHREmployeeKaajSummaryAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HrEmployeeLeaveApproved\_PrintHrEmployeeLeaveApprovedAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeKaajSummary\_GetHREmployeeKaajSummaryAsync.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\HREmployeeBiometricTemplate\_GetDeviceConnectionComponentAsync.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\HREmployeeBiometricTemplate\_RealandDeviceManagementAsync.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\HREmployeeBiometricTemplate\_ListWrapperRealandDeviceManagementAsync.cshtml" />
+    <Content Include="Areas\DeviceManagement\Views\HREmployeeBiometricTemplate\_GetFingerPrintDataAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\YearlyAttendanceSheet\Index.cshtml" />
+    <Content Include="Areas\Reports\Views\YearlyAttendanceSheet\_ListYearlyAttendanceSheetAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\YearlyAttendanceSheet\_PrintYearlyAttendanceSheetAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\YearlyAttendanceSheet\_Action.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\CRUDViews\_CRUDYearlyAttendanceSheet.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_PrintYearlyAttendanceSheet.cshtml" />
+    <Content Include="Areas\Reports\Views\EarlyCheckoutAttendanceReport\Index.cshtml" />
+    <Content Include="Areas\Reports\Views\EarlyCheckoutAttendanceReport\_Action.cshtml" />
+    <Content Include="Areas\Reports\Views\EarlyCheckoutAttendanceReport\_ListEarlyCheckoutAttendanceReportAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\EarlyCheckoutAttendanceReport\_UpdateEarlyCheckoutAttendanceReportAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\CRUDViews\_CRUDEarlyCheckoutAttendanceReport.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_FormModelEarlyCheckoutAttendanceReport.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\EarlyCheckoutAttendanceApproval\Index.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\EarlyCheckoutAttendanceApproval\_ListEarlyCheckoutAttendanceApprovalAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\EarlyCheckoutAttendanceApproval\_UpdateEarlyCheckoutAttendanceApprovalAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\CRUDViews\_CRUDEarlyCheckoutAttendanceApproval.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_FormModelEarlyCheckoutAttendanceApproval.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveSummary\_ReadLeaveSummaryAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\CRUDViews\_CRUDHREmployeeKaajSummary.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_PrintHREmployeeKaajSummary.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeKaajSummary\_PrintKaajSummaryAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\MonthlyEarlyandLateReport\Index.cshtml" />
+    <Content Include="Areas\Reports\Views\MonthlyEarlyandLateReport\_ListMonthlyEarlyandLateReportAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\MonthlyEarlyandLateReport\_Action.cshtml" />
+    <Content Include="Areas\Reports\Views\MonthlyEarlyandLateReport\_ReadMonthlyEarlyCheckOutReportAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\MonthlyEarlyandLateReport\_ReadMonthlyLateReportAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\CRUDViews\_CRUDMonthlyLateReport.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_ReadMonthlyLateReport.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\CRUDViews\_CRUDMonthlyEarlyCheckOutReport.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_ReadMonthlyEarlyCheckOutReport.cshtml" />
+    <Content Include="Areas\Reports\Views\MonthlyEarlyandLateReport\_PrintMonthlyEarlyandLateReport.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_PrintMonthlyEarlyandLateReport.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\CRUDViews\_CRUDMonthlyEarlyandLateReport.cshtml" />
+    <Content Include="Areas\Reports\Views\MonthlyAttendanceSheet\_CreateHREmployeeLeaveHistoryAsyncPopup.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeBulkAttendance\_ListHREmployeeBulkAttendanceAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeBulkAttendance\_ListWrapperHREmployeeBulkAttendanceAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeBulkAttendance\_CreateHREmployeeBulkAttendanceAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_FormModelHREmployeeBulkAttendance.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeBulkAttendanceApproved\_ListHREmployeeBulkAttendanceApprovedAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\CRUDViews\_CRUDHREmployeeBulkAttendance.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\CRUDViews\_CRUDHREmployeeBulkAttendanceApproved.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeBulkAttendanceApproved\_ListWrapperHREmployeeBulkAttendanceApprovedAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeBulkAttendanceApproved\_UpdateHREmployeeBulkAttendanceApprovedAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_FormModelHREmployeeBulkAttendanceApproved.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HREmployeeBulkAttendance\_UpdateHREmployeeBulkAttendanceAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyAttendance\_CreateHRCompanyAttendanceAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyAttendance\_ListHRCompanyAttendanceAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyAttendance\_ListWrapperHRCompanyAttendanceAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\CRUDViews\_CRUDHRCompanyAttendance.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_FormModelHRCompanyAttendance.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HRCompanyAttendance\_ListHRCompanyAttendanceAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HRCompanyAttendance\_ListWrapperHRCompanyAttendanceAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HRCompanyAttendance\_ReadHRCompanyAttendanceAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HRCompanyAttendance\_UpdateHRCompanyAttendanceAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\CRUDViews\_CRUDHRCompanyAttendance.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_FormModelHRCompanyAttendance.cshtml" />
+    <Content Include="Areas\Reports\Views\EarlyandLateReport\_Action.cshtml" />
+    <Content Include="Areas\Reports\Views\EarlyandLateReport\_ListEarlyandLateReportAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\EarlyandLateReport\_PrintEarlyandLateReport.cshtml" />
+    <Content Include="Areas\Reports\Views\EarlyandLateReport\_ReadEarlyCheckOutReportAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\EarlyandLateReport\_ReadLateReportAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\EarlyandLateReport\Index.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\CRUDViews\_CRUDLateCommerReport.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_ReadLateCommerReport.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\CRUDViews\_CRUDEarlyCheckOutReport.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_ReadEarlyCheckOutReport.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\ModelPartialViews\_PrintEarlyandLateReport.cshtml" />
+    <Content Include="Areas\Reports\Views\Shared\CRUDViews\_CRUDEarlyandLateReport.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyHREmployeeCovidKaaj\_CreateHRCompanyHREmployeeCovidKaajAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyHREmployeeCovidKaaj\_DeleteHRCompanyHREmployeeCovidKaajAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyHREmployeeCovidKaaj\_GetHRCompanyHREmployeeCovidKaajAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyHREmployeeCovidKaaj\_ListHRCompanyHREmployeeCovidKaajAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyHREmployeeCovidKaaj\_ListWrapperHRCompanyHREmployeeCovidKaajAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyHREmployeeCovidKaaj\_ReadHRCompanyHREmployeeCovidKaajAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\CRUDViews\_CRUDHRCompanyHREmployeeCovidKaaj.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_FormModelHRCompanyHREmployeeCovidKaaj.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeLeaveHistory\_PrintIndividualHREmployeeLeaveHistoryAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_PrintIndividualHREmployeeLeaveHistory.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\HREmployeeKaajHistory\_PrintIndividualHREmployeeKaajHistoryAsync.cshtml" />
+    <Content Include="Areas\EmployeeManagement\Views\Shared\ModelPartialViews\_PrintIndividualHREmployeeKaajHistory.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyHREmployeeBulkKaaj\_CreateHRCompanyHREmployeeBulkKaajAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyHREmployeeBulkKaaj\_DeleteHRCompanyHREmployeeBulkKaajAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyHREmployeeBulkKaaj\_GetHRCompanyHREmployeeBulkKaajAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyHREmployeeBulkKaaj\_ListHRCompanyHREmployeeBulkKaajAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyHREmployeeBulkKaaj\_ListWrapperHRCompanyHREmployeeBulkKaajAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyHREmployeeBulkKaaj\_ReadHRCompanyHREmployeeBulkKaajAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\CRUDViews\_CRUDHRCompanyHREmployeeBulkKaaj.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_FormModelHRCompanyHREmployeeBulkKaaj.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyOfficeLogs\_CreateHRCompanyOfficeLogsAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyOfficeLogs\_ListHRCompanyOfficeLogsAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyOfficeLogs\_ListWrapperHRCompanyOfficeLogsAsync.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\CRUDViews\_CRUDHRCompanyOfficeLogs.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_FormModelHRCompanyOfficeLogs.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\Shared\ModelPartialViews\_PrintHRCompanyOfficeLogs.cshtml" />
+    <Content Include="Areas\CompanyManagement\Views\HRCompanyOfficeLogs\_PrintHRCompanyOfficeLogsAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\DatePunchedReport\Index.cshtml" />
+    <Content Include="Areas\Reports\Views\DatePunchedReport\_Action.cshtml" />
+    <Content Include="Areas\Reports\Views\DatePunchedReport\_ExportDatePunchedReportAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\DatePunchedReport\_ListHREmployeeAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\DatePunchedReport\_PrintDatePunchedReportAsync.cshtml" />
+    <Content Include="Areas\Reports\Views\DatePunchedReport\_ReadDatePunchedReportAsync.cshtml" />
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\ace-editable.min.js" />
+    <Content Include="Scripts\ace-elements.min.js" />
+    <Content Include="Scripts\ace-extra.min.js" />
+    <Content Include="Scripts\ace.min.js" />
+    <Content Include="Scripts\autosize.min.js" />
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootstrap-colorpicker.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker.min.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap-editable.min.js" />
+    <Content Include="Scripts\bootstrap-markdown.min.js" />
+    <Content Include="Scripts\bootstrap-multiselect.min.js" />
+    <Content Include="Scripts\bootstrap-switch.js" />
+    <Content Include="Scripts\bootstrap-switch.min.js" />
+    <Content Include="Scripts\bootstrap-tag.min.js" />
+    <Content Include="Scripts\bootstrap-timepicker.min.js" />
+    <Content Include="Scripts\bootstrap-wysiwyg.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\buttons.colVis.min.js" />
+    <Content Include="Scripts\buttons.flash.min.js" />
+    <Content Include="Scripts\buttons.html5.min.js" />
+    <Content Include="Scripts\buttons.print.min.js" />
+    <Content Include="Scripts\chosen.jquery.min.js" />
+    <Content Include="Scripts\dataTables.buttons.min.js" />
+    <Content Include="Scripts\dataTables.select.min.js" />
+    <Content Include="Scripts\daterangepicker.min.js" />
+    <Content Include="Scripts\dropzone.min.js" />
+    <Content Include="Scripts\excanvas.min.js" />
+    <Content Include="Scripts\fullcalendar.min.js" />
+    <Content Include="Scripts\grid.locale-en.js" />
+    <Content Include="Scripts\holder.min.js" />
+    <Content Include="Scripts\html5shiv.min.js" />
+    <Content Include="Scripts\jasny-bootstrap.js" />
+    <Content Include="Scripts\jasny-bootstrap.min.js" />
+    <Content Include="Scripts\jquery-1.11.3.min.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\jquery-additional-methods.min.js" />
+    <Content Include="Scripts\jquery-typeahead.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery-ui.custom.min.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.bootstrap-duallistbox.min.js" />
+    <Content Include="Scripts\jquery.colorbox.min.js" />
+    <Content Include="Scripts\jquery.dataTables.bootstrap.min.js" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
+    <Content Include="Scripts\jquery.datetimepicker.min.js" />
+    <Content Include="Scripts\jquery.easypiechart.min.js" />
+    <Content Include="Scripts\jquery.flot.min.js" />
+    <Content Include="Scripts\jquery.flot.pie.min.js" />
+    <Content Include="Scripts\jquery.flot.resize.min.js" />
+    <Content Include="Scripts\jquery.form.js" />
+    <Content Include="Scripts\jquery.gritter.min.js" />
+    <Content Include="Scripts\jquery.hotkeys.index.min.js" />
+    <Content Include="Scripts\jquery.inputlimiter.min.js" />
+    <Content Include="Scripts\jquery.jqGrid.min.js" />
+    <Content Include="Scripts\jquery.knob.min.js" />
+    <Content Include="Scripts\jquery.maskedinput.min.js" />
+    <Content Include="Scripts\jquery.mobile.custom.min.js" />
+    <Content Include="Scripts\jquery.nestable.min.js" />
+    <Content Include="Scripts\jquery.raty.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.3.0.js" />
+    <Content Include="Scripts\jquery.signalR-2.4.1.js" />
+    <Content Include="Scripts\jquery.signalR-2.4.1.min.js" />
+    <Content Include="Scripts\jquery.sparkline.index.min.js" />
+    <Content Include="Scripts\jquery.table2excel.min.js" />
+    <Content Include="Scripts\jquery.ui.touch-punch.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jsapi-tree.js" />
+    <Content Include="Scripts\JsTree\jstree.js" />
+    <Content Include="Scripts\JsTree\jstree.min.js" />
+    <Content Include="Scripts\jszip.min.js" />
+    <Content Include="Scripts\markdown.min.js" />
+    <Content Include="Scripts\Menu\customNepaliConverter.js" />
+    <Content Include="Scripts\Menu\customChart.js" />
+    <Content Include="Scripts\Menu\script.js" />
+    <Content Include="Scripts\Menu\style.css" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\nepali.datepicker.v2.2.min.js" />
+    <Content Include="Scripts\offline-exporting.js" />
+    <Content Include="Scripts\pdfmake.min.js" />
+    <Content Include="Scripts\pie.js" />
+    <Content Include="Scripts\prettify.min.js" />
+    <Content Include="Scripts\printThis.js" />
+    <Content Include="Scripts\RequiredField.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\select2.min.js" />
+    <Content Include="Scripts\spin.js" />
+    <Content Include="Scripts\spinbox.min.js" />
+    <Content Include="Scripts\TableFreeze\datatables.min.css" />
+    <Content Include="Scripts\TableFreeze\datatables.min.js" />
+    <Content Include="Scripts\TableFreeze\freeze-table.js" />
+    <Content Include="Scripts\TableFreeze\freeze-table.min.js" />
+    <Content Include="Scripts\TableFreeze\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\TableFreeze\jquery.floatThead.min.js" />
+    <Content Include="Scripts\TableFreeze\tableColumn.js" />
+    <Content Include="Scripts\tree.min.js" />
+    <Content Include="Scripts\vfs_fonts.js" />
+    <Content Include="Scripts\wizard.min.js" />
+    <Content Include="Scripts\xlsx.min.js" />
+    <Content Include="Upload\CompanyLogo\a5239f5e-dce9-46a3-854c-0b79c963d616\index.jpg" />
+    <Content Include="Upload\EmployeeProfile\0c3b3bb1-1295-4967-ad2c-50cdea5d3ea7\2263b65d-9911-427f-a27e-9a5ef8d6d9c6.jpg.jpg" />
+    <Content Include="Upload\EmployeeProfile\12be3789-ba84-432a-bb85-58d5c915c0f9\2263b65d-9911-427f-a27e-9a5ef8d6d9c6.jpg.jpg" />
+    <Content Include="Upload\EmployeeProfile\7fd1a7a4-7cf5-4681-807e-dbced7aafec9\add authority.PNG" />
+    <Content Include="Upload\EmployeeProfile\8e895aab-8063-4e1e-af15-19ce11b53234\Nepal Tourism Dashboard.PNG" />
+    <Content Include="Upload\EmployeeProfile\9b1b649c-f113-45cc-9246-562aea2388e0\index.jpg" />
+    <Content Include="Upload\LeaveForm\266d0cca-ea18-4958-a898-e974798d0d4d\1.JPG" />
+    <Content Include="Upload\LeaveForm\848e296f-942a-4858-b76c-bdfd0f3862be\add authority.PNG" />
+    <Content Include="Upload\LeaveForm\87447e53-58c7-4355-bcc1-91b5f6fc1655\1.JPG" />
+    <Content Include="Upload\LeaveForm\b3eef541-2846-4870-abee-60e3ab7c0621\2263b65d-9911-427f-a27e-9a5ef8d6d9c6.jpg.jpg" />
+    <Content Include="Upload\LeaveForm\ba95e632-b30a-4e99-8438-8102bcbb5432\1.JPG" />
+    <Content Include="Upload\LeaveForm\ec094f16-2461-4921-b392-83edb5874d5a\1.JPG" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\_AttendanceByGender.cshtml" />
+    <Content Include="Views\Home\_TodayEmployeeStatus.cshtml" />
+    <Content Include="Views\Home\_Calender.cshtml" />
+    <Content Include="Views\Home\_SuperAdminDashboard.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Views\Shared\_FullCalendar.cshtml" />
+    <Content Include="Views\Shared\Menu\_LeftMenu.cshtml" />
+    <Content Include="Views\Shared\Menu\_MainMenu.cshtml" />
+    <Content Include="Views\Shared\Menu\_Footer.cshtml" />
+    <Content Include="Views\Shared\_TopHeaderUserProfile.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\AccessDenied.cshtml" />
+    <Content Include="Views\Shared\_SettingContainer.cshtml" />
+    <Content Include="Views\Shared\_NotificationPanel.cshtml" />
+    <Content Include="Views\Shared\_ReportFooter.cshtml" />
+    <Content Include="Views\Shared\_ReportHeader.cshtml" />
+    <Content Include="Views\Home\_GetCountEmployee.cshtml" />
+    <Content Include="Views\Home\_ListHRCompanyAsync.cshtml" />
+    <Content Include="Views\Home\HRCompanyAsync.cshtml" />
+    <Content Include="Views\Home\_ListHREmployeeAsync.cshtml" />
+    <Content Include="Views\Home\HREmployeeAsync.cshtml" />
+    <Content Include="Views\Home\HRDevicesAsync.cshtml" />
+    <Content Include="Views\Home\_ListHRDevicesAsync.cshtml" />
+    <Content Include="Views\Home\PresentHREmployeeAsync.cshtml" />
+    <Content Include="Views\Home\_ListPresentHREmployeeAsync.cshtml" />
+    <Content Include="Views\Home\_PrintPresentHREmployeeAsync.cshtml" />
+    <Content Include="Views\Home\_NormalUserDashboard.cshtml" />
+    <Content Include="Views\Shared\_ReportFooterWithApproval.cshtml" />
+    <Content Include="Views\Shared\AlertNotification.cshtml" />
+    <Content Include="Views\Account\_TodayEmployeeStatus.cshtml" />
+    <Content Include="Views\Account\_AttendanceByGender.cshtml" />
+    <Content Include="SystemMannual\EAttendanceSystemManual.pdf" />
+    <Content Include="Views\Home\_ReportAdminDashboard.cshtml" />
+    <Content Include="Views\Home\_AdminDashboard.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Shared\_ReportFooters.cshtml" />
+    <Content Include="Views\Chat\Index.cshtml" />
+    <Content Include="Views\Chat\ActiveUsers.cshtml" />
+    <Content Include="Views\Chat\Account.cshtml" />
+    <Content Include="Views\Home\AbsentHREmployeeAsync.cshtml" />
+    <Content Include="Views\Home\_ListAbsentHREmployeeAsync.cshtml" />
+    <Content Include="Views\Home\_PrintAbsentHREmployeeAsync.cshtml" />
+    <Content Include="Views\Home\_AdminDashboard -old.cshtml" />
+    <Content Include="Views\Shared\_LeaveKaajReportHeader.cshtml" />
+    <Content Include="Views\Home\_SectionAdminDashboard.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\CompanyManagement\Models\" />
+    <Folder Include="Areas\CompanyManagement\Views\HREmployeeServiceTypeGroup\" />
+    <Folder Include="Areas\DeviceManagement\Models\" />
+    <Folder Include="Areas\DeviceManagement\Views\DeviceManager\" />
+    <Folder Include="Areas\DeviceManagement\Views\HRDeviceModelUserVerficationMode\" />
+    <Folder Include="Areas\EmployeeManagement\Models\" />
+    <Folder Include="Areas\EmployeeManagement\Views\HREmployeeBulkRemark\" />
+    <Folder Include="Areas\Reports\Models\" />
+    <Folder Include="Areas\SystemFeedback\Models\" />
+    <Folder Include="Areas\SystemSecurity\Models\" />
+    <Folder Include="Areas\SystemSecurity\Views\UserLoginsHistory\" />
+    <Folder Include="Areas\SystemSetting\Models\" />
+    <Folder Include="Areas\SystemSetting\Views\EmployeePermission\" />
+    <Folder Include="Areas\SystemSetting\Views\PayRollSetup\" />
+    <Folder Include="Upload\EmployeeBulkAttendance\" />
+    <Folder Include="Upload\EmployeeForm\" />
+    <Folder Include="Upload\EmployeeJobProfile\" />
+    <Folder Include="Upload\EmployeeKaajProfile\" />
+    <Folder Include="Views\Base\" />
+    <Folder Include="Views\JSON\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DeviceManagement\DeviceManagement.csproj">
+      <Project>{a0c3c1f3-f8e0-41a7-8ad8-a10ab99ea90a}</Project>
+      <Name>DeviceManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LanguageResources\LanguageResources.csproj">
+      <Project>{72a4ce27-e7a8-4071-a7bc-0c3c6953a04a}</Project>
+      <Name>LanguageResources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SystemDatabase\SystemDatabase.csproj">
+      <Project>{c090bec7-d1df-404e-858a-fc80436c3bd4}</Project>
+      <Name>SystemDatabase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SystemInterfaces\SystemInterfaces.csproj">
+      <Project>{cb0053bc-7252-44f4-a524-9df21215f735}</Project>
+      <Name>SystemInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SystemModels\SystemModels.csproj">
+      <Project>{e288f56d-7475-4640-b301-2b4f8e88146b}</Project>
+      <Name>SystemModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SystemServices\SystemServices.csproj">
+      <Project>{2a3cb19f-6671-411e-934e-3b49f8ffcaa0}</Project>
+      <Name>SystemServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SystemStores\SystemStores.csproj">
+      <Project>{2235d008-7138-45b3-bb53-400f24a4c615}</Project>
+      <Name>SystemStores</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SystemUnitOfWork\SystemUnitOfWork.csproj">
+      <Project>{43005e9a-b659-4e8d-b4cb-74f1ac68818d}</Project>
+      <Name>SystemUnitOfWork</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SystemViewModels\SystemViewModels.csproj">
+      <Project>{139865ba-64cb-4165-92fe-a98085a56a33}</Project>
+      <Name>SystemViewModels</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>52721</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:52721/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.1\build\Microsoft.ApplicationInsights.DependencyCollector.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.1\build\Microsoft.ApplicationInsights.DependencyCollector.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.9.1\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.9.1\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.WindowsServer.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.Web.2.9.1\build\Microsoft.ApplicationInsights.Web.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.Web.2.9.1\build\Microsoft.ApplicationInsights.Web.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.3.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.3.0.0\build\Microsoft.Net.Compilers.props'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.1\build\Microsoft.ApplicationInsights.DependencyCollector.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.1\build\Microsoft.ApplicationInsights.DependencyCollector.targets')" />
+  <Import Project="..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.9.1\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.9.1\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets')" />
+  <Import Project="..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets')" />
+  <Import Project="..\packages\Microsoft.ApplicationInsights.WindowsServer.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.targets')" />
+  <Import Project="..\packages\Microsoft.ApplicationInsights.Web.2.9.1\build\Microsoft.ApplicationInsights.Web.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.Web.2.9.1\build\Microsoft.ApplicationInsights.Web.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

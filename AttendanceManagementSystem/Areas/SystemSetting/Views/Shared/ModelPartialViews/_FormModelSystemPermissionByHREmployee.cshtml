@@ -1,0 +1,152 @@
+﻿@model SystemViewModels.SystemSetting.SystemPermissionByHREmployeeViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.IdHRCompany)
+@Html.HiddenFor(model => model.IdHREmployee)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+
+<div class="col-md-12">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<!-- Nav tabs -->
+			@{int i = 0; var datamodel = Model.DataModelSystemStructure.GroupBy(x => new { x.IdSystemMenu, x.MenuName }).OrderBy(x => x.Key.IdSystemMenu);}
+			<ul id="tabstrip" class="nav nav-tabs">
+				@foreach (var item in datamodel)
+				{
+					<li class="@(item.Key.IdSystemMenu==1?"active":"")">
+						<a href="#Tabbed_@item.Key.IdSystemMenu" data-toggle="tab">
+							@item.Key.MenuName
+						</a>
+					</li>
+				}
+			</ul>
+			<!-- Tab panes -->
+			<div class="tab-content">
+				@foreach (var datas in datamodel)
+				{
+
+					<div class="tab-pane fade in @(datas.Key.IdSystemMenu == 1 ? "active" : "")" style="padding-top:10px;" id="Tabbed_@datas.Key.IdSystemMenu">
+						@{var items = datas.ToList();}
+						<h4 class="page-header">Menus</h4>
+						<div class="row">
+                            <div class="col-md-12 col-sm-12 col-lg-12">
+                                <div>
+                                    <input type="checkbox" class="Menu" value="@datas.Key.IdSystemMenu" />
+                                </div>
+                                <div class="form-group row">
+                                    @foreach (var item in items.Where(x => x.Menu))
+                                    {
+                                        @Html.HiddenFor(x => x.DataModel[i].Id, new { Value = item.Id })
+                                        @Html.HiddenFor(x => x.DataModel[i].IdHREmployee, new { Value = item.IdHREmployee })
+                                        @Html.HiddenFor(x => x.DataModel[i].IdSystemStructure, new { Value = item.IdSystemStructure })
+                                        <div class="col-md-3 col-sm-3 col-lg-3">
+                                            <input type="checkbox" class="Menu_@item.IdSystemMenu" name="DataModel[@i].Assigned" id="@($"DataModel_{i}_Assigned")" value="@(item.Assigned==true?"true":"false")" @(item.Assigned == true ? "checked=checked" : "") onchange="ChangeAtt(this)" />
+                                            @Html.Label(item.Header, new { @class = "control-label" })
+                                            @Html.ValidationMessageFor(model => model.DataModel[i].Assigned)
+                                        </div>
+                                        i++;
+                                    }
+                                </div>
+                            </div>
+						</div>
+						<h4 class="page-header">Tabbed</h4>
+						<div class="row">
+                            <div class="col-md-12 col-sm-12 col-lg-12">
+                                <div>
+                                    <input type="checkbox" class="Tabbed" value="@datas.Key.IdSystemMenu" />
+                                </div>
+                                <div class="form-group row">
+                                    @foreach (var item in items.Where(x => x.Tabb))
+                                    {
+                                        @Html.HiddenFor(x => x.DataModel[i].Id, new { Value = item.Id })
+                                        @Html.HiddenFor(x => x.DataModel[i].IdHREmployee, new { Value = item.IdHREmployee })
+                                        @Html.HiddenFor(x => x.DataModel[i].IdSystemStructure, new { Value = item.IdSystemStructure })
+                                        <div class="col-md-3 col-sm-3 col-lg-3">
+                                            <input type="checkbox" class="Tabbed_@item.IdSystemMenu" name="DataModel[@i].Assigned" id="@($"DataModel_{i}_Assigned")" value="@(item.Assigned==true?"true":"false")" @(item.Assigned == true ? "checked=checked" : "") onchange="ChangeAtt(this)" />
+                                            @Html.Label(item.Header, new { @class = "control-label" })
+                                            @Html.ValidationMessageFor(model => model.DataModel[i].Assigned)
+                                        </div>
+                                        i++;
+                                    }
+                                </div>
+                            </div>
+						</div>
+						<h4 class="page-header">Buttons</h4>
+						<div class="row">
+                            <div class="col-md-12 col-sm-12 col-lg-12">
+                                <div>
+                                    <input type="checkbox" class="Buttons" value="@datas.Key.IdSystemMenu" />
+                                </div>
+                                <div class="form-group row">
+                                    @foreach (var item in items.Where(x => x.Button == true))
+                                    {
+                                        @Html.HiddenFor(x => x.DataModel[i].Id, new { Value = item.Id })
+                                        @Html.HiddenFor(x => x.DataModel[i].IdHREmployee, new { Value = item.IdHREmployee })
+                                        @Html.HiddenFor(x => x.DataModel[i].IdSystemStructure, new { Value = item.IdSystemStructure })
+                                        <div class="col-md-3 col-sm-3 col-lg-3">
+                                            <input type="checkbox" class="Buttons_@item.IdSystemMenu" name="DataModel[@i].Assigned" id="@($"DataModel_{i}_Assigned")" value="@(item.Assigned==true?"true":"false")" @(item.Assigned == true ? "checked=checked" : "") onchange="ChangeAtt(this)" />
+                                            @Html.Label(item.Header, new { @class = "control-label" })
+                                            @Html.ValidationMessageFor(model => model.DataModel[i].Assigned)
+                                        </div>
+                                        i++;
+                                    }
+                                </div>
+                            </div>
+						</div>
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	function ChangeAtt(element) {
+		if ($(element).is(':checked')) $(element).val('true');
+		else $(element).val('false');
+	}
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.Menu').click(function () {
+            var IdMEnu = $(this).val();
+            if ($(this).is(':checked')) {
+                $(".Menu_" + IdMEnu).prop('checked', true);
+                $(".Menu_" + IdMEnu).val(true);
+            }
+            else {
+                $(".Menu_" + IdMEnu).prop('checked', false);
+                $(".Menu_" + IdMEnu).val(false);
+            }
+        });
+        $('.Tabbed').click(function () {
+            var IdMEnu = $(this).val();
+            if ($(this).is(':checked')) {
+                $(".Tabbed_" + IdMEnu).prop('checked', true);
+                $(".Tabbed_" + IdMEnu).val(true);
+            }
+            else {
+                $(".Tabbed_" + IdMEnu).prop('checked', false);
+                $(".Tabbed_" + IdMEnu).val(false);
+            }
+        });
+        $('.Buttons').click(function () {
+            var IdMEnu = $(this).val();
+            if ($(this).is(':checked')) {
+                $(".Buttons_" + IdMEnu).prop('checked', true);
+                $(".Buttons_" + IdMEnu).val(true);
+            }
+            else {
+                $(".Buttons_" + IdMEnu).prop('checked', false);
+                $(".Buttons_" + IdMEnu).val(false);
+            }
+        });
+    });
+</script>

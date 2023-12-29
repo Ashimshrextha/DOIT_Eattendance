@@ -1,0 +1,42 @@
+﻿@model SystemViewModels.DeviceManagement.DeviceCommunicationEntityViewModel
+
+<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"><div class="panel-title">Employee Management Action</div></div>
+                <div class="panel-body">
+                    <div class="button-group">
+                        <button type="button" class="btn btn-success btn-sm">Read FP Data</button>
+                        <button type="button" class="btn btn-success btn-sm">Write FP Data</button>
+                        <button type="button" class="btn btn-success btn-sm" id="GetAll">Get All Enroll</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+            <div id="DeviceResult">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(function () {
+        $.ajaxSetup({ cache: false });
+            $('#Create_HREmployeeBiometricTemplate').click(function (e) {
+            var url;
+                url = '/';
+            $('#myModalContent').load(url, function () {
+                $('#myModal').modal({
+                    keyboard: true
+                }, 'show');
+                bindAjaxForm(this);
+            });
+            return false;
+        });
+        });
+    });
+</script>

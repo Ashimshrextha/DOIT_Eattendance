@@ -1,0 +1,26 @@
+﻿@model  string
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/bootstrap-notify.min.js"></script>
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-etsy"></i>
+            <a href="#">Error</a>
+        </li>
+        <li class="active">Error</li>
+    </ul><!-- /.breadcrumb -->
+</div>
+<div class="page-content">
+    <div class="row">
+        <hgroup>
+            <h1>त्रुटि</h1>
+            <h2>ई हाजिरी प्रणालीमा कुनै त्रुटि देखिएमा </h2>
+            <h2>कृपया सूचना प्रविधि विभागमा तुरून्त सम्पर्क गर्नुहोला!!!</h2>
+            <h2>अवरोधको लागि माफ गर्नुहोस्</h2>
+            <h2>धन्यवाद</h2>
+        </hgroup>
+        @Html.Raw(Model)
+    </div><!-- /.row -->
+</div>

@@ -1,0 +1,58 @@
+﻿@model SystemViewModels.Reports.DailyReportViewModelList
+
+<div id="printThis">
+    @{ Html.RenderPartial("~/Views/Shared/_ReportHeader.cshtml", Model.Header);}
+    <table class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th class="text-center">क.संकेत नं.</th>
+                <th>कर्मचारी नाम</th>
+                <th class="ace-icon">पद</th>
+                <th class="text-center">मिति</th>
+                <th class="text-center">आउने समय</th>
+                <th class="text-center">आएको समय</th>
+                <th class="text-center">ढिलो आएको</th>
+                <th class="text-center">जाने समय</th>
+                <th class="text-center">गएको समय</th>
+                <th class="text-center">छिटो गएको</th>
+                <th class="text-center">स्थिति</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+            {
+                <tr>
+                    <td class="text-center">@item.PISNumber</td>
+                    <td>@item.HREmployeeNameNP</td>
+                    <td class="ace-icon">
+                        @item.HRDesignationTitle
+                    </td>
+                    <td class="text-center">@item.NepaliDate</td>
+                    <td class="text-center">@item.LogInTime</td>
+                    <td class="text-center">@item.CheckInTime</td>
+                    <td class="text-center">@item.LateBy</td>
+                    <td class="text-center">@item.LogOutTime</td>
+                    <td class="text-center">@item.CheckOutTime</td>
+                    <td class="text-center">@item.CheckOutEarly</td>
+                    <td class="text-center">@item.EmployeeStatus</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @{ Html.RenderPartial("~/Views/Shared/_ReportFooterWithApproval.cshtml", Model.Header);}
+</div>
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>
+<script type="text/javascript">
+    function ExcelReport(div) {
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('div[id$=' + div + ']').html()));
+        e.preventDefault();
+    }
+</script>

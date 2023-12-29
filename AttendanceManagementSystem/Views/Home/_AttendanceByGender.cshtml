@@ -1,0 +1,40 @@
+﻿@model SystemViewModels.Home.HomeDashboardViewModelList
+@{
+    int? TotalMale = Model.DbGender.FirstOrDefault(x => x.HREmployeeSexTitle == "Male").TotalNumber;
+    int? TotalFemale = Model.DbGender.FirstOrDefault(x => x.HREmployeeSexTitle == "Female").TotalNumber;
+}
+
+<script src="~/Scripts/Chart.min.js"></script>
+<style type="text/css">
+
+    #doughnut-chart {
+        width: 100%;
+        border: 1px solid rgba(191, 199, 219, 0.64) !important;
+    }
+</style>
+
+<canvas id="doughnut-chart"></canvas>
+<script type="text/javascript">
+    var pending = [];
+    pending[0] = @TotalMale;
+    pending[1] = @TotalFemale;
+    new Chart(document.getElementById("doughnut-chart"), {
+        type: 'doughnut',
+        data: {
+            labels: ["पुरुष", "महिला"],
+            datasets: [
+                {
+                    label: "Device Chart",
+                    backgroundColor: ["#66ba66", "#59a4b4", "#722CAB"],
+                    data: pending
+                }
+            ]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'लिङ्ग उपस्थिति',
+            }
+        }
+    });
+</script>

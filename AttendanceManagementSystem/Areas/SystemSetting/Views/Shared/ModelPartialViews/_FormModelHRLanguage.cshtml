@@ -1,0 +1,32 @@
+﻿@model SystemViewModels.SystemSetting.HRLanguageViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+
+<div class="row">
+    
+    <div class="col-md-12 col-lg-12 col-sm-12">
+        <div class="row form-group">
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.HRLanguageTitle, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.HRLanguageTitle, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.HRLanguageTitle)
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.IsActive, new { @class = "control-label" })
+                @Html.CheckBoxFor(model => model.DataModel.IsActive, new { @class = "form-control BSswitch" })
+                @Html.ValidationMessageFor(model => model.DataModel.IsActive)
+            </div>
+        </div>
+    </div>
+</div>

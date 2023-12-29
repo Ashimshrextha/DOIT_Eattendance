@@ -1,0 +1,671 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C090BEC7-D1DF-404E-858A-FC80436C3BD4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SystemDatabase</RootNamespace>
+    <AssemblyName>SystemDatabase</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AttendanceDBModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AttendanceDBModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AttendanceDBModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AttendanceDBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AttendanceDBModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="BiometricTemplateType.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="City.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CityCategory.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Country.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CountryDistrict.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CountryState.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DayOfWeekNP.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DeviceLog.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DeviceLogsManual.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fc_MonthNp_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRCalendar.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRCompany.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRCompanyAssignNotification.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRCompanyCode.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRCompanyDeviceMonitor.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRCompanyDivision.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRCompanyDivisionType.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRCompanyEmployeeOfficeLog.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRCompanyHistory.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRCompanyHREmployeeShiftDate.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRCompanyHREmployeeShiftRoaster.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRCompanyLeaveStatusType.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRCompanyLeaveType.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRCompanyManualAttendance.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRCompanyNotification.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRCompanyShiftRoaster.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRCompanySystemSupport.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRCompanyType.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRDesignation.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRDevice.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRDeviceModel.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRDeviceModelUserVerficationMode.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployee.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeAddress.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeAdvanceAmount.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeAttendanceHistory.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeBankAccount.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeBankList.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeBiometricTemplate.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeBloodGroup.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeCategory.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeCompanyFacility.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeContact.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeContactType.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeEducation.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeEducationType.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeEveryTwelveDaysLeaveBalance.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeJobHistory.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeJobStatu.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeKaajHistory.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeLeaveBalance.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeLeaveHistory.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeLeaveManagement.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeLoan.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeLoanRepaymentSchedule.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeLoanTitle.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeManualAttendance.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeMarital.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeMedicalRecord.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeMessageService.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeNationalIdentity.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeNationalIdentityType.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeePositionStatusType.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeProperty.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeRelationType.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeReligion.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeRole.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeSalaryHistory.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeServiceType.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeServiceTypeGroup.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HREmployeeSex.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRLanguage.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRLanguageConversion.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HRPublicHoliday.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ifc_CheckLeaveExists_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ifc_CountActiveOffice_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ifc_ExploreDateRange_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ifc_GetDateByNepaliDate_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ifc_GetDateInfo_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ifc_GetDesignationForLeaveApproval_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ifc_GetEmployeeCount_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ifc_GetEmployeeDetailById_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ifc_GetEmployeeKaajHistory_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ifc_GetEmployee_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ifc_GetHREmployeePublicHolidayAndWeekend_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ifc_GetLeaveByEmployeePerYear_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ifc_GetLeaveByEmployeePerYear_Test_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ifc_GetLeaveTypeForHRCompany_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ifc_GetShiftInfoForEmployee_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ifc_GetUpcomingHoliday_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ifc_today_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KaajType.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LoanInstallmentMode.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Login.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LoginLogs.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LoginsHistory.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterLeaveTitle.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MembershipProvider.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MonthNp.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NumberSystemConversion.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_Authorization_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_AuthorizeUserForFetcher_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_DaillyAbsentAttendance_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_DaillyEmployeeOnLeaveAttendance_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_DaillyPresentAttendance_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_DailyAttendanceReport_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_EarlyCheckoutReport_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_EmployeeAbsentReport_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_EmployeeMenuSetupList_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_EmployeeOnKaaj_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_EmployeeTakenLeaveReport_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_EmployeeTakenLeaveReport_Test_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GenerateEndDateOfLeave_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GenerateEndDateOfLeave_Test_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetActivePerson_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetApprovalPerson_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetAssignedAndUnAssignedRoasterForEmployee_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetAssignHREmployeeOfShiftRoasterByDate_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetAssignHREmployeeOfShiftRoaster_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetAttendanceDeviceCountByModel_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetAvailableLeavePerYear_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetAvailableLeavePerYear_Test_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetBalanceLeaveReport_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetBalanceLeaveReport_Test_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_getdailyindex_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetDateRangeWorkingDetailReport_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetDateRangeWorkingSummaryReport_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetDeviceLogsByPunchedDate_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetEmployeeBulkAttendance_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetEmployeeByDesignation_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetEmployeeCountByGender_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetEmployeeDetail_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetEmployeeDeviceLogsRecord_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetEmployeeLeaveSummary_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetEmployeeLeaveSummary_TEST_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetEmployeeRemainingLeave_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetEmployeeSavingLeaveDetail_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetEmployeeSavingLeaveDetail_Test_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetEmployeeShiftRoasterDetail_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetEmployeeShiftRoasterReport_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetEmployeeTodayStatusForDashboard_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetHREmployeeKaajAppliedSummary_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetHREmployeeLeaveAppliedSummary_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetHREmployeeLeaveHistoryPerYearDateReport_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetHREmployeeLeaveHistoryPerYearReportTest_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetHREmployeeLeaveHistoryPerYearReport_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetLeaveByEmployee_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetLeaveByEmployee_TEST_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetMonthlyAttendanceHeader_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetMonthlyAttendanceTimeSheetReport_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetMonthlyAttendanceTimeSheetReport_Test_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetMonthlyKaajReport_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetMonthlyLeaveReport_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetMonthlyWorkingDetailReport_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetMonthlyWorkingSummaryReport_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetNavbarMenu_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetRecommendedPerson_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetRemainingLeavePerYear_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetRemainingLeavePerYear_Test_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetSystemLeftMenu_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetSystemTabbed_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetTotalEmployeeCountByGender_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetTotalOfficeCountByState_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetTotalOfficeCountByType_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetTotalWorkedInHoliday_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetTotalWorkedReport_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetYearlyAttendanceSheetReport_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetYearlyLeaveDetail_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetYearMonthlyAttendanceReport_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_LateAttendance_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_MonthlyAttendance_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_MonthlyAttendance_Test_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_MonthlyCalendar_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_MonthlyCalendar_Test_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_OfficeLogsInfo_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_RoleMenuSetupList_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SystemComment.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SystemCommentResponse.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SystemDatabaseBackup.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SystemDetail.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SystemDetailCategory.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SystemLanguage.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SystemMenu.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SystemPermissionByHREmployee.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SystemPermissionByRole.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SystemStructure.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserLog.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_DeviceLogs.cs">
+      <DependentUpon>AttendanceDBModel.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="AttendanceDBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AttendanceDBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="AttendanceDBModel.edmx.diagram">
+      <DependentUpon>AttendanceDBModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AttendanceDBModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AttendanceDBModel.edmx</DependentUpon>
+      <LastGenOutput>AttendanceDBModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="AttendanceDBModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AttendanceDBModel.edmx</DependentUpon>
+      <LastGenOutput>AttendanceDBModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

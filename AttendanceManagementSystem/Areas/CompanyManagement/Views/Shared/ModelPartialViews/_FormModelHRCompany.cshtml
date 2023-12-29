@@ -1,0 +1,170 @@
+﻿@model SystemViewModels.CompanyManagement.HRCompanyViewModel
+<link href="~/Content/jasny-bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jasny-bootstrap.min.js"></script>
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.DataModel.CreatedOn)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+@Html.HiddenFor(model => model.SearchKey1)
+
+
+<div class="col-md-12 col-sm-12 col-lg-12">
+    <table class="table table-border table-stripped table-hover">
+        <colgroup>
+            <col style="width:14%" />
+            <col style="width:1%" />
+            <col style="width:35%" />
+            <col style="width:14%" />
+            <col style="width:1%" />
+            <col style="width:35%" />
+        </colgroup>
+        <tbody>
+            <tr>
+                <th class="text-right">@Html.LabelFor(model => model.DataModel.IdHRCompanyType, new { @class = "control-label" })</th>
+                <th>: </th>
+                <td>
+                    @Html.DropDownListFor(model => model.DataModel.IdHRCompanyType, new SelectList(Model.DDLCompanyType, "Key", "Value"), new { @class = "form-control chosen-select" })
+                    @Html.ValidationMessageFor(model => model.DataModel.IdHRCompanyType)
+                </td>
+                <th class="text-right"> @Html.LabelFor(model => model.DataModel.IdParent_HRCompany, new { @class = "control-label" })</th>
+                <th>:</th>
+                <td>
+                    @Html.DropDownListFor(model => model.DataModel.IdParent_HRCompany, new SelectList(Model.DDLParentChildCompany, "Key", "Value"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.IdParent_HRCompany)
+                </td>
+            </tr>
+            <tr>
+                <th class="text-right"> @Html.LabelFor(model => model.DataModel.CompanyName, new { @class = "control-label" })</th>
+                <th>:</th>
+                <td>
+                    @Html.TextBoxFor(model => model.DataModel.CompanyName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.CompanyName)
+                </td>
+                <th class="text-right"> @Html.LabelFor(model => model.DataModel.CompanyShortName, new { @class = "control-label" })</th>
+                <th>:</th>
+                <td>
+                    @Html.TextBoxFor(model => model.DataModel.CompanyShortName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.CompanyShortName)
+                </td>
+            </tr>
+            <tr>
+                <th class="text-right"> @Html.LabelFor(model => model.DataModel.CompanyNameNP, new { @class = "control-label" })</th>
+                <th>:</th>
+                <td>
+                    @Html.TextBoxFor(model => model.DataModel.CompanyNameNP, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.CompanyNameNP)
+                </td>
+                <th class="text-right">  @Html.LabelFor(model => model.DataModel.IdCompanyCode, new { @class = "control-label" })</th>
+                <th>:</th>
+                <td>
+                    @Html.DropDownListFor(model => model.DataModel.IdCompanyCode, new SelectList(Model.DDLHRCompanyCode, "Key", "Value"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.IdCompanyCode)
+                </td>
+            </tr>
+            <tr>
+                <th class="text-right"> @Html.LabelFor(model => model.DataModel.FaxNumber, new { @class = "control-label" })</th>
+                <th>:</th>
+                <td>
+                    @Html.TextBoxFor(model => model.DataModel.FaxNumber, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.FaxNumber)
+                </td>
+                <th class="text-right"> @Html.LabelFor(model => model.DataModel.PhoneNumber, new { @class = "control-label" })</th>
+                <th>:</th>
+                <td>
+                    @Html.TextBoxFor(model => model.DataModel.PhoneNumber, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.PhoneNumber)
+                </td>
+            </tr>
+            <tr>
+                <th class="text-right">@Html.LabelFor(model => model.DataModel.IdState, new { @class = "control-label" })</th>
+                <th>:</th>
+                <td>
+                    @Html.DropDownListFor(model => model.DataModel.IdState, new SelectList(Model.DDLState, "Key", "Value"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.IdState)
+                </td>
+            </tr>
+            <tr>
+                <th class="text-right">  @Html.LabelFor(model => model.DataModel.Address, new { @class = "control-label" })</th>
+                <th>:</th>
+                <td>
+                    @Html.TextAreaFor(model => model.DataModel.Address, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.Address)
+                </td>
+                <th class="text-right">@Html.LabelFor(model => model.DataModel.Remark, new { @class = "control-label" })</th>
+                <th>:</th>
+                <td>
+                    @Html.TextAreaFor(model => model.DataModel.Remark, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.Remark)
+                </td>
+            </tr>
+            <tr>
+                <th class="text-right">@Html.LabelFor(model => model.DataModel.IsCentralLevelHRCompany, new { @class = "control-label" })</th>
+                <th>:</th>
+                <td>
+                    @Html.CheckBoxFor(model => model.DataModel.IsCentralLevelHRCompany, new { @class = "BSswitch" })
+                    @Html.ValidationMessageFor(model => model.DataModel.IsCentralLevelHRCompany)
+                </td>
+                <th class="text-right">  @Html.LabelFor(model => model.DataModel.IsActive, new { @class = "control-label" })</th>
+                <th>:</th>
+                <td>
+                    @Html.CheckBoxFor(model => model.DataModel.IsActive, new { @class = "BSswitch" })
+                    @Html.ValidationMessageFor(model => model.DataModel.IsActive)
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="row col-md-12 col-sm-12 col-lg-12 form-group">
+    <div class="col-md-3 col-sm-3 pull-right">
+        <div class="form-group pull-right">
+            <div class="form-inline" data-toggle="tooltip" data-placement="top" title="Please Upload Only JPG & PNG File & File Should be less than 1 mb in size">
+                <div class="fileinput fileinput-new" data-provides="fileinput">
+                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
+                        <img src="~/images/logo/logo.png" style="width:150px;height:200px;" />
+                    </div>
+                    <div>
+                        <span class="hidden">
+                            <input type="file" name="HRCompanyLogo">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#DataModel_IdHRCompanyType').change(function () {
+            populateOffice($(this).val());
+        });
+        function populateOffice(idOfficeType) {
+            $.ajax({
+                url: 'HRCompany/GetOfficeByOfficeType_Json',
+                type: 'GET',
+                dataType: 'JSON',
+                data: { idOfficeType: idOfficeType },
+                success: function (result) {
+                    var options = $('#DataModel_IdParent_HRCompany');
+                    $('option', options).remove();
+                    $.each(result, function () {
+                        options.append($('<option/>').val(this.Key).text(this.Value));
+                    });
+                }
+            });
+        }
+        $('select').select2({
+            width: '100%',
+            dropdownAutoWidth: true
+        });
+    });
+</script>
+

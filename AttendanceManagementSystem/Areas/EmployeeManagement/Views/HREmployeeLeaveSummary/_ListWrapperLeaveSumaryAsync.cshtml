@@ -1,0 +1,20 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeLeaveSummaryViewModelList
+@using SystemStores.GlobalMethod;
+@using SystemStores.ENUMData;
+<div class="breadcrumbs ace-save-state">
+    <div class="nav-search" id="nav-search">
+        <form class="form-search">
+            <span class="input-icon">
+                <a class="nav-search-input" href="~/@Model.BreadCrumbBaseURL/_PrintLeaveSummaryAsync?idHREmployee=@Model.IdHREmployee" data-ajax-model="">
+                    <i class="ace-icon fa fa-print nav-search-icon">@SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Print)</i>
+                </a>
+            </span>
+            <span class="input-icon">
+                <a class="nav-search-input" href="~/@Model.BreadCrumbBaseURL/_ExportLeaveSummaryAsync?idHREmployee=@Model.IdHREmployee">
+                    <i class="ace-icon fa fa-file-excel-o nav-search-icon">@SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Export)</i>
+                </a>
+            </span>
+        </form>
+    </div><!-- /.nav-search -->
+</div>
+@{ Html.RenderPartial("_ListLeaveSummaryAsync");}

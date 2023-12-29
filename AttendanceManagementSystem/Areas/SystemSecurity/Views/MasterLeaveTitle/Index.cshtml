@@ -1,0 +1,115 @@
+﻿@model SystemViewModels.SystemSecurity.MasterLeaveTitleViewModelList
+@using SystemStores.GlobalMethod;
+@using SystemStores.ENUMData;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="~/@Model.BreadCrumbBaseURL">@Model.BreadCrumbArea</a>
+        </li>
+        <li class="active">@Model.BreadCrumbTitle</li>
+    </ul><!-- /.breadcrumb -->
+    <div class="nav-search" id="nav-search">
+        <form class="form-search">
+            <span class="input-icon">
+                <a class="nav-search-input" href="@Url.Action("_PrintMasterLeaveTitleAsync",new { controller=Model.BreadCrumbController})" data-ajax-model="">
+                    <i class="ace-icon fa fa-print nav-search-icon">@SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Print)</i>
+                </a>
+            </span>
+            <span class="input-icon">
+                <a class="nav-search-input" href="~/@Model.BreadCrumbBaseURL/_ExportMasterLeaveTitleAsync">
+                    <i class="ace-icon fa fa-file-excel-o nav-search-icon">@SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Export)</i>
+                </a>
+            </span>
+            <span class="input-icon">
+                <a class="nav-search-input" href="#" id="Create_MasterLeaveTitle">
+                    <i class="ace-icon fa fa-plus  nav-search-icon">@SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Create)</i>
+                </a>
+            </span>
+            <span class="input-icon">
+                @Html.DropDownListFor(model => model.PageSize, new SelectList(AttendanceManagementSystem.Services.CommonServices.PageNumber), new { @class = "nav-search-input", @style = "width:55px;" })
+            </span>
+            <span class="input-icon">
+                <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-dateSearch" autocomplete="off" />
+                <i class="ace-icon fa fa-search nav-search-icon"></i>
+            </span>
+        </form>
+    </div><!-- /.nav-search -->
+</div>
+<div class="page-content">
+    @{ Html.RenderPartial("_SettingContainer");}
+    <div class="row">
+        <div id="replacetarget" class="col-xs-12">
+            @{ Html.RenderPartial("_ListMasterLeaveTitleAsync");}
+        </div>
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#PageSize').change(function () {
+        $('table,#mask').addClass('loading');
+        $.ajax({
+            url: '/@Model.BreadCrumbBaseURL/_ListMasterLeaveTitleAsync',
+            type: 'GET',
+            data: { pageNumber: 1, pageSize: $(this).val(), orderingBy: '@Model.OrderingBy', orderingDirection: '@Model.OrderingDirection', searchKey:''},
+            success: function (result) {
+                if (result == '"_Login_"') {
+                    window.location = "/Account/Login";
+                    return;
+                }
+                $('#content').html(result);
+                $('table,#mask').removeClass('loading');
+            }
+        });
+    });
+        $(function () {
+        $.ajaxSetup({ cache: false });
+            $('#Create_MasterLeaveTitle').click(function (e) {
+            var url;
+                url = '/@Model.BreadCrumbBaseURL' + '/_CreateMasterLeaveTitleAsync';
+            $('#myModalContent').load(url, function () {
+                $('#myModal').modal({
+                    keyboard: true
+                }, 'show');
+                bindAjaxForm(this);
+            });
+            return false;
+        });
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var delay = (function () {
+            var timer = 0;
+            return function (callback, ms, that) {
+                clearTimeout(timer);
+                timer = setTimeout(callback.bind(that), ms);
+            };
+        })();
+        $('#nav-search-dateSearch').keyup(function () {
+            $('table,#mask').addClass('loading');
+            delay(function () {
+             $.ajax({
+                    url: '/@Model.BreadCrumbBaseURL/_ListMasterLeaveTitleAsync',
+                 type: 'GET',
+                 data: { pageNumber:1, pageSize: $('#PageSize').val(), orderingBy: '@Model.OrderingBy', orderingDirection: '@Model.OrderingDirection', searchKey: $(this).val() },
+				    success: function (result) {
+				        if (result == '"_Login_"') {
+				            window.location = "/Account/Login";
+				            return;
+				        }
+				        $('#content').html(result);
+				        $('table,#mask').removeClass('loading');
+				    }
+				});
+            }, 1000, this);
+        });
+    });
+</script>

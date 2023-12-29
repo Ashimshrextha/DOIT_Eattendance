@@ -1,0 +1,132 @@
+﻿@model SystemStores.GlobalModels.BreadCrumbModel
+@using SystemStores.GlobalMethod;
+@using SystemStores.ENUMData;
+@Html.HiddenFor(x => x.Date)
+<link href="~/Content/bootstrap-datepicker3.min.css" rel="stylesheet" />
+
+<style>
+    .control-label {
+        margin-bottom: 0px
+    }
+
+    .form-control {
+        margin-top: -10px
+    }
+</style>
+
+<div class="ace-settings-container" id="ace-settings-container">
+    <div class="btn btn-app btn-xs btn-success ace-settings-btn" id="ace-settings-btn">
+        <i class="ace-icon fa fa-cog bigger-130"></i>
+    </div>
+    <div class="ace-settings-box clearfix" id="ace-settings-box">
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="form-group-mini" id="hiddenfile">
+                @Html.LabelFor(model => model.ParentHRCompany, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.ParentHRCompany, new { @class = "form-control", @readonly = "readonly", @id = "ParentName" })
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="form-group-mini">
+                @Html.LabelFor(model => model.IdHRCompany, new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.IdHRCompany, new SelectList(Model.DDLCompany, "Key", "Value"), "--Select---", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdHRCompany)
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="form-group-mini">
+                @Html.LabelFor(model => model.IdDivision, new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.IdDivision, new SelectList("", "Key", "Value"), "--Select All--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdDivision)
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="form-group-mini">
+                @Html.LabelFor(model => model.IdJobStatus, new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.IdJobStatus, new SelectList(Model.DDLJobStatus, "Key", "Value"), "--Select All--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdJobStatus)
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="form-group-mini">
+                @Html.LabelFor(model => model.IdHREmployee, new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.IdHREmployee, new SelectList("", "Key", "Value"), "--Select All--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdHREmployee)
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="form-group-mini">
+                @Html.LabelFor(model => model.DateNp, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DateNp, "{0:yyyy-MM-dd}", new { @Value = Model.DateNp, @class = "form-control", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.DateNp)
+            </div>
+        </div>
+        <div class="pull-right">
+            <button class="btn btn-sm btn-success" id="Search_EarlyCheckout">
+                @SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Search)
+            </button>
+            <button class="btn btn-sm btn-default" id="Print_EarlCheckout">
+                @SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Print)
+            </button>
+        </div><!-- /.pull-left -->
+    </div><!-- /.ace-settings-box -->
+</div><!-- /.ace-settings-container -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(function () {
+			$.ajaxSetup({ cache: false });
+            $('#Search_EarlyCheckout').click(function (e) {
+                 if ($('#IdHRCompany').val() == 0) {
+                    $.notify({
+                        title: '<strong>Please Select</strong>',
+                        message: 'Office'
+                    }, {
+                            type: 'danger'
+                        });
+                    return false;
+                };
+				var $loading = $('<img src="/images/Icon/ajaxLoading.gif" alt="loading..." class="ui-loading-icon img_loading_center">');
+                $("#replacetarget_EarlyCheckoutAttendanceReport").html($loading);
+				$.ajax({
+                    url: '/@Model.BreadCrumbBaseURL' + '/_ListEarlyCheckoutAttendanceReportAsync',
+					data:
+						{
+							idHRCompany: $('#IdHRCompany').val(),
+                            idHRCompanyDivision: $('#IdDivision').val(),
+                            idJobStatus: $('#IdJobStatus').val(),
+							idHREmployee: $('#IdHREmployee').val(),
+                            date: $('#Date').val(),
+                            pageNumber: '@Model.PageNumber',
+							pageSize: $('#PageSize').val(),
+							orderingBy: '@Model.OrderingBy',
+							orderingDirection: '@Model.OrderingDirection',
+							searchKey: $('#SearchKey').val()
+						},
+					cache: false,
+					type: "GET",
+					dataType: "html",
+					success: function (result) {
+						if (result == '"_Login_"') {
+							window.location = "/Account/Login";
+							return;
+						}
+                        $("#replacetarget_EarlyCheckoutAttendanceReport").html(result);
+					}
+				});
+			    return false;
+            });
+		});
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#DateNp').nepaliDatePicker({
+            npdMonth: true,
+            npdYear: true,
+            onChange: function () {
+                $('#Date').val(BS2AD($('#DateNp').val()));
+            }
+        });
+    });
+</script>
+<script src="~/Scripts/CustomScripts/ReportSearchAction.js"></script>

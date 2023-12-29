@@ -1,0 +1,165 @@
+﻿@model SystemViewModels.CompanyManagement.HRCompanyViewModelList
+@using SystemStores.GlobalMethod;
+@using SystemStores.ENUMData;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var role = Model.SessionDetails.IdRoleType==0?true:false;
+}
+
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="~/@Model.BreadCrumbBaseURL">@Model.BreadCrumbTitle</a>
+        </li>
+        <li class="active">@Model.BreadCrumbTitle</li>
+    </ul><!-- /.breadcrumb -->
+    <div class="nav-search" id="nav-search">
+        <form class="form-search">
+            <span class="input-icon">
+                <a class="nav-search-input" id="Print_company"  style="cursor:pointer" data-ajax-model="">
+                    <i class="ace-icon fa fa-print nav-search-icon">@SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Print)</i>
+                </a>
+            </span>
+            <span class="input-icon">
+                <a class="nav-search-input"  href="@Url.Action("_ExportHRCompanyAsync",new { searchKey =Model.SearchKey,searchKey1=Model.SearchKey1 })" >
+                    <i class="ace-icon fa fa-file-excel-o nav-search-icon">@SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Export)</i>
+                </a>
+            </span>
+            <span class="input-icon">
+                <a class="nav-search-input" href="#" id="Create_SupportEmployee">
+                    <i class="ace-icon fa fa-plus  nav-search-icon">@SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Create)</i>
+                </a>
+            </span>
+            <span class="input-icon">
+                @Html.DropDownListFor(model => model.PageSize, new SelectList(AttendanceManagementSystem.Services.CommonServices.PageNumber), new { @class = "nav-search-input", @style = "width:55px;" })
+            </span>
+            <span class="input-icon">
+                <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                <i class="ace-icon fa fa-search nav-search-icon"></i>
+            </span>
+          @if (role)
+          {
+                 <span class="input-icon">
+                @Html.DropDownListFor(model => model.SearchKey1, new SelectList(Model.DDLCompanyType, "Key", "Value"), "--सबै--", new { @class = "form-control" ,@id= "nav-search-input1" })
+                 </span>
+          }
+           
+
+        </form>
+    </div><!-- /.nav-search -->
+</div>
+<div class="page-content">
+    @{ Html.RenderPartial("_SettingContainer");}
+    <div class="row">
+        <div id="replacetarget_SupportEmployee" class="col-xs-12">
+            @{ Html.RenderPartial("_ListHRCompanyAsync");}
+        </div>
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#PageSize').change(function () {
+        $('table,#mask').addClass('loading');
+        $.ajax({
+            url: '/@Model.BreadCrumbBaseURL/_ListHRCompanyAsync',
+            type: 'GET',
+            data: { pageNumber: 1, pageSize: $(this).val(), orderingBy: '@Model.OrderingBy', orderingDirection: '@Model.OrderingDirection', searchKey: $('#nav-search-input').val(), searchKey1: $('#nav-search-input1').val() },
+            success: function (result) {
+                if (result == '"_Login_"') {
+                    window.location = "/Account/Login";
+                    return;
+                }
+                $('#content').html(result);
+                $('table,#mask').removeClass('loading');
+            }
+        });
+        });
+        $(function () {
+        $.ajaxSetup({ cache: false });
+            $('#Create_SupportEmployee').click(function (e) {
+            var url;
+                url = '/@Model.BreadCrumbBaseURL' + '/_CreateHRCompanyAsync';
+            $('#myModalContent').load(url, function () {
+                $('#myModal').modal({
+                    keyboard: true
+                }, 'show');
+                bindAjaxForm(this);
+            });
+            return false;
+        });
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var delay = (function () {
+            var timer = 0;
+            return function (callback, ms, that) {
+                clearTimeout(timer);
+                timer = setTimeout(callback.bind(that), ms);
+            };
+        })();
+
+        $('#nav-search-input').keyup(function () {
+            $('table,#mask').addClass('loading');
+            delay(function () {
+                $.ajax({
+                    url: '/CompanyManagement/HRCompany/_ListHRCompanyAsync',
+                    type: 'GET',
+                    data: { pageNumber: 1, pageSize: $('#PageSize').val(), orderingBy: '@Model.OrderingBy', orderingDirection: '@Model.OrderingDirection', searchKey: $('#nav-search-input').val(), searchKey1: $('#nav-search-input1').val() },
+                    success: function (result) {
+                        if (result == '"_Login_"') {
+                            window.location = "/Account/Login";
+                            return;
+                        }
+                        $('#content').html(result);
+                        $('table,#mask').removeClass('loading');
+                    }
+                });
+            }, 1000, this);
+        });
+
+
+        $('#nav-search-input1').change(function () {
+            $('table,#mask').addClass('loading');
+            delay(function () {
+                $.ajax({
+                    url: '/CompanyManagement/HRCompany/_ListHRCompanyAsync',
+                    type: 'GET',
+                    data: { pageNumber: 1, pageSize: $('#PageSize').val(), orderingBy: '@Model.OrderingBy', orderingDirection: '@Model.OrderingDirection', searchKey: $('#nav-search-input').val(), searchKey1: $('#nav-search-input1').val() },
+                    success: function (result) {
+                        if (result == '"_Login_"') {
+                            window.location = "/Account/Login";
+                            return;
+                        }
+                        $('#content').html(result);
+                        $('table,#mask').removeClass('loading');
+                    }
+                });
+            }, 1000, this);
+        });
+
+        $('#Print_company').click(function () {
+
+            var searchKey = $('#nav-search-input').val()
+            var searchKey1 = $('#nav-search-input1').val()
+            if (searchKey1 == '') {
+                searchKey1 = 0;
+            }
+            var url;
+            url = '/CompanyManagement/HRCompany/_PrintHRCompanyAsync?searchKey=' + searchKey + '&searchKey1=' + searchKey1,
+                $('#myModalContent').load(url, function () {
+                    $('#myModal').modal({
+                        keyboard: true
+                    }, 'show');
+                    bindAjaxForm(this);
+                });
+            return false;
+        });
+
+    });
+  
+</script>
+

@@ -1,0 +1,969 @@
+﻿@model SystemViewModels.Reports.MonthlyAttendanceSheetViewModelList
+
+
+@*here we use this for whole design*@
+<style type="text/css">
+    table.r {
+        border-collapse: collapse;
+        width: 100%;
+        overflow-x: scroll;
+        display: block;
+    }
+
+    .r thead {
+        background-color: #EFEFEF;
+    }
+
+    .r thead,
+    .r tbody {
+        display: block;
+    }
+
+    .r tbody {
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: calc(100hv)-100px;
+    }
+
+    .r th {
+        text-transform: uppercase;
+    }
+
+    .r td,
+    .r th {
+        min-width: 70px;
+        height: 35px;
+        border: dashed 1px lightblue;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 70px;
+    }
+
+    .sat {
+        background-color: #E5B555;
+    }
+</style>
+
+
+
+
+<style>
+    table.r {
+        position: relative;
+        background-color: #f3f3f3;
+        overflow: hidden;
+        border-collapse: collapse;
+    }
+
+    .r thead {
+        position: relative;
+        display: block;
+        overflow: visible;
+    }
+
+        .r thead th {
+            height: 53px;
+            border: 1px solid #222;
+        }
+
+            .r thead th:nth-child(1) {
+                position: relative;
+                display: block;
+                background-color: #efeff3;
+            }
+
+    .r tbody {
+        position: relative;
+        display: block;
+        height: 40em;
+        overflow: scroll;
+    }
+
+        .r tbody td {
+            background-color: #efeff3;
+            border: 1px solid #222;
+        }
+
+        .r tbody tr td:nth-child(1) {
+            position: relative;
+            display: block;
+            background-color: #efeff3;
+        }
+</style>
+<style>
+    table.r {
+        position: relative;
+        background-color: #f3f3f3;
+        overflow: hidden;
+        border-collapse: collapse;
+    }
+
+    .r thead {
+        position: relative;
+        display: block;
+        overflow: visible;
+    }
+
+        .r thead th {
+            height: 53px;
+            border: 1px solid #222;
+        }
+
+            .r thead th:nth-child(2) {
+                position: absolute;
+                display: block;
+                background-color: #efeff3;
+            }
+
+    .r tbody {
+        position: relative;
+        display: block;
+        height: 40em;
+        overflow: scroll;
+    }
+
+        .r tbody td {
+            background-color: #efeff3;
+            border: 1px solid #222;
+        }
+
+        .r tbody tr td:nth-child(2) {
+            position: absolute;
+            display: block;
+            background-color: #efeff3;
+        }
+</style>
+<style>
+    table.r {
+        position: relative;
+        background-color: #f3f3f3;
+        overflow: hidden;
+        border-collapse: collapse;
+    }
+
+    .r thead {
+        position: relative;
+        display: block;
+        overflow: visible;
+    }
+
+        .r thead th {
+            height: 53px;
+            border: 1px solid #222;
+        }
+
+            .r thead th:nth-child(6) {
+                position: relative;
+                display: block;
+                background-color: #efeff3;
+            }
+
+    .r tbody {
+        position: relative;
+        display: block;
+        height: 40em;
+        overflow: scroll;
+    }
+
+        .r tbody td {
+            background-color: #efeff3;
+            border: 1px solid #222;
+        }
+
+        .r tbody tr td:nth-child(6) {
+            position: relative;
+            display: block;
+            background-color: #efeff3;
+        }
+</style>
+<style>
+    table.r {
+        position: relative;
+        background-color: #f3f3f3;
+        overflow: hidden;
+        border-collapse: collapse;
+    }
+
+    .r thead {
+        position: relative;
+        display: block;
+        overflow: visible;
+    }
+
+        .r thead th {
+            height: 53px;
+            border: 1px solid #222;
+        }
+
+            .r thead th:nth-child(7) {
+                position: relative;
+                display: block;
+                background-color: #efeff3;
+            }
+
+    .r tbody {
+        position: relative;
+        display: block;
+        height: 40em;
+        overflow: scroll;
+    }
+
+        .r tbody td {
+            background-color: #efeff3;
+            border: 1px solid #222;
+        }
+
+        .r tbody tr td:nth-child(7) {
+            position: relative;
+            display: block;
+            background-color: #efeff3;
+        }
+</style>
+<script>
+    $(document).ready(function () {
+        $('.r tbody').scroll(function (e) {
+            $('.r thead').css("left", -$(".r tbody").scrollLeft());
+            $('.r thead th:nth-child(1)').css("left", $(".r tbody").scrollLeft());
+            $('.r tbody td:nth-child(1)').css("left", $(".r tbody").scrollLeft());
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('.r tbody').scroll(function (e) {
+            $('.r thead').css("left", -$(".r tbody").scrollLeft());
+            $('.r thead th:nth-child(2)').css("left", $(".r tbody").scrollLeft());
+            $('.r tbody td:nth-child(2)').css("left", $(".r tbody").scrollLeft());
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('.r tbody').scroll(function (e) {
+            $('.r thead').css("left", -$(".r tbody").scrollLeft());
+            $('.r thead th:nth-child(6)').css("left", $(".r tbody").scrollLeft());
+            $('.r tbody td:nth-child(6)').css("left", $(".r tbody").scrollLeft());
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('.r tbody').scroll(function (e) {
+            $('.r thead').css("left", -$(".r tbody").scrollLeft());
+            $('.r thead th:nth-child(7)').css("left", $(".r tbody").scrollLeft());
+            $('.r tbody td:nth-child(7)').css("left", $(".r tbody").scrollLeft());
+        });
+    });
+</script>
+
+
+
+
+
+<div id="replacetarget">
+    <div id="content" class="content">
+        <div class="dataTables_wrapper">
+            <div id="mask-container">
+                <div id="mask"></div>
+                <div class="table-responsive">
+                    <table class="table table-bordered r" id="table3" width="100%">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="height:73px;">क.संकेत नं.</th>
+                                <th style="min-width:209px; position:absolute;margin-left: 71px;margin-top: -74px;height:73px;"> कर्मचारी नाम</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th style="position:relative; height:73px">पद</th>
+                                <th class="text-center" style="min-width:90px; position:relative;margin-left: 70px;margin-top: -73px; height:73px;">आएको/गएको</th>
+                                @foreach (var item in Model.DBReportHeader)
+                                {
+                                    <th class="text-center @(item.DOW=="Saturday"?"sat":"")">
+                                        @item.NumberInNepali <br />
+                                        @item.DOWShortNP
+                                    </th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                    int value = 0;
+                                }
+                            @foreach (var item in Model.DBModel)
+                            {
+                                <tr>
+                                    <td class="text-center" style="height:73px;">
+                                        <i class="fa bigger-110">@item.PISNumber</i>
+                                    </td>
+                                    <td class="blue" style="min-width:211px;position:absolute;margin-left: 70px;margin-top: -73px; height:73px;">
+                                        <i class="fa bigger-140">@item.EmployeeName</i>
+                                    </td>
+                                    <td class="blue text-center">
+                                        <i class="fa bigger-110"></i>
+                                    </td>
+                                    <td class="blue text-center">
+                                        <i class="fa bigger-110"></i>
+                                    </td>
+                                    <td class="blue text-center">
+                                        <i class="fa bigger-110"></i>
+                                    </td>
+                                    <td class="blue text-center" style="position:relative; height:73px;">
+                                        <i class="fa bigger-110">@item.DesignationTitle</i>
+                                    </td>
+                                    <td class="text-center" style="min-width:90px; position:relative;margin-left: 70px;margin-top: -73px; height:73px;">
+                                        <p>आएको</p>
+                                        <p>गएको</p>
+                                    </td>
+
+                                    <td style="background-color:@item.C1 ;" class="text-center">
+                                        <p>@item.CIN1</p>
+                                        <p>@item.COUT1</p>
+                                    </td>
+                                    <td style="background-color:@item.C2 ;" class="text-center">
+                                        <p>@item.CIN2</p>
+                                        <p>@item.COUT2</p>
+                                    </td>
+                                    <td style="background-color:@item.C3 ;" class="text-center">
+                                        <p>@item.CIN3</p>
+                                        <p>@item.COUT3</p>
+                                    </td>
+                                    <td style="background-color:@item.C4 ;" class="text-center">
+                                        <p>@item.CIN4</p>
+                                        <p>@item.COUT4</p>
+                                    </td>
+                                    <td style="background-color:@item.C5 ;" class="text-center">
+                                        <p>@item.CIN5</p>
+                                        <p>@item.COUT5</p>
+                                    </td>
+                                    <td style="background-color:@item.C6 ;" class="text-center">
+                                        <p>@item.CIN6</p>
+                                        <p>@item.COUT6</p>
+                                    </td>
+                                    <td style="background-color:@item.C7 ;" class="text-center">
+                                        <p>@item.CIN7</p>
+                                        <p>@item.COUT7</p>
+                                    </td>
+                                    <td style="background-color:@item.C8 ;" class="text-center">
+                                        <p>@item.CIN8</p>
+                                        <p>@item.COUT8</p>
+                                    </td>
+                                    <td style="background-color:@item.C9 ;" class="text-center">
+                                        <p>@item.CIN9</p>
+                                        <p>@item.COUT9</p>
+                                    </td>
+                                    <td style="background-color:@item.C10;" class="text-center">
+                                        <p>@item.CIN10</p>
+                                        <p>@item.COUT10</p>
+                                    </td>
+                                    <td style="background-color:@item.C11;" class="text-center">
+                                        <p>@item.CIN11</p>
+                                        <p>@item.COUT11</p>
+                                    </td>
+                                    <td style="background-color:@item.C12;" class="text-center">
+                                        <p>@item.CIN12</p>
+                                        <p>@item.COUT12</p>
+                                    </td>
+                                    <td style="background-color:@item.C13;" class="text-center">
+                                        <p>@item.CIN13</p>
+                                        <p>@item.COUT13</p>
+                                    </td>
+                                    <td style="background-color:@item.C14;" class="text-center">
+                                        <p>@item.CIN14</p>
+                                        <p>@item.COUT14</p>
+                                    </td>
+                                    <td style="background-color:@item.C15;" class="text-center">
+                                        <p>@item.CIN15</p>
+                                        <p>@item.COUT15</p>
+                                    </td>
+                                    <td style="background-color:@item.C16;" class="text-center">
+                                        <p>@item.CIN16</p>
+                                        <p>@item.COUT16</p>
+                                    </td>
+                                    <td style="background-color:@item.C17;" class="text-center">
+                                        <p>@item.CIN17</p>
+                                        <p>@item.COUT17</p>
+                                    </td>
+                                    <td style="background-color:@item.C18;" class="text-center">
+                                        <p>@item.CIN18</p>
+                                        <p>@item.COUT18</p>
+                                    </td>
+                                    <td style="background-color:@item.C19;" class="text-center">
+                                        <p>@item.CIN19</p>
+                                        <p>@item.COUT19</p>
+                                    </td>
+                                    <td style="background-color:@item.C20;" class="text-center">
+                                        <p>@item.CIN20</p>
+                                        <p>@item.COUT20</p>
+                                    </td>
+                                    <td style="background-color:@item.C21;" class="text-center">
+                                        <p>@item.CIN21</p>
+                                        <p>@item.COUT21</p>
+                                    </td>
+                                    <td style="background-color:@item.C22;" class="text-center">
+                                        <p>@item.CIN22</p>
+                                        <p>@item.COUT22</p>
+                                    </td>
+                                    <td style="background-color:@item.C23;" class="text-center">
+                                        <p>@item.CIN23</p>
+                                        <p>@item.COUT23</p>
+                                    </td>
+                                    <td style="background-color:@item.C24;" class="text-center">
+                                        <p>@item.CIN24</p>
+                                        <p>@item.COUT24</p>
+                                    </td>
+                                    <td style="background-color:@item.C25;" class="text-center">
+                                        <p>@item.CIN25</p>
+                                        <p>@item.COUT25</p>
+                                    </td>
+                                    <td style="background-color:@item.C26;" class="text-center">
+                                        <p>@item.CIN26</p>
+                                        <p>@item.COUT26</p>
+                                    </td>
+                                    <td style="background-color:@item.C27;" class="text-center">
+                                        <p>@item.CIN27</p>
+                                        <p>@item.COUT27</p>
+                                    </td>
+                                    <td style="background-color:@item.C28;" class="text-center">
+                                        <p>@item.CIN28</p>
+                                        <p>@item.COUT28</p>
+                                    </td>
+                                    <td style="background-color:@item.C29;" class="text-center">
+                                        <p>@item.CIN29</p>
+                                        <p>@item.COUT29</p>
+                                    </td>
+                                    <td style="background-color:@item.C30;" class="text-center">
+                                        <p>@item.CIN30</p>
+                                        <p>@item.COUT30</p>
+                                    </td>
+                                    <td style="background-color:@item.C31;" class="text-center">
+                                        <p>@item.CIN31</p>
+                                        <p>@item.COUT31</p>
+                                    </td>
+                                    <td style="background-color:@item.C32;" class="text-center">
+                                        <p>@item.CIN32</p>
+                                        <p>@item.COUT32</p>
+                                    </td>
+
+
+
+
+
+
+                                    @*<td style="background-color:@item.C1 ;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN1 != "अनु")
+                                            {
+                                                <p>@item.CIN1</p>
+                                                <p>@item.COUT1</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN1</p><p>@item.COUT1</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C2 ;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN2 != "अनु")
+                                            {
+                                                <p>@item.CIN2</p>
+                                                <p>@item.COUT2</p>
+                                            }
+                                            else
+                                            {
+
+                                                <a class="nav-search-input" href="" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN2</p><p>@item.COUT2</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C3 ;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN3 != "अनु")
+                                            {
+                                                <p>@item.CIN3</p>
+                                                <p>@item.COUT3</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN3</p><p>@item.COUT3</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C4 ;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN4 != "अनु")
+                                            {
+                                                <p>@item.CIN4</p>
+                                                <p>@item.COUT4</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN4</p><p>@item.COUT4</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C5 ;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN5 != "अनु")
+                                            {
+                                                <p>@item.CIN5</p>
+                                                <p>@item.COUT5</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="#" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN5</p><p>@item.COUT5</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C6 ;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN6 != "अनु")
+                                            {
+                                                <p>@item.CIN6</p>
+                                                <p>@item.COUT6</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="#" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN6</p><p>@item.COUT6</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C7 ;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN7 != "अनु")
+                                            {
+                                                <p>@item.CIN7</p>
+                                                <p>@item.COUT7</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="#" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN7</p><p>@item.COUT7</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C8 ;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN8 != "अनु")
+                                            {
+                                                <p>@item.CIN8</p>
+                                                <p>@item.COUT8</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="#" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN8</p><p>@item.COUT8</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C9 ;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN9 != "अनु")
+                                            {
+                                                <p>@item.CIN9</p>
+                                                <p>@item.COUT9</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="#" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN9</p><p>@item.COUT9</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C10;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN10 != "अनु")
+                                            {
+                                                <p>@item.CIN10</p>
+                                                <p>@item.COUT10</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="#" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN10</p><p>@item.COUT10</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C11;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN11 != "अनु")
+                                            {
+                                                <p>@item.CIN11</p>
+                                                <p>@item.COUT11</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="#" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN11</p><p>@item.COUT11</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C12;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN12 != "अनु")
+                                            {
+                                                <p>@item.CIN12</p>
+                                                <p>@item.COUT12</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="#" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN12</p><p>@item.COUT12</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C13;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN13 != "अनु")
+                                            {
+                                                <p>@item.CIN13</p>
+                                                <p>@item.COUT13</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="#" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN13</p><p>@item.COUT13</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C14;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN14 != "अनु")
+                                            {
+                                                <p>@item.CIN14</p>
+                                                <p>@item.COUT14</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="#" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN14</p><p>@item.COUT14</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C15;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN14 != "अनु")
+                                            {
+                                                <p>@item.CIN15</p>
+                                                <p>@item.COUT15</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="#" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN14</p><p>@item.COUT14</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C16;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN16 != "अनु")
+                                            {
+                                                <p>@item.CIN16</p>
+                                                <p>@item.COUT16</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="#" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN16</p><p>@item.COUT16</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C17;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN17 != "अनु")
+                                            {
+                                                <p>@item.CIN17</p>
+                                                <p>@item.COUT17</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="#" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN17</p><p>@item.COUT17</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C18;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN18 != "अनु")
+                                            {
+                                                <p>@item.CIN18</p>
+                                                <p>@item.COUT18</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="#" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN18</p><p>@item.COUT18</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C19;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN19 != "अनु")
+                                            {
+                                                <p>@item.CIN19</p>
+                                                <p>@item.COUT19</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="#" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN19</p><p>@item.COUT19</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C20;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN20 != "अनु")
+                                            {
+                                                <p>@item.CIN20</p>
+                                                <p>@item.COUT20</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="#" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN20</p><p>@item.COUT20</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C21;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN21 != "अनु")
+                                            {
+                                                <p>@item.CIN21</p>
+                                                <p>@item.COUT21</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="#" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN21</p><p>@item.COUT21</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C22;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN22 != "अनु")
+                                            {
+                                                <p>@item.CIN22</p>
+                                                <p>@item.COUT22</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="#" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN22</p><p>@item.COUT22</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C23;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN23 != "अनु")
+                                            {
+                                                <p>@item.CIN23</p>
+                                                <p>@item.COUT23</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="#" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN23</p><p>@item.COUT23</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C24;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN24 != "अनु")
+                                            {
+                                                <p>@item.CIN24</p>
+                                                <p>@item.COUT24</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="#" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN24</p><p>@item.COUT24</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C25;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN25 != "अनु")
+                                            {
+                                                <p>@item.CIN25</p>
+                                                <p>@item.COUT25</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="#" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN25</p><p>@item.COUT25</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C26;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN26 != "अनु")
+                                            {
+                                                <p>@item.CIN26</p>
+                                                <p>@item.COUT26</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="#" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN26</p><p>@item.COUT26</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C27;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN27 != "अनु")
+                                            {
+                                                <p>@item.CIN27</p>
+                                                <p>@item.COUT27</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="#" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN27</p><p>@item.COUT27</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C28;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN28 != "अनु")
+                                            {
+                                                <p>@item.CIN28</p>
+                                                <p>@item.COUT28</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="#" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN28</p><p>@item.COUT28</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C29;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN29 != "अनु")
+                                            {
+                                                <p>@item.CIN29</p>
+                                                <p>@item.COUT29</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="#" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN29</p><p>@item.COUT29</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C30;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN30 != "अनु")
+                                            {
+                                                <p>@item.CIN30</p>
+                                                <p>@item.COUT30</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="#" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN30</p><p>@item.COUT30</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C31;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN31 != "अनु")
+                                            {
+                                                <p>@item.CIN31</p>
+                                                <p>@item.COUT31</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="#" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN31</p><p>@item.COUT31</p></a>
+                                            }
+                                        </td>
+                                        <td style="background-color:@item.C32;" class="text-center">
+                                            @{
+                                                value = value + 1;
+                                            }
+                                            @if (item.CIN32 != "अनु")
+                                            {
+                                                <p>@item.CIN32</p>
+                                                <p>@item.COUT32</p>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-search-input" href="#" id="Create_HREmployeeLeaveHistory_@value"><p>@item.CIN32</p><p>@item.COUT32</p></a>
+                                            }
+                                        </td>*@
+
+
+
+
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div aria-live="polite" role="status" id="example_info" class="dataTables_info">
+                    <div class="row">
+                        <div class="col-md-4">Showing @(Model.DBModel.PageCount < Model.PageNumber ? 0 : Model.DBModel.FirstItemOnPage) to @Model.DBModel.LastItemOnPage of @Model.DBModel.TotalItemCount entries in @Model.DBModel.PageCount Pages</div>
+                        <div class="col-md-8 dataTables_paginate paging_simple_numbers" id="example_paginate">@Html.PagedListPager(Model.DBModel, page => Url.Action("_ListMonthlyAttendanceSheetAsync", new { idHRCompany = Model.IdHRCompany, idHRCompanyDivision = Model.IdDivision, idJobStatus = Model.IdJobStatus, idHREmployee = Model.IdHREmployee, year = Model.YearNp, month = Model.MonthNp, pageNumber = page, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection }))</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('table').on('scroll', function () {
+            $("#" + this.id + " > *").width($(this).width() + $(this).scrollLeft());
+        });
+    });
+</script>
+@*<script type="text/javascript">
+        $(document).ready(function () {
+            $(function () {
+                $.ajaxSetup({ cache: false });
+                $('.nav-search-input').click(function (e) {
+                    var url;
+                    url = '/EmployeeManagement/HREmployeeLeaveHistory/_CreateHREmployeeLeaveHistoryAsync?idHREmployee=' + 0 + '&pageNumber=' + 1 + '&pageSize=' + 10 + '&orderingBy=' + 'Id' + '&orderingDirection=' + 'DESC';
+                    $('#myModalContent').load(url, function () {
+                        $('#myModal').modal({
+                            keyboard: true
+                        }, 'show');
+                        bindAjaxLeaveForm(this);
+                    });
+                    return false;
+                });
+            });
+            function bindAjaxLeaveForm(dialog) {
+                $('#ajaxForm').ajaxForm({
+                    success: function (data, textStatus, xhr) {
+                        if (data == '"_Login_"') {
+                            window.location = "/Account/Login";
+                            return;
+                        }
+                        $('#myModal').modal('hide');
+                        $('#replacetarget_leave').html(data);
+                    },
+                    error: function (xhr, status) {
+                        $('#myModalContent').html(xhr.responseText, xhr.status);
+                        // enable reserve button again
+                        $('#btnSubmit').val($('#btnSubmit').val());
+                        $('#btnSubmit').prop('disabled', false);
+                        bindAjaxLeaveForm(dialog);
+                    }
+                }).submit(function () {
+                    $('#btnSubmit').val($('#btnSubmit').val());
+                    $('#btnSubmit').prop('disabled', false);
+                });
+                return false;
+            }
+        });
+    </script>*@
+

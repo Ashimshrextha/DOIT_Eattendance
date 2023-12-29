@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E288F56D-7475-4640-B301-2B4F8E88146B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SystemModels</RootNamespace>
+    <AssemblyName>SystemModels</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Auditable\AuditableEntity.cs" />
+    <Compile Include="Auditable\EntityId.cs" />
+    <Compile Include="CompanyManagement\EmployeeShiftRoasterSelectedModel.cs" />
+    <Compile Include="CompanyManagement\HRCompanyAssignNotificationModel.cs" />
+    <Compile Include="CompanyManagement\HRCompanyDeviceMonitorModel.cs" />
+    <Compile Include="CompanyManagement\HRCompanyDivisionModel.cs" />
+    <Compile Include="CompanyManagement\HRCompanyDivisionTypeModel.cs" />
+    <Compile Include="CompanyManagement\HRCompanyHistoryModel.cs" />
+    <Compile Include="CompanyManagement\HRCompanyHREmployeeBulkKaajModel.cs" />
+    <Compile Include="CompanyManagement\HRCompanyHREmployeeShiftDateModel.cs" />
+    <Compile Include="CompanyManagement\HRCompanyHREmployeeCovidKaajModel.cs" />
+    <Compile Include="CompanyManagement\HRCompanyHREmployeeShiftRoasterModel.cs" />
+    <Compile Include="CompanyManagement\HRCompanyLeaveStatusTypeModel.cs" />
+    <Compile Include="CompanyManagement\HRCompanyOfficeLogsModel.cs" />
+    <Compile Include="CompanyManagement\HRCompanyManualAttendanceModel.cs" />
+    <Compile Include="CompanyManagement\ReportHeaderModel.cs" />
+    <Compile Include="CompanyManagement\HRCompanyModel.cs" />
+    <Compile Include="CompanyManagement\HRCompanyNotificationModel.cs" />
+    <Compile Include="CompanyManagement\HRCompanyShiftRoasterModel.cs" />
+    <Compile Include="CompanyManagement\HRCompanySystemSupportModel.cs" />
+    <Compile Include="CompanyManagement\HRDeviceModel.cs" />
+    <Compile Include="CompanyManagement\HREmployeeManualAttendanceModel.cs" />
+    <Compile Include="DeviceManagement\DeviceConnectionComponentModel.cs" />
+    <Compile Include="DeviceManagement\DeviceConnectionModel.cs" />
+    <Compile Include="DeviceManagement\DeviceLogsFetcherModel.cs" />
+    <Compile Include="DeviceManagement\DeviceLogsModel.cs" />
+    <Compile Include="DeviceManagement\BiometricTemplateTypeModel.cs" />
+    <Compile Include="DeviceManagement\HRDeviceModels.cs" />
+    <Compile Include="DeviceManagement\HRDeviceModelUserVerficationModeModel.cs" />
+    <Compile Include="DeviceManagement\HREmployeeBiometricTemplateModel.cs" />
+    <Compile Include="EmployeeManagement\HRDesignationModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeAddressModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeAttendanceHistoryModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeBankAccountModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeCompanyFacilityModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeContactModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeEducationModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeEducationTypeModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeJobHistoryModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeKaajHistoryModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeLeaveBalanceModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeLeaveCancelModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeLeaveHistoryModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeLeaveManagementModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeNationalIdentityModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeePropertyModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeSalaryHistoryModel.cs" />
+    <Compile Include="EmployeeManagement\KaajAppliedSummaryModel.cs" />
+    <Compile Include="EmployeeManagement\LeaveAppliedSummaryModel.cs" />
+    <Compile Include="Feedback\SystemCommentModel.cs" />
+    <Compile Include="Feedback\SystemCommentResponseModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\EarlyCheckoutAttendanceReportModel.cs" />
+    <Compile Include="Reports\ExploreDateRangeModel.cs" />
+    <Compile Include="Reports\UserLogsModel.cs" />
+    <Compile Include="SystemAuthentication\LoginHistoryModel.cs" />
+    <Compile Include="SystemAuthentication\LoginModel.cs" />
+    <Compile Include="SystemAuthentication\LoginsModel.cs" />
+    <Compile Include="SystemAuthentication\MembershipProviderModel.cs" />
+    <Compile Include="SystemSecurity\HRCalendarModel.cs" />
+    <Compile Include="SystemSecurity\HRCompanyCodeModel.cs" />
+    <Compile Include="SystemSecurity\MasterLeaveTitleModel.cs" />
+    <Compile Include="SystemSecurity\SystemDetailCategoryModel.cs" />
+    <Compile Include="SystemSecurity\SystemDetailModel.cs" />
+    <Compile Include="SystemSecurity\SystemMenuModel.cs" />
+    <Compile Include="SystemSecurity\SystemStructureModel.cs" />
+    <Compile Include="SystemSetting\HREmployeeConatctTypeModel.cs" />
+    <Compile Include="SystemSetting\MonthNpModel.cs" />
+    <Compile Include="SystemSetting\HRCalendarModel.cs" />
+    <Compile Include="SystemSetting\HRCompanyLeaveTypeModel.cs" />
+    <Compile Include="SystemSetting\HRCompanyTypeModel.cs" />
+    <Compile Include="SystemSetting\HREmployeeBankListModel.cs" />
+    <Compile Include="SystemSetting\HREmployeeBloodGroupModel.cs" />
+    <Compile Include="SystemSetting\HREmployeeCategoryModel.cs" />
+    <Compile Include="SystemSetting\HREmployeeGenderModel.cs" />
+    <Compile Include="SystemSetting\HREmployeeJobStatusModel.cs" />
+    <Compile Include="SystemSetting\HREmployeeMaritalModel.cs" />
+    <Compile Include="SystemSetting\HREmployeeNationalIdentityTypeModel.cs" />
+    <Compile Include="SystemSetting\HREmployeeRelationTypeModel.cs" />
+    <Compile Include="SystemSetting\HREmployeeRoleModel.cs" />
+    <Compile Include="SystemSetting\HREmployeeServiceTypeGroupModel.cs" />
+    <Compile Include="SystemSetting\HREmployeeServiceTypeModel.cs" />
+    <Compile Include="SystemSetting\HRLanguageConversionModel.cs" />
+    <Compile Include="SystemSetting\HRLanguageModel.cs" />
+    <Compile Include="SystemSetting\HRPublicHolidayModel.cs" />
+    <Compile Include="SystemSetting\SystemDatabaseBackupModel.cs" />
+    <Compile Include="SystemSetting\SystemPermissionByHREmployeeModel.cs" />
+    <Compile Include="SystemSetting\SystemPermissionByRoleModel.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\LanguageResources\LanguageResources.csproj">
+      <Project>{72a4ce27-e7a8-4071-a7bc-0c3c6953a04a}</Project>
+      <Name>LanguageResources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SystemDatabase\SystemDatabase.csproj">
+      <Project>{c090bec7-d1df-404e-858a-fc80436c3bd4}</Project>
+      <Name>SystemDatabase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SystemInterfaces\SystemInterfaces.csproj">
+      <Project>{cb0053bc-7252-44f4-a524-9df21215f735}</Project>
+      <Name>SystemInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SystemStores\SystemStores.csproj">
+      <Project>{2235D008-7138-45B3-BB53-400F24A4C615}</Project>
+      <Name>SystemStores</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

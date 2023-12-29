@@ -1,0 +1,105 @@
+﻿@model SystemViewModels.CompanyManagement.HRCompanyHREmployeeShiftRoasterViewModel
+<script src="~/Scripts/RequiredField.js"></script>
+<style type="text/css">
+    .panel-default > .panel-heading-custom {
+        background-color: cadetblue;
+        color: #fff;
+        border-radius: 1em;
+    }
+</style>
+
+<div id="printThis">
+    <div class="panel panel-primary" style="border-radius:1em">
+        <div class="panel-heading panel-heading" style="border-radius:1em">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+                    @Html.DropDownList("DDLShiftDate", new SelectList(Model.DDLHRCompanyHREmployeeShiftDate, "Key", "Value"), new { @class = "form-control" })
+                </div>
+                <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+                    <h3 class="panel-title" style="text-align:center!important">कर्मचारीहरुको र्शिफ्ट विवरण</h3>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div id="replacetarget">
+                <div id="content" class="content">
+                    <div class="dataTables_wrapper">
+                        <div id="mask-container">
+                            <div id="mask"></div>
+                            <div class="table-responsive">
+                                <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">आईडी</th>
+                                            <th class="text-center">हप्ताको दिन</th>
+                                            <th>शिफ्ट शीर्षक</th>
+                                            <th class="text-center">लगइन समय</th>
+                                            <th class="text-center">लगआउट समय</th>
+                                            <th class="text-center">सप्ताहांत हो/होइन</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.DBEmpModelList)
+                                        {
+                                            <tr>
+                                                <td class="ace-icon">@item.Id</td>
+                                                <td class="ace-icon">
+                                                    <i class="ace-icon bigger-100 fa badge badge-yellow">@item.DayOfWeekNP.DOWNP</i>
+                                                </td>
+                                                <td class="blue">
+                                                    <i class="fa bigger-110">@(item.IdHRCompanyShiftRoaster == null ? "" : item.HRCompanyShiftRoaster.ShiftTitle)</i>
+                                                </td>
+                                                <td class="ace-icon">
+                                                    <i class="fa badge badge-info bigger-130">@(item.IdHRCompanyShiftRoaster == null ? " " : item.HRCompanyShiftRoaster.LoginTime.ToString())</i>
+                                                </td>
+                                                <td class="ace-icon">
+                                                    <i class="fa badge badge-info bigger-130">@(item.IdHRCompanyShiftRoaster == null ? " " : item.HRCompanyShiftRoaster.LogoutTime.ToString())</i>
+                                                </td>
+                                                <td class="ace-icon">
+                                                    <div>
+                                                        <i class="ace-icon @(item.IsWeekend==true?"fa fa-thumbs-up green":"fa fa-thumbs-down red") bigger-130" aria-hidden="true"></i>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#DDLShiftDate').change(function () {
+        $('table,#mask').addClass('loading');
+        $.ajax({
+            url: '/@Model.BreadCrumbBaseURL/_GetHRCompanyHREmployeeShiftRoasterAsync',
+            type: 'GET',
+            data: { id: $(this).val() },
+            success: function (result) {
+                if (result == '"_Login_"') {
+                    window.location = "/Account/Login";
+                    return;
+                }
+                $('#content').html(result);
+                $('table,#mask').removeClass('loading');
+            }
+        });
+        });
+    });
+</script>
+
+

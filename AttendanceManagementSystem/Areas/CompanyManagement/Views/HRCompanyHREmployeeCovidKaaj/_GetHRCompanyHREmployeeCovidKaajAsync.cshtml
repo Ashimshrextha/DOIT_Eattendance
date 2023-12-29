@@ -1,0 +1,39 @@
+﻿@model SystemViewModels.CompanyManagement.HRCompanyHREmployeeCovidKaajViewModel
+
+<table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+    <thead>
+        <tr>
+            <th class="text-center">आईडी</th>
+            <th class="text-center">हप्ताको दिन</th>
+            <th>शिफ्ट शीर्षक</th>
+            <th class="text-center">लगइन समय</th>
+            <th class="text-center">लगआउट समय</th>
+            <th class="text-center">सप्ताहांत हो/होइन</th>
+        </tr>
+    </thead>
+    @*<tbody>
+        @foreach (var item in Model.DBEmpModelList)
+        {
+            <tr>
+                <td class="ace-icon">@item.Id</td>
+                <td class="ace-icon">
+                    <i class="ace-icon bigger-100 fa badge badge-yellow">@item.DayOfWeekNP.DOWNP</i>
+                </td>
+                <td class="blue">
+                    <i class="fa bigger-110">@(item.IdHRCompanyShiftRoaster == null ? "" : item.HRCompanyShiftRoaster.ShiftTitle)</i>
+                </td>
+                <td class="ace-icon">
+                    <i class="fa badge badge-info bigger-130">@(item.IdHRCompanyShiftRoaster == null ? " " : item.HRCompanyShiftRoaster.LoginTime.ToString())</i>
+                </td>
+                <td class="ace-icon">
+                    <i class="fa badge badge-info bigger-130">@(item.IdHRCompanyShiftRoaster == null ? " " : item.HRCompanyShiftRoaster.LogoutTime.ToString())</i>
+                </td>
+                <td class="ace-icon">
+                    <div>
+                        <i class="ace-icon @(item.IsWeekend==true?"fa fa-thumbs-up green":"fa fa-thumbs-down red") bigger-130" aria-hidden="true"></i>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>*@
+</table>

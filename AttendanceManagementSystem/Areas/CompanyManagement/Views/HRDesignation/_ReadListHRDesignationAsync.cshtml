@@ -1,0 +1,76 @@
+﻿@model SystemViewModels.SystemSetting.HRDesignationViewModelList
+@using PagedList.Mvc;
+<div id="replacetarget">
+    <div id="content" class="content">
+        <div class="dataTables_wrapper">
+            <div id="mask-container">
+                <div id="mask"></div>
+                <div class="table-responsive">
+                    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th class="ace-icon">आईडी</th>
+                                <th class="ace-icon">कार्या.कोड</th>
+                                <th class="ace-icon">श्रेणी/तह</th>
+                                <th>पद</th>
+                                <th class="ace-icon">संक्षिप्त</th>
+                                <th class="ace-icon">पद क्रमश</th>
+                                <th class="ace-icon">श्रेणी अनुसार</th>
+                                <th class="ace-icon">ग्रेड नं.</th>
+                                <th class="ace-icon">बिदा स्वीकृत गर्ने पद</th>
+                                <th class="text-center">अवस्था</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.DBModelList)
+                            {
+                            <tr>
+                                <td class="ace-icon">@item.Id</td>
+                                <td class="ace-icon">
+                                    <i class="fa bigger-110 badge badge-yellow">@item.HRCompany.HRCompanyCode.HRCompanyCodeTitle</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="fa bigger-110 badge badge-yellow">@item.HREmployeeCategory.HREmployeeCategoryTitle</i>
+                                </td>
+                                <td class="blue">
+                                    <i class="fa bigger-110">@item.HRDesignationTitle</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="fa bigger-110 badge badge-yellow">@item.HRDesignationShortName</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="fa badge badge-info">@item.HRDesignationOrder</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="fa badge badge-info">@item.HRDesignationRank</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="fa badge badge-info">@item.SalaryIncrementNumber</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="fa badge badge-info">@(item.HRDesignation2 == null ? "नेपाल सरकार" : item.HRDesignation2.HRDesignationTitle)</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <div>
+                                        <i class="ace-icon @(item.IsActive==true?"fa fa-thumbs-up green":"fa fa-thumbs-down red") bigger-130" aria-hidden="true"></i>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div aria-live="polite" role="status" id="example_info" class="dataTables_info">
+                    <div class="row">
+                        <div class="col-md-4">Showing @(Model.DBModelList.PageCount < Model.DBModelList.PageNumber ? 0 : Model.DBModelList.FirstItemOnPage) to @Model.DBModelList.LastItemOnPage of @Model.DBModelList.TotalItemCount entries in @Model.DBModelList.PageCount Pages</div>
+                        <div class="col-md-8 dataTables_paginate paging_simple_numbers" id="example_paginate">@Html.PagedListPager(Model.DBModelList, page => Url.Action("_ListHRDesignationAsync", new { idHRCompany = Model.IdHRCompany, pageNumber = page, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey }))</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

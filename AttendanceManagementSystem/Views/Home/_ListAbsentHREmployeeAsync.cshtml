@@ -1,0 +1,58 @@
+﻿@model SystemViewModels.Home.HomeDashboardViewModelList
+@using PagedList.Mvc;
+
+<div id="replacetarget">
+    <div id="content" class="content">
+        <div class="dataTables_wrapper">
+            <div id="mask-container">
+                <div id="mask"></div>
+                <div class="table-responsive">
+                    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th class="text-center">आईडी</th>
+                                <th class="text-center">उपकरण  नं.</th>
+                                <th class="text-center">कर्मचारी नाम</th>
+                                <th class="text-center">पद</th>
+                                <th class="text-center">मिति</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.DBModelAbsentEmp.OrderBy(x => x.HRDesignationRank).ThenBy(x => x.AppointmentDate))
+                            {
+                                <tr>
+                                    <td class="text-center">
+                                        <i class="ace-icon fa bigger-110 badge badge-yellow">@item.IdHREmployee</i>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="ace-icon fa bigger-110 badge badge-yellow">@item.IdEnroll</i>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <i class="ace-icon fa bigger-130">
+                                            @(item.EmployeeName)
+                                        </i>
+                                    </td>
+                                    <td class="blue">
+                                        <i class="ace-icon fa bigger-90">@item.HRDesignationTitle</i>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="ace-icon fa bigger-110 badge badge-success">@item.AttendanceDate.DateNp()</i>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div aria-live="polite" role="status" id="example_info" class="dataTables_info">
+                    <div class="row">
+                        <div class="col-md-4">Showing @(Model.DBModelAbsentEmp.PageCount < Model.DBModelAbsentEmp.PageNumber ? 0 : Model.DBModelAbsentEmp.FirstItemOnPage) to @Model.DBModelAbsentEmp.LastItemOnPage of @Model.DBModelAbsentEmp.TotalItemCount entries in @Model.DBModelAbsentEmp.PageCount Pages</div>
+                        <div class="col-md-8 dataTables_paginate paging_simple_numbers" id="example_paginate">@Html.PagedListPager(Model.DBModelAbsentEmp, page => Url.Action("_ListAbsentHREmployeeAsync", new { pageNumber = page, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey }))</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

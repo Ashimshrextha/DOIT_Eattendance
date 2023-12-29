@@ -1,0 +1,43 @@
+﻿@using AttendanceManagementSystem.Services
+
+@{
+    var leftMenu = CommonServices.Get_SystemLeftMenu();
+    <ul class="nav nav-list">
+        @foreach (var item in leftMenu.OrderBy(x => x.IdParent_SystemStructure))
+        {
+            if (item.IdParent_SystemStructure == 0 && leftMenu.Where(x => x.IdParent_SystemStructure == item.Id).Count() == 0)
+            {
+                <li class="@item.StatusClass">
+                    <a href="@item.DefaultURL">
+                        <i class="@item.CSSIcon"></i>
+                        <span class="@item.CSSClass"> @item.Header </span>
+                    </a>
+                    <b class="@item.CSSClass1"></b>
+                </li>
+            }
+            else if (leftMenu.Where(x => x.IdParent_SystemStructure == item.Id).Count() > 0)
+            {
+                <li class="@item.ParentStatusClass">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="@item.CSSIcon"></i>
+                        <span class="@item.CSSClass"> @item.Header</span>
+                        <b class="@item.CSSClass1"></b>
+                    </a>
+                    <b class="arrow"></b>
+                    <ul class="submenu">
+                        @foreach (var secondLevel in leftMenu.Where(x => x.IdParent_SystemStructure == item.Id).OrderBy(x => x.ChildOrder))
+                        {
+                            <li class="@secondLevel.StatusClass">
+                                <a href="@secondLevel.DefaultURL">
+                                    <i class="@secondLevel.CSSIcon"></i>
+                                    @secondLevel.Header
+                                </a>
+                                <b class="@secondLevel.CSSClass1"></b>
+                            </li>
+                        }
+                    </ul>
+                </li>
+            }
+        }
+    </ul>
+}

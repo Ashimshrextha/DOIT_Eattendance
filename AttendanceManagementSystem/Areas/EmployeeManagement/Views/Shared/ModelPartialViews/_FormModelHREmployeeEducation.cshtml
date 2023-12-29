@@ -1,0 +1,111 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeEducationViewModel
+<link href="~/Content/jasny-bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jasny-bootstrap.min.js"></script>
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+
+@Html.AntiForgeryToken()
+@Html.HiddenFor(Model =>Model.DataModel.StartedDate)
+@Html.HiddenFor(Model =>Model.DataModel.EndDate)
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.DataModel.IdHREmployee)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+
+<div class="row">
+    
+    <div class="col-md-12 col-sm-12 col-lg-12">
+        <div class="col-md-12 col-sm-12 col-lg-12">
+            <div class="form-group row">
+                <div class="col-md-3 col-sm-3 col-lg-3">
+                    @Html.LabelFor(model => model.DataModel.IdHREmployeeEducationType, new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.DataModel.IdHREmployeeEducationType, new SelectList(Model.DDLEducationType, "Key", "Value"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.IdHREmployeeEducationType)
+                </div>
+                <div class="col-md-3 col-sm-3 col-lg-3">
+                    @Html.LabelFor(model => model.DataModel.CollegeName, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.DataModel.CollegeName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.CollegeName)
+                </div>
+                <div class="col-md-3 col-sm-3 col-lg-3">
+                    @Html.LabelFor(model => model.DataModel.CollegeAddress, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.DataModel.CollegeAddress, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.CollegeAddress)
+                </div>
+                <div class="col-md-3 col-sm-3 col-lg-3">
+                    @Html.LabelFor(model => model.DataModel.DegreeName, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.DataModel.DegreeName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.DegreeName)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-lg-12">
+            <div class="form-group row">
+                <div class="col-md-3 col-sm-3 col-lg-3">
+                    @Html.LabelFor(model => model.DataModel.Score, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.DataModel.Score, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.Score)
+                </div>
+                <div class="col-md-3 col-sm-3 col-lg-3">
+                    @Html.LabelFor(model => model.DataModel.StartedDate, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.DataModel.StartedDateNp, new { @class = "form-control " })
+                    @Html.ValidationMessageFor(model => model.DataModel.StartedDate)
+                </div>
+                <div class="col-md-3 col-sm-3 col-lg-3">
+                    @Html.LabelFor(model => model.DataModel.EndDate, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.DataModel.EndDateNp, new { @class = "form-control " })
+                    @Html.ValidationMessageFor(model => model.DataModel.EndDate)
+                </div>
+                <div class="col-md-3 col-sm-3 col-lg-3">
+                    @Html.LabelFor(model => model.DataModel.Document, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.DataModel.Document, new { @type = "file", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.Document)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-lg-12">
+            <div class="form-group row">
+                <div class="col-md-3 col-sm-3 col-lg-3">
+                    @Html.LabelFor(model => model.DataModel.Document1, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.DataModel.Document1, new { @type = "file", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.Document1)
+                </div>
+                <div class="col-md-3 col-sm-3 col-lg-3">
+                    @Html.LabelFor(model => model.DataModel.Document2, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.DataModel.Document2, new { @type = "file", @class = "form-control"  })
+                    @Html.ValidationMessageFor(model => model.DataModel.Document2)
+                </div>
+                <div class="col-md-3 col-sm-3 col-lg-3">
+                    @Html.LabelFor(model => model.DataModel.Document3, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.DataModel.Document3, new { @type = "file", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.Document3)
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#DataModel_StartedDateNp').nepaliDatePicker({
+            npdMonth: true,
+            npdYear: true,
+            onChange: function () {
+                $('#DataModel_StartedDate').val(BS2AD($('#DataModel_StartedDateNp').val()));
+            }
+        });
+        $('#DataModel_EndDateNp ').nepaliDatePicker({
+            npdMonth: true,
+            npdYear: true,
+            onChange: function () {
+                $('#DataModel_EndDate').val(BS2AD($('#DataModel_EndDateNp').val()));
+            }
+        });
+    });
+</script>

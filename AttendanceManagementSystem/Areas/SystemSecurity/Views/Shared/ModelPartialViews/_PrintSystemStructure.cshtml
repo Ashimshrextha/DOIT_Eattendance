@@ -1,0 +1,45 @@
+﻿@model SystemViewModels.SystemSecurity.SystemStructureViewModel
+
+<div id="printThis">
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>आईडी</th>
+                <th>प्रमुख आईडी</th>
+                <th>क्षेत्र</th>
+                <th>शीर्षक</th>
+                <th>नियन्त्रक</th>
+                <th>कार्यको नाम</th>
+                <th>सीएसएस वर्ग</th>
+                <th>सीएसएस प्रतिमा</th>
+                <th>प्रमुख अनुक्रम</th>
+                <th>साहायक अनुक्रम</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.IdParent_SystemStructure</td>
+                    <td>@item.SystemMenu.Area</td>
+                    <td>@item.Header</td>
+                    <td>@item.Controller</td>
+                    <td>@item.ActionName</td>
+                    <td>@item.CSSClass</td>
+                    <td>@item.CSSIcon</td>
+                    <td>@item.ParentOrder</td>
+                    <td>@item.ChildOrder</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>

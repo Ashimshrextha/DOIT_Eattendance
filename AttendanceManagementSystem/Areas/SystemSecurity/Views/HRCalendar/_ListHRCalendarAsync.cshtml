@@ -1,0 +1,60 @@
+﻿@model SystemViewModels.SystemSecurity.HRCalendarViewModelList
+@using PagedList.Mvc;
+<div id="replacetarget">
+    <div id="content" class="content">
+        <div class="dataTables_wrapper">
+            <div id="mask-container">
+                <div id="mask"></div>
+                <div class="table-responsive">
+                    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th class="ace-icon">आईडी</th>
+                                <th class="ace-icon">हप्ता</th>
+                                <th>नेपाली वर्ष</th>
+                                <th>नेपाली मिति</th>
+                                <th>नेपाली महिना</th>
+                                <th>अंग्रेजी वर्ष</th>
+                                <th>अंग्रेजी मिति</th>
+                                <th>अंग्रेजी महिना</th>
+                                <th>महोत्सव नाम</th>
+                                <th class="ace-icon">कार्य</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.DBModelList)
+                            {
+                                <tr>
+                                    <td class="ace-icon">@item.Id</td>
+                                    <td class="ace-icon">@item.EngDate.DayOfWeek</td>
+                                    <td class="ace-icon">@item.NepYear</td>
+                                    <td class="ace-icon">@item.NepDate</td>
+                                    <td class="ace-icon">@item.NepMonth</td>
+                                    <td class="ace-icon">@item.EngYear</td>
+                                    <td class="ace-icon">@item.EngDate.ToShortDateString()</td>
+                                    <td class="ace-icon">@item.EngMonth</td>
+                                    <td class="ace-icon">@item.FestivalName</td>
+                                    <td class="ace-icon action-buttons">
+                                        <a href="@Url.Action("_UpdateHRCalendarAsync",new { id=item.Id,pageNumber=Model.PageNumber,pageSize=Model.PageSize,orderingBy=Model.OrderingBy,orderingDirection=Model.OrderingDirection,searchKey=Model.SearchKey})" data-ajax-model="">
+                                            <i class="ace-icon fa fa-pencil green bigger-150" aria-hidden="true" title="Edit"></i>
+                                        </a>
+                                        <a href="@Url.Action("_ReadHRCalendarnAsync",new { id=item.Id,pageNumber=Model.PageNumber,pageSize=Model.PageSize,orderingBy=Model.OrderingBy,orderingDirection=Model.OrderingDirection,searchKey=Model.SearchKey})" data-ajax-model=""><i class="ace-icon fa fa-search-plus blue bigger-150" aria-hidden="true" title="View"></i></a>
+                                        <a href="@Url.Action("_DeleteHRCalendarAsync",new { id=item.Id,pageNumber=Model.PageNumber,pageSize=Model.PageSize,orderingBy=Model.OrderingBy,orderingDirection=Model.OrderingDirection,searchKey=Model.SearchKey})" data-ajax-model=""><i class="ace-icon fa fa-trash-o red bigger-150" aria-hidden="true" title="Delete"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div aria-live="polite" role="status" id="example_info" class="dataTables_info">
+                    <div class="row">
+                        <div class="col-md-4">Showing @(Model.DBModelList.PageCount < Model.DBModelList.PageNumber ? 0 : Model.DBModelList.FirstItemOnPage) to @Model.DBModelList.LastItemOnPage of @Model.DBModelList.TotalItemCount entries in @Model.DBModelList.PageCount Pages</div>
+                        <div class="col-md-8 dataTables_paginate paging_simple_numbers" id="example_paginate">@Html.PagedListPager(Model.DBModelList, page => Url.Action("_ListHRCalendarAsync", new { pageNumber = page, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey }))</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

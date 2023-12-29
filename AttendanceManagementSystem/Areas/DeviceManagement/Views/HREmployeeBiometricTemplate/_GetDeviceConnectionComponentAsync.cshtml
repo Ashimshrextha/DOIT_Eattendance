@@ -1,0 +1,32 @@
+﻿@model SystemViewModels.DeviceManagement.HREmployeeBiometricTemplateViewModel
+
+@Html.HiddenFor(model => model.ConnectionComponentModel.IdDeviceModel)
+<div class="panel panel-default">
+    <div class="panel-heading"><div class="panel-title">Device Information</div></div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-3 col-sm-4 col-lg-3 col-xs-12">
+                    @Html.LabelFor(model => model.ConnectionComponentModel.DeviceNumber, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.ConnectionComponentModel.DeviceNumber, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.ConnectionComponentModel.DeviceNumber)
+                </div>
+                <div class="col-md-3 col-sm-4 col-lg-3 col-xs-12">
+                    @Html.LabelFor(model => model.ConnectionComponentModel.IPAddress, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.ConnectionComponentModel.IPAddress, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.ConnectionComponentModel.IPAddress)
+                </div>
+                <div class="col-md-3 col-sm-4 col-lg-3 col-xs-12">
+                    @Html.LabelFor(model => model.ConnectionComponentModel.PortNumber, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.ConnectionComponentModel.PortNumber, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.ConnectionComponentModel.PortNumber)
+                </div>
+                <div class="col-md-3 col-sm-4 col-lg-3 col-xs-12">
+                    @Html.LabelFor(model => model.ConnectionComponentModel.CommunicationKey, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.ConnectionComponentModel.CommunicationKey, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.ConnectionComponentModel.CommunicationKey)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

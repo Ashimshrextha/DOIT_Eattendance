@@ -1,0 +1,42 @@
+﻿@model SystemViewModels.CompanyManagement.HRCompanyNotificationViewModel
+
+<div id="printThis">
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th class="ace-icon">आईडी</th>
+                <th>कार्यालय</th>
+                <th>सुचित गर्ने</th>
+                <th>सुचना शीर्षक</th>
+                <th>सुचना शीर्षक(NP)</th>
+                <th>सुचना सन्देस</th>
+                <th>शुरुवात मिति</th>
+                <th>अन्तिम मिति</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+            {
+                <tr>
+                    <td class="ace-icon">@item.Id</td>
+                    <td>@item.HRCompany.CompanyName</td>
+                    <td>@item.HREmployee</td>
+                    <td>@item.NotificationTitle</td>
+                    <td>@item.NotificationTitleNP</td>
+                    <td>@item.NotificationMessage</td>
+                    <td>@item.EffectiveFromDate</td>
+                    <td>@item.EffectiveToDate</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>

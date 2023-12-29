@@ -1,0 +1,56 @@
+﻿@model SystemViewModels.CompanyManagement.HRCompanyOfficeLogsViewModellist
+@using PagedList.Mvc;
+
+<div id="replacetarget">
+    <div id="content" class="content">
+        <div class="dataTables_wrapper">
+            <div id="mask-container">
+                <div id="mask"></div>
+                <div class="table-responsive">
+                    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th class="ace-icon">आईडी</th>
+                                <th class="ace-icon">कार्यालय</th>
+                                <th class="ace-icon">कर्मचारीको नाम</th>
+                                <th class="ace-icon">मिति</th>
+                                <th class="ace-icon">टिप्पणी</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.DBModelList)
+                            {
+                                <tr>
+                                    <td class="ace-icon">@item.Id</td>
+                                    <td class="ace-icon">
+                                        <i class="fa bigger-110 badge badge-yellow">@(item.HRCompany?.HRCompanyCode?.HRCompanyCodeTitle)</i>
+                                    </td>
+                                    <td class="ace-icon">
+                                        <i class="ace-icon fa bigger-110">@(item.HREmployee?.HREmployeeNameNP)</i>
+                                    </td>
+                                    <td class="ace-icon">
+                                        <i class="ace-icon fa bigger-110">@item.OfficeDate.DateNp() @(item.OfficeTime)</i>
+                                    </td>
+                                    <td class="ace-icon">
+                                        <i class="ace-icon fa bigger-110">@item.Remarks</i>
+                                    </td>
+
+
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div aria-live="polite" role="status" id="example_info" class="dataTables_info">
+                    <div class="row">
+                        <div class="col-md-4">Showing @(Model.DBModelList.PageCount < Model.DBModelList.PageNumber ? 0 : Model.DBModelList.FirstItemOnPage) to @Model.DBModelList.LastItemOnPage of @Model.DBModelList.TotalItemCount entries in @Model.DBModelList.PageCount Pages</div>
+                        <div class="col-md-8 dataTables_paginate paging_simple_numbers" id="example_paginate">@Html.PagedListPager(Model.DBModelList, page => Url.Action("_ListHRCompanyOfficeLogsAsync", new { idHRCompany = Model.IdHRCompany, pageNumber = page, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey }))</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

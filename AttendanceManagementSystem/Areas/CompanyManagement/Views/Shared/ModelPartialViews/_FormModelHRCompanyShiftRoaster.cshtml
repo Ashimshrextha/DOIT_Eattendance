@@ -1,0 +1,46 @@
+﻿@model SystemViewModels.CompanyManagement.HRCompanyShiftRoasterViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.DataModel.IdHRCompany)
+@Html.HiddenFor(model => model.IdHRCompany)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+        <div class="form-group row">
+            <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                @Html.LabelFor(model => model.DataModel.ShiftTitle, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.ShiftTitle, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.ShiftTitle)
+            </div>
+            <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                @Html.LabelFor(model => model.DataModel.LoginTime, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.LoginTime, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.LoginTime)
+            </div>
+            <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                @Html.LabelFor(model => model.DataModel.LogoutTime, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.LogoutTime, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.LogoutTime)
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+        <div class="form-group row">
+            <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                @Html.LabelFor(model => model.DataModel.IsActive, new { @class = "control-label" })
+                @Html.CheckBoxFor(model => model.DataModel.IsActive, new { @class = "form-control BSswitch" })
+                @Html.ValidationMessageFor(model => model.DataModel.IsActive)
+            </div>
+        </div>
+    </div>
+</div>

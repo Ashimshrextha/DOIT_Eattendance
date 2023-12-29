@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CB0053BC-7252-44F4-A524-9DF21215F735}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SystemInterfaces</RootNamespace>
+    <AssemblyName>SystemInterfaces</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Auditable\IAuditableEntity.cs" />
+    <Compile Include="Auditable\IEntityId.cs" />
+    <Compile Include="CompanyManagement\IHRCompanyOfficeLogsServices.cs" />
+    <Compile Include="CompanyManagement\IHRCompanyAttendanceServices.cs" />
+    <Compile Include="CompanyManagement\IHRCompanyDivisionServices.cs" />
+    <Compile Include="CompanyManagement\IHRCompanyDivisionTypeServices.cs" />
+    <Compile Include="CompanyManagement\IHRCompanyHREmployeeBulkKaajServices.cs" />
+    <Compile Include="CompanyManagement\IHRCompanyHREmployeeShiftDateServices.cs" />
+    <Compile Include="CompanyManagement\IHRCompanyHREmployeeCovidKaajServices.cs" />
+    <Compile Include="CompanyManagement\IHRCompanyHREmployeeShiftRoasterServices.cs" />
+    <Compile Include="CompanyManagement\IHRCompanyNotificationServices.cs" />
+    <Compile Include="CompanyManagement\IHRCompanyServices.cs" />
+    <Compile Include="CompanyManagement\IHRCompanyShiftRoasterServices.cs" />
+    <Compile Include="CompanyManagement\IHRCompanySystemSupportServices.cs" />
+    <Compile Include="CompanyManagement\IHRDeviceServices.cs" />
+    <Compile Include="CompanyManagement\IHREmployeeManualAttendanceServices.cs" />
+    <Compile Include="DeviceManagement\IDeviceLogsServices.cs" />
+    <Compile Include="DeviceManagement\IHRDeviceModelServices.cs" />
+    <Compile Include="DeviceManagement\IBiometricTemplateType.cs" />
+    <Compile Include="DeviceManagement\IHREmployeeBiometricTemplateServices.cs" />
+    <Compile Include="EmployeeManagement\IEmployeeDashboardServices.cs" />
+    <Compile Include="EmployeeManagement\IHREmployeeAddressServices.cs" />
+    <Compile Include="EmployeeManagement\IHREmployeeBankAccountServices.cs" />
+    <Compile Include="EmployeeManagement\IHREmployeeCompanyFacilityServices.cs" />
+    <Compile Include="EmployeeManagement\IHREmployeeLateAttendanceApprovedServices.cs" />
+    <Compile Include="EmployeeManagement\IHREmployeeContactServices.cs" />
+    <Compile Include="EmployeeManagement\IHREmployeeEducationServices.cs" />
+    <Compile Include="EmployeeManagement\IHREmployeeJobHistoryServices.cs" />
+    <Compile Include="EmployeeManagement\IHREmployeeLeaveBalanceServices.cs" />
+    <Compile Include="EmployeeManagement\IHREmployeeLeaveManagementServices.cs" />
+    <Compile Include="EmployeeManagement\IHREmployeeNationalIdentityServices.cs" />
+    <Compile Include="EmployeeManagement\IHREmployeeServices.cs" />
+    <Compile Include="EmployeeManagement\IKaajAppliedSummaryServices.cs" />
+    <Compile Include="EmployeeManagement\ILeaveAppliedSummaryServices.cs" />
+    <Compile Include="Feedback\ISystemCommentResponseServices.cs" />
+    <Compile Include="Feedback\ISystemCommentservices.cs" />
+    <Compile Include="Home\IHomeServices.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\IDailyReportServices.cs" />
+    <Compile Include="Reports\IEarlyCheckoutAttendanceReportServices.cs" />
+    <Compile Include="Reports\ILateAttendanceReportServices.cs" />
+    <Compile Include="Reports\IAbsentReportServices.cs" />
+    <Compile Include="Reports\ICurrentYearLeaveSummaryServices.cs" />
+    <Compile Include="Reports\IKaajReportServices.cs" />
+    <Compile Include="Reports\ILeaveBalanceReportServices.cs" />
+    <Compile Include="Reports\ILeaveReportServices.cs" />
+    <Compile Include="Reports\IMonthlyAttendanceSheetServices.cs" />
+    <Compile Include="Reports\IMonthlyAttendanceServices.cs" />
+    <Compile Include="Reports\IMonthlyAttendanceSummary.cs" />
+    <Compile Include="Reports\IMonthlyAttendanceSummaryServices.cs" />
+    <Compile Include="Reports\IUserLogsServices.cs" />
+    <Compile Include="Reports\IWorkedReportServices.cs" />
+    <Compile Include="Reports\IYearlyAttendanceServices.cs" />
+    <Compile Include="Reports\IYearlyAttendanceSheet.cs" />
+    <Compile Include="SystemAuthentication\ILoginsServices.cs" />
+    <Compile Include="SystemAuthentication\IMembershipProviderServices.cs" />
+    <Compile Include="SystemAuthentication\ISystemAuthenticationServices.cs" />
+    <Compile Include="SystemSecurity\IHRCalenderServices.cs" />
+    <Compile Include="SystemSecurity\IHRCompanyCodeServices.cs" />
+    <Compile Include="SystemSecurity\IHREmployeeAttendanceHistoryServices.cs" />
+    <Compile Include="SystemSecurity\IHREmployeeKaajHistoryServices.cs" />
+    <Compile Include="SystemSecurity\IHRLanguageConversionServices.cs" />
+    <Compile Include="SystemSecurity\IHRLanguageServices.cs" />
+    <Compile Include="SystemSecurity\IHREmployeeLeaveHistoryServices.cs" />
+    <Compile Include="SystemSecurity\IMasterLeaveTitleServices.cs" />
+    <Compile Include="SystemSecurity\ISystemDatabaseBackupServices.cs" />
+    <Compile Include="SystemSecurity\ISystemDetailCategoryServices.cs" />
+    <Compile Include="SystemSecurity\ISystemDetailServices.cs" />
+    <Compile Include="SystemSecurity\ISystemMenuServices.cs" />
+    <Compile Include="SystemSecurity\ISystemStructureServices.cs" />
+    <Compile Include="SystemSetting\IHRCompanyLeaveTypeServices.cs" />
+    <Compile Include="SystemSetting\IHRCompanyTypeServices.cs" />
+    <Compile Include="SystemSetting\IHRDesignationServices.cs" />
+    <Compile Include="SystemSetting\IHREmployeeBankListServices.cs" />
+    <Compile Include="SystemSetting\IHREmployeeBloodGroupServices.cs" />
+    <Compile Include="SystemSetting\IHREmployeeCategoryServices.cs" />
+    <Compile Include="SystemSetting\IHREmployeeContactTypeServices.cs" />
+    <Compile Include="SystemSetting\IHREmployeeGenderServices.cs" />
+    <Compile Include="SystemSetting\IHREmployeeJobStatusServices.cs" />
+    <Compile Include="SystemSetting\IHREmployeeMaritalServices.cs" />
+    <Compile Include="SystemSetting\IHREmployeeNationalIdentityTypeServices.cs" />
+    <Compile Include="SystemSetting\IHREmployeeRelationTypeServices.cs" />
+    <Compile Include="SystemSetting\IHREmployeeRoleServices.cs" />
+    <Compile Include="SystemSetting\IHREmployeeServiceTypeServices.cs" />
+    <Compile Include="SystemSetting\IHRLanguageServices.cs" />
+    <Compile Include="SystemSetting\IPublicHolidayServices.cs" />
+    <Compile Include="SystemSetting\ISystemPermissionByHREmployeeServices.cs" />
+    <Compile Include="SystemSetting\ISystemPermissionByRoleServices.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GlobalModel\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SystemDatabase\SystemDatabase.csproj">
+      <Project>{c090bec7-d1df-404e-858a-fc80436c3bd4}</Project>
+      <Name>SystemDatabase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SystemStores\SystemStores.csproj">
+      <Project>{2235d008-7138-45b3-bb53-400f24a4c615}</Project>
+      <Name>SystemStores</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

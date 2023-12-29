@@ -1,0 +1,57 @@
+﻿@model SystemViewModels.SystemSetting.HREmployeeRoleViewModel
+@using SystemStores.ENUMData;
+<div id="printThis">
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th class="text-center">आईडी</th>
+                <th class="text-center">कार्यालय कोड</th>
+                <th class="text-center">भुमिकाको प्रकार</th>
+                <th>शीर्षक</th>
+                <th class="text-center">जम्मा कर्मचारी</th>
+                <th class="text-center">अपडेट गर्ने</th>
+                <th class="text-center">अपडेट मिति</th>
+                <th class="text-center">अवस्था</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+            {
+                <tr>
+                    <td class="text-center">@item.Id</td>
+                    <td class="text-center">
+                        <i class="ace-icon fa bigger-110 badge badge-yellow">@item.HRCompany.HRCompanyCode.HRCompanyCodeTitle</i>
+                    </td>
+                    <td class="text-center">
+                        <i class="ace-icon fa bigger-110 badge badge-yellow">@Enum.GetName(typeof(EnumGlobal.RoleType), item.IdRoleType)</i>
+                    </td>
+                    <td class="blue">
+                        <i class="fa bigger-120">@item.HRRoleTitle</i>
+                    </td>
+                    <td class="text-center">
+                        <i class="fa bigger-110 badge badge-info">@item.MembershipProviders.Count</i>
+                    </td>
+                    <td class="text-center">
+                        <i class="ace-icon fa bigger-110 badge badge-grey">@item.UpdatedBy</i>
+                    </td>
+                    <td class="text-center">
+                        <i class="ace-icon fa bigger-110 badge badge-grey">@string.Format("{0:yyyy-MM-dd}", item.UpdatedOn)</i>
+                    </td>
+                    <td class="text-center">
+                        <i class="ace-icon @(item.IsActive==true?"fa fa-thumbs-up green" : "fa fa-thumbs-down red") bigger-130" aria-hidden="true"></i>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>
+

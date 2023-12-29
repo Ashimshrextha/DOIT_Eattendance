@@ -1,0 +1,1964 @@
+﻿@using AttendanceManagementSystem.Services;
+@using SystemStores.ENUMData;
+@model SystemViewModels.Home.HomeDashboardViewModelList
+
+@{
+    var userdetail = CommonServices.UserSession();
+
+    var IdHremployee = Model.SessionDetails.IdHREmployee;
+
+
+    var todaypresent = CommonServices.TodayPresent(userdetail.IdHREmployee);
+    var status = "statusabsent";
+    var todayStatus = "तपाईंले हाजिर गर्नु भएको छैन ।";
+    if (todaypresent)
+    {
+        status = "statuspresent";
+        todayStatus = "तपाईंले हाजिर गर्नु भएको छ ।";
+
+    }
+}
+
+
+
+<div class="p-home-content">
+    <div class="dash-welcome">
+        <span class="dash-date">
+            <span id="Nep-bar"></span><span>,</span>
+            <span id="Nep-day"></span>
+        </span>
+        <div class="dash-welcome-status">
+            <div class="welcome">नमस्ते !  @userdetail.Name </div>
+            <div>
+                <label class="@status">@todayStatus</label>
+            </div>
+        </div>
+    </div>
+    <div class="card card-warning my-4">
+        <div class="d-xl-flex align-items-center justify-content-between">
+            <div class="align-start">
+                <i class=" text-warning fa fa-user" style="font-size:60px;margin-right:30px">
+                </i>
+                <div>
+                    <div class="align-vertical">
+                        <h6 class="heading-03">बिदा आवेदन</h6>
+                        <div class="tags-warning">
+                            <h6 style="color: white ;font-size: medium; padding-top: 6px;">पेन्डिङ</h6>
+                        </div>
+                    </div>
+                    <div class="text-02  align-vertical mr-2">
+                        <ul class="list align-vertical flex-wrap">
+                            <li class="mt-2"><span id="LeavecurrentInfo"></span></li>
+
+                        </ul>
+                    </div>
+                </div>
+                <a class="btn btn-primary flex-shrink-0" href="/EmployeeManagement/HREmployeeLeaveHistory/_CreateHREmployeeLeaveHistoryAsync?idHREmployee=@IdHremployee" data-ajax-model="">
+                    बिदा आबेदन
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="dash-multi-card">
+        <div class="header">कर्मचारीहरुको विवरण</div>
+        <div class="multi-card-section">
+            <div class="p-card-section">
+                <div class="p-card-section-header">कुल कर्मचारीहरु</div>
+                <div class="p-card-section-footer" id="EmployeeCount">
+                    <div id="loadingemployee" class="loader" style="display: none;">    </div>
+                </div>
+            </div>
+
+            <div class="p-card-section">
+                <div class="p-card-section-header">उपस्थित कर्मचारीहरु</div>
+                <div class="p-card-section-footer text-success" id="EmployeePresentCount">     <div id="loadingpresentemployee" class="loader" style="display: none;"></div>  </div>
+            </div>
+
+            <div class="p-card-section">
+                <div class="p-card-section-header">अनुपस्थित। बिदामा भएका</div>
+                <div class="p-card-section-footer text-danger"><span id="absentCountToday"></span>| <span id="leaveempCountToday"></span> <div id="loadingAbsentemployee" class="loader" style="display: none;"></div> </div>
+            </div>
+
+            <div class="p-card-section">
+                <div class="p-card-section-header">काजमा भएका कर्मचारीहरु</div>
+                <div class="p-card-section-footer text-primary" id="employeeOnKaaj"> <div id="loadingKaajemployee" class="loader" style="display: none;"></div> </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="p-canvas-map">
+        <div>
+            <h4 class="heading-canvas ">बिदा अवलोकन </h4>
+            <ul class=" mt-2 list-inline">
+                <li><i class="fa fa-circle bg-kul"></i> कुल बिदा</li>
+                <li><i class="fa fa-circle bg-remain"></i> बाँकी बिदा</li>
+            </ul>
+        </div>
+        <canvas id="myChart" style="display: block; box-sizing: border-box; height: 438px; width: 1460px;"></canvas>
+    </div>
+    <div class="p-my-description">
+        <div class="header">मेरो विवरण</div>
+        <div class="multi-card-section">
+            <div class="p-card-section">
+                <div class="p-card-section-header">
+                    <span> महिना  </span>
+                    <div class=" col-md-6 col-lg-6 col-sm-6">
+                        <div class="form-group-mini">
+
+                            <select class="form-control select2-hidden-accessible" data-val="true" data-val-number="The field महिना must be a number." id="MonthNp" name="MonthNp" data-select2-id="select2-data-MonthNp" tabindex="-1" aria-hidden="true">
+                            </select>
+                            @Html.ValidationMessageFor(model => model.MonthNp)
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div id="loadingmonthfirst" class="loader" style="display: none;"></div>
+
+                <div class="p-card-section-footer first" id="first">
+                    <div>
+                        <span class="text-primary p-text-size-20" id="monthlylatecount"></span>
+                        <br />
+                        <span class="p-text-size-12"> ढिलो आएको </span>
+                    </div>
+                    <div>
+                        <span class="text-primary p-text-size-20" id="monthlearlyoutcount"></span>
+                        <br />
+                        <span class="p-text-size-12"> छिटो गएको </span>
+                    </div>
+                    <div>
+                        <span class="text-primary p-text-size-20" id="monthlyabsentcount"></span>
+                        <br />
+                        <span class="p-text-size-12"> अनुपास्थित </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-card-section">
+                <div class="p-card-section-header">
+                    <span> बाँकी दिन बिदा ( दिनमा ) </span>
+                    <div>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mykModal">
+                            संचित बिदा
+                        </button>
+                        <div class="modal" id="mykModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content custom-width">
+
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">संचित बिदा</h4>
+                                        <button onclick="printTable()" class="btn btn-warning"><i class="fa fa-print"></i></button>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+
+                                    <div class="modal-body" id="sanchit-table">
+                                        <table class="table table-bordered responsive">
+                                            <thead>
+                                                <tr>
+                                                    <th>क्र.सं.</th>
+                                                    <th>विदाको नाम</th>
+                                                    <th>अघिल्लो संचित बिदा</th>
+                                                    <th>हालको संचित बिदा</th>
+                                                    <th>जम्मा भएको बिदा</th>
+                                                    <th>विदा लिएको(दिन)	</th>
+                                                    <th>बाँकी	</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="savingLeave">
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+
+                <div id="loadingmonthsecond" class="loader" style="display: none;"></div>
+                <div class="p-card-section-footer first" id="second">
+                    @*//dynamically calling value*@
+                </div>
+            </div>
+
+            <div class="p-card-section">
+                <div class="p-card-section-header">
+                    <span>
+                        काज अनुरोध
+                    </span>
+                    <div>
+                        <a class="btn btn-primary btn-sm flex-shrink-0" href="/EmployeeManagement/HREmployeeKaajHistory/_CreateHREmployeeKaajHistoryAsync?idHREmployee=@IdHremployee" data-ajax-model="">
+                            आबेदन
+                        </a>
+                    </div>
+
+                </div>
+                <hr />
+                <div id="loadingmonththird" class="loader" style="display: none;"></div>
+                <div class="p-card-section-footer text-primary" id="third">
+                    <p>
+                        <span id="kaajinfo"></span>
+                    </p>
+                    <div class="row">
+                        <div class="col-md-6 p-text-size-14">
+                            अबधी :- <span id="kaajdate">-</span>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-text-size-12 ">
+                                <span class="label label-success" id="kaajstatus">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-card-section">
+                <div class="p-card-section-header">
+                    <span>
+                        आउदो बिदा
+                    </span>
+                    @*<button>पत्रो हेर्नुहोस्</button>*@
+                </div>
+                <hr />
+                <div id="loadingmonthfourth" class="loader" style="display: none;"></div>
+                <div class="p-card-section-footer p-flex" id="fourth">
+                    <div class="p-date">
+                        <p class="p-date-p">
+                            <span class="date-day" id="holidayDate">
+
+                            </span> <br>
+                            <span class="date-month" id="holidayMonth">
+
+                            </span>
+                        </p>
+                    </div>
+                    <div class="day-description">
+                        <span id="holidayName">
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-card-section">
+                <div class="p-card-section-header">शिफ्ट</div>
+                <hr />
+                <div id="loadingmonthfifth" class="loader" style="display: none;"></div>
+
+                <div class="p-card-section-footer text-primary" id="fifth">
+                    <p>
+                        <span class="p-text-size-12 text-gray" id="shiftName">
+                        </span> <br>
+                        <span class="p-text-size-16" id="sTime">
+                        </span>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="employee-table">
+        <div class="employee-table-top">
+            <div class="p-tab-menu">
+                <div class="active-table activeEmployeeTable" onclick="activeclass('activeEmployeeTable')">
+                    कुल कर्मचारीहरु
+                </div>
+                <div class="text-gray p-text-size-14 presentEmployeeTable" onclick="activeclass('presentEmployeeTable')">
+                    उपस्थित कर्मचारीहरु
+                </div>
+                <div class="text-gray p-text-size-14 absentEmployeeTable" onclick="activeclass('absentEmployeeTable')">
+                    अनुपास्थित कर्मचारीहरु
+                </div>
+                <div class="text-gray p-text-size-14 leaveEmployeeTable" onclick="activeclass('leaveEmployeeTable')">
+                    बिदामा भएका कर्मचारीहरु
+                </div>
+                <div class="text-gray p-text-size-14 kaajEmployeeTable" onclick="activeclass('kaajEmployeeTable')">
+                    काजमा भएका कर्मचारीहरु
+                </div>
+                <div class="text-gray p-text-size-14 logsEmployeeTable" onclick="activeclass('logsEmployeeTable')">
+                    दैनिक लग
+                </div>
+                <div class="text-gray p-text-size-14 lateEmployeeTable" onclick="activeclass('lateEmployeeTable')">
+                    ढिलो आएका
+                </div>
+                <div class="text-gray p-text-size-14 yesterdayEmployeeTable" onclick="activeclass('yesterdayEmployeeTable')">
+                    हिजो छिटो गएका
+                </div>
+            </div>
+            @*<button class="btn btn-primary">
+                    प्रिन्ट गर्नुहोस्
+                </button>*@
+        </div>
+
+        <div id="tableContainer" class="table-responsive">
+        </div>
+
+
+
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-lg-6">
+            <p class="text-center bg-success text-02">बिदा सिफारिस </p>
+            <div id="tableRecomendContainer" class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">क.संकेत नं.	</th>
+                            <th scope="col">कर्मचारीको नाम</th>
+                            <th scope="col">बिदा</th>
+                            <th scope="col">मिति</th>
+                            <th scope="col">कार्य</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <p class="text-center bg-warning text-02 ">बिदा स्वीकृत</p>
+            <div id="tableApprovalContainer" class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">क.संकेत नं.	</th>
+                            <th scope="col">कर्मचारीको नाम</th>
+                            <th scope="col">बिदा</th>
+                            <th scope="col">मिति</th>
+                            <th scope="col">कार्य</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <p class="text-center bg-info text-02 ">काज स्वीकृत</p>
+
+            <div id="tableKaajRecomendContainer" class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">क.संकेत नं.	</th>
+                            <th scope="col">कर्मचारीको नाम</th>
+                            <th scope="col">काज</th>
+                            <th scope="col">मिति</th>
+                            <th scope="col">कार्य</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+    </div>
+
+</div>
+<script src="~/Scripts/Menu/customChart.js"></script>
+<script src="~/Scripts/Menu/customNepaliConverter.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+        const currentDate = new Date();
+        var yearID = @Model.YearNp;
+        var monthID = @Model.MonthNp;
+        var dayID = @Model.TodayDayNp;
+
+        const dayIndex = currentDate.getDay();
+        var todayNp = ConvEnglishToNepaliNum(yearID) + ' ' + ConvNepaliMonth(monthID) + ' ' + ConvEnglishToNepaliNum(dayID)
+        var dayName = ConvertNepaliDayName(dayIndex)
+        $("#Nep-bar").html(dayName)
+        $("#Nep-day").html(todayNp)
+
+
+        $.ajax({
+            url: "/Home/AdminEmployeeCount/",
+            beforeSend: function () {
+                $('#loadingemployee').show();
+            },
+            success: function (response) {
+                $('#loadingemployee').hide();
+                $("#EmployeeCount").html(ConvEnglishToNepaliNum(response));
+            },
+            error: function () {
+                $('#loadingemployee').hide();
+                $("#EmployeeCount").html('0');
+            }
+        });
+        $.ajax({
+            url: "/Home/AdminGenderList",
+            type: "GET",
+            cache: true,
+            beforeSend: function () {
+                $('#loadingpresentemployee').show();
+            },
+            success: function (response) {
+                $('#loadingpresentemployee').hide();
+                $("#EmployeePresentCount").html(ConvEnglishToNepaliNum(response.total))
+            },
+            error: function () {
+                $('#loadingpresentemployee').hide();
+                $("#EmployeePresentCount").html('0');
+            }
+        });
+        $.ajax({
+            url: "/Home/AbsentEmployeeListToday",
+            type: "GET",
+             cache: true,
+             beforeSend: function () {
+                 $('#loadingAbsentemployee').show();
+             },
+             success: function (response) {
+                 $('#loadingAbsentemployee').hide();
+                 $("#absentCountToday").html(ConvEnglishToNepaliNum(response.listCount))
+             },
+             error: function () {
+                 $('#loadingAbsentemployee').hide();
+                 $("#absentCountToday").html('0')
+             }
+
+        });
+
+
+
+
+        $.ajax({
+            url: "/Home/leaveEmployeeByOfficeList",
+            type: "GET",
+            cache: true,
+            beforeSend: function () {
+                $('#loadingKaajemployee').show();
+            },
+            success: function (response) {
+                $('#loadingKaajemployee').hide();
+                $("#leaveempCountToday").html(ConvEnglishToNepaliNum(response.listCount))
+            },
+            error: function () {
+                $('#loadingKaajemployee').hide();
+                $("#leaveempCountToday").html('0')
+            }
+        });
+
+
+        $.ajax({
+            url: "/Home/KaajEmployeeByOfficeList",
+            type: "GET",
+            cache: true,
+            beforeSend: function () {
+                $('#loadingKaajemployee').show();
+            },
+            success: function (response) {
+                $('#loadingKaajemployee').hide();
+                $("#employeeOnKaaj").html(ConvEnglishToNepaliNum(response.listCount))
+            },
+            error: function () {
+                $('#loadingKaajemployee').hide();
+                $("#employeeOnKaaj").html('0')
+            }
+        });
+
+
+        $.ajax({
+                url: "/Home/GetMonthNp",
+                type: "GET",
+                cache: true,
+                success: function (response) {
+                    $.each(response.monthNp, function (key, value) {
+                        if (value.Key == @Model.MonthNp) {
+                            $('#MonthNp').append("<option selected='selected' value='" + value.Key + "'>" + value.Value + "</option>");
+                        }
+                        else
+                        {
+                             $('#MonthNp').append("<option value='" + value.Key + "'>" + value.Value + "</option>");
+                        }
+                    })
+                }
+
+        });
+        $.ajax({
+
+            url: "/Home/GetMonthlyDetailsByID/",
+            data: {
+                year: yearID,
+                month: monthID
+            },
+            beforeSend: function () {
+                $('#loadingmonthfirst').show();
+                $('#first').hide();
+            },
+            success: function (response) {
+                $('#loadingmonthfirst').hide();
+                $('#first').show();
+                console.log('kkk', response.data)
+                $("#monthlylatecount").html(ConvEnglishToNepaliNum(response.data.TotalCheckInEarly))
+                $("#monthlearlyoutcount").html(ConvEnglishToNepaliNum(response.data.TotalCheckOutEarly))
+                $("#monthlyabsentcount").html(ConvEnglishToNepaliNum(response.data.AbsentDays))
+
+
+            },
+            error: function () {
+                $('#loadingmonthfirst').hide();
+                $('#first').show();
+                $("#monthlylatecount").html('')
+                $("#monthlearlyoutcount").html('')
+                $("#monthlyabsentcount").html('')
+            }
+        });
+        $('#MonthNp').change(function () {
+            var selectedMonth = $(this).val();
+            $.ajax({
+
+                url: "/Home/GetMonthlyDetailsByID/",
+                data: {
+                    year: yearID,
+                    month: selectedMonth
+                },
+                beforeSend: function () {
+                    $('#loadingmonthfirst').show();
+                    $('#first').hide();
+                },
+                success: function (response) {
+                    $('#loadingmonthfirst').hide();
+                    $('#first').show();
+                    console.log('kkk', response.data)
+                    $("#monthlylatecount").html(ConvEnglishToNepaliNum(response.data.TotalCheckInEarly))
+                    $("#monthlearlyoutcount").html(ConvEnglishToNepaliNum(response.data.TotalCheckOutEarly))
+                    $("#monthlyabsentcount").html(ConvEnglishToNepaliNum(response.data.AbsentDays))
+
+
+                },
+                error: function () {
+                    $('#loadingmonthfirst').hide();
+                    $('#first').show();
+                    $("#monthlylatecount").html('')
+                    $("#monthlearlyoutcount").html('')
+                    $("#monthlyabsentcount").html('')
+                }
+            });
+        });
+        $.ajax({
+            url: "/Home/EmployeeOwnLeaveStatusByOfficeList",
+            type: "GET",
+            cache: true,
+            beforeSend: function () {
+                $('#loadingmonthsecond').show();
+                $('#second').hide();
+            },
+            success: function (response) {
+                loadMyChartData(response.wholeList)
+                populateTable(response.wholeList);
+                $('#loadingmonthsecond').hide();
+                response.list.forEach(function (item) {
+                    var divElement = $('<div></div>');
+                    var spanValue1 = $('<span class="text-primary p-text-size-20"></span>').text(ConvEnglishToNepaliNum(item.RemainingLeave));
+                    var spanValue2 = $('<span class="p-text-size-12"></span>').text(item.LeaveTitle);
+
+                    divElement.append(spanValue1).append('<br />').append(spanValue2);
+                    $('#second').append(divElement);
+                });
+
+                $('#second').show();
+            },
+            error: function () {
+                $('#loadingmonthsecond').hide();
+                $('#second').show();
+            }
+        });
+
+
+        $.ajax({
+            url: "/Home/GetEmployeeOwnKaajInfo",
+            type: "GET",
+            cache: true,
+            beforeSend: function () {
+                $('#loadingmonththird').show();
+                $('#third').hide();
+            },
+            success: function (response) {
+                $('#loadingmonththird').hide();
+                $('#third').show();
+                $("#kaajinfo").html(response.info)
+                $("#kaajdate").html(ConvEnglishToNepaliNum(response.totalday))
+                $("#kaajstatus").html(response.status)
+            },
+            error: function () {
+                $('#loadingmonththird').hide();
+                $('#third').show();
+                $("#kaajinfo").html('')
+                $("#kaajdate").html('')
+                $("#kaajstatus").html('')
+            }
+        });
+
+
+        $.ajax({
+            url: "/Home/GetUpcomingHoliday",
+            type: "GET",
+            cache: true,
+            beforeSend: function () {
+                $('#loadingmonthfourth').show();
+                $('#fourth').hide();
+            },
+            success: function (response) {
+                $('#loadingmonthfourth').hide();
+                $('#fourth').show();
+                if (response.list.length > 0) {
+                    var day = response.list[0]?.NepDay;
+                    var month = response.list[0]?.NepMonth;
+
+                    $("#holidayDate").html(ConvEnglishToNepaliNum(day));
+                    $("#holidayMonth").html(ConvNepaliMonth(month));
+                    $("#holidayName").html(response.list[0].HolidayName);
+                } else {
+                    $("#holidayDate").html('०');
+                    $("#holidayMonth").html('छैन');
+                    $("#holidayName").html('बिदा राखिएको छैन');
+                }
+               
+            },
+            error: function () {
+                $('#loadingmonthfourth').hide();
+                $('#fourth').show();
+
+                $("#holidayDate").html('');
+                $("#holidayMonth").html('');
+                $("#holidayName").html('HOLIDAY NOT FOUND ');
+            }
+        });
+        $.ajax({
+            url: "/Home/GetEmployeeCurrentShift/",
+            beforeSend: function () {
+                $('#loadingmonthfifth').show();
+                $('#fifth').hide();
+            },
+            success: function (response) {
+                $('#fifth').show();
+                $('#loadingmonthfifth').hide();
+                console.log('shift', response)
+                if (response.list && response.list.length > 0) {
+                    var data = response.list[0]; // Assuming the first object from the array
+
+                    if (data.LoginTime == null) {
+                        $("#shiftName").html('आज तपाईको शिफ्ट छैन')
+                        $("#sTime").html('')
+                    }
+                    else {
+                        // Extract login and logout time hours and minutes
+                        var loginHours = data.LoginTime.Hours;
+                        var loginMinutes = data.LoginTime.Minutes;
+                        var logoutHours = data.LogoutTime.Hours;
+                        var logoutMinutes = data.LogoutTime.Minutes;
+
+                        // Convert login and logout times to a readable format (e.g., "10AM" to "4PM")
+                        var loginTime = convertToReadableTime(loginHours, loginMinutes);
+                        var logoutTime = convertToReadableTime(logoutHours, logoutMinutes);
+                        var concatenatedTimes = loginTime + ' - ' + logoutTime;
+
+
+                        $("#shiftName").html(data.ShiftTitle)
+                        $("#sTime").html(concatenatedTimes)
+                    }
+
+                } else {
+                    $("#shiftName").html('कुनै पनि शिफ्ट राखिएको छैन')
+                    $("#sTime").html('')
+                }
+
+            },
+            error: function () {
+                $('#loadingmonthfifth').hide();
+                $('#fifth').show();
+
+                $("#holidayDate").html('');
+                $("#holidayMonth").html('');
+                $("#holidayName").html('HOLIDAY NOT FOUND ');
+            }
+        });
+        $.ajax({
+            url: "/Home/AdminTotalEmployeeList/",
+            type: 'GET',
+            data: {
+                PageNumber: 1
+            },
+            success: function (data) {
+
+                let paginationInfo = data.pagination;
+                let employees = data.list;
+
+                convertTotable(data);
+
+            },
+            error: function (xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+
+
+
+
+        $.ajax({
+            url: "/Home/MyPendingLeaveListInformation/",
+            beforeSend: function () {
+                $("#LeavecurrentInfo").html('तपाईंले बिदाको लागि आवेदन दिनु भएको छैन ।');
+            },
+            success: function (response) {
+                const leaveRequests = response.showing;
+                if (response.isData == true) {
+                    $("#LeavecurrentInfo").html('तपाईंले बिदाको लागि आवेदन दिनु भएको');
+                    const listElement = document.querySelector('.text-02 .list');
+
+                    leaveRequests.forEach(request => {
+                        const li = document.createElement('li');
+                        li.classList.add('mt-2');
+
+                        const divTagsStatus = document.createElement('div');
+                        divTagsStatus.classList.add('tags-status', 'secondary', 'cursor-pointer', 'ml-2', 'px-3');
+
+                        const divDropdown = document.createElement('div');
+                        divDropdown.classList.add('dropdown');
+
+                        const divDropdownText = document.createElement('div');
+                        divDropdownText.setAttribute('aria-haspopup', 'true');
+                        divDropdownText.classList.add('dropdown-text', 'align-vertical');
+                        divDropdownText.setAttribute('aria-expanded', 'false');
+
+                        const span = document.createElement('span');
+                        span.title = "१ दिन"; // Update with appropriate title
+                        span.textContent = `${ConvEnglishToNepaliNum1(request.LeaveValidFromNP)} देखि ${ConvEnglishToNepaliNum1(request.LeaveValidToNP)}`;
+
+                        divDropdownText.appendChild(span);
+                        divDropdown.appendChild(divDropdownText);
+                        divTagsStatus.appendChild(divDropdown);
+                        li.appendChild(divTagsStatus);
+                        listElement.appendChild(li);
+                    });
+                }
+            },
+            error: function () {
+
+            }
+        });
+
+
+        $.ajax({
+            url: "/Home/RequestToLeaveRecomend",
+            type: "GET",
+            cache: true,
+            beforeSend: function () {
+
+            },
+            success: function (response) {
+                console.log('checkthis', response)
+                appendRecomendDataToTable(response.RequestToLeaveRecomendList)
+                appendApproveDataToTable(response.RequestToLeaveApproveList)
+                appendKaajRecomendDataToTable(response.RequestToKaajApproveList)
+            },
+            error: function () {
+            }
+        });
+
+        function convertToReadableTime(hours, minutes) {
+            var ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // 0 should be displayed as 12
+            var minutesStr = minutes < 10 ? '0' + minutes : minutes;
+            return ConvEnglishToNepaliNum(hours) + ':' + ConvEnglishToNepaliNum(minutesStr) + ' ' + ampm;
+        }
+
+        function appendRecomendDataToTable(data) {
+            const tableBody = document.querySelector('#tableRecomendContainer table tbody');
+
+            // Loop through the JSON data
+            data.forEach((item, index) => {
+                const row = document.createElement('tr');
+
+                // Creating table cells and populating with JSON data
+                row.innerHTML = `
+            <th scope="row">${index + 1}</th>
+            <td>${item.PISNumber}</td>
+            <td>${item.RequestedEmployeeName}</td>
+            <td>${item.LeaveTitleNP}</td>
+            <td>${item.LeaveValidFromNP} देखि ${item.LeaveValidToNP} </td>
+            <td>
+            <a href="${item.PopUrl}" data-ajax-model="">
+                    <i class="ace-icon fa fa-pencil green bigger-150" aria-hidden="true" title="Edit"></i>
+                </a>
+           </td>
+        `;
+
+                // Appending the row to the table body
+                tableBody.appendChild(row);
+            });
+        }
+        function appendApproveDataToTable(data) {
+            const tableBody = document.querySelector('#tableApprovalContainer table tbody');
+
+            // Loop through the JSON data
+            data.forEach((item, index) => {
+                const row = document.createElement('tr');
+
+                                // Creating table cells and populating with JSON data
+                row.innerHTML = `
+                    <th scope="row">${index + 1}</th>
+                    <td>${item.PISNumber}</td>
+                    <td>${item.RequestedEmployeeName}</td>
+                    <td>${item.LeaveTitleNP}</td>
+                    <td>${item.LeaveValidFromNP} देखि ${item.LeaveValidToNP} </td>
+                    <td>
+                    <a href="${item.PopUrl}" data-ajax-model="">
+                            <i class="ace-icon fa fa-pencil green bigger-150" aria-hidden="true" title="Edit"></i>
+                        </a>
+                   </td>
+                `;
+
+                // Appending the row to the table body
+                tableBody.appendChild(row);
+            });
+        }
+        function appendKaajRecomendDataToTable(data) {
+            const tableBody = document.querySelector('#tableKaajRecomendContainer table tbody');
+
+            // Loop through the JSON data
+            data.forEach((item, index) => {
+                const row = document.createElement('tr');
+
+                  // Creating table cells and populating with JSON data
+                 row.innerHTML = `
+                    <th scope="row">${index + 1}</th>
+                    <td>${item.PISNumber}</td>
+                    <td>${item.RequestedEmployeeName}</td>
+                    <td>${item.LeaveTitleNP}</td>
+                    <td>${item.LeaveValidFromNP} देखि ${item.LeaveValidToNP} </td>
+                    <td>
+                    <a href="${item.PopUrl}" data-ajax-model="">
+                            <i class="ace-icon fa fa-pencil green bigger-150" aria-hidden="true" title="Edit"></i>
+                        </a>
+                   </td>
+                `;
+
+                // Appending the row to the table body
+                tableBody.appendChild(row);
+            });
+        }
+
+    });
+
+</script>
+
+<script>
+    function activeclass(tab) {
+        debugger
+        const tabs = document.querySelectorAll('.p-tab-menu > div');
+        tabs.forEach((tab) => {
+            tab.classList.remove('active-table');
+        });
+
+        const selectedTab = document.querySelector(`.${tab}`);
+        selectedTab.classList.add('active-table');
+        if (tab === 'activeEmployeeTable') {
+            employeelist(1, 1)
+        }
+        else if (tab === 'presentEmployeeTable') {
+            presentemployeelist(1, 1)
+
+        }
+        else if (tab === 'absentEmployeeTable') {
+            absentemployeelist(1, 1)
+        }
+        else if (tab === 'leaveEmployeeTable') {
+            leaveemployeelist(1, 1)
+        }
+        else if (tab === 'kaajEmployeeTable') {
+            kaajemployeelist(1, 1)
+        }
+        else if (tab === 'logsEmployeeTable') {
+            todaylogemployeelist(1, 1)
+        }
+        else if (tab === 'lateEmployeeTable') {
+            lateemployeelist(1, 1)
+        }
+        else if (tab === 'yesterdayEmployeeTable') {
+            yesterdayemployeelist(1, 1)
+        }
+
+    }
+</script>
+@*//Employeelist*@
+<script>
+    function employeelist(action, pageNumber) {
+        let hitPageNumber = 1;
+        if (action === 'previous') {
+            if (pageNumber != 1) {
+                hitPageNumber == pageNumber - 1;
+            }
+        }
+        else if (action === 'next') {
+            hitPageNumber = pageNumber
+        }
+        else {
+            hitPageNumber = pageNumber;
+        }
+
+        employeeInfo(hitPageNumber)
+    }
+    function employeeInfo(pageNumber) {
+        $.ajax({
+            url: "/Home/AdminTotalEmployeeList/",
+            type: 'GET',
+            data: {
+                PageNumber: pageNumber
+            },
+            success: function (data) {
+
+                const paginationInfo = data.pagination;
+                const employees = data.list;
+
+                convertTotable(data);
+
+            },
+            error: function (xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+    function convertTotable(data) {
+
+        let employee_table = $('#tableContainer')
+        if (employee_table[0]) {
+            $('#employee_table').remove();
+            $('#employee_pagination').remove();
+        }
+        let tableHTML = '';
+        let paginationHTML = '';
+        $('#tableContainer').append(tableHTML).append(paginationHTML);
+        let employees = data.list
+
+        let totalPages = data.pagination.PageCount;
+        let pageNumber = data.pagination.PageNumber;
+        tableHTML = `
+                    <table id='employee_table' class="table employee_table">
+                        <thead>
+                            <tr class="active">
+                                <th >क्र.स.</th>
+                                <th >संकेत नं</th>
+                                <th >कर्मचारी नाम</th>
+                                <th>पद</th>
+                            </tr>
+                        </thead>
+                        <tbody id="employeeTableBody">
+                        </tbody>
+                    </table>
+                `;
+        paginationHTML = `
+                       <div id='employee_pagination' class="table-footer employee_pagination">
+                           <nav>
+                                 <ul class="pagination">
+                                     <li>
+                                         <a onclick="employeelist('previous', ${pageNumber})" aria-label="Previous">
+                                             <span aria-hidden="true">«</span>
+                                         </a>
+                                     </li>
+                                     ${Array.from({ length: totalPages }, (_, index) => `
+                                         <li${index + 1 === pageNumber ? ' class="active"' : ''}>
+                                             <a onclick="employeelist(${index + 1}, ${index + 1})">${index + 1}</a>
+                                         </li>`).join('')}
+                                     <li>
+                                         <a onclick="employeelist('next', ${totalPages})" aria-label="Next">
+                                             <span aria-hidden="true">»</span>
+                                         </a>
+                                     </li>
+                                 </ul>
+                           </nav>
+                       </div>
+                   `;
+        $('#tableContainer').append(tableHTML).append(paginationHTML);
+        let tableBody = $('#employeeTableBody');
+        tableBody[0].innerHTML = ''
+        employees.forEach((employee, index) => {
+            const row = `
+                                   <tr>
+                                       <td>${index + 1}</td>
+                                       <td>${employee.PISNumber}</td>
+                                       <td>${employee.HREmployeeNameNP}</td>
+                                       <td>${employee.HRDesignationTitle}</td>
+                                   </tr> `;
+            tableBody.append(row);
+        });
+
+    }
+</script>
+
+@*//presentlist*@
+<script>
+    function presentemployeelist(action, pageNumber) {
+        debugger
+        let hitPageNumber = 1;
+        if (action === 'previous') {
+            if (pageNumber != 1) {
+                hitPageNumber == pageNumber - 1;
+            }
+        }
+        else if (action === 'next') {
+            hitPageNumber = pageNumber
+        }
+        else {
+            hitPageNumber = pageNumber;
+        }
+
+        presentemployeeInfo(hitPageNumber)
+    }
+    function presentemployeeInfo(pageNumber) {
+        $.ajax({
+            url: "/Home/AdminTotalPresentEmployee/",
+            type: 'GET',
+            data: {
+                PageNumber: pageNumber
+            },
+            success: function (data) {
+
+                const paginationInfo = data.pagination;
+                const employees = data.list;
+
+                presentconvertTotable(data);
+
+            },
+            error: function (xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+    function presentconvertTotable(data) {
+        debugger
+        let employee_table = $('#tableContainer')
+        if (employee_table[0]) {
+            $('#employee_table').remove();
+            $('#employee_pagination').remove();
+        }
+        let tableHTML = '';
+        let paginationHTML = '';
+        $('#tableContainer').append(tableHTML).append(paginationHTML);
+        let employees = data.list
+
+        let totalPages = data.pagination.PageCount;
+        let pageNumber = data.pagination.PageNumber;
+        tableHTML = `
+                    <table id='employee_table' class="table employee_table">
+                        <thead>
+                            <tr class="active">
+                                <th >क्र.स. </th>
+                                <th >संकेत नं</th>
+                                <th >कर्मचारी नाम</th>
+                                <th>पद</th>
+                            </tr>
+                        </thead>
+                        <tbody id="employeeTableBody">
+                        </tbody>
+                    </table>
+                `;
+        paginationHTML = `
+                       <div id='employee_pagination' class="table-footer employee_pagination">
+                           <nav>
+                                 <ul class="pagination">
+                                     <li>
+                                         <a onclick="presentemployeelist('previous', ${pageNumber})" aria-label="Previous">
+                                             <span aria-hidden="true">«</span>
+                                         </a>
+                                     </li>
+                                     ${Array.from({ length: totalPages }, (_, index) => `
+                                         <li${index + 1 === pageNumber ? ' class="active"' : ''}>
+                                             <a onclick="presentemployeelist(${index + 1}, ${index + 1})">${index + 1}</a>
+                                         </li>`).join('')}
+                                     <li>
+                                         <a onclick="presentemployeelist('next', ${totalPages})" aria-label="Next">
+                                             <span aria-hidden="true">»</span>
+                                         </a>
+                                     </li>
+                                 </ul>
+                           </nav>
+                       </div>
+                   `;
+        $('#tableContainer').append(tableHTML).append(paginationHTML);
+        let tableBody = $('#employeeTableBody');
+        tableBody[0].innerHTML = ''
+        employees.forEach((employee, index) => {
+            const row = `
+                                   <tr>
+                                       <td>${index + 1}</td>
+                                       <td>${employee.IdEnroll}</td>
+                                       <td>${employee.HREmployeeNameNP}</td>
+                                       <td>${employee.HRDesignationTitle}</td>
+                                   </tr> `;
+            tableBody.append(row);
+        });
+
+    }
+</script>
+
+
+
+@*//absentlist*@
+<script>
+    function absentemployeelist(action, pageNumber) {
+        debugger
+        let hitPageNumber = 1;
+        if (action === 'previous') {
+            if (pageNumber != 1) {
+                hitPageNumber == pageNumber - 1;
+            }
+        }
+        else if (action === 'next') {
+            hitPageNumber = pageNumber
+        }
+        else {
+            hitPageNumber = pageNumber;
+        }
+
+        absentemployeeInfo(hitPageNumber)
+    }
+    function absentemployeeInfo(pageNumber) {
+        $.ajax({
+            url: "/Home/AdminTotalAbsentEmployee/",
+            type: 'GET',
+            data: {
+                PageNumber: pageNumber
+            },
+            success: function (data) {
+
+                const paginationInfo = data.pagination;
+                const employees = data.list;
+
+                absentconvertTotable(data);
+
+            },
+            error: function (xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+    function absentconvertTotable(data) {
+        debugger
+        console.log('f', data)
+        let employee_table = $('#tableContainer')
+        if (employee_table[0]) {
+            $('#employee_table').remove();
+            $('#employee_pagination').remove();
+        }
+        let tableHTML = '';
+        let paginationHTML = '';
+        $('#tableContainer').append(tableHTML).append(paginationHTML);
+        let employees = data.list
+
+        let totalPages = data.pagination.PageCount;
+        let pageNumber = data.pagination.PageNumber;
+        tableHTML = `
+                    <table id='employee_table' class="table employee_table">
+                        <thead>
+                            <tr class="active">
+                                <th >क्र.स. </th>
+                                <th >संकेत नं</th>
+                                <th >कर्मचारी नाम</th>
+                                <th>पद</th>
+                            </tr>
+                        </thead>
+                        <tbody id="employeeTableBody">
+                        </tbody>
+                    </table>
+                `;
+        paginationHTML = `
+                       <div id='employee_pagination' class="table-footer employee_pagination">
+                           <nav>
+                                 <ul class="pagination">
+                                     <li>
+                                         <a onclick="absentemployeelist('previous', ${pageNumber})" aria-label="Previous">
+                                             <span aria-hidden="true">«</span>
+                                         </a>
+                                     </li>
+                                     ${Array.from({ length: totalPages }, (_, index) => `
+                                         <li${index + 1 === pageNumber ? ' class="active"' : ''}>
+                                             <a onclick="absentemployeelist(${index + 1}, ${index + 1})">${index + 1}</a>
+                                         </li>`).join('')}
+                                     <li>
+                                         <a onclick="absentemployeelist('next', ${totalPages})" aria-label="Next">
+                                             <span aria-hidden="true">»</span>
+                                         </a>
+                                     </li>
+                                 </ul>
+                           </nav>
+                       </div>
+                   `;
+        $('#tableContainer').append(tableHTML).append(paginationHTML);
+        let tableBody = $('#employeeTableBody');
+        tableBody[0].innerHTML = ''
+        employees.forEach((employee, index) => {
+            const row = `
+                                   <tr>
+                                       <td>${index + 1}</td>
+                                       <td>${employee.PISNumber}</td>
+                                       <td>${employee.EmployeeName}</td>
+                                       <td>${employee.HRDesignationTitle}</td>
+                                   </tr> `;
+            tableBody.append(row);
+        });
+
+    }
+</script>
+
+@*//leavelist*@
+<script>
+    function leaveemployeelist(action, pageNumber) {
+        debugger
+        let hitPageNumber = 1;
+        if (action === 'previous') {
+            if (pageNumber != 1) {
+                hitPageNumber == pageNumber - 1;
+            }
+        }
+        else if (action === 'next') {
+            hitPageNumber = pageNumber
+        }
+        else {
+            hitPageNumber = pageNumber;
+        }
+
+        leaveemployeeInfo(hitPageNumber)
+    }
+    function leaveemployeeInfo(pageNumber) {
+        $.ajax({
+            url: "/Home/AdminTotalonLeaveEmployee/",
+            type: 'GET',
+            data: {
+                PageNumber: pageNumber
+            },
+            success: function (data) {
+
+                const paginationInfo = data.pagination;
+                const employees = data.list;
+
+                leaveconvertTotable(data);
+
+            },
+            error: function (xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+    function leaveconvertTotable(data) {
+        debugger
+        let employee_table = $('#tableContainer')
+        if (employee_table[0]) {
+            $('#employee_table').remove();
+            $('#employee_pagination').remove();
+        }
+        let tableHTML = '';
+        let paginationHTML = '';
+        $('#tableContainer').append(tableHTML).append(paginationHTML);
+        let employees = data.list
+
+        let totalPages = data.pagination.PageCount;
+        let pageNumber = data.pagination.PageNumber;
+        tableHTML = `
+                    <table id='employee_table' class="table employee_table">
+                        <thead>
+                            <tr class="active">
+                                <th >क्र.स. </th>
+                                <th >संकेत नं</th>
+                                <th >कर्मचारी नाम</th>
+                                <th>पद</th>
+                            </tr>
+                        </thead>
+                        <tbody id="employeeTableBody">
+                        </tbody>
+                    </table>
+                `;
+        paginationHTML = `
+                       <div id='employee_pagination' class="table-footer employee_pagination">
+                           <nav>
+                                 <ul class="pagination">
+                                     <li>
+                                         <a onclick="leaveemployeelist('previous', ${pageNumber})" aria-label="Previous">
+                                             <span aria-hidden="true">«</span>
+                                         </a>
+                                     </li>
+                                     ${Array.from({ length: totalPages }, (_, index) => `
+                                         <li${index + 1 === pageNumber ? ' class="active"' : ''}>
+                                             <a onclick="leaveemployeelist(${index + 1}, ${index + 1})">${index + 1}</a>
+                                         </li>`).join('')}
+                                     <li>
+                                         <a onclick="leaveemployeelist('next', ${totalPages})" aria-label="Next">
+                                             <span aria-hidden="true">»</span>
+                                         </a>
+                                     </li>
+                                 </ul>
+                           </nav>
+                       </div>
+                   `;
+        $('#tableContainer').append(tableHTML).append(paginationHTML);
+        let tableBody = $('#employeeTableBody');
+        tableBody[0].innerHTML = ''
+        employees.forEach((employee, index) => {
+            const row = `
+                                   <tr>
+                                       <td>${index + 1}</td>
+                                       <td>${employee.IdEnroll}</td>
+                                       <td>${employee.HREmployeeNameNP}</td>
+                                       <td>${employee.HRDesignationTitle}</td>
+                                   </tr> `;
+            tableBody.append(row);
+        });
+
+    }
+</script>
+
+
+@*//kaajlist*@
+<script>
+    function kaajemployeelist(action, pageNumber) {
+        debugger
+        let hitPageNumber = 1;
+        if (action === 'previous') {
+            if (pageNumber != 1) {
+                hitPageNumber == pageNumber - 1;
+            }
+        }
+        else if (action === 'next') {
+            hitPageNumber = pageNumber
+        }
+        else {
+            hitPageNumber = pageNumber;
+        }
+
+        kaajemployeeInfo(hitPageNumber)
+    }
+    function kaajemployeeInfo(pageNumber) {
+        $.ajax({
+            url: "/Home/AdminTotalonKaajEmployee/",
+            type: 'GET',
+            data: {
+                PageNumber: pageNumber
+            },
+            success: function (data) {
+
+                const paginationInfo = data.pagination;
+                const employees = data.list;
+
+                kaajconvertTotable(data);
+
+            },
+            error: function (xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+    function kaajconvertTotable(data) {
+        debugger
+        let employee_table = $('#tableContainer')
+        if (employee_table[0]) {
+            $('#employee_table').remove();
+            $('#employee_pagination').remove();
+        }
+        let tableHTML = '';
+        let paginationHTML = '';
+        $('#tableContainer').append(tableHTML).append(paginationHTML);
+        let employees = data.list
+
+        let totalPages = data.pagination.PageCount;
+        let pageNumber = data.pagination.PageNumber;
+        tableHTML = `
+                    <table id='employee_table' class="table employee_table">
+                        <thead>
+                            <tr class="active">
+                                <th >क्र.स. </th>
+                                <th >संकेत नं</th>
+                                <th >कर्मचारी नाम</th>
+                                <th>पद</th>
+                            </tr>
+                        </thead>
+                        <tbody id="employeeTableBody">
+                        </tbody>
+                    </table>
+                `;
+        paginationHTML = `
+                       <div id='employee_pagination' class="table-footer employee_pagination">
+                           <nav>
+                                 <ul class="pagination">
+                                     <li>
+                                         <a onclick="kaajemployeelist('previous', ${pageNumber})" aria-label="Previous">
+                                             <span aria-hidden="true">«</span>
+                                         </a>
+                                     </li>
+                                     ${Array.from({ length: totalPages }, (_, index) => `
+                                         <li${index + 1 === pageNumber ? ' class="active"' : ''}>
+                                             <a onclick="kaajemployeelist(${index + 1}, ${index + 1})">${index + 1}</a>
+                                         </li>`).join('')}
+                                     <li>
+                                         <a onclick="kaajemployeelist('next', ${totalPages})" aria-label="Next">
+                                             <span aria-hidden="true">»</span>
+                                         </a>
+                                     </li>
+                                 </ul>
+                           </nav>
+                       </div>
+                   `;
+        $('#tableContainer').append(tableHTML).append(paginationHTML);
+        let tableBody = $('#employeeTableBody');
+        tableBody[0].innerHTML = ''
+        employees.forEach((employee, index) => {
+            const row = `
+                                   <tr>
+                                       <td>${index + 1}</td>
+                                       <td>${employee.IdEnroll}</td>
+                                       <td>${employee.HREmployeeNameNP}</td>
+                                       <td>${employee.HRDesignationTitle}</td>
+                                   </tr> `;
+            tableBody.append(row);
+        });
+
+    }
+</script>
+
+@*//latelist*@
+<script>
+    function lateemployeelist(action, pageNumber) {
+        debugger
+        let hitPageNumber = 1;
+        if (action === 'previous') {
+            if (pageNumber != 1) {
+                hitPageNumber == pageNumber - 1;
+            }
+        }
+        else if (action === 'next') {
+            hitPageNumber = pageNumber
+        }
+        else {
+            hitPageNumber = pageNumber;
+        }
+
+        lateemployeeInfo(hitPageNumber)
+    }
+    function lateemployeeInfo(pageNumber) {
+        $.ajax({
+            url: "/Home/AdminTotalLateEmployee/",
+            type: 'GET',
+            data: {
+                PageNumber: pageNumber
+            },
+            success: function (data) {
+
+                const paginationInfo = data.pagination;
+                const employees = data.list;
+
+                lateconvertTotable(data);
+
+            },
+            error: function (xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+    function lateconvertTotable(data) {
+        debugger
+        let employee_table = $('#tableContainer')
+        if (employee_table[0]) {
+            $('#employee_table').remove();
+            $('#employee_pagination').remove();
+        }
+        let tableHTML = '';
+        let paginationHTML = '';
+        $('#tableContainer').append(tableHTML).append(paginationHTML);
+        let employees = data.list
+
+        let totalPages = data.pagination.PageCount;
+        let pageNumber = data.pagination.PageNumber;
+        tableHTML = `
+                    <table id='employee_table' class="table employee_table">
+                        <thead>
+                            <tr class="active">
+                                <th >क्र.स. </th>
+                                <th >संकेत नं</th>
+                                <th >कर्मचारी नाम</th>
+                                <th>पद</th>
+                            </tr>
+                        </thead>
+                        <tbody id="employeeTableBody">
+                        </tbody>
+                    </table>
+                `;
+        paginationHTML = `
+                       <div id='employee_pagination' class="table-footer employee_pagination">
+                           <nav>
+                                 <ul class="pagination">
+                                     <li>
+                                         <a onclick="lateemployeelist('previous', ${pageNumber})" aria-label="Previous">
+                                             <span aria-hidden="true">«</span>
+                                         </a>
+                                     </li>
+                                     ${Array.from({ length: totalPages }, (_, index) => `
+                                         <li${index + 1 === pageNumber ? ' class="active"' : ''}>
+                                             <a onclick="lateemployeelist(${index + 1}, ${index + 1})">${index + 1}</a>
+                                         </li>`).join('')}
+                                     <li>
+                                         <a onclick="lateemployeelist('next', ${totalPages})" aria-label="Next">
+                                             <span aria-hidden="true">»</span>
+                                         </a>
+                                     </li>
+                                 </ul>
+                           </nav>
+                       </div>
+                   `;
+        $('#tableContainer').append(tableHTML).append(paginationHTML);
+        let tableBody = $('#employeeTableBody');
+        tableBody[0].innerHTML = ''
+        employees.forEach((employee, index) => {
+            const row = `
+                                   <tr>
+                                       <td>${index + 1}</td>
+                                       <td>${employee.IdEnroll}</td>
+                                       <td>${employee.Name}</td>
+                                       <td>${employee.Designation}</td>
+                                   </tr> `;
+            tableBody.append(row);
+        });
+
+    }
+</script>
+
+
+@*//yesterdaylist*@
+<script>
+    function yesterdayemployeelist(action, pageNumber) {
+        debugger
+        let hitPageNumber = 1;
+        if (action === 'previous') {
+            if (pageNumber != 1) {
+                hitPageNumber == pageNumber - 1;
+            }
+        }
+        else if (action === 'next') {
+            hitPageNumber = pageNumber
+        }
+        else {
+            hitPageNumber = pageNumber;
+        }
+
+        yesterdayemployeeInfo(hitPageNumber)
+    }
+    function yesterdayemployeeInfo(pageNumber) {
+        $.ajax({
+            url: "/Home/AdminEarlyCheckoutEmpList/",
+            type: 'GET',
+            data: {
+                PageNumber: pageNumber
+            },
+            success: function (data) {
+
+                const paginationInfo = data.pagination;
+                const employees = data.list;
+
+                yesterdayconvertTotable(data);
+
+            },
+            error: function (xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+    function yesterdayconvertTotable(data) {
+        debugger
+        let employee_table = $('#tableContainer')
+        if (employee_table[0]) {
+            $('#employee_table').remove();
+            $('#employee_pagination').remove();
+        }
+        let tableHTML = '';
+        let paginationHTML = '';
+        $('#tableContainer').append(tableHTML).append(paginationHTML);
+        let employees = data.list
+        let totalPages = data.pagination.PageCount;
+        let pageNumber = data.pagination.PageNumber;
+        tableHTML = `
+                    <table id='employee_table' class="table employee_table">
+                        <thead>
+                            <tr class="active">
+                                <th >क्र.स. </th>
+                                <th >संकेत नं</th>
+                                <th >कर्मचारी नाम</th>
+                                <th>पद</th>
+                            </tr>
+                        </thead>
+                        <tbody id="employeeTableBody">
+                        </tbody>
+                    </table>
+                `;
+        paginationHTML = `
+                       <div id='employee_pagination' class="table-footer employee_pagination">
+                           <nav>
+                                 <ul class="pagination">
+                                     <li>
+                                         <a onclick="yesterdayemployeelist('previous', ${pageNumber})" aria-label="Previous">
+                                             <span aria-hidden="true">«</span>
+                                         </a>
+                                     </li>
+                                     ${Array.from({ length: totalPages }, (_, index) => `
+                                         <li${index + 1 === pageNumber ? ' class="active"' : ''}>
+                                             <a onclick="yesterdayemployeelist(${index + 1}, ${index + 1})">${index + 1}</a>
+                                         </li>`).join('')}
+                                     <li>
+                                         <a onclick="yesterdayemployeelist('next', ${totalPages})" aria-label="Next">
+                                             <span aria-hidden="true">»</span>
+                                         </a>
+                                     </li>
+                                 </ul>
+                           </nav>
+                       </div>
+                   `;
+        $('#tableContainer').append(tableHTML).append(paginationHTML);
+        let tableBody = $('#employeeTableBody');
+        tableBody[0].innerHTML = ''
+        employees.forEach((employee, index) => {
+            const row = `
+                                   <tr>
+                                       <td>${index + 1}</td>
+                                       <td>${employee.IdEnroll}</td>
+                                       <td>${employee.EmployeeName}</td>
+                                       <td>${employee.Designation}</td>
+                                   </tr> `;
+            tableBody.append(row);
+        });
+
+    }
+</script>
+
+@*//todayLoglist*@
+<script>
+    function todaylogemployeelist(action, pageNumber) {
+        debugger
+        let hitPageNumber = 1;
+        if (action === 'previous') {
+            if (pageNumber != 1) {
+                hitPageNumber == pageNumber - 1;
+            }
+        }
+        else if (action === 'next') {
+            hitPageNumber = pageNumber
+        }
+        else {
+            hitPageNumber = pageNumber;
+        }
+
+        todaylogemployeeInfo(hitPageNumber)
+    }
+    function todaylogemployeeInfo(pageNumber) {
+        $.ajax({
+            url: "/Home/AdminOfficeLogsEmpList/",
+            type: 'GET',
+            data: {
+                PageNumber: pageNumber
+            },
+            success: function (data) {
+
+                const paginationInfo = data.pagination;
+                const employees = data.list;
+
+                todaylogconvertTotable(data);
+
+            },
+            error: function (xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+    function todaylogconvertTotable(data) {
+        debugger
+        let employee_table = $('#tableContainer')
+        if (employee_table[0]) {
+            $('#employee_table').remove();
+            $('#employee_pagination').remove();
+        }
+        let tableHTML = '';
+        let paginationHTML = '';
+        $('#tableContainer').append(tableHTML).append(paginationHTML);
+        let employees = data.list
+
+        let totalPages = data.pagination.PageCount;
+        let pageNumber = data.pagination.PageNumber;
+        tableHTML = `
+                    <table id='employee_table' class="table employee_table">
+                        <thead>
+                            <tr class="active">
+                                <th >क्र.स. </th>
+                                <th >संकेत नं</th>
+                                <th >कर्मचारी नाम</th>
+                                <th>पद</th>
+                            </tr>
+                        </thead>
+                        <tbody id="employeeTableBody">
+                        </tbody>
+                    </table>
+                `;
+        paginationHTML = `
+                       <div id='employee_pagination' class="table-footer employee_pagination">
+                           <nav>
+                                 <ul class="pagination">
+                                     <li>
+                                         <a onclick="todaylogemployeelist('previous', ${pageNumber})" aria-label="Previous">
+                                             <span aria-hidden="true">«</span>
+                                         </a>
+                                     </li>
+                                     ${Array.from({ length: totalPages }, (_, index) => `
+                                         <li${index + 1 === pageNumber ? ' class="active"' : ''}>
+                                             <a onclick="todaylogemployeelist(${index + 1}, ${index + 1})">${index + 1}</a>
+                                         </li>`).join('')}
+                                     <li>
+                                         <a onclick="todaylogemployeelist('next', ${totalPages})" aria-label="Next">
+                                             <span aria-hidden="true">»</span>
+                                         </a>
+                                     </li>
+                                 </ul>
+                           </nav>
+                       </div>
+                   `;
+        $('#tableContainer').append(tableHTML).append(paginationHTML);
+        let tableBody = $('#employeeTableBody');
+        tableBody[0].innerHTML = ''
+        employees.forEach((employee, index) => {
+            const row = `
+                                   <tr>
+                                       <td>${index + 1}</td>
+                                       <td>${employee.IdEnroll}</td>
+                                       <td>${employee.EmployeeName}</td>
+                                       <td>${employee.Designation}</td>
+                                   </tr> `;
+            tableBody.append(row);
+        });
+
+    }
+</script>
+
+
+<script>
+    function printTable() {
+        var printContent = document.getElementById("sanchit-table").innerHTML;
+        var originalContent = document.body.innerHTML;
+
+        document.body.innerHTML = printContent;
+        window.print();
+
+        // Restore original content after printing
+        document.body.innerHTML = originalContent;
+    }
+</script>
+<script>
+    function populateTable(jsonData) {
+        var tableBody = document.getElementById("savingLeave");
+
+        for (var i = 0; i < jsonData.length; i++) {
+            var row = document.createElement("tr");
+
+            var cell1 = document.createElement("td");
+            cell1.textContent = ConvEnglishToNepaliNum(i + 1);
+            row.appendChild(cell1);
+
+            var cell2 = document.createElement("td");
+            cell2.textContent = jsonData[i].LeaveTitle;
+            row.appendChild(cell2);
+
+
+            var cell3 = document.createElement("td");
+            cell3.textContent = ConvEnglishToNepaliNum(jsonData[i].SavingLeave || 0);
+            row.appendChild(cell3);
+
+
+            var cell4 = document.createElement("td");
+            cell4.textContent = ConvEnglishToNepaliNum(jsonData[i].EligiblePerYear || 0);
+            row.appendChild(cell4);
+
+            var cell5 = document.createElement("td");
+            cell5.textContent = ConvEnglishToNepaliNum(jsonData[i].AvailableLeave || 0);
+            row.appendChild(cell5);
+
+            var cell6 = document.createElement("td");
+            cell6.textContent = ConvEnglishToNepaliNum(jsonData[i].TotalTakenLeave || 0);
+            row.appendChild(cell6);
+
+            var cell7 = document.createElement("td");
+            cell7.textContent = ConvEnglishToNepaliNum(jsonData[i].RemainingLeave || 0);
+            row.appendChild(cell7);
+
+            tableBody.appendChild(row);
+        }
+    }
+</script>
+
+<script>
+    // Get the animated text element
+    const animatedText = document.getElementById('animatedText');
+
+    // Function to stop the animation
+    function stopAnimation() {
+        animatedText.style.animationPlayState = 'paused';
+    }
+
+    // Add a touch event listener to the text
+    animatedText.addEventListener('touchstart', stopAnimation);
+
+    // You can also add a click event listener for non-touch devices
+    animatedText.addEventListener('click', stopAnimation);
+
+
+
+</script>
+
+<style>
+    .page-content {
+        Background: white !important
+    }
+
+    .loader {
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid #3498db;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 2s linear infinite;
+        margin: 20px auto;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
+<style>
+    .card-danger, .card-warning {
+        background-color: #fff;
+        border-radius: 2px;
+        padding: 1rem;
+        box-shadow: 0 1px 4px #e1e1e1;
+    }
+
+    .card-warning {
+        border-left: 8px solid #fec120;
+    }
+
+    .align-baseline, .align-start {
+        display: -webkit-flex;
+        display: flex;
+    }
+
+
+    .list {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    .text-02 {
+        font-size: 16px;
+        font-weight: 400;
+        color: #525252;
+    }
+
+    .align-start {
+        -webkit-align-items: flex-start;
+        align-items: flex-start;
+    }
+
+    .text-warning {
+        color: #fec120 !important;
+    }
+
+    .align-vertical {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+
+    .heading-03 {
+        font-size: 18px;
+        font-weight: 600;
+        color: #292929;
+    }
+
+    .align-vertical, .avatar-block, .toaster-icon {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+
+    .tags-warning {
+        width: 70px;
+        height: 30px;
+        margin-left: 18px;
+        background-color: orange;
+        border-radius: 10px;
+        text-align: center
+    }
+
+    .dropdown, .dropend, .dropstart, .dropup {
+        position: relative;
+    }
+
+    .tags-status.secondary {
+        background-color: #e0e0e0;
+        color: #292929;
+    }
+
+    .tags-status, .tags-status .icon {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+
+    .tags-status {
+        margin-left: 10px;
+        padding: 4px 5px;
+        color: #fff;
+        border-radius: 18px;
+        font-size: 18px;
+    }
+
+    .cursor-pointer {
+        cursor: pointer;
+    }
+
+    .px-3 {
+        padding-right: 16px !important;
+        padding-left: 16px !important;
+    }
+
+    .align-items-center {
+        -webkit-align-items: center !important;
+        align-items: center !important;
+    }
+
+    .custom-width {
+        width: 150%;
+    }
+</style>

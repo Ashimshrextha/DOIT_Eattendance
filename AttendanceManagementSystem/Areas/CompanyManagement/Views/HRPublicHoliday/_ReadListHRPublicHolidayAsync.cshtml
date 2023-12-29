@@ -1,0 +1,69 @@
+﻿@model SystemViewModels.SystemSetting.HRPublicHolidayViewModelList
+@using PagedList.Mvc;
+<div id="replacetarget">
+    <div id="content" class="content">
+        <div class="dataTables_wrapper">
+            <div id="mask-container">
+                <div id="mask"></div>
+                <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+                    <thead>
+                        <tr>
+                            <th class="ace-icon">आईडी</th>
+                            <th class="ace-icon">कार्या.कोड</th>
+                            <th>नाम</th>
+                            <th class="ace-icon">संक्षिप्त</th>
+                            <th class="ace-icon">शुरुको मिति</th>
+                            <th class="ace-icon">अन्तिम मिति</th>
+                            <th class="ace-icon">पुरुष</th>
+                            <th class="ace-icon">महिला</th>
+                            <th class="ace-icon">अपडेट गर्ने</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.DBModelList)
+                        {
+                            <tr>
+                                <td class="ace-icon">@item.Id</td>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa bigger-110 badge badge-yellow">@item.HRCompany.HRCompanyCode.HRCompanyCodeTitle</i>
+                                </td>
+                                <td class="blue">
+                                    <i class="fa bigger-120">@item.HRPublicHolidayTitle</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="fa bigger-110 badge badge-yellow">@item.HRPublicHolidayShortName</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa badge badge-success">@item.Fromdate.ToShortDateString()</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa badge badge-danger">@item.ToDate.ToShortDateString()</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa bigger-110 badge @(item.IsHolidayForMale?"badge-success":"badge-danger")">@(item.IsHolidayForMale ? "हो" : "होइन")</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa bigger-110 badge @(item.IsHolidayForFemale?"badge-success":"badge-danger")">@(item.IsHolidayForFemale ? "हो" : "होइन")</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa badge badge-grey">@item.UpdatedBy</i>
+                                </td>
+                              
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div aria-live="polite" role="status" id="example_info" class="dataTables_info">
+                    <div class="row">
+                        <div class="col-md-4">Showing @(Model.DBModelList.PageCount < Model.DBModelList.PageNumber ? 0 : Model.DBModelList.FirstItemOnPage) to @Model.DBModelList.LastItemOnPage of @Model.DBModelList.TotalItemCount entries in @Model.DBModelList.PageCount Pages</div>
+                        <div class="col-md-8 dataTables_paginate paging_simple_numbers" id="example_paginate">@Html.PagedListPager(Model.DBModelList, page => Url.Action("_ListHRPublicHolidayAsync", new { idHRCompany = Model.IdHRCompany, pageNumber = page, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey }))</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

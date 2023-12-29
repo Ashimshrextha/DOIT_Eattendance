@@ -1,0 +1,77 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeLeaveSummaryViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+
+
+
+    <div class="col-md-6 col-sm-6 col-lg-6">
+        <div class="panel panel-success">
+            <div class="panel-heading"><h4 class="panel-title"></h4></div>
+            <div class="panel-body">
+                <table class="table table-border table-hover">
+                    <colgroup>
+                        <col style="width:24%" />
+                        <col style="width:1%" />
+                        <col style="width:75%" />
+                    </colgroup>
+                    <tbody>
+
+                        <tr>
+                            <th>@Html.LabelFor(model => model.DataModel.IdHRCompany, new { @class = "control-label" })</th>
+                            <th>:</th>
+                            <td>
+                                @Html.TextBoxFor(model => model.DataModel.IdHRCompany, new { @class = "form-control", @readonly = "readonly" })
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                        </tr>
+                        <tr>
+                            <th>@Html.LabelFor(model => model.DataModel.IdLeaveType, new { @class = "control-label" })</th>
+                            <th>:</th>
+                            <td>
+                                @Html.DropDownListFor(model => model.DataModel.IdLeaveType, new SelectList(Model.DDLLeaveType, "Key", "Value"), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DataModel.IdLeaveType)
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                        </tr>
+                        <tr>
+                            <th>@Html.LabelFor(model => model.DataModel.LeaveValidFromNP, new { @class = "control-label" })</th>
+                            <th>:</th>
+                            <td>
+                                @Html.TextAreaFor(model => model.DataModel.LeaveValidFromNP, new { @class = "form-control switchYesNo" })
+                                @Html.ValidationMessageFor(model => model.DataModel.LeaveValidFromNP)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>@Html.LabelFor(model => model.DataModel.LeaveValidToNP, new { @class = "control-label" })</th>
+                            <th>:</th>
+                            <td>
+                                @Html.TextAreaFor(model => model.DataModel.LeaveValidToNP, new { @class = "form-control switchYesNo" })
+                                @Html.ValidationMessageFor(model => model.DataModel.LeaveValidToNP)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>@Html.LabelFor(model => model.DataModel.IdApprovedBy, new { @class = "label-control" })</th>
+                            <th>:</th>
+                            <td>
+                                @Html.DropDownListFor(model => model.DataModel.IdApprovedBy, new SelectList(Model.DDLApprovalEmployee, "Key", "Value"), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DataModel.IdApprovedBy)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>          
+

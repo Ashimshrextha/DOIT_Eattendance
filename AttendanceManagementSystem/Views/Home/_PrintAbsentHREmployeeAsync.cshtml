@@ -1,0 +1,80 @@
+﻿@model SystemViewModels.Home.HomeDashboardViewModelList
+@using SystemStores.ENUMData;
+@using SystemStores.GlobalMethod;
+
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="myModalLabel">@Model.ModalTitle</h4>
+</div>
+<div class="modal-body maxheight">
+    <div id="printThis" class="Export-table">
+        @{ Html.RenderPartial("~/Views/Shared/_ReportHeader.cshtml", Model.Header);}
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="text-center">आईडी</th>
+                    <th class="text-center">क. नं.</th>
+                    <th class="text-center">पुरा नाम</th>
+                    <th class="text-center">पद</th>
+                    <th class="text-center">मिति</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.DBModelAbsentEmpList.OrderBy(x => x.HRDesignationRank).ThenBy(x => x.AppointmentDate))
+                {
+                    <tr>
+                        <td class="text-center">
+                            <i class="ace-icon fa bigger-110 badge badge-yellow">@item.IdHREmployee</i>
+                        </td>
+                        <td class="text-center">
+                            <i class="ace-icon fa bigger-110 badge badge-yellow">@item.IdEnroll</i>
+                        </td>
+                        <td>
+                            <i class="ace-icon fa bigger-130">
+                                @(item.EmployeeName)
+                            </i>
+                        </td>
+                        <td class="blue">
+                            <i class="ace-icon fa bigger-90">@item.HRDesignationTitle</i>
+                        </td>
+                        <td class="text-center">
+                            <i class="ace-icon fa bigger-110 badge badge-success">@item.AttendanceDate.DateNp()</i>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="modal-footer">
+    <button id="@Model.CancelButtonID" class="btn btn-danger btn-app btn-sm" type="button" data-dismiss="modal"> @SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Cancel)</button>
+    @if (Model.OnlyCancelButton == false)
+    {
+        <input id="@Model.SubmitButtonID" class="btn btn-app btn-success btn-sm" type="@Model.SubmitButtonType" value="@SystemGlobalMethod.GetButtonText(Model.SubmitButtonText)" />
+        <input id="Export" class="btn btn-app btn-success btn-sm" type="button" value="@SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Export)" />
+    }
+</div>
+
+<script src="~/Scripts/jquery.table2excel.min.js"></script>
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#Export').click(function () {
+            $('.Export-table').table2excel(
+                {
+                    exclude: ".noExl",
+                    name: "अनुपस्थित कर्मचारी सूची",
+                    filename: "अनुपस्थित कर्मचारी सूची",
+                    fileext: ".xls"
+                });
+        });
+    });
+</script>

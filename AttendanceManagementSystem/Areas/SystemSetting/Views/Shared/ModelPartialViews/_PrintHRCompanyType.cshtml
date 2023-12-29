@@ -1,0 +1,38 @@
+﻿@model SystemViewModels.SystemSetting.HRCompanyTypeViewModel
+
+<div id="printThis">
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>आईडी</th>
+                <th>कार्यालयको प्रकार</th>
+                <th>संक्षिप्त नाम</th>
+                <th>अपडेट गर्ने</th>
+                <th>अपडेट मिति</th>
+                <th>आई.पी</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.CompanyType</td>
+                    <td>@item.CompanyTypeShortName</td>
+                    <td>@item.UpdatedBy</td>
+                    <td>@item.UpdatedOn.ToString()</td>
+                    <td>@item.TerminalIP</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>

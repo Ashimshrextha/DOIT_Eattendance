@@ -1,0 +1,44 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeJobHistoryViewModelList
+@using SystemStores.GlobalMethod;
+@using SystemStores.ENUMData;
+<div class="breadcrumbs ace-save-state">
+    <div class="nav-search" id="nav-search">
+        <form class="form-search">
+            <span class="input-icon">
+                <a class="nav-search-input" href="~/@Model.BreadCrumbBaseURL/_PrintHREmployeejobAsync?idHREmployee=@Model.IdHREmployee" data-ajax-model="">
+                    <i class="ace-icon fa fa-print nav-search-icon">@SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Print)</i>
+                </a>
+            </span>
+            <span class="input-icon">
+                <a class="nav-search-input" href="~/@Model.BreadCrumbBaseURL/_ExportHREmployeeJobAsync?idHREmployee=@Model.IdHREmployee">
+                    <i class="ace-icon fa fa-file-excel-o nav-search-icon">@SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Export)</i>
+                </a>
+            </span>
+            @if (Model.JobHistoryCounter == 0)
+            {
+                <span class="input-icon">
+                    <a class="nav-search-input" href="#" id="Create_HREmployeeJob">
+                        <i class="ace-icon fa fa-plus  nav-search-icon">@SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Create)</i>
+                    </a>
+                </span>
+            }
+        </form>
+    </div><!-- /.nav-search -->
+</div>
+@{ Html.RenderPartial("_ListHREmployeeJobAsync");}
+<script type="text/javascript">
+    $(function () {
+        $.ajaxSetup({ cache: false });
+        $('#Create_HREmployeeJob').click(function (e) {
+            var url;
+			url = '/@Model.BreadCrumbBaseURL' + '/_CreateHREmployeeJobAsync?IdHREmployee=' +'@Model.IdHREmployee';
+            $('#myModalContent').load(url, function () {
+                $('#myModal').modal({
+                    keyboard: true
+                }, 'show');
+                bindAjaxForm(this);
+            });
+            return false;
+        });
+    });
+</script>

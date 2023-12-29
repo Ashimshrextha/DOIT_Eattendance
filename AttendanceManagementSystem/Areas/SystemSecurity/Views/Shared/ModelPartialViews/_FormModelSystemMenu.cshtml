@@ -1,0 +1,81 @@
+﻿@model SystemViewModels.SystemSecurity.SystemMenuViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+
+<div class="row">
+    
+    <div class="col-md-12 col-sm-12 col-lg-12">
+        <table class="table table-border table-hover">
+            <colgroup>
+                <col style="width:14%" />
+                <col style="width:1%" />
+                <col style="width:35%" />
+                <col style="width:14%" />
+                <col style="width:1%" />
+                <col style="width:35%" />
+            </colgroup>
+            <tbody>
+                <tr>
+                    <th class="text-right">@Html.LabelFor(model => model.DataModel.Area, new { @class = "control-label" })</th>
+                    <th>:</th>
+                    <th>
+                        @Html.TextBoxFor(model => model.DataModel.Area, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.Area)
+                    </th>
+                    <th class="text-right">@Html.LabelFor(model => model.DataModel.IsActive, new { @class = "control-label" })</th>
+                    <th>:</th>
+                    <th>
+                        @Html.CheckBoxFor(model => model.DataModel.IsActive, new { @class = "form-control BSswitch" })
+                        @Html.ValidationMessageFor(model => model.DataModel.IsActive)
+                    </th>
+                </tr>
+                <tr>
+                    <th class="text-right">@Html.LabelFor(model => model.DataModel.Menu, new { @class = "control-label" })</th>
+                    <th>:</th>
+                    <th>
+                        @Html.TextBoxFor(model => model.DataModel.Menu, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.Menu)
+                    </th>
+                    <th class="text-right"> @Html.LabelFor(model => model.DataModel.CSSClass, new { @class = "control-label" })</th>
+                    <th>:</th>
+                    <th>
+                        @Html.TextBoxFor(model => model.DataModel.CSSClass, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.CSSClass)
+                    </th>
+                </tr>
+                <tr>
+                    <th class="text-right">@Html.LabelFor(model => model.DataModel.CSSIcon, new { @class = "control-label" })</th>
+                    <th>:</th>
+                    <th>
+                        @Html.TextBoxFor(model => model.DataModel.CSSIcon, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.CSSIcon)
+                    </th>
+                    <th class="text-right"> @Html.LabelFor(model => model.DataModel.DefaultURL, new { @class = "control-label" })</th>
+                    <th>:</th>
+                    <th>
+                        @Html.TextBoxFor(model => model.DataModel.DefaultURL, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.DefaultURL)
+                    </th>
+                </tr>
+                <tr>
+                    <th class="text-right"> @Html.LabelFor(model => model.DataModel.OrderBy, new { @class = "control-label" })</th>
+                    <th>:</th>
+                    <th>
+                        @Html.TextBoxFor(model => model.DataModel.OrderBy, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.OrderBy)
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

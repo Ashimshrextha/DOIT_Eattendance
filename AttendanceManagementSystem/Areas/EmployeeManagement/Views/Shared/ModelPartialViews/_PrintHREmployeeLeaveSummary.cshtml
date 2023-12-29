@@ -1,0 +1,63 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeLeaveSummaryViewModel
+
+@{
+    var lastyear = Model.lastYearNp;
+}
+<div id="printThis">
+    <div class="fontsize">
+        <div style="text-align:center;font-weight:bold">
+
+            @Model.DBModelList.FirstOrDefault().HREmployee1.HRCompany.CompanyNameNP<br>
+        </div>
+
+        <div style="text-align:center;font-weight:bold">
+
+            @Model.CurrentDesignation<br>
+        </div>
+
+        <div style="text-align:center;font-weight:bold">
+            @Model.DBModelList.FirstOrDefault().HREmployee1.HREmployeeNameNP<br>
+        </div>
+
+    </div>
+    <table style="width: 100%;" class="table table-bordered  table-responsive">
+        <thead>
+            <tr>
+                <th>कार्यालय</th>
+                <th class="text-center">विदाको प्रकार</th>
+                <th class="ace-icon">आवेदन मिति</th>
+                <th class="text-center">शुरुको मिति</th>
+                <th class="text-center">अन्तिम मिति</th>
+                <th class="ace-icon">सिफारिस गर्ने</th>
+                <th class="text-center">स्वीकृत गर्ने</th>
+                <th class="text-center">प्रविष्ट गर्ने</th>
+                <th class="text-center">अवस्था</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList.OrderByDescending(x => x.LeaveValidFromNP))
+            {
+            <tr>
+                <td>@item.HRCompany.CompanyNameNP</td>
+                <td class="text-center">@item.HRCompanyLeaveType.MasterLeaveTitle.LeaveTitleNP</td>
+                <td>@(string.Format("{0:yyyy-MM-dd}", item.CreatedOn.DateNp()))</td>
+                <td class="text-center">@item.LeaveValidFromNP</td>
+                <td class="text-center">@item.LeaveValidToNP</td>
+                <td>@(item.IdRecommandationBy == null ? "" : item.HREmployee2.HREmployeeNameNP)</td>
+                <td>@(item.IdApprovedBy == null ? "" : item.HREmployee.HREmployeeNameNP)</td>
+                <td>@(item.CreatedBy == null ? "" : item.CreatedBy)</td>
+                <td class="text-center">@item.HRCompanyLeaveStatusType.LeaveStatusTypeNP</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>

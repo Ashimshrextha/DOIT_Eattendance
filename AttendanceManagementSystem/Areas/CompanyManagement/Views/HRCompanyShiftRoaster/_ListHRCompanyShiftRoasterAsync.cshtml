@@ -1,0 +1,66 @@
+﻿@model SystemViewModels.CompanyManagement.HRCompanyShiftRoasterViewModelList
+@using PagedList.Mvc;
+<div id="replacetarget">
+    <div id="content" class="content">
+        <div class="dataTables_wrapper">
+            <div id="mask-container">
+                <div id="mask"></div>
+                <div class="table-responsive">
+                    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th class="text-center">आईडी</th>
+                                <th class="text-center">कार्यालय</th>
+                                <th>शिफ्ट शीर्षक</th>
+                                <th class="text-center">आउने समय </th>
+                                <th class="text-center">जाने समय</th>
+                                <th class="text-center">अवस्था</th>
+                                <th class="ace-icon">कार्य</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.DBModelList.OrderBy(x=>x.Id))
+                            {
+                                <tr>
+                                    <td class="ace-icon">@item.Id</td>
+                                    <td class="ace-icon">
+                                        <i class="ace-icon bigger-100 fa badge badge-yellow">@item.HRCompany.HRCompanyCode.HRCompanyCodeTitle</i>
+                                    </td>
+                                    <td class="blue">
+                                        <i class="fa bigger-110">@item.ShiftTitle</i>
+                                    </td>
+                                    <td class="ace-icon">
+                                        <i class="fa badge badge-info bigger-130">@item.LoginTime</i>
+                                    </td>
+                                    <td class="ace-icon">
+                                        <i class="fa badge badge-info bigger-130">@item.LogoutTime</i>
+                                    </td>
+                                    <td class="ace-icon">
+                                        <div>
+                                            <i class="ace-icon @(item.IsActive==true?"fa fa-thumbs-up green":"fa fa-thumbs-down red") bigger-130" aria-hidden="true"></i>
+                                        </div>
+                                    </td>
+                                    <td class="ace-icon action-buttons">
+                                        @if (item.HRCompanyHREmployeeShiftRoasters.Count == 0)
+                                        {
+                                            <a href="@Url.Action("_UpdatedHRCompanyShiftRoasterAsync",new { id=item.Id,idHRCompany=item.IdHRCompany,pageNumber=Model.PageNumber,pageSize=Model.PageSize,orderingBy=Model.OrderingBy,orderingDirection=Model.OrderingDirection,searchKey=Model.SearchKey})" data-ajax-model="">
+                                                <i class="ace-icon fa fa-pencil green bigger-150" aria-hidden="true" title="Edit"></i>
+                                            </a>
+                                            <a href="@Url.Action("_DeleteHRCompanyShiftRoasterAsync",new { id=item.Id,idHRCompany=item.IdHRCompany,pageNumber=Model.PageNumber,pageSize=Model.PageSize,orderingBy=Model.OrderingBy,orderingDirection=Model.OrderingDirection,searchKey=Model.SearchKey})" data-ajax-model=""><i class="ace-icon fa fa-trash-o red bigger-150" aria-hidden="true" title="Delete"></i></a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div aria-live="polite" role="status" id="example_info" class="dataTables_info">
+                    <div class="row">
+                        <div class="col-md-4">Showing @(Model.DBModelList.PageCount < Model.DBModelList.PageNumber ? 0 : Model.DBModelList.FirstItemOnPage) to @Model.DBModelList.LastItemOnPage of @Model.DBModelList.TotalItemCount entries in @Model.DBModelList.PageCount Pages</div>
+                        <div class="col-md-8 dataTables_paginate paging_simple_numbers" id="example_paginate">@Html.PagedListPager(Model.DBModelList, page => Url.Action("_ListHRCompanyAsync", new { pageNumber = page, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey }))</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

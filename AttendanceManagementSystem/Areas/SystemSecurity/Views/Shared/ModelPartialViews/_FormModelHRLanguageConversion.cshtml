@@ -1,0 +1,68 @@
+﻿@model SystemViewModels.SystemSecurity.HRLanguageConversionViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+
+<div class="row">
+    
+    <div class="col-md-12 col-sm-12 col-lg-12">
+        <table class="table table-border table-hover">
+            <colgroup>
+                <col style="width:14%"/>
+                <col style="width:1%"/>
+                <col style="width:35%"/>
+                <col style="width:14%"/>
+                <col style="width:1%"/>
+                <col style="width:35%"/>
+            </colgroup>
+            <tbody>
+                <tr>
+                    <th class="text-right">@Html.LabelFor(model => model.DataModel.English, new { @class = "control-label" })</th>
+                    <th>:</th>
+                    <th>
+                        @Html.TextBoxFor(model => model.DataModel.English, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.English)
+                    </th>
+                    <th class="text-right">@Html.LabelFor(model => model.DataModel.Nepali, new { @class = "control-label" })</th>
+                    <th>:</th>
+                    <th>
+                        @Html.TextBoxFor(model => model.DataModel.Nepali, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.Nepali)
+                    </th>
+                </tr>
+                <tr>
+                    <th class="text-right">  @Html.LabelFor(model => model.DataModel.Newari, new { @class = "control-label" })</th>
+                    <th>:</th>
+                    <th>
+                        @Html.TextBoxFor(model => model.DataModel.Newari, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.Newari)
+                    </th>
+                    <th class="text-right">@Html.LabelFor(model => model.DataModel.Maithali, new { @class = "control-label" })</th>
+                    <th>:</th>
+                    <th>
+                        @Html.TextBoxFor(model => model.DataModel.Maithali, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.Maithali)
+                    </th>
+                </tr>
+                <tr>
+                    <th class="text-right">@Html.LabelFor(model => model.DataModel.Other, new { @class = "control-label" })</th>
+                    <th>:</th>
+                    <th>
+                        @Html.TextBoxFor(model => model.DataModel.Other, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.Other)
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

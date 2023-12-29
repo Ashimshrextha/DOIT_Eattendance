@@ -1,0 +1,56 @@
+﻿@model SystemViewModels.Reports.MonthlyEarlyandLateReportViewModel
+@{
+    int SN = 1;
+}
+<div id="printThis">
+    @{ Html.RenderPartial("~/Views/Shared/_ReportHeader.cshtml", Model.Header);}
+    <div class="table-responsive">
+        <table class="table table-border table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center">क्रस</th>
+                    <th class="text-center">मिति</th>
+                    <th class="text-center">दिन</th>
+                    <th class="text-center">आउने समय</th>
+                    <th class="text-center">आएको समय</th>
+                    <th class="text-center">जाने समय</th>
+                    <th class="text-center">गएको समय</th>
+                    <th class="text-center">छिटो गएको</th>
+                    <th class="text-center">अवस्था</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.DBModelAttendanceWorkingRangeList.Where(x => x.CheckOutEarly != null))
+                {
+                    <tr>
+                        <td class="text-center">@SN</td>
+                        <td class="text-center">@item.NepaliDate</td>
+                        <td class="text-center">@item.DayOfWeekNP</td>
+                        <td class="text-center">@item.LoginTime</td>
+                        <td class="text-center">@item.CheckinTime</td>
+                        <td class="text-center">@item.LogoutTime</td>
+                        <td class="text-center">@item.CheckoutTime</td>
+                        <td class="text-center">@item.CheckOutEarly</td>
+                        <td class="text-center">@item.DayStatus</td>
+                    </tr>SN++;
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>
+<script type="text/javascript">
+    function ExcelReport(div) {
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('div[id$=' + div + ']').html()));
+        e.preventDefault();
+    }
+</script>

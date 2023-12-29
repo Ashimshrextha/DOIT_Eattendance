@@ -1,0 +1,72 @@
+﻿@model SystemViewModels.Reports.DailyReportViewModelList
+@using PagedList.Mvc;
+<div id="replacetarget">
+    <div id="content" class="content">
+        <div class="dataTables_wrapper">
+            <div id="mask-container">
+                <div id="mask"></div>
+                <div class="table-responsive scroll-table">
+                    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th class="text-center">क.संकेत नं.</th>
+                                <th> कर्मचारी नाम</th>
+                                <th class="ace-icon">पद</th>
+                                <th class="text-center" style="min-width:130px;">मिति</th>
+                                <th class="text-center" style="min-width:110px;">आउने समय</th>
+                                <th class="text-center" style="min-width:110px;">आएको समय</th>
+                                <th class="text-center" style="min-width:110px;">ढिलो आएको</th>
+                                <th class="text-center" style="min-width:110px;">जाने समय</th>
+                                <th class="text-center" style="min-width:110px;">गएको समय</th>
+                                <th class="text-center" style="min-width:110px;">छिटो गएको</th>
+                                <th class="text-center" style="min-width:150px;">स्थिति</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.DBModelPageList)
+                            {
+                                <tr id="@item.IdHREmployee">
+                                    <td class="text-center">
+                                        <i class="ace-icon fa bigger-110 badge badge-yellow">@item.PISNumber</i>
+                                    </td>
+                                    <td class="blue" style="min-width:130px;">
+                                        <i class="ace-icon fa bigger-130">@item.HREmployeeNameNP</i>
+                                    </td>
+                                    <td class="ace-icon">
+                                        <i class="ace-icon fa bigger-110 badge badge-yellow">@item.HRDesignationTitle</i>
+                                    </td>
+                                    <td class="text-center" style="min-width:130px;">
+                                        <i class="ace-icon fa bigger-110 badge badge-success">@item.NepaliDate</i>
+                                    </td>
+                                    <td class="text-center" style="min-width:110px;">
+                                        <i class="ace-icon fa bigger-110 badge badge-success">@item.LogInTime</i>
+                                    </td>
+                                    <td class="text-center" style="min-width:110px;">@item.CheckInTime</td>
+                                    <td class="text-center" style="min-width:110px;">
+                                        <i class="fa bigger-120 badge badge-danger">@item.LateBy</i>
+                                    </td>
+                                    <td class="text-center" style="min-width:110px;">@item.LogOutTime</td>
+                                    <td class="text-center" style="min-width:110px;">@item.CheckOutTime</td>
+                                    <td class="text-center" style="min-width:110px;">
+                                        <i class="fa bigger-120 badge badge-yellow">@item.CheckOutEarly</i>
+                                    </td>
+                                    <td class="text-center" style="background-color:@item.ColorCode;min-width:150px;">
+                                        <i class="ace-icon fa bigger-130">@item.EmployeeStatus</i>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div aria-live="polite" role="status" id="example_info" class="dataTables_info">
+                    <div class="row">
+                        <div class="col-md-4">Showing @(Model.DBModelPageList.PageCount < Model.DBModelPageList.PageNumber ? 0 : Model.DBModelPageList.FirstItemOnPage) to @Model.DBModelPageList.LastItemOnPage of @Model.DBModelPageList.TotalItemCount entries in @Model.DBModelPageList.PageCount Pages</div>
+                        <div class="col-md-8 dataTables_paginate paging_simple_numbers" id="example_paginate">@Html.PagedListPager(Model.DBModelPageList, page => Url.Action("_ListDailyReportAsync", new { idHRCompany = Model.IdHRCompany, idHRCompanyDivision = Model.IdDivision, idJobStatus = Model.IdJobStatus, idHREmployee = Model.IdHREmployee, dateNP = Model.DateNp, pageNumber = page, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey }))</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

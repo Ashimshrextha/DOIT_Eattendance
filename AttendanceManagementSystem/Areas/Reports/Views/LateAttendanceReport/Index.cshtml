@@ -1,0 +1,127 @@
+﻿@model SystemViewModels.Reports.LateAttendanceReportViewModelList
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+    @{ Html.RenderPartial("_Action");}
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="~/@Model.BreadCrumbBaseURL">@Model.BreadCrumbArea</a>
+        </li>
+        <li class="active">@Model.BreadCrumbTitle</li>
+    </ul><!-- /.breadcrumb -->
+    <div class="nav-search" id="nav-search">
+        <form class="form-search">
+            <span class="input-icon">
+                @Html.DropDownListFor(model => model.PageSize, new SelectList(AttendanceManagementSystem.Services.CommonServices.PageNumber), new { @class = "nav-search-input", @style = "width:55px;" })
+            </span>
+            <span class="input-icon">
+                <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-UserSearch" autocomplete="off" />
+                <i class="ace-icon fa fa-search nav-search-icon"></i>
+            </span>
+        </form>
+    </div><!-- /.nav-search -->
+</div>
+<div class="page-content">
+    <div class="row">
+        <div id="replacetarget_@Model.BreadCrumbController" class="col-xs-12">
+            @{ Html.RenderPartial("_ListLateAttendanceReportAsync");}
+        </div>
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#PageSize').change(function () {
+        $('table,#mask').addClass('loading');
+            $.ajax({
+            url: '/@Model.BreadCrumbBaseURL/_ListLateAttendanceReportAsync',
+            type: 'GET',
+            data: {
+                idHRCompany: $('#IdHRCompany').val(),
+                idHRCompanyDivision: $('#IdDivision').val(),
+                idHREmployee: $('#IdHREmployee').val(),
+                date: $('#Date').val(),
+                pageNumber: 1,
+                pageSize: $(this).val(),
+                orderingBy: '@Model.OrderingBy',
+                orderingDirection: '@Model.OrderingDirection',
+                searchKey: $('#nav-search-UserSearch').val()
+            },
+            success: function (result) {
+                if (result == '"_Login_"') {
+                    window.location = "/Account/Login";
+                    return;
+                }
+                $('#content').html(result);
+                $('table,#mask').removeClass('loading');
+            }
+        });
+    });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#Print_LateAttendanceReport').click(function (e) {
+				var url;
+				var idHRCompany = $('#IdHRCompany').val();
+				var idHRCompanyDivision = $('#IdDivision').val();
+				var idHREmployee = $('#IdHREmployee').val();
+            var date = $('#Date').val();
+            var idJobStatus = $('#IdJobStatus').val();
+            url = '/@Model.BreadCrumbBaseURL' + '/_PrintLateAttendanceReportAsync?idHRCompany=' + idHRCompany + '&idHRCompanyDivision=' + idHRCompanyDivision + '&idJobStatus=' + idJobStatus + '&idHREmployee=' + idHREmployee + '&date=' + date;
+            $.get(url, function (data) {
+                $('#myModalContent').html(data);
+            }).done(function () {
+                $('#myModal').modal({
+                    keyboard: true
+                }, 'show');
+            });
+			});
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var delay = (function () {
+            var timer = 0;
+            return function (callback, ms, that) {
+                clearTimeout(timer);
+                timer = setTimeout(callback.bind(that), ms);
+            };
+        })();
+
+        $('#nav-search-UserSearch').keyup(function () {
+            $('table,#mask').addClass('loading');
+            delay(function () {
+                var idHRCompany = $('#IdHRCompany').val();
+                var idDivision = $('#IdDivision').val();
+                var idHREmployee = $('#IdHREmployee').val();
+                var pageSize = $('#PageSize').val();
+                $.ajax({
+                    url:'/Reports/LateAttendanceReport/_ListLateAttendanceReportAsync',
+                    type: 'GET',
+                    data: {
+                        idHRCompany: idHRCompany,
+                        idHRCompanyDivision: idDivision,
+                        idHREmployee: idHREmployee,
+                        date: $('#Date').val(),
+                        pageNumber: 1,
+                        pageSize: pageSize,
+                              orderingBy: '@Model.OrderingBy',
+                             orderingDirection: '@Model.OrderingDirection',
+                             searchKey: $(this).val()
+                         },
+				    success: function (result) {
+				        if (result == '"_Login_"') {
+				            window.location = "/Account/Login";
+				            return;
+				        }
+				        $('#content').html(result);
+				        $('table,#mask').removeClass('loading');
+				    }
+				});
+            }, 1000, this);
+        });
+    });
+</script>
+

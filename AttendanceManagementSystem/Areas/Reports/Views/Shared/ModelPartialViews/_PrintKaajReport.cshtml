@@ -1,0 +1,173 @@
+﻿@model  SystemViewModels.Reports.KaajReportViewModel
+<style>
+    @@media screen {
+        #printSection {
+            display: none;
+        }
+    }
+
+    @@media print {
+        @@Page {
+            size: landscape;
+            margin: 0.5cm;
+        }
+
+        body {
+            -webkit-print-color-adjust: exact;
+        }
+
+            body * {
+                visibility: hidden;
+            }
+
+        #printSection, #printSection * {
+            -webkit-print-color-adjust: exact;
+            visibility: visible;
+        }
+
+        #printSection {
+            -webkit-print-color-adjust: exact;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    }
+</style>
+<div id="printThis">
+    @{ Html.RenderPartial("~/Views/Shared/_ReportHeader.cshtml", Model.Header);}
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="text-center" rowspan="3">क.संकेत नं.</th>
+                    <th rowspan="3"> कर्मचारी नाम</th>
+                    <th rowspan="3" class="text-center">पद</th>
+                    @foreach (var item in Model.DBReportHeader)
+                    {
+                        <th>
+                            @item.NumberInNepali <br />
+                            @item.DOWShortNP
+                        </th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.DBModelKaajList)
+                {
+                    <tr>
+                        <th class="text-center">
+                            <i class="ace-icon fa bigger-110 badge badge-yellow">@item.IdEnroll</i>
+                        </th>
+                        <th style="min-width:200px" class="blue">
+                            <i class="ace-icon fa bigger-130">@item.HREmployeeNameNP</i>
+                        </th>
+                        <th class="text-center">
+                            <i class="ace-icon fa bigger-110 badge badge-yellow">@item.HRDesignationShortName</i>
+                        </th>
+                        <td>@item.C1 </td>
+                        <td>@item.C2 </td>
+                        <td>@item.C3 </td>
+                        <td>@item.C4 </td>
+                        <td>@item.C5 </td>
+                        <td>@item.C6 </td>
+                        <td>@item.C7 </td>
+                        <td>@item.C8 </td>
+                        <td>@item.C9 </td>
+                        <td>@item.C10</td>
+                        <td>@item.C11</td>
+                        <td>@item.C12</td>
+                        <td>@item.C13</td>
+                        <td>@item.C14</td>
+                        <td>@item.C15</td>
+                        <td>@item.C16</td>
+                        <td>@item.C17</td>
+                        <td>@item.C18</td>
+                        <td>@item.C19</td>
+                        <td>@item.C20</td>
+                        <td>@item.C21</td>
+                        <td>@item.C22</td>
+                        <td>@item.C23</td>
+                        <td>@item.C24</td>
+                        <td>@item.C25</td>
+                        <td>@item.C26</td>
+                        <td>@item.C27</td>
+                        <td>@item.C28</td>
+                        <td>@item.C29</td>
+                        <td>@item.C30</td>
+                        <td>@item.C31</td>
+                        <td>@item.C32</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @{ Html.RenderPartial("~/Views/Shared/_ReportFooter.cshtml", Model.Header);}
+    </div>
+</div>
+<script type="text/javascript">
+    function ExcelReport(div) {
+        //window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('div[id$=' + div + ']').html()));
+        //e.preventDefault();
+         var y = $('div[id$=' + div + ']');
+        var z = $('.non-print', y).remove();
+        //$('.print', y).remove();
+        console.log(z);
+        var x = encodeURIComponent($('div[id$=' + div + ']').html());
+        var z = $('.non-print', y).remove();
+        debugger
+        window.open('data:application/vnd.ms-excel,' + x);
+        e.preventDefault();
+    }
+</script>
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('table').on('scroll', function () {
+            $("#" + this.id + " > *").width($(this).width() + $(this).scrollLeft());
+        });
+    });
+</script>
+
+@*<script type="text/javascript">
+    document.getElementById("btnPrint").onclick = function () {
+        printElement(document.getElementById("printThis"));
+    }
+
+    function printElement(elem) {
+        var domClone = elem.cloneNode(true);
+        var $printSection = document.getElementById("printSection");
+        if (!$printSection) {
+            var $printSection = document.createElement("div");
+            $printSection.id = "printSection";
+            document.body.appendChild($printSection);
+        }
+        $printSection.innerHTML = "";
+        $printSection.appendChild(domClone);
+        window.print();
+    }
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        function PrintElem(elem) {
+            Popup($(elem).html());
+        }
+        function Popup(data) {
+            var mywindow = window.open('', 'प्रिन्ट', 'height=400,width=600');
+            mywindow.document.write('<html><head><title>प्रिन्ट</title>');
+            mywindow.document.write('</head><body >');
+            mywindow.document.write(data);
+            mywindow.document.write('</body></html>');
+            mywindow.document.close(); // necessary for IE >= 10
+            mywindow.focus(); // necessary for IE >= 10
+            mywindow.print();
+            mywindow.close();
+            return true;
+        }
+    });
+</script>*@

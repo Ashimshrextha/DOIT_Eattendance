@@ -1,0 +1,156 @@
+﻿@model SystemViewModels.SystemSecurity.SystemStructureViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+<div class="row">
+    
+    <div class="col-md-12 col-sm-12 col-lg-12">
+        <table class="table table-border table-hover">
+            <colgroup>
+                <col style="width:14%" />
+                <col style="width:1%" />
+                <col style="width:35%" />
+                <col style="width:14%" />
+                <col style="width:1%" />
+                <col style="width:35%" />
+            </colgroup>
+            <tbody>
+                <tr>
+                    <th class="text-right">@Html.LabelFor(model => model.DataModel.IdSystemMenu, new { @class = "control-label" })</th>
+                    <th>:</th>
+                    <td>
+                        @Html.DropDownListFor(model => model.DataModel.IdSystemMenu, new SelectList(Model.DDLSystemMenu, "Key", "Value"), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.IdSystemMenu)
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-right">@Html.LabelFor(model => model.DataModel.Header, new { @class = "control-label" })</th>
+                    <th>:</th>
+                    <td>
+                        @Html.TextBoxFor(model => model.DataModel.Header, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.Header)
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-right">@Html.LabelFor(model => model.DataModel.IdParent_SystemStructure, new { @class = "control-label" })</th>
+                    <th>:</th>
+                    <td>
+                        @Html.DropDownListFor(model => model.DataModel.IdParent_SystemStructure, new SelectList(Model.DDLSystemStructure,"Key","Value"),new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.IdParent_SystemStructure)
+                    </td>
+                    <th class="text-right">@Html.LabelFor(model => model.DataModel.IsActive, new { @class = "control-label" })</th>
+                    <th>:</th>
+                    <td>
+                        @Html.CheckBoxFor(model => model.DataModel.IsActive, new { @class = "form-control BSswitch" })
+                        @Html.ValidationMessageFor(model => model.DataModel.IsActive)
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-right">@Html.LabelFor(model => model.DataModel.Controller, new { @class = "control-label" })</th>
+                    <th>:</th>
+                    <td>
+                        @Html.TextBoxFor(model => model.DataModel.Controller, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.Controller)
+                    </td>
+                    <th class="text-right">@Html.LabelFor(model => model.DataModel.ActionName, new { @class = "control-label" })</th>
+                    <th>:</th>
+                    <td>
+                        @Html.TextBoxFor(model => model.DataModel.ActionName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.ActionName)
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-right">@Html.LabelFor(model => model.DataModel.CSSClass, new { @class = "control-label" })</th>
+                    <th>:</th>
+                    <td>
+                        @Html.TextBoxFor(model => model.DataModel.CSSClass, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.CSSClass)
+                    </td>
+                    <th class="text-right">@Html.LabelFor(model => model.DataModel.CSSIcon, new { @class = "control-label" })</th>
+                    <th>:</th>
+                    <td>
+                        @Html.TextBoxFor(model => model.DataModel.CSSIcon, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.CSSIcon)
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-right">@Html.LabelFor(model => model.DataModel.CSSClass1, new { @class = "control-label" })</th>
+                    <th>:</th>
+                    <td>
+                        @Html.TextBoxFor(model => model.DataModel.CSSClass1, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.CSSClass1)
+                    </td>
+                    <th class="text-right">@Html.LabelFor(model => model.DataModel.CSSIcon1, new { @class = "control-label" })</th>
+                    <th>:</th>
+                    <td>
+                        @Html.TextBoxFor(model => model.DataModel.CSSIcon1, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.CSSIcon1)
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-right">@Html.LabelFor(model => model.DataModel.ParentOrder, new { @class = "control-label" })</th>
+                    <th>:</th>
+                    <td>
+                        @Html.TextBoxFor(model => model.DataModel.ParentOrder, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.ParentOrder)
+                    </td>
+                    <th class="text-right">@Html.LabelFor(model => model.DataModel.ChildOrder, new { @class = "control-label" })</th>
+                    <th>:</th>
+                    <td>
+                        @Html.TextBoxFor(model => model.DataModel.ChildOrder, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.ChildOrder)
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-right">@Html.LabelFor(model => model.DataModel.IsTabbed, new { @class = "control-label" })</th>
+                    <th>:</th>
+                    <td>
+                        @Html.CheckBoxFor(model => model.DataModel.IsTabbed, new { @class = "BSswitch" })
+                        @Html.ValidationMessageFor(model => model.DataModel.IsTabbed)
+                    </td>
+                    <th class="text-right">@Html.LabelFor(model => model.DataModel.IsMenu, new { @class = "control-label" })</th>
+                    <th>:</th>
+                    <td>
+                        @Html.CheckBoxFor(model => model.DataModel.IsMenu, new { @class = "BSswitch" })
+                        @Html.ValidationMessageFor(model => model.DataModel.IsMenu)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#DataModel_IdSystemMenu').change(function () {
+            PopulateSystemMenu($(this).val());
+        });
+        function PopulateSystemMenu(idSystemMenu) {
+            $.ajax({
+                url: 'SystemStructure/GetSystemStructureBySystemMenu_Json',
+                type: 'GET',
+                dataType: 'JSON',
+                data: { idSystemMenu: idSystemMenu },
+                success: function (result) {
+                    var options = $('#DataModel_IdParent_SystemStructure');
+                    $('option', options).remove();
+                    $.each(result, function () {
+                        options.append($('<option/>').val(this.Key).text(this.Value));
+                    });
+                }
+            });
+        }
+        $('select').select2({
+            width: '100%',
+            dropdownAutoWidth: true
+        });
+    });
+</script>

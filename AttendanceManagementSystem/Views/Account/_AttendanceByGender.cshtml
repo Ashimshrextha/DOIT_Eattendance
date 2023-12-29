@@ -1,0 +1,52 @@
+﻿@model SystemViewModels.SystemAuthentication.LoginViewModel
+@{
+    int? TotalMale = Model.DbGender.FirstOrDefault(x => x.HREmployeeSexTitle == "Male").TotalNumber;
+    int? TotalFemale = Model.DbGender.FirstOrDefault(x => x.HREmployeeSexTitle == "Female").TotalNumber;
+}
+
+<script src="~/Scripts/highcharts.js"></script>
+
+<div id="attendanceByGender"></div>
+
+<script type="text/javascript">
+        var chart = null;
+        chart=Highcharts.chart('attendanceByGender', {
+            chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+            }
+        },
+        title: {
+            text: ''
+        },
+        credits: {
+            enabled: false
+        },
+        //tooltip: {
+        //    pointFormat: '{series.name}: <b>{point.percentage:.1f}</b>'
+        //},
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 25,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}'
+                }
+            }
+        },
+         series: [{
+            type: 'pie',
+            name: 'कुल संख्या',
+            data: [
+                ['पुरुष',@TotalMale],
+                ['महिला', @TotalFemale]
+            ]
+        }]
+    });
+</script>
+

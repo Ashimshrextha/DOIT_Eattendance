@@ -1,0 +1,76 @@
+﻿@model SystemViewModels.Home.HomeDashboardViewModelList
+@using PagedList.Mvc;
+
+<div id="replacetarget">
+    <div id="content" class="content">
+        <div class="dataTables_wrapper">
+            <div id="mask-container">
+                <div id="mask"></div>
+                <div class="table-responsive">
+                    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th class="text-center">आईडी</th>
+                                <th class="text-center">उपकरण  नं.</th>
+                                <th class="text-center">कर्मचारी नाम</th>
+                                <th class="text-center">लिङ्ग</th>
+                                <th class="text-center">पद</th>
+                                <th class="text-center">कार्यालय</th>
+                                <th class="text-center">मिति</th>
+                                <th class="text-center">आएको समय</th>
+                                <th class="text-center">गएको समय</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.DBModelPresentEmp.OrderBy(x => x.HRDesignationRank).ThenBy(x => x.AppointmentDate))
+                            {
+                            <tr>
+                                <td class="text-center">
+                                    <i class="ace-icon fa bigger-110 badge badge-yellow">@item.IdHREmployee</i>
+                                </td>
+                                <td class="text-center">
+                                    <i class="ace-icon fa bigger-110 badge badge-yellow">@item.IdEnroll</i>
+                                </td>
+
+                                <td>
+                                    <a class="@(item.HREmployeeSexTitleNP=="पुरुष"?"green":"blue")">
+                                        <i class="ace-icon fa bigger-130">
+                                            @(item.HREmployeeNameNP)
+                                        </i>
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <i class="ace-icon fa bigger-90 badge @(item.HREmployeeSexTitleNP=="पुरुष"?"badge-success":"badge-info")">@item.HREmployeeSexTitleNP</i>
+                                </td>
+                                <td class="blue">
+                                    <i class="ace-icon fa bigger-90">@item.HRDesignationTitle</i>
+                                </td>
+                                <td class="blue">
+                                    <i class="ace-icon fa bigger-110">@item.CompanyNameNP</i>
+                                </td>
+                                <td class="text-center">
+                                    <i class="ace-icon fa bigger-110 badge badge-success">@item.AttendanceDate.DateNp()</i>
+                                </td>
+                                <td class="text-center">
+                                    <i class="ace-icon fa bigger-110 badge badge-info">@item.CheckInTime</i>
+                                </td>
+                                <td class="text-center">
+                                    <i class="ace-icon fa bigger-110 badge badge-yellow">@item.CheckOutTime</i>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div aria-live="polite" role="status" id="example_info" class="dataTables_info">
+                    <div class="row">
+                        <div class="col-md-4">Showing @(Model.DBModelPresentEmp.PageCount < Model.DBModelPresentEmp.PageNumber ? 0 : Model.DBModelPresentEmp.FirstItemOnPage) to @Model.DBModelPresentEmp.LastItemOnPage of @Model.DBModelPresentEmp.TotalItemCount entries in @Model.DBModelPresentEmp.PageCount Pages</div>
+                        <div class="col-md-8 dataTables_paginate paging_simple_numbers" id="example_paginate">@Html.PagedListPager(Model.DBModelPresentEmp, page => Url.Action("_ListPresentHREmployeeAsync", new { pageNumber = page, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey }))</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

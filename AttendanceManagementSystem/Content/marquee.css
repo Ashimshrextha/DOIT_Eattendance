@@ -1,0 +1,71 @@
+﻿.example5 {
+   height:30px;
+    overflow: hidden;
+    position: relative;
+}
+
+    .example5 h3 {
+        position: absolute;
+        color: red;
+        height: 100%;
+        width:100%;
+        margin: 0;
+        line-height: 30px;
+        text-align: left;
+        /* Apply animation to this element */
+        -moz-animation: example5 15s linear infinite alternate;
+        -webkit-animation: example5 15s linear infinite alternate;
+        animation: example5 15s linear infinite alternate;
+        font-size:20px !important
+    }
+/* Move it (define the animation) */
+@-moz-keyframes example5 {
+    0% {
+        -moz-transform: translateX(70%);
+    }
+
+    100% {
+        -moz-transform: translateX(0%);
+    }
+}
+
+@-webkit-keyframes example5 {
+    0% {
+        -webkit-transform: translateX(70%);
+    }
+
+    100% {
+        -webkit-transform: translateX(0%);
+    }
+}
+
+@keyframes example5 {
+    0% {
+        -moz-transform: translateX(70%); /* Firefox bug fix */
+        -webkit-transform: translateX(70%); /* Firefox bug fix */
+        transform: translateX(70%);
+    }
+
+    100% {
+        -moz-transform: translateX(0%); /* Firefox bug fix */
+        -webkit-transform: translateX(0%); /* Firefox bug fix */
+        transform: translateX(0%);
+    }
+}
+
+
+/* Move it (define the animation) */
+@keyframes example5 {
+    0% {
+        transform: translateX(70%);
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+/* Pause animation on hover */
+.example5:hover h3 {
+    animation-play-state: paused;
+}

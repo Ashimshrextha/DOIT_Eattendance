@@ -1,0 +1,111 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeLoginViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.DataModelMembership.Id)
+@Html.HiddenFor(model => model.DataModelMembership.IdHREmployee)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+<div class="row">
+
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h4 class="panel-title">लगइन जानकारी</h4></div>
+            <div class="panel-body">
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-md-3 col-sm-3 col-lg-3">
+                            @if (Model.SessionDetails.IdRoleType == 1 || Model.SessionDetails.IdRoleType == 0)
+                            {
+                                @Html.LabelFor(model => model.DataModel.UserName, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.DataModel.UserName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DataModel.UserName)
+                            }
+                            else
+                            {
+                                @Html.LabelFor(model => model.DataModel.UserName, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.DataModel.UserName, new { @class = "form-control", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(model => model.DataModel.UserName)
+                            }
+                            <span id="loadavailability" class="field-validation-valid" data-valmsg-for="DataModel.UserName" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-lg-3">
+                            @Html.LabelFor(model => model.DataModelMembership.IdHREmployeeRole, new { @class = "control-label" })
+                            @Html.DropDownListFor(model => model.DataModelMembership.IdHREmployeeRole, new SelectList(Model.DDLRole, "Key", "Value"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.DataModelMembership.IdHREmployeeRole)
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-lg-3">
+                            @Html.LabelFor(model => model.DataModel.Language, new { @class = "control-label" })
+                            @Html.DropDownListFor(model => model.DataModel.Language, new SelectList(Model.DDLSystemLanguage, "Value", "Value"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.DataModel.Language)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-3 col-sm-3 col-lg-3">
+                            @Html.LabelFor(model => model.DataModel.Mobile, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.DataModel.Mobile, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.DataModel.Mobile)
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-lg-3">
+                            @Html.LabelFor(model => model.DataModel.Email, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.DataModel.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.DataModel.Email)
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-lg-3">
+                            @Html.LabelFor(model => model.DataModel.TwoFactorEnabled, new { @class = "control-label col-sm-12 col-md-12 col-lg-12" })
+                            @Html.CheckBoxFor(model => model.DataModel.TwoFactorEnabled, new { @class = "form-control switchYesNo" })
+                            @Html.ValidationMessageFor(model => model.DataModel.TwoFactorEnabled)
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-lg-3">
+                            @Html.LabelFor(model => model.DataModel.IsActive, new { @class = "control-label col-md-12 col-sm-12 col-lg-12" })
+                            @Html.CheckBoxFor(model => model.DataModel.IsActive, new { @class = "form-control switchYesNo" })
+                            @Html.ValidationMessageFor(model => model.DataModel.IsActive)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //handling identity state and district
+        $('#DataModel_UserName').keyup(function () {
+            CheckIsAvailable($(this).val());
+        });
+        function CheckIsAvailable(UserName) {
+            if (UserName.length > 5) {
+                $.ajax({
+                    url: '/HREmployeeManagement/_CheckUserNameAsync',
+                    type: 'GET',
+                    data: { UserName: UserName },
+                    dataType: 'json',
+                    success: function (result) {
+                        if (result == "Available") {
+                            $('#loadavailability').text(UserName + " " + result).css('color', 'green');
+                        }
+                        else {
+                            $('#DataModelLogin_UserName').val('');
+                            $('#loadavailability').text(UserName + " " + result).css('color', 'red');
+                        }
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status);
+                        alert(thrownError);
+                    }
+                });
+            }
+            else if (UserName.length === 0)
+                $('#loadavailability').text('').css('color', '');
+            else
+                $('#loadavailability').text('Min Length should be 6').css('color', '');
+        }
+    });
+</script>
+

@@ -1,0 +1,124 @@
+﻿@model SystemViewModels.SystemSetting.HRDesignationViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+
+<div class="row">
+    
+    <div class="col-md-12 col-lg-12 col-sm-12">
+        <div class="row form-group">
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.IdHRCompany, new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.DataModel.IdHRCompany, new SelectList(Model.DDLCompany, "Key", "Value"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.IdHRCompany)
+            </div>
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.IdHREmployeeCategory, new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.DataModel.IdHREmployeeCategory, new SelectList(Model.DDLEmployeeCategory, "Key", "Value"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.IdHREmployeeCategory)
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.HRDesignationTitle, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.HRDesignationTitle, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.HRDesignationTitle)
+            </div>
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.HRDesignationShortName, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.HRDesignationShortName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.HRDesignationShortName)
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.HRDesignationOrder, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.HRDesignationOrder, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.HRDesignationOrder)
+            </div>
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.HRDesignationRank, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.HRDesignationRank, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.HRDesignationRank)
+            </div>
+            
+        </div>
+        <div class="row form-group">
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.SalaryIncrementNumber, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.SalaryIncrementNumber, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.SalaryIncrementNumber)
+            </div>
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.SalaryIncrementRate, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.SalaryIncrementRate, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.SalaryIncrementRate)
+            </div>
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.BasicSalary, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.BasicSalary, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.BasicSalary)
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.Allowance, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.Allowance, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.Allowance)
+            </div>
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.OverTimeAllowance, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.OverTimeAllowance, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.OverTimeAllowance)
+            </div>
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.RatePerMinute, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.RatePerMinute, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.RatePerMinute)
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.IsPermanent, new { @class = "control-label" })
+                @Html.CheckBoxFor(model => model.DataModel.IsPermanent, new { @class = "form-control BSswitch" })
+                @Html.ValidationMessageFor(model => model.DataModel.IsPermanent)
+            </div>
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                @Html.LabelFor(model => model.DataModel.IsActive, new { @class = "control-label" })
+                @Html.CheckBoxFor(model => model.DataModel.IsActive, new { @class = "form-control BSswitch" })
+                @Html.ValidationMessageFor(model => model.DataModel.IsActive)
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#DataModel_IdHRCompany').change(function () {
+            PopulateEmployeeCategory($(this).val());
+        });
+        function PopulateEmployeeCategory(idCompany) {
+            $.ajax({
+                url: 'HRDesignation/GetEmployeeCategoryByCompany_Json',
+                type: 'GET',
+                dataType: 'JSON',
+                data: { idHRCompany: idCompany },
+                success: function (result) {
+                    var options = $('#DataModel_IdHREmployeeCategory');
+                    $('option', options).remove();
+                    $.each(result, function () {
+                        options.append($('<option/>').val(this.Key).text(this.Value));
+                    });
+                }
+            });
+        }
+    });
+</script>

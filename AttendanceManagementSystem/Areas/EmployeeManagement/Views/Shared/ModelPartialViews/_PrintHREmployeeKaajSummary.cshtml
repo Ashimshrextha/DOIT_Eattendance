@@ -1,0 +1,95 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeKaajHistoryViewModel
+@{ 
+    var lastyear = Model.lastYearNp;
+        }
+<div id="printThis">
+    
+   
+    <div class="fontsize">
+        <div style="text-align:center;font-weight:bold">
+
+            @Model.DBModelList.FirstOrDefault().HREmployee1.HRCompany.CompanyNameNP<br>
+        </div>
+
+         <div style="text-align:center;font-weight:bold">
+
+            @Model.CurrentDesignation<br>
+        </div>
+
+        <div style="text-align:center;font-weight:bold">
+            @Model.DBModelList.FirstOrDefault().HREmployee1.HREmployeeNameNP<br>
+        </div>
+
+    </div>
+
+
+        <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+            <thead>
+                <tr>
+                    @*<th class="ace-icon">आईडी</th>*@
+                    <th class="ace-icon">कार्यालय</th>
+                    <th>प्रकार</th>
+                    <th>स्थान</th>
+                    <th>काज  उदेश्य </th>
+                    <th>आवेदन मिति  </th>
+                    <th class="ace-icon">शुरुको मिति</th>
+                    <th class="ace-icon">अन्तिम मिति</th>
+                    <th class="ace-icon">स्वीकृत गर्ने</th>
+                    <th class="ace-icon">प्रविष्ट गर्ने</th>
+                    <th class="ace-icon">अवस्था</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.DBModelList.OrderByDescending(x => x.KaajFromDate))
+                {
+                <tr>
+                    @*<td>@item.Id</td>*@
+                    <td class="ace-icon">
+                        <i class="fa bigger-120 badge badge-yellow">@(item?.HRCompany?.HRCompanyCode?.HRCompanyCodeTitle)</i>
+                    </td>
+                    <td class="green">
+                        <i class="ace-icon fa bigger-120">@(item?.KaajType?.TitleNP)</i>
+                    </td>
+                    <td class="blue">
+                        <i class="ace-icon fa bigger-110">@item.KaajLocation</i>
+                    </td>
+                    <td class="blue">
+                        <i class="ace-icon fa bigger-110">@item.KaajPurpose</i>
+                    </td>
+                    <td class="blue">
+                        <i class="ace-icon fa bigger-110">@(string.Format("{0:yyyy-MM-dd}", item.CreatedOn.DateNp()))</i>
+                    </td>
+                    <td class="ace-icon">
+                        <i class="fa bigger-110 badge badge-success">@item.KaajFromNP</i>
+                    </td>
+                    <td class="ace-icon">
+                        <i class="fa bigger-110 badge badge-danger">@item.KaajToNP</i>
+                    </td>
+                    <td class="blue">
+                        <i class="ace-icon fa bigger-120">@(item.HREmployee?.HREmployeeNameNP)</i>
+                    </td>
+                    <td class="blue">
+                        <i class="ace-icon fa bigger-120">@(item.CreatedBy)</i>
+                    </td>
+                    <td class="ace-icon">
+                        <i class="ace-icon fa bigger-100 badge @(item.IdKaajStatus==1||item.IdKaajStatus==4?"badge-danger":"badge-success")">@item.HRCompanyLeaveStatusType.LeaveStatusTypeNP</i>
+                    </td>
+                    @*<td class="ace-icon">
+            <i class="fa bigger-110 badge badge-danger">@item.HREmployee1.CreatedBy</i>
+        </td>*@
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>
+

@@ -1,0 +1,50 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeLeaveHistoryViewModel
+
+<div id="leaveSummary">
+    <div class="panel panel-primary">
+        <div class="panel-heading"><h4 class="panel-title">बिदा सारांश</h4></div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>बिदा शीर्षक</th>
+                            <th class="ace-icon">शुरु मिति</th>
+                            <th class="ace-icon">अन्तिम मिति</th>
+                            <th class="ace-icon">आधा दिन</th>
+                            <th class="ace-icon">जम्मा दिन</th>
+                            <th class="ace-icon">स्थिति</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.DBModelLeaveSummary)
+                        {
+                            <tr>
+                                <td class="blue">
+                                    <i class="fa bigger-120">@item.LeaveTitleNP</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa bigger-110 badge badge-success">@item.LeaveValidFromNP</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa bigger-110 badge badge-danger">@item.LeaveValidToNP</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa bigger-110 badge badge-yellow">@item.IsHalfDay</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa bigger-110 badge badge-grey">@item.TotalDays</i>
+                                </td>
+                                <td class="ace-icon" style="background-color:@item.ColorCode ;">
+                                    <i class="ace-icon ">@item.LeaveStatusTypeNP</i>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

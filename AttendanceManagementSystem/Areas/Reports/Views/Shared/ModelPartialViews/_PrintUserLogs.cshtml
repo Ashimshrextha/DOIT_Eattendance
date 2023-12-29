@@ -1,0 +1,51 @@
+﻿@model SystemViewModels.Reports.UserLogsViewModel
+<div id="printThis">
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>Id Login</th>
+                <th>User Name</th>
+                <th>Full Name</th>
+                <th>Session Id</th>
+                <th>Login</th>
+                <th>Logout</th>
+                <th>Area</th>
+                <th>Controller</th>
+                <th>Access URL</th>
+                <th>Event Msg</th>
+                <th>Error Msg</th>
+                <th>IP</th>
+                <th>Created On</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+            {
+                <tr>
+                    <td>@item.IdLogin</td>
+                    <td>@item.UserName</td>
+                    <td>@item.FullName</td>
+                    <td>@item.SessionId</td>
+                    <td>@item.LoginTime</td>
+                    <td>@item.LogoutTime</td>
+                    <td>@item.Area</td>
+                    <td>@item.Controller</td>
+                    <td>@item.AccessURL</td>
+                    <td>@item.EventMessage</td>
+                    <td>@item.ErrorMessage</td>
+                    <td>@item.TerminalIP</td>
+                    <td>@item.CreatedOn</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+
+    <script src="~/Scripts/printThis.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#btnPrint').click(function () {
+                $('#printThis').printThis();
+            });
+        });
+    </script>

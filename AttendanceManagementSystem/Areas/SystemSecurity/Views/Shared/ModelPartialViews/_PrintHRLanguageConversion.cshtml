@@ -1,0 +1,44 @@
+﻿@model SystemViewModels.SystemSecurity.HRLanguageConversionViewModel
+
+<div id="printThis">
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>आईडी</th>
+                <th>अंग्रेजी</th>
+                <th>नेपाली</th>
+                <th>मैथली</th>
+                <th>नेवारी</th>
+                <th>अन्य</th>
+                <th>आई.पी</th>
+                <th>अपडेट गर्ने</th>
+                <th>अपडेट मिति</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+            {
+                <tr>
+                    <th>@item.Id</th>
+                    <th>@item.English</th>
+                    <th>@item.Nepali</th>
+                    <th>@item.Maithali</th>
+                    <th>@item.Newari</th>
+                    <th>@item.Other</th>
+                    <th>@item.TerminalIP</th>
+                    <th>@item.UpdatedBy</th>
+                    <th>@item.UpdatedOn</th>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+</div>
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>

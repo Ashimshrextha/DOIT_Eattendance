@@ -1,0 +1,203 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeKaajHistoryViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+<style type="text/css">
+	.blink_me {
+		animation: blinker 2s linear infinite;
+	}
+
+	@@keyframes blinker {
+		50% {
+			opacity: 0;
+		}
+	}
+</style>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.DBModel.Id)
+@Html.HiddenFor(model => model.DBModel.IdHRCompany)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+
+
+<div class="panel panel-success">
+	<div class="panel-heading"><h4 class="panel-title">Leave Request Detail</h4></div>
+	<div class="panel-body">
+		<div class="page-header">Personal Information</div>
+		<table class="table table-border table-hover">
+			<colgroup>
+				<col style="width:14%" />
+				<col style="width:1%" />
+				<col style="width:35%" />
+				<col style="width:14%" />
+				<col style="width:1%" />
+				<col style="width:35%" />
+			</colgroup>
+			<tbody>
+				<tr>
+					<th>@Html.Label("PIS No", new { @class = "control-label" })</th>
+					<th>:</th>
+					<td>
+						<i class="ace-icon fa bigger-120 badge badge-info">@Html.DisplayFor(model => model.DBModel.PISNumber, new { @class = "form-control" })</i>
+					</td>
+					<th>@Html.Label("Id", new { @class = "control-label" })</th>
+					<th>:</th>
+					<td>
+						<i class="ace-icon fa bigger-120 badge badge-info">@Html.DisplayFor(model => model.DBModel.Id, new { @class = "form-control" })</i>
+					</td>
+				</tr>
+				<tr>
+					<th>@Html.Label("Employee Name", new { @class = "control-label" })</th>
+					<th>:</th>
+					<td class="blue">
+						<i class="ace-icon fa bigger-130">@Html.DisplayFor(model => model.DBModel.HREmployeeName, new { @class = "form-control" })</i>
+					</td>
+					<th>@Html.Label("देवनागरी", new { @class = "control-label" })</th>
+					<th>:</th>
+					<td class="blue">
+						<i class="ace-icon fa bigger-130">@Html.DisplayFor(model => model.DBModel.HREmployeeNameNP, new { @class = "form-control" })</i>
+					</td>
+				</tr>
+				<tr>
+					<th>@Html.Label("Mobile No", new { @class = "control-label" })</th>
+					<th>:</th>
+					<td>
+						<i class="ace-icon fa bigger-120 badge badge-yellow">@Html.DisplayFor(model => model.DBModel.MobileNumber, new { @class = "form-control" })</i>
+					</td>
+					<th>@Html.Label("Email", new { @class = "control-label" })</th>
+					<th>:</th>
+					<td>
+						<i class="ace-icon fa bigger-120 badge badge-yellow">@Html.DisplayFor(model => model.DBModel.Email, new { @class = "form-control" })</i>
+					</td>
+				</tr>
+				<tr>
+					<th>@Html.Label("Office", new { @class = "control-label" })</th>
+					<th>:</th>
+					<td class="blue">
+						<i class="ace-icon fa bigger-130">@Html.DisplayFor(model => model.DBModel.CompanyName, new { @class = "form-control" })</i>
+					</td>
+					<th>@Html.Label("देवनागरी", new { @class = "control-label" })</th>
+					<th>:</th>
+					<td class="blue">
+						<i class="ace-icon fa bigger-130">@Html.DisplayFor(model => model.DBModel.CompanyNameNP, new { @class = "form-control" })</i>
+					</td>
+				</tr>
+				<tr>
+					<th>@Html.Label("Designation", new { @class = "control-label" })</th>
+					<th>:</th>
+					<td>
+						<i class="ace-icon fa bigger-120 badge badge-yellow">@Html.DisplayFor(model => model.DBModel.HRDesignationTitle, new { @class = "form-control" })</i>
+					</td>
+					<th>@Html.Label("Division / Section", new { @class = "control-label" })</th>
+					<th>:</th>
+					<td>
+						<i class="ace-icon fa bigger-120 badge badge-yellow">@Html.DisplayFor(model => model.DBModel.HRCompanyDivisionName, new { @class = "form-control" })</i>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="page-header"> Kaaj Information</div>
+		<table class="table table-border table-hover">
+			<colgroup>
+				<col style="width:14%" />
+				<col style="width:1%" />
+				<col style="width:35%" />
+				<col style="width:14%" />
+				<col style="width:1%" />
+				<col style="width:35%" />
+			</colgroup>
+			<tbody>
+				<tr>
+					<th>@Html.Label("Kaaj Title", new { @class = "control-label" })</th>
+					<th>:</th>
+					<td>
+						<i class="ace-icon blink_me fa bigger-120 badge badge-success">@Html.DisplayFor(model => model.DBModel.KaajTitle, new { @class = "form-control" })</i>
+					</td>
+					<th>@Html.Label("Abbr", new { @class = "control-label" })</th>
+					<th>:</th>
+					<td>
+						<i class="ace-icon fa bigger-120 badge badge-info">@Html.DisplayFor(model => model.DBModel.KaajShortName, new { @class = "form-control" })</i>
+					</td>
+				</tr>
+				<tr>
+					<th>@Html.Label("Kaaj Start Date", new { @class = "control-label" })</th>
+					<th>:</th>
+					<td>
+						<i class="ace-icon fa bigger-130 badge badge-success">@Html.DisplayFor(model => model.DBModel.KaajFromDate, new { @class = "form-control" })</i>
+					</td>
+					<th>@Html.Label("Kaaj End Date", new { @class = "control-label" })</th>
+					<th>:</th>
+					<td class="blue">
+						<i class="ace-icon fa bigger-130 badge badge-danger">@Html.DisplayFor(model => model.DBModel.KaajToDate, new { @class = "form-control" })</i>
+					</td>
+				</tr>
+				<tr>
+					<th>@Html.Label("Requested Days", new { @class = "control-label" })</th>
+					<th>:</th>
+					<td>
+						<i class="ace-icon fa bigger-120 badge badge-yellow">@Html.DisplayFor(model => model.DBModel.KaajTakenNumber, new { @class = "form-control" })</i>
+					</td>
+					<th>@Html.Label("Requested On", new { @class = "control-label" })</th>
+					<th>:</th>
+					<td>
+						<i class="ace-icon blink_me fa bigger-120 badge badge-yellow">@Html.DisplayFor(model => model.DBModel.RequestedOn, new { @class = "form-control" })</i>
+					</td>
+				</tr>
+				<tr>
+					<th>@Html.Label("Kaaj Year", new { @class = "control-label" })</th>
+					<th>:</th>
+					<td>
+						<i class="ace-icon fa bigger-120 badge badge-yellow">@Html.DisplayFor(model => model.DBModel.FiscalYear, new { @class = "form-control" })</i>
+					</td>
+					<th>@Html.Label("Registration No", new { @class = "control-label" })</th>
+					<th>:</th>
+					<td>
+						<i class="ace-icon fa bigger-120 badge badge-yellow">@Html.DisplayFor(model => model.DBModel.KaajRegistrationNumber, new { @class = "form-control" })</i>
+					</td>
+				</tr>
+				<tr>
+					<th>@Html.Label("Kaaj Purpose", new { @class = "control-label" })</th>
+					<th>:</th>
+					<td>
+						@Html.DisplayFor(model => model.DBModel.KaajPurpose, new { @class = "form-control" })
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+	<div class="panel-footer">
+		<table class="table table-border table-hover">
+			<caption class="ace-icon"><i class="ace-icon fa bigger-130 badge badge-purple">Approval</i></caption>
+			<colgroup>
+				<col style="width:14%" />
+				<col style="width:1%" />
+				<col style="width:35%" />
+				<col style="width:14%" />
+				<col style="width:1%" />
+				<col style="width:35%" />
+			</colgroup>
+			<tbody>
+				<tr>
+					<th>@Html.Label("Recommended Remarks", new { @class = "control-label" })</th>
+					<th>:</th>
+					<td>
+						@Html.TextAreaFor(model => model.DBModel.RemarkRecommended, new { @class = "form-control" })
+						@Html.ValidationMessageFor(model => model.DBModel.RemarkRecommended)
+					</td>
+					<th>@Html.Label("Status", new { @class = "control-label" })</th>
+					<th>:</th>
+					<td>
+						@Html.DropDownListFor(model => model.DBModel.IdKaajStatus, new SelectList(Model.DDLLeaveStatusType, "Key", "Value"), new { @class = "form-control" })
+						@Html.ValidationMessageFor(model => model.DBModel.IdKaajStatus)
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+

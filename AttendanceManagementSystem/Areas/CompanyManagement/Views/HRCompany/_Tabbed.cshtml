@@ -1,0 +1,236 @@
+﻿@model SystemViewModels.CompanyManagement.HRCompanyViewModelList
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+@Html.HiddenFor(model => model.DBModel.Id)
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <!-- Nav tabs -->
+            <ul id="tabstrip" class="nav nav-tabs">
+                <li class="active">
+                    <a href="#CompanyDetail" data-toggle="tab">
+                        कार्यालय विवरण
+                    </a>
+                </li>
+                <li>
+                    <a href="#ServiceType" data-toggle="tab">
+                        सेवा
+                    </a>
+                </li>
+                <li>
+                    <a href="#EmployeeCategory" data-toggle="tab">
+                        श्रेणी/तह
+                    </a>
+                </li>
+                <li>
+                    <a href="#HRDivisionType" data-toggle="tab">
+                        शाखाको प्रकार
+                    </a>
+                </li>
+                <li>
+                    <a href="#HRDivision" data-toggle="tab">
+                        शाखा
+                    </a>
+                </li>
+                <li>
+                    <a href="#Designation" data-toggle="tab">
+                        पद
+                    </a>
+                </li>
+                <li>
+                    <a href="#LeaveType" data-toggle="tab">
+                        विदा प्रकार
+                    </a>
+                </li>
+                <li>
+                    <a href="#Role" data-toggle="tab">
+                        भूमिका प्रकार
+                    </a>
+                </li>
+                <li>
+                    <a href="#PublicHoliday" data-toggle="tab">
+                        सार्वजनिक विदा
+                    </a>
+                </li>
+                <li>
+                    <a href="#HRDevice" data-toggle="tab">
+                        हाजिरी उपकरण
+                    </a>
+                </li>
+                <li>
+                    <a href="#HRCompanyShiftRoaster" data-toggle="tab">
+                        शिफ्ट व्यवस्थापन
+                    </a>
+                </li>
+                <li>
+                    <a href="#HRCompanyHREmployeeShiftRoaster" data-toggle="tab">
+                        शिफ्ट रोस्टर
+                    </a>
+                </li>
+                <li>
+                    <a href="#HRCompanyCovidKaaj" data-toggle="tab">
+                        कोभिड काज
+                    </a>
+                </li>
+                <li>
+                    <a href="#HRCompanyAttendance" data-toggle="tab">
+                        म्यानुअल हाजिरी
+                    </a>
+                </li>
+                <li>
+                    <a href="#HRCompanyBulkKaaj" data-toggle="tab">
+                        बल्क काज
+                    </a>
+                </li>
+                <li>
+                    <a href="#HRCompanyOfficeLogs" data-toggle="tab">
+                        अफिस लग 
+                    </a>
+                </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane fade in active" style="padding-top:10px;" id="CompanyDetail">
+                    @{ Html.RenderPartial("_ListWrapperHRCompanyAsync");}
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HRDevice">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HRDivisionType">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HRDivision">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="ServiceType">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="EmployeeCategory">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="Designation">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="LeaveType">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="Role">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="PublicHoliday">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HRCompanyShiftRoaster">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HRCompanyHREmployeeShiftRoaster">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HRCompanyHREmployeeManualAttendance">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HRCompanyCovidKaaj">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HRCompanyAttendance">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HRCompanyBulkKaaj">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HRCompanyOfficeLogs">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#tabstrip a').click(function (e) {
+        debugger
+        e.preventDefault()
+        var tabID = $(this).attr("href").substr(1);
+        $(".tab-pane").each(function () {
+            $(this).empty();
+    });
+    var idCompany ='@Model.IdHRCompany';
+    var sort = $('#OrderingBy').val();
+    var sortdir = $('#OrderingDirection').val();
+    var searchKey = $('#SearchKey').val();
+    var searchKey1 =@Model.SearchKey1;
+    switch (tabID) {
+        case 'CompanyDetail':
+            url = '/@Model.BreadCrumbBaseURL' + '/_ListWrapperHRCompanyAsync?idHRCompany= ' + idCompany + '&pageNumber=' + 1 + '&pageSize=' + 10 + '&orderingBy=' + sort + '&orderingDirection=' + sortdir + '&searchKey=' + searchKey + '&searchKey1=' + searchKey1;
+            break;
+        case 'HRDevice':
+            url = '/CompanyManagement/HRDevice' + '/_ListWrapperHRDeviceAsync?idHRCompany= '+idCompany + '&pageNumber=' + 1 + '&pageSize=' + 10 + '&orderingBy=' + 'Id' + '&orderingDirection=' + sortdir + '&searchKey=' + searchKey;
+            break;
+        case 'HRDivisionType':
+            url = '/CompanyManagement/HRCompanyDivisionType' + '/_ListWrapperHRDivisionTypeAsync?idHRCompany= '+idCompany + '&pageNumber=' + 1 + '&pageSize=' + 10 + '&orderingBy=' + 'Id' + '&orderingDirection=' + sortdir + '&searchKey=' + searchKey;
+            break;
+        case 'HRDivision':
+			url = '/CompanyManagement/HRCompanyDivision' + '/_ListWrapperHRDivisionAsync?idHRCompany= ' + idCompany + '&pageNumber=' + 1 + '&pageSize=' + 10 + '&orderingBy=' + 'Id' + '&orderingDirection=' + sortdir + '&searchKey=' + searchKey;
+                break;
+            case 'ServiceType':
+            url = '/CompanyManagement/HREmployeeServiceType' + '/_ListWrapperHREmployeeServiceTypeAsync?idHRCompany= '+idCompany + '&pageNumber=' + 1 + '&pageSize=' + 10 + '&orderingBy=' + 'Id' + '&orderingDirection=' + sortdir + '&searchKey=' + searchKey;
+                break;
+        case 'EmployeeCategory':
+            url = '/CompanyManagement/HREmployeeCategory' + '/_ListWrapperHREmployeeCategoryAsync?idHRCompany=' + idCompany + '&pageNumber=' + 1 + '&pagesize=' + 10 + '&orderingBy=' + 'Id' + '&orderingDirection=' + sortdir + '&searchKey=' + searchKey;
+                break;
+            case 'Designation':
+            url = '/CompanyManagement/HRDesignation' + '/_ListWrapperHRDesignationAsync?idHRCompany=' + idCompany + '&pageNumber=' + 1 + '&pagesize=' + 10 + '&orderingBy=' + 'Id' + '&orderingDirection=' + sortdir + '&searchKey=' + searchKey;
+                break;
+            case 'LeaveType':
+            url = '/CompanyManagement/HRCompanyLeaveType' + '/_ListWrapperHRCompanyLeaveTypeAsync?idHRCompany=' + idCompany + '&pageNumber=' + 1 + '&pagesize=' + 10 + '&orderingBy=' + 'Id' + '&orderingDirection=' + sortdir + '&searchKey=' + searchKey;
+                break;
+            case 'Role':
+            url = '/CompanyManagement/HREmployeeRole' + '/_ListWrapperHREmployeeRoleAsync?idHRCompany=' + idCompany + '&pageNumber=' + 1 + '&pagesize=' + 10 + '&orderingBy=' + 'Id' + '&orderingDirection=' + sortdir + '&searchKey=' + searchKey;
+                break;
+            case 'PublicHoliday':
+            url = '/CompanyManagement/HRPublicHoliday' + '/_ListWrapperHRPublicHolidayAsync?idHRCompany='+idCompany + '&pageNumber=' + 1 + '&pageSize=' + 10 + '&orderingBy=' + 'Id' + '&orderingDirection=' + 'DESC' + '&searchKey=' + searchKey;
+            break;
+        case 'HRCompanyShiftRoaster':
+            url = '/CompanyManagement/HRCompanyShiftRoaster' + '/_ListWrapperHRCompanyShiftRoasterAsync?idHRCompany=' + idCompany + '&pageNumber=' + 1 + '&pageSize=' + 10 + '&orderingBy=' + 'Id' + '&orderingDirection=' + "DESC" + '&searchKey=' + searchKey;
+            break;
+
+        case 'HRCompanyHREmployeeShiftRoaster':
+            url = '/CompanyManagement/HRCompanyHREmployeeShiftRoaster/_ListWrapperHRCompanyHREmployeeShiftRoasterAsync?idHRCompany=' + idCompany + '&pageNumber=' + 1 + '&pageSize=' + 10 + '&orderingBy=' + 'Id' + '&orderingDirection=' + sortdir + '&searchKey=' + searchKey;
+            break;
+
+        case 'HRCompanyHREmployeeManualAttendance':
+            url = '/CompanyManagement/HREmployeeBulkAttendance' + '/_ListWrapperHREmployeeBulkAttendanceAsync?idHRCompany=' + idCompany + '&pageNumber=' + 1 + '&pageSize=' + 10 + '&orderingBy=' + 'Id' + '&orderingDirection=' + sortdir + '&searchKey=' + searchKey;
+            break;
+
+        case 'HRCompanyCovidKaaj':
+            url = '/CompanyManagement/HRCompanyHREmployeeCovidKaaj/_ListWrapperHRCompanyHREmployeeCovidKaajAsync?idHRCompany=' + idCompany + '&pageNumber=' + 1 + '&pageSize=' + 10 + '&orderingBy=' + 'Id' + '&orderingDirection=' + sortdir + '&searchKey=' + searchKey;
+            break;
+
+         case 'HRCompanyAttendance':
+            url = '/CompanyManagement/HRCompanyAttendance/_ListWrapperHRCompanyAttendanceAsync?idHRCompany=' + idCompany + '&pageNumber=' + 1 + '&pageSize=' + 10 + '&orderingBy=' + 'Id' + '&orderingDirection=' + sortdir + '&searchKey=' + searchKey;
+            break;
+        case 'HRCompanyBulkKaaj':
+            url = '/CompanyManagement/HRCompanyHREmployeeBulkKaaj/_ListWrapperHRCompanyHREmployeeBulkKaajAsync?idHRCompany=' + idCompany + '&pageNumber=' + 1 + '&pageSize=' + 10 + '&orderingBy=' + 'Id' + '&orderingDirection=' + sortdir + '&searchKey=' + searchKey;
+            break;
+        case 'HRCompanyOfficeLogs':
+            url = '/CompanyManagement/HRCompanyOfficeLogs/_ListWrapperHRCompanyOfficeLogsAsync?idHRCompany=' + idCompany + '&pageNumber=' + 1 + '&pageSize=' + 10 + '&orderingBy=' + 'Id' + '&orderingDirection=' + sortdir + '&searchKey=' + searchKey;
+            break;
+        default:
+            url = "";
+            break;
+
+        }
+        if (url != "") {
+            var $loading = $('<img src="/images/Icon/ajaxLoading.gif" alt="loading" class="ui-loading-icon img_loading_center">');
+            $("#" + tabID).html($loading);
+            $.ajax({
+                url: url,
+                cache: false,
+                type: "GET",
+                dataType: "html",
+                success: function (result) {
+                    if (result == '"_Login_"') {
+                        window.location = "/Account/Login";
+                        return;
+                    }
+                    $("#" + tabID).html(result);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    if (xhr.status == parseInt(500)) {
+                    window.location = "/Account/Login";
+                    return;
+                }
+                }
+            });
+            $(this).tab('show')
+        }
+    });</script>
+
+

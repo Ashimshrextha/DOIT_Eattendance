@@ -1,0 +1,49 @@
+﻿@model SystemViewModels.DeviceManagement.HREmployeeBiometricTemplateViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+
+
+<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+    <div class="panel panel-default">
+        <div class="panel-heading"><div class="panel-title">Please Connect Your Device</div></div>
+        <div class="panel-body">
+            <div class="row form-group">
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    @Html.LabelFor(model => model.ConnectionModel.IdHRCompany, new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.ConnectionModel.IdHRCompany, new SelectList(Model.DDLCompany, "Key", "Value"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ConnectionModel.IdHRCompany)
+                </div>
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    @Html.LabelFor(model => model.ConnectionModel.IdHRDevice, new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.ConnectionModel.IdHRDevice, new SelectList(Model.DDLHRDevice, "Key", "Value"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ConnectionModel.IdHRDevice)
+                </div>
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    @Html.LabelFor(model => model.ConnectionModel.Protocol, new { @class = "control-label" })
+                    @Html.EnumDropDownListFor(model => model.ConnectionModel.Protocol, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ConnectionModel.Protocol)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+    <div id="deviceInfo"></div>
+</div>
+<script src="~/Scripts/CustomScripts/BiometricTemplate.js"></script>
+<script>
+    $('select').select2({
+        width: '100%',
+        dropdownAutoWidth: true
+    });
+</script>

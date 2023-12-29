@@ -1,0 +1,63 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+
+<div class="row">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h4 class="panel-title">व्यक्तिगत जानकारी</h4></div>
+            <div class="panel-body">
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <div class="col-md-9 col-sm-9 col-lg-9">
+                        <div class="form-group row">
+                            <div class="col-md-3 col-sm-3 col-lg-3">
+                                @Html.LabelFor(model => model.DataModel.IdEnroll, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.DataModel.IdEnroll, new { @class = "form-control required",@readonly="readonly" })
+                                @Html.ValidationMessageFor(model => model.DataModel.IdEnroll)
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-lg-3">
+                                @Html.LabelFor(model => model.DataModel.HREmployeeName, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.DataModel.HREmployeeName, new { @class = "form-control", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(model => model.DataModel.HREmployeeName)
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-lg-3">
+                                @Html.LabelFor(model => model.DataModel.HREmployeeNameNP, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.DataModel.HREmployeeNameNP, new { @class = "form-control", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(model => model.DataModel.HREmployeeNameNP)
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-3 col-sm-3 col-lg-3">
+                                @Html.LabelFor(model => model.DataModel.BirthPlace, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.DataModel.BirthPlace, new { @class = "form-control", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(model => model.DataModel.BirthPlace)
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-lg-3">
+                                @Html.LabelFor(model => model.DataModel.MobileNumber, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.DataModel.MobileNumber, new { @class = "form-control" , @readonly = "readonly" })
+                                @Html.ValidationMessageFor(model => model.DataModel.MobileNumber)
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-lg-3">
+                                @Html.LabelFor(model => model.DataModel.Email, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.DataModel.Email, new { @class = "form-control", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(model => model.DataModel.Email)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

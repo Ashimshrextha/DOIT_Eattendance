@@ -1,0 +1,290 @@
+﻿@model SystemViewModels.Reports.MonthlyAttendanceSheetViewModelList
+<style type="text/css">
+    @@media screen {
+        #printSection {
+            display: none;
+        }
+    }
+
+    @@media print {
+        @@Page {
+            size: landscape;
+            margin: 0.5cm;
+        }
+
+        body {
+            -webkit-print-color-adjust: exact;
+            font-family: 'Times New Roman';
+        }
+
+            body * {
+                visibility: hidden;
+            }
+
+        table, tbody, thead, tr, th, td {
+            border: 2px solid black;
+        }
+
+        #printSection, #printSection * {
+            -webkit-print-color-adjust: exact;
+            visibility: visible;
+        }
+
+        #printSection {
+            -webkit-print-color-adjust: exact;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    }
+</style>
+<div id="printThisAttendance">
+    @{ Html.RenderPartial("~/Views/Shared/_ReportHeader.cshtml", Model.Header);}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th class="text-center">क.संकेत नं.</th>
+                <th> कर्मचारी नाम</th>
+                <th>पद</th>
+                <th class="text-center">आएको/गएको</th>
+                @foreach (var item in Model.DBReportHeader)
+                {
+                    <th class="text-center @(item.DOW=="Saturday"?"sat":"")">
+                        @item.NumberInNepali <br />
+                        @item.DOWShortNP
+                    </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelPrint)
+            {
+                <tr>
+                    <td class="text-center" style="height:73px;">
+                        <i class="fa bigger-110">@item.PISNumber</i>
+                    </td>
+                    <td class="blue">
+                        <i class="fa bigger-140">@item.EmployeeName</i>
+                    </td>
+                    <td class="blue text-center">
+                        <i class="fa bigger-110">@item.DesignationTitle</i>
+                    </td>
+                    <td class="text-center">
+                        <p>आएको</p>
+                        <p>गएको</p>
+                    </td>
+                    <th style="background-color:@item.C1 ;font-size:14px;" class="text-center">
+                        <p>@item.CIN1</p>
+                        <p>@item.COUT1</p>
+                    </th>
+                    <th style="background-color:@item.C2 ;font-size:14px;" class="text-center">
+                        <p>@item.CIN2</p>
+                        <p>@item.COUT2</p>
+                    </th>
+                    <th style="background-color:@item.C3 ;font-size:14px;" class="text-center">
+                        <p>@item.CIN3</p>
+                        <p>@item.COUT3</p>
+                    </th>
+                    <th style="background-color:@item.C4 ;font-size:14px;" class="text-center">
+                        <p>@item.CIN4</p>
+                        <p>@item.COUT4</p>
+                    </th>
+                    <th style="background-color:@item.C5 ;font-size:14px;" class="text-center">
+                        <p>@item.CIN5</p>
+                        <p>@item.COUT5</p>
+                    </th>
+                    <th style="background-color:@item.C6 ;font-size:14px;" class="text-center">
+                        <p>@item.CIN6</p>
+                        <p>@item.COUT6</p>
+                    </th>
+                    <th style="background-color:@item.C7 ;font-size:14px;" class="text-center">
+                        <p>@item.CIN7</p>
+                        <p>@item.COUT7</p>
+                    </th>
+                    <th style="background-color:@item.C8 ;font-size:14px;" class="text-center">
+                        <p>@item.CIN8</p>
+                        <p>@item.COUT8</p>
+                    </th>
+                    <th style="background-color:@item.C9 ;font-size:14px;" class="text-center">
+                        <p>@item.CIN9</p>
+                        <p>@item.COUT9</p>
+                    </th>
+                    <th style="background-color:@item.C10;font-size:14px;" class="text-center">
+                        <p>@item.CIN10</p>
+                        <p>@item.COUT10</p>
+                    </th>
+                    <th style="background-color:@item.C11;font-size:14px;" class="text-center">
+                        <p>@item.CIN11</p>
+                        <p>@item.COUT11</p>
+                    </th>
+                    <th style="background-color:@item.C12;font-size:14px;" class="text-center">
+                        <p>@item.CIN12</p>
+                        <p>@item.COUT12</p>
+                    </th>
+                    <th style="background-color:@item.C13;font-size:14px;" class="text-center">
+                        <p>@item.CIN13</p>
+                        <p>@item.COUT13</p>
+                    </th>
+                    <th style="background-color:@item.C14;font-size:14px;" class="text-center">
+                        <p>@item.CIN14</p>
+                        <p>@item.COUT14</p>
+                    </th>
+                    <th style="background-color:@item.C15;font-size:14px;" class="text-center">
+                        <p>@item.CIN15</p>
+                        <p>@item.COUT15</p>
+                    </th>
+                    <th style="background-color:@item.C16;font-size:14px;" class="text-center">
+                        <p>@item.CIN16</p>
+                        <p>@item.COUT16</p>
+                    </th>
+                    <th style="background-color:@item.C17;font-size:14px;" class="text-center">
+                        <p>@item.CIN17</p>
+                        <p>@item.COUT17</p>
+                    </th>
+                    <th style="background-color:@item.C18;font-size:14px;" class="text-center">
+                        <p>@item.CIN18</p>
+                        <p>@item.COUT18</p>
+                    </th>
+                    <th style="background-color:@item.C19;font-size:14px;" class="text-center">
+                        <p>@item.CIN19</p>
+                        <p>@item.COUT19</p>
+                    </th>
+                    <th style="background-color:@item.C20;font-size:14px;" class="text-center">
+                        <p>@item.CIN20</p>
+                        <p>@item.COUT20</p>
+                    </th>
+                    <th style="background-color:@item.C21;font-size:14px;" class="text-center">
+                        <p>@item.CIN21</p>
+                        <p>@item.COUT21</p>
+                    </th>
+                    <th style="background-color:@item.C22;font-size:14px;" class="text-center">
+                        <p>@item.CIN22</p>
+                        <p>@item.COUT22</p>
+                    </th>
+                    <th style="background-color:@item.C23;font-size:14px;" class="text-center">
+                        <p>@item.CIN23</p>
+                        <p>@item.COUT23</p>
+                    </th>
+                    <th style="background-color:@item.C24;font-size:14px;" class="text-center">
+                        <p>@item.CIN24</p>
+                        <p>@item.COUT24</p>
+                    </th>
+                    <th style="background-color:@item.C25;font-size:14px;" class="text-center">
+                        <p>@item.CIN25</p>
+                        <p>@item.COUT25</p>
+                    </th>
+                    <th style="background-color:@item.C26;font-size:14px;" class="text-center">
+                        <p>@item.CIN26</p>
+                        <p>@item.COUT26</p>
+                    </th>
+                    <th style="background-color:@item.C27;font-size:14px;" class="text-center">
+                        <p>@item.CIN27</p>
+                        <p>@item.COUT27</p>
+                    </th>
+                    <th style="background-color:@item.C28;font-size:12px;" class="text-center">
+                        <p>@item.CIN28</p>
+                        <p>@item.COUT28</p>
+                    </th>
+                    <th style="background-color:@item.C29;font-size:14px;" class="text-center">
+                        <p>@item.CIN29</p>
+                        <p>@item.COUT29</p>
+                    </th>
+                    <th style="background-color:@item.C30;font-size:14px;" class="text-center">
+                        <p>@item.CIN30</p>
+                        <p>@item.COUT30</p>
+                    </th>
+                    <th style="background-color:@item.C31;font-size:14px;" class="text-center">
+                        <p>@item.CIN31</p>
+                        <p>@item.COUT31</p>
+                    </th>
+                    <th style="background-color:@item.C32;font-size:14px;" class="text-center">
+                        <p>@item.CIN32</p>
+                        <p>@item.COUT32</p>
+                    </th>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @{ Html.RenderPartial("~/Views/Shared/_ReportFooter.cshtml", Model.Header);}
+</div>
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    function ExcelReport(div) {
+        //console.log("Beginning");
+        //window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('div[id$=' + div + ']').html()));
+        ////   window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('div[id$=' + div + ']').html()));
+        //e.preventDefault();
+        var y = $('div[id$=' + div + ']');
+        var z = $('.non-print', y).remove();
+        //$('.print', y).remove();
+        console.log(z);
+        var x = encodeURIComponent($('div[id$=' + div + ']').html());
+        var z = $('.non-print', y).remove();
+        debugger
+        window.open('data:application/vnd.ms-excel,' + x);
+        e.preventDefault();
+    }
+</script>
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThisAttendance').printThis();
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('table').on('scroll', function () {
+            $("#" + this.id + " > *").width($(this).width() + $(this).scrollLeft());
+        });
+    });
+</script>
+
+
+
+@*<script type="text/javascript">
+        $(document).ready(function () {
+            $('table').on('scroll', function () {
+                $("#" + this.id + " > *").width($(this).width() + $(this).scrollLeft());
+            });
+        });
+    </script>*@
+
+@*<script type="text/javascript">
+        document.getElementById("btnPrint").onclick = function () {
+            printElement(document.getElementById("printThisAttendance"));
+        }
+
+        function printElement(elem) {
+            var domClone = elem.cloneNode(true);
+            var $printSection = document.getElementById("printSection");
+            if (!$printSection) {
+                var $printSection = document.createElement("div");
+                $printSection.id = "printSection";
+                document.body.appendChild($printSection);
+            }
+            $printSection.innerHTML = "";
+            $printSection.appendChild(domClone);
+            window.print();
+        }
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            function PrintElem(elem) {
+                Popup($(elem).html());
+            }
+            function Popup(data) {
+                var mywindow = window.open('', 'प्रिन्ट', 'height=600,width=1000');
+                mywindow.document.write('<html><head><title>प्रिन्ट</title></head><body>');
+                mywindow.document.write(data);
+                mywindow.document.write('</body></html>');
+                mywindow.document.close(); // necessary for IE >= 10
+                mywindow.focus(); // necessary for IE >= 10
+                mywindow.print();
+                mywindow.close();
+                return true;
+            }
+        });
+    </script>*@

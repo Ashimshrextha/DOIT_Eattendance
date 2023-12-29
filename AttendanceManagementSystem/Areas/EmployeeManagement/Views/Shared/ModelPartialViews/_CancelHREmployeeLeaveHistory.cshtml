@@ -1,0 +1,46 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeLeaveHistoryViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.DataModelLeaveCancel.Id)
+@Html.HiddenFor(model => model.DataModelLeaveCancel.LeaveCancelFrom)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+
+
+<div class="row">
+    <div class="form-group">
+        <div class="col-md-6 col-sm-6 col-lg-6">
+            @Html.LabelFor(model => model.DataModelLeaveCancel.LeaveCancelFromNP, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.DataModelLeaveCancel.LeaveCancelFromNP, new { @class = "form-control ", @id = "cancelDate", @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.DataModelLeaveCancel.LeaveCancelFromNP)
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var leaveFrom = '@Model.DataModel.LeaveValidFromNP';
+        var leaveTo = '@Model.DataModel.LeaveValidToNP';
+        var dateNP = leaveFrom.split('-');
+        var datelist = leaveTo.split('-');
+        var startDateNP = dateNP[1] + '/' + (dateNP[2] - 1) + '/' + dateNP[0];
+        var endDateNP = datelist[1] + '/' +datelist[2] + '/' + datelist[0];
+        $('#cancelDate').nepaliDatePicker({
+            npdMonth: true,
+            npdYear: true,
+            disableBefore: startDateNP,
+            disableAfter: endDateNP,
+            onChange: function () {
+                $('#DataModel_LeaveCancelFrom').val($('#cancelDate').val());
+            }
+        });
+    });
+</script>
+

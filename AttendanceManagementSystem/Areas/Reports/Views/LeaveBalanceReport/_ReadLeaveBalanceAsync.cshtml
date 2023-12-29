@@ -1,0 +1,172 @@
+﻿@model SystemViewModels.Reports.LeaveBalanceReportViewModel
+@using SystemStores.ENUMData;
+@using SystemStores.GlobalMethod;
+
+<style type="text/css">
+    .panel-default > .panel-heading-custom {
+        background-color: cadetblue;
+        color: #fff;
+        border-radius: 1em;
+    }
+</style>
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="myModalLabel">@Model.ModalTitle</h4>
+</div>
+@if (Model.DBModelList.Count > 1)
+{
+    <div class="modal-body maxheight">
+        @{ Html.RenderPartial("~/Views/Shared/_ReportHeader.cshtml", Model.Header);}
+        <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+            <table class="table table-border table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>बिदा</th>
+                        <th class="text-center"> दिन</th>
+                        <th class="text-center">गत बर्ष</th>
+                        <th class="text-center">जम्मा दिन</th>
+                        <th class="text-center">कट्टा दिन</th>
+                        <th class="text-center">जम्मा अनुरोध दिन</th>
+                        <th class="text-center">सार्बजनिक बिदा</th>
+                        <th class="text-center">सप्ताहांत</th>
+                        <th class="text-center">आधा दिन</th>
+                        <th class="text-center">जम्मा लिएको दिन</th>
+                        <th class="text-center">बाँकी दिन</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    @foreach (var item in Model.DBModelList)
+                    {
+                
+                         <tr id="@item.IdLeaveType">
+                             <td>@item.LeaveTitle</td>
+                             <td class="text-center">@item.EligiblePerYear</td>           
+                             <td class="text-center">@(item.SavingLeave)</td>          
+                             <td class="text-center">@((item.EligiblePerYear == null ? 0 : item.EligiblePerYear) + (item.SavingLeave == null ? 0 : item.SavingLeave)) </td>
+                             <td class="text-center">@item.DeductedLeaveDay</td>
+                             <td class="text-center">@item.TotalRequestDays</td>
+                             <td class="text-center">@item.TotalFestival</td>
+                             <td class="text-center">@item.TotalWeekend</td>
+                             <td class="text-center">@item.TotalHalfDays</td>
+                             <td class="text-center">@item.TotalTakenLeave</td>     
+                             <td class="text-center"> @(  ((item.EligiblePerYear == null ? 0 : item.EligiblePerYear) + (item.SavingLeave == null ? 0 : item.SavingLeave))-(item.TotalTakenLeave==null?0:item.TotalTakenLeave)  )    </td>      @*बाँकी दिन*@
+                         </tr>
+                     }
+                </tbody>
+            </table>
+            <table class="table table-border table-striped">
+                <thead>
+                    <tr>
+                        <th>बिदा</th>
+                        <th class="text-center">वर्ष</th>
+                        <th class="text-center">दिन</th>
+                        <th>टिप्पणी</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.LeaveMgmtList)
+                    {
+                        <tr>
+                            <td class="text-center">@(item.MasterLeaveTitle?.LeaveTitleNP)</td>
+                            <td class="text-center">@item.LeaveYearNP</td>
+                            <td class="text-center">@item.TotalLeave</td>
+                            <td>@item.Remarks</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button id="@Model.CancelButtonID" class="btn btn-danger btn-app btn-sm" type="button" data-dismiss="modal">@SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Cancel)</button>
+        @if (Model.CRUDAction == EnumGlobal.CRUDType.PRINT)
+        {
+            <button type="button" class="btn btn-info btn-app btn-sm" onclick="ExcelReport('printThis')">@SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Cancel)</button>
+        }
+        @if (Model.OnlyCancelButton == false)
+        {
+            <input id="@Model.SubmitButtonID" class="btn btn-app btn-success btn-sm" type="@Model.SubmitButtonType" value="@SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Submit)" />
+        }
+    </div>
+}
+else
+{
+    <div class="modal-body maxheight">
+        @{ Html.RenderPartial("~/Views/Shared/_ReportHeader.cshtml", Model.Header);}
+        <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+            <table class="table table-border table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>बिदा</th>
+                        <th class="text-center"> दिन</th>
+                        <th class="text-center">गत बर्ष</th>
+                        <th class="text-center">जम्मा दिन</th>
+                        <th class="text-center">रकम लिएको दिन</th>
+                        <th class="text-center">जम्मा अनुरोध दिन</th>
+                        <th class="text-center">सार्बजनिक बिदा</th>
+                        <th class="text-center">सप्ताहांत</th>
+                        <th class="text-center">आधा दिन</th>
+                        <th class="text-center">जम्मा लिएको दिन</th>
+                        <th class="text-center">बाँकी दिन</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.DBModelList)
+                    {
+                    <tr id="@item.IdLeaveType">
+                        <td>@item.LeaveTitle</td>
+                        <td class="text-center">@item.EligiblePerYear</td>
+                        <td class="text-center">@item.SavingLeave</td>
+                        <td class="text-center">@((item.EligiblePerYear == null ? 0 : item.EligiblePerYear) + (item.SavingLeave == null ? 0 : item.SavingLeave)) </td>
+                        <td class="text-center">@item.DeductedLeaveDay</td>
+                        <td class="text-center">@item.TotalRequestDays</td>
+                        <td class="text-center">@item.TotalFestival</td>
+                        <td class="text-center">@item.TotalWeekend</td>
+                        <td class="text-center">@item.TotalHalfDays</td>
+                        <td class="text-center">@item.TotalTakenLeave</td>
+                        <td class="text-center">@item.RemainingLeave</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+            <table class="table table-border table-striped">
+                <thead>
+                    <tr>
+                        <th>बिदा</th>
+                        <th class="text-center">वर्ष</th>
+                        <th class="text-center">दिन</th>
+                        <th>टिप्पणी</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.LeaveMgmtList)
+                    {
+                        <tr>
+                            <td class="text-center">@(item.MasterLeaveTitle?.LeaveTitleNP)</td>
+                            <td class="text-center">@item.LeaveYearNP</td>
+                            <td class="text-center">@item.TotalLeave</td>
+                            <td>@item.Remarks</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button id="@Model.CancelButtonID" class="btn btn-danger btn-app btn-sm" type="button" data-dismiss="modal">@SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Cancel)</button>
+        @if (Model.CRUDAction == EnumGlobal.CRUDType.PRINT)
+        {
+            <button type="button" class="btn btn-info btn-app btn-sm" onclick="ExcelReport('printThis')">@SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Cancel)</button>
+        }
+        @if (Model.OnlyCancelButton == false)
+        {
+            <input id="@Model.SubmitButtonID" class="btn btn-app btn-success btn-sm" type="@Model.SubmitButtonType" value="@SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Submit)" />
+        }
+    </div>
+}
+
+
+
+

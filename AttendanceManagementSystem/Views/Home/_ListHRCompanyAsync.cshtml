@@ -1,0 +1,64 @@
+﻿@model SystemViewModels.Home.HomeDashboardViewModelList
+@using PagedList.Mvc;
+<div id="replacetarget">
+    <div id="content" class="content">
+        <div class="dataTables_wrapper">
+            <div id="mask-container">
+                <div id="mask"></div>
+                <div class="table-responsive">
+                    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th class="text-center">आईडी</th>
+                                <th class="text-center">प्रकार</th>
+                                <th class="text-center">कोड</th>
+                                <th>कार्यालयको नाम</th>
+                                <th>देवनागरी</th>
+                                <th class="text-center">कर्मचारी सं</th>
+                                <th class="text-center">अवस्था</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.HRCompanyList)
+                            {
+                                <tr>
+                                    <td class="ace-icon">@item.Id</td>
+                                    <td class="ace-icon">
+                                        <i class="ace-icon bigger-100 fa badge @(item.IdParent_HRCompany==0?"badge-success":"badge-yellow" )">@item.HRCompanyType.CompanyType</i>
+                                    </td>
+                                    <td class="ace-icon">
+                                        <i class="fa bigger-100 badge badge-yellow">@item.HRCompanyCode.HRCompanyCodeTitle</i>
+                                    </td>
+                                    <td>
+                                        <a class="blue">
+                                            <i class="ace-icon fa bigger-130">
+                                                @(item.CompanyName)
+                                            </i>
+                                        </a>
+                                    </td>
+                                    <td class="blue">
+                                        <i class="fa bigger-110">@item.CompanyNameNP</i>
+                                    </td>
+                                    <td class="ace-icon">
+                                        <i class="fa badge badge-info bigger-130">@item.HREmployees.Count</i>
+                                    </td>
+                                    <td class="ace-icon">
+                                        <div>
+                                            <i class="ace-icon @(item.IsActive==true?"fa fa-thumbs-up green":"fa fa-thumbs-down red") bigger-130" aria-hidden="true"></i>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div aria-live="polite" role="status" id="example_info" class="dataTables_info">
+                    <div class="row">
+                        <div class="col-md-4">Showing @(Model.HRCompanyList.PageCount < Model.HRCompanyList.PageNumber ? 0 : Model.HRCompanyList.FirstItemOnPage) to @Model.HRCompanyList.LastItemOnPage of @Model.HRCompanyList.TotalItemCount entries in @Model.HRCompanyList.PageCount Pages</div>
+                        <div class="col-md-8 dataTables_paginate paging_simple_numbers" id="example_paginate">@Html.PagedListPager(Model.HRCompanyList, page => Url.Action("_ListHRCompanyAsync", new { pageNumber = page, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey }))</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

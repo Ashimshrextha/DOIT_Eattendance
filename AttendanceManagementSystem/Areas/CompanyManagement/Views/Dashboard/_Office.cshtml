@@ -1,0 +1,62 @@
+﻿@model SystemViewModels.CompanyManagement.DashboardViewModelList
+<script src="~/Scripts/amcharts.js"></script>
+<script src="~/Scripts/export.min.js"></script>
+<link href="~/Content/export.css" rel="stylesheet" type="text/css" media="all"/>
+<script src="~/Scripts/pie.js"></script>
+
+<style>
+    #chartdiv2 {
+        height: 800px;
+        border: 1px solid rgba(191, 199, 219, 0.64) !important;
+        background-color:rgba(205, 207, 211, 0.64)
+    }												
+</style>
+
+
+<div id="chartdiv2"></div>
+<script>
+    var chart2 = null;
+     chart2 = AmCharts.makeChart("chartdiv2", {
+        "type": "pie",
+        "theme": "light",
+        "titles": [{
+            "text": "Office Chart",
+            "size": 16
+        }],
+        "dataProvider": [{
+            "country": "Minsitry",
+            "visits": 7252
+        }, {
+            "country": "Deoartment",
+            "visits": 3882
+        }, {
+            "country": "Office",
+            "visits": 1809
+        }, {
+            "country": "Municipality",
+            "visits": 1322
+        }, {
+            "country": "Metropolitan City",
+            "visits": 1122
+        }, {
+            "country": "Rural Manicipality",
+            "visits": 414
+        }, {
+            "country": "Sub Metropolitan City",
+            "visits": 384
+        
+        }],
+        "valueField": "visits",
+        "titleField": "country",
+        "startEffect": "elastic",
+        "startDuration": 2,
+        "labelRadius": 15,
+        "innerRadius": "50%",
+        "depth3D": 10,
+        "balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+        "angle": 15,
+        "export": {
+            "enabled": true
+        }
+    });
+</script>

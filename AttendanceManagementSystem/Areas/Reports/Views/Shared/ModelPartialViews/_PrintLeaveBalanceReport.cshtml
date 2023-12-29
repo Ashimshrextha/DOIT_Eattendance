@@ -1,0 +1,104 @@
+﻿@model SystemViewModels.Reports.LeaveBalanceReportViewModel
+
+<style type="text/css">
+    @@media screen {
+        #printSection {
+            display: none;
+        }
+    }
+
+    @@media print {
+        @@Page {
+            size: landscape;
+            margin: 0.5cm;
+        }
+
+        body {
+            -webkit-print-color-adjust: exact;
+        }
+
+            body * {
+                visibility: hidden;
+            }
+
+        #printSection, #printSection * {
+            -webkit-print-color-adjust: exact;
+            visibility: visible;
+        }
+
+        #printSection {
+            -webkit-print-color-adjust: exact;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    }
+</style>
+<div id="printThis">
+    @{ Html.RenderPartial("~/Views/Shared/_ReportHeader.cshtml", Model.Header);}
+    <table class="table table-border table-striped table-hover">
+        <thead>
+            <tr>
+                <th>बिदा</th>
+                <th class="text-center"> दिन</th>
+                <th class="text-center">गत बर्ष</th>
+                <th class="text-center">जम्मा दिन</th>
+                <th class="text-center">कट्टा दिन</th>
+                <th class="text-center">जम्मा अनुरोध दिन</th>
+                <th class="text-center">सार्बजनिक बिदा</th>
+                <th class="text-center">सप्ताहांत</th>
+                <th class="text-center">आधा दिन</th>
+                <th class="text-center">जम्मा लिएको दिन</th>
+                <th class="text-center">बाँकी दिन</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+             {
+                <tr id="@item.IdLeaveType">
+                    <td>@item.LeaveTitle</td>
+                    <td class="text-center">@item.EligiblePerYear</td>          
+                    <td class="text-center">@(item.SavingLeave)</td>           
+                    <td class="text-center">@((item.EligiblePerYear == null ? 0 : item.EligiblePerYear) + (item.SavingLeave == null ? 0 : item.SavingLeave)) </td>
+                    <td class="text-center">@item.DeductedLeaveDay</td>
+                    <td class="text-center">@item.TotalRequestDays</td>
+                    <td class="text-center">@item.TotalFestival</td>
+                    <td class="text-center">@item.TotalWeekend</td>
+                    <td class="text-center">@item.TotalHalfDays</td>
+                    <td class="text-center">@item.TotalTakenLeave</td>     
+                    <td class="text-center"> @( ((item.EligiblePerYear == null ? 0 : item.EligiblePerYear) + (item.SavingLeave == null ? 0 : item.SavingLeave)) - (item.TotalTakenLeave == null ? 0 : item.TotalTakenLeave) )    </td>      @*बाँकी दिन*@
+                </tr>
+             }
+        </tbody>
+    </table>
+    <table class="table table-border table-striped">
+        <thead>
+            <tr>
+                <th>बिदा</th>
+                <th class="text-center">वर्ष</th>
+                <th class="text-center">दिन</th>
+                <th>टिप्पणी</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.LeaveMgmtList)
+            {
+                <tr>
+                    <td class="text-center">@item.MasterLeaveTitle.LeaveTitleNP</td>
+                    <td class="text-center">@item.LeaveYearNP</td>
+                    <td class="text-center">@item.TotalLeave</td>
+                    <td>@item.Remarks</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>
+

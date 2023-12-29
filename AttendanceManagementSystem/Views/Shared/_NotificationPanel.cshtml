@@ -1,0 +1,15 @@
+﻿@model string
+<script src="~/Scripts/bootstrap-notify.min.js"></script>
+<script type="text/javascript">
+    $.notify({
+        title: '<strong>Heads up!</strong>',
+        message: 'You can use any of bootstraps other alert styles as well by default.'
+    }, {
+            type: 'warning'
+        });
+</script>
+@if (TempData["notification"] != null)
+{
+    @Html.Raw(TempData["notification"])
+}
+

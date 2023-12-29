@@ -1,0 +1,883 @@
+﻿@model SystemViewModels.Home.HomeDashboardViewModelList
+
+@{
+    var assignedShiftModel = Model.DBModelShift.Where(x => x.LoginTime != null && x.LogoutTime != null);
+    var unAssignedShiftModel = Model.DBModelShift.Where(x => x.LoginTime == null && x.LogoutTime == null);
+    var IdHremployee = Model.SessionDetails.IdHREmployee;
+
+
+    var allKaj = Model.DBModelKaajApprovalHistory.Count();
+    var adminapprovalkaj = Model.DBModelKaajApprovalHistory.Where(x => x.IdApprovedBy == IdHremployee).Count();
+
+
+
+
+    var allRecomendationleave = Model.DBModelLeaveApprovalHistory.Where(x => x.IdLeaveStatus == 1).Count();
+    var adminRecomendationleave = Model.DBModelLeaveApprovalHistory.Where(x => x.IdLeaveStatus == 1 && x.IdRecommandationBy == IdHremployee).Count();
+
+
+    var allApprovalleave = Model.DBModelLeaveApprovalHistory.Where(x => x.IdLeaveStatus == 2).Count();
+    var adminapprovalleave = Model.DBModelLeaveApprovalHistory.Where(x => x.IdLeaveStatus == 2 && x.IdApprovedBy == IdHremployee).Count();
+
+    var officeStatus = Model.OfficeStatus;
+
+}
+
+<!--total device active to active employee-->
+<div class="form-group row">
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="panel panel-warning">
+            <div class="panel-heading" style="height:100px;">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-group fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge" style="font-weight:bold;font-size:15px;">@Model.EmployeeCount</div>
+                        <div style="font-weight:bold;">समग्रमा कर्मचारी</div>
+                    </div>
+                </div>
+            </div>
+            <a href="~/Home/HREmployeeAsync">
+                <div class="panel-footer">
+                    <span class="pull-left">विवरण हेर्नुहोस्</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right fa-2x" style="color:#d48043;"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="panel panel-info">
+            <div class="panel-heading" style="height:100px;">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-group fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge" style="font-weight:bold;font-size:15px;">@Model.EmployeePresentCount</div>
+                        <div style="font-weight:bold;">उपस्थित कर्मचारीहरू</div>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    @foreach (var item in Model.DbGender)
+                                    {
+                                        <td style="font-weight:bold">@($"{item.HREmployeeSexTitleNP} [{item.TotalNumber}]")</td>
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <a href="~/Home/PresentHREmployeeAsync">
+                <div class="panel-footer">
+                    <span class="pull-left">विवरण हेर्नुहोस्</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right fa-2x" style="color:#19abcb;"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="panel panel-info">
+            <div class="panel-heading" style="height:100px;">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-group fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge" style="font-weight:bold;font-size:15px;"><span style="font-size:20px;" id="absentCountToday"></span></div>
+                        <div style="font-weight:bold;">अनुपस्थित कर्मचारीहरू</div>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    @foreach (var item in Model.DbGender)
+                                    {
+                                        <td style="font-weight:bold">@($"{item.HREmployeeSexTitleNP} [{item.TotalNumber}]")</td>
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <a href="~/Home/AbsentHREmployeeAsync">
+                <div class="panel-footer">
+                    <span class="pull-left">विवरण हेर्नुहोस्</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right fa-2x" style="color:#19abcb;"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="panel panel-danger">
+            <div class="panel-heading" style="height:100px;">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-building fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="huge" style="font-weight:bold;font-size:15px;">@Model.OfficeDeviceList.Count(x => x.IsActive)</div>
+                                <div style="font-weight:bold;">सक्रिय उपकरणहरू</div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="huge" style="font-weight:bold;font-size:15px;">@Model.OfficeDeviceList.Count(x => x.IsActive == false)</div>
+                                <div style="font-weight:bold;">निष्क्रिय उपकरणहरू</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="~/Home/HRDevicesAsync">
+                <div class="panel-footer">
+                    <span class="pull-left">विवरण हेर्नुहोस्</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right fa-2x" style="color:#e9460a;"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+<!--unattendanced emp to leave employee-->
+<div class="form-group row form-content-3">
+    <div class="col-md-6 col-sm-6 col-lg-4 col-xs-12">
+        <div class="panel panel-info" style="border-radius:1em">
+            @*<div class="panel-heading panel-heading grid-panel-heading" style="border-radius:1em">
+                    <h3 class="panel-title" style="">उपस्थित कर्मचारी  <span style="font-size:20px;">(@officeStatus.FirstOrDefault().PresentCount)</span></h3>
+                    <span class="pull-right">
+                        <a data-toggle="collapse" href="#collapse2">
+                            <i class="fa fa-arrow-circle-down fa-2x" style="color:#e9460a;"></i>
+                        </a>
+                    </span>
+                </div>*@
+            <div class="panel-group karyalaya">
+                <div id="collapse2" class="panel-collapse collapse">
+
+                    @if (Model.ParentChildViewModelList != null)
+                    {
+                        foreach (var leavehier in Model.ParentChildViewModelList.Select((value, i) => new { i, value }))
+
+                        {
+
+                            <div class="panel-heading">
+                                <span class=""> <a href="#">@leavehier.value.parentDetails.CompanyNameNp</a></span>
+                                <span class="pull-right">
+                                    <a href="">
+                                        <i class="fa " style="color:#e9460a;">@leavehier.value.parentDetails.PresentCount</i>
+                                    </a>
+                                </span>
+                            </div>
+
+
+                            <div id="collapsek21" class="">
+                                <ul class="list-group ">
+                                    <li class="list-group-item ">
+
+
+                                        @foreach (var leavehier1 in leavehier.value.ChildList.Select((value, i) => new { i, value }))
+                                        {
+                                            //<span style="padding:10px;background-color:aqua">@leavehier1.value.IdHrcompany</span>
+
+
+
+
+                                            <div class="panel-heading">
+                                                <span class=""> <a href="#">@leavehier1.value.CompanyNameNp</a></span>
+                                                <span class="pull-right">
+                                                    <a href="">
+                                                        <i class="fa "
+                                                           style="color:#e9460a;">@leavehier1.value.PresentCount</i>
+                                                    </a>
+                                                </span>
+                                            </div>
+
+
+                                            if (leavehier1.value.ChildList != null)
+                                            {
+                                                foreach (var leavehier11 in leavehier1.value.ChildList.Select((value, i) => new { i, value }))
+                                                {
+                                                    // <span style="background-color:chocolate">@leavehier11.value.IdHrcompany</span>
+                                                    <div id="collapsek211" class="">
+                                                        <ul class="list-group ">
+                                                            <li class="list-group-item ">
+
+                                                                <div class="panel-heading">
+                                                                    <span class=""> <a href="#"> @leavehier11.value.CompanyNameNp</a></span>
+                                                                    <span class="pull-right">
+                                                                        <a href="">
+                                                                            <i class="fa "
+                                                                               style="color:#e9460a;">@leavehier11.value.PresentCount</i>
+                                                                        </a>
+                                                                    </span>
+                                                                </div>
+
+
+                                                                @if (leavehier11.value.ChildList != null)
+                                                                {
+                                                                    foreach (var leavehier111 in leavehier11.value.ChildList.Select((value, i) => new { i, value }))
+                                                                    {
+                                                                        // <span style="background-color:red">@leavehier111.value.IdHrcompany</span>
+                                                                        <div id="collapsek211" class="">
+                                                                            <ul class="list-group ">
+                                                                                <li class="list-group-item ">
+
+                                                                                    <div class="panel-heading">
+                                                                                        <span class=""> <a href="#"> @leavehier111.value.CompanyNameNp</a></span>
+                                                                                        <span class="pull-right">
+                                                                                            <a href="">
+                                                                                                <i class="fa "
+                                                                                                   style="color:#e9460a;">@leavehier111.value.PresentCount</i>
+                                                                                            </a>
+                                                                                        </span>
+                                                                                    </div>
+
+
+
+
+                                                                                </li>
+
+                                                                            </ul>
+                                                                        </div>
+                                                                    }
+                                                                }
+
+                                                            </li>
+
+
+                                                        </ul>
+                                                    </div>
+
+
+                                                }
+                                            }
+
+                                        }
+
+                                    </li>
+                                </ul>
+                            </div>
+
+
+
+
+                        }
+                    }
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-6 col-sm-6 col-lg-4 col-xs-12">
+        <div class="panel panel-info" style="border-radius:1em">
+            @*<div class="panel-heading panel-heading grid-panel-heading" style="border-radius:1em">
+                    <h3 class="panel-title" style="">बिदामा गएको कर्मचारी  <span style="font-size:20px;">(@officeStatus.FirstOrDefault().LeaveCount)</span></h3>
+                    <span class="pull-right">
+                        <a data-toggle="collapse" href="#collapseeleave">
+                            <i class="fa fa-arrow-circle-down fa-2x" style="color:#e9460a;"></i>
+                        </a>
+                    </span>
+                </div>*@
+
+            <div class="panel-group karyalaya">
+                <div id="collapseeleave" class="panel-collapse collapse">
+
+                    @if (Model.ParentChildViewModelList != null)
+                    {
+                        foreach (var leavehier in Model.ParentChildViewModelList.Select((value, i) => new { i, value }))
+
+                        {
+                            @*<li class="list-group-item">*@
+
+                            <div class="panel-heading">
+                                <span class=""> <a href="#">@leavehier.value.parentDetails.CompanyNameNp</a></span>
+                                <span class="pull-right">
+                                    <a href="">
+                                        <i class="fa " style="color:#e9460a;">@leavehier.value.parentDetails.LeaveCount</i>
+                                    </a>
+                                </span>
+                            </div>
+
+
+                            <div id="collapsek21" class="">
+                                <ul class="list-group ">
+                                    <li class="list-group-item ">
+
+
+                                        @foreach (var leavehier1 in leavehier.value.ChildList.Select((value, i) => new { i, value }))
+                                        {
+                                            //<span style="padding:10px;background-color:aqua">@leavehier1.value.IdHrcompany</span>
+
+
+
+
+                                            <div class="panel-heading">
+                                                <span class=""> <a href="#">@leavehier1.value.CompanyNameNp</a></span>
+                                                <span class="pull-right">
+                                                    <a href="">
+                                                        <i class="fa "
+                                                           style="color:#e9460a;">@leavehier1.value.LeaveCount</i>
+                                                    </a>
+                                                </span>
+                                            </div>
+
+
+                                            if (leavehier1.value.ChildList != null)
+                                            {
+                                                foreach (var leavehier11 in leavehier1.value.ChildList.Select((value, i) => new { i, value }))
+                                                {
+                                                    // <span style="background-color:chocolate">@leavehier11.value.IdHrcompany</span>
+                                                    <div id="collapsek211" class="">
+                                                        <ul class="list-group ">
+                                                            <li class="list-group-item ">
+
+                                                                <div class="panel-heading">
+                                                                    <span class=""> <a href="#"> @leavehier11.value.CompanyNameNp</a></span>
+                                                                    <span class="pull-right">
+                                                                        <a href="">
+                                                                            <i class="fa "
+                                                                               style="color:#e9460a;">@leavehier11.value.LeaveCount</i>
+                                                                        </a>
+                                                                    </span>
+                                                                </div>
+
+
+                                                                @if (leavehier11.value.ChildList != null)
+                                                                {
+                                                                    foreach (var leavehier111 in leavehier11.value.ChildList.Select((value, i) => new { i, value }))
+                                                                    {
+                                                                        // <span style="background-color:red">@leavehier111.value.IdHrcompany</span>
+                                                                        <div id="collapsek211" class="">
+                                                                            <ul class="list-group ">
+                                                                                <li class="list-group-item ">
+
+                                                                                    <div class="panel-heading">
+                                                                                        <span class=""> <a href="#"> @leavehier111.value.CompanyNameNp</a></span>
+                                                                                        <span class="pull-right">
+                                                                                            <a href="">
+                                                                                                <i class="fa "
+                                                                                                   style="color:#e9460a;">@leavehier111.value.LeaveCount</i>
+                                                                                            </a>
+                                                                                        </span>
+                                                                                    </div>
+
+
+
+
+                                                                                </li>
+
+                                                                            </ul>
+                                                                        </div>
+                                                                    }
+                                                                }
+
+                                                            </li>
+
+
+                                                        </ul>
+                                                    </div>
+
+
+                                                }
+                                            }
+
+                                        }
+
+                                    </li>
+                                </ul>
+                            </div>
+
+
+
+                            @*</li>*@
+                        }
+                    }
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--Kaaj all list and requested approval List-->
+<div class="form-group row">
+    <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+        <div class="panel panel-info" style="border-radius:1em">
+            <div class="panel-heading panel-heading" style="border-radius:1em">
+                <h3 class="panel-title" style="text-align:center!important">स्वीकृत नभएको काज<span style="font-size:20px;">(@allKaj)  स्वीकृत गर्नुपर्ने काज(@adminapprovalkaj)</span></h3>
+            </div>
+            <div class="table-responsive" style="height:401px;overflow:auto;">
+                <table class="table table-border table-hover">
+                    <thead>
+                        <tr>
+                            <th class="text-center">आइडी</th>
+                            <th class="text-center">कार्यालय</th>
+                            <th class="ace-icon">क.संकेत नं.</th>
+                            <th>कर्मचारीको नाम</th>
+                            <th class="ace-icon">प्रकार</th>
+                            <th class="ace-icon">स्थान</th>
+                            <th class="ace-icon">आवेदन मिति  </th>
+                            <th class="ace-icon">शुरुको मिति</th>
+                            <th class="ace-icon">अन्तिम मिति</th>
+                            <th class="ace-icon">स्वीकृत गर्ने</th>
+                            <th class="ace-icon">देश</th>
+                            <th class="ace-icon">अवस्था</th>
+                            <th class="ace-icon">कार्य</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var ApprovalListitem in Model.DBModelKaajApprovalHistory)
+                        {
+                            <tr>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa bigger-110 fa badge badge-info">@ApprovalListitem.Id</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="fa bigger-100 badge badge-info">@(ApprovalListitem?.HRCompany?.HRCompanyCode?.HRCompanyCodeTitle)</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa bigger-110 fa badge badge-info">@ApprovalListitem.HREmployee1.PISNumber</i>
+                                </td>
+                                <td class="blue" style="min-width:200px;">
+                                    <i class="fa bigger-130">@(ApprovalListitem.HREmployee1?.HREmployeeNameNP)</i>
+                                </td>
+                                <td class="blue">
+                                    <i class="ace-icon fa  bigger-130">@(ApprovalListitem?.KaajType?.TitleNP)</i>
+                                </td>
+                                <td class="blue">
+                                    <i class="fa bigger-110">@(ApprovalListitem.KaajLocation)</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa bigger-110 badge badge-yellow">@(string.Format("{0:yyyy-MM-dd}", ApprovalListitem.CreatedOn.DateNp()))</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa bigger-110 badge badge-success">@ApprovalListitem.KaajFromNP</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa bigger-110 badge badge-danger">@(ApprovalListitem?.KaajToNP)</i>
+                                </td>
+                                <td class="blue" style="min-width:200px;">
+                                    <i class="fa bigger-130">@(ApprovalListitem.HREmployee?.HREmployeeNameNP)</i>
+                                </td>
+                                <td class="green text-center">
+                                    <i class="ace-icon fa bigger-130">@(ApprovalListitem?.Country?.CountryNp)</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa bigger-110 badge @(ApprovalListitem.IdKaajStatus == 4 ? "badge-danger" : "badge-success")">@ApprovalListitem.HRCompanyLeaveStatusType.LeaveStatusTypeNP</i>
+                                </td>
+                                <td class="ace-icon action-buttons">
+                                    @if (ApprovalListitem.IdApprovedBy == IdHremployee)
+                                    {
+                                        <a href="@Url.Action("../EmployeeManagement/HREmployeeKaajApproved/_UpdateHREmployeeKaajApprovedAsync", new { id = ApprovalListitem.Id, pageNumber = Model.PageNumber, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey })" data-ajax-model="">
+                                            <i class="ace-icon fa fa-pencil green bigger-150" aria-hidden="true" title="Edit"></i>
+                                        </a>
+                                    }
+                                    <a href="@Url.Action("../EmployeeManagement/HREmployeeKaajApproved/_ReadHREmployeeKaajApprovedAsync", new { id = ApprovalListitem.Id, pageNumber = Model.PageNumber, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey })" data-ajax-model=""><i class="ace-icon fa fa-search-plus blue bigger-150" aria-hidden="true" title="View"></i></a>
+
+
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--Leave requested and approval-->
+
+<div class="form-group row">
+    <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+        <div class="panel panel-info" style="border-radius:1em">
+            <div class="panel-heading panel-heading" style="border-radius:1em">
+                <h3 class="panel-title" style="text-align:center!important">सिफारिस नभएको बिदा<span style="font-size:20px;">(@allRecomendationleave) सिफारिस गर्नुपर्ने बिदा(@adminRecomendationleave)</span></h3>
+            </div>
+            <div class="table-responsive" style="height:401px;overflow:auto;">
+                <table class="table table-border table-hover">
+                    <thead>
+                        <tr>
+                            <th class="text-center">आईडी</th>
+                            <th class="text-center">कार्यालय</th>
+                            <th class="ace-icon">क.संकेत नं.</th>
+                            <th>कर्मचारीको नाम</th>
+                            <th class="text-center">
+                                बिदा
+                            </th>
+                            <th class="ace-icon">आवेदन मिति</th>
+                            <th class="ace-icon">शुरुको मिति</th>
+                            <th class="ace-icon">अन्तिम मिति</th>
+                            <th class="ace-icon">सिफारिस गर्ने</th>
+                            <th class="ace-icon">सिफारिस मिति</th>
+                            <th class="ace-icon">अवस्था</th>
+                            <th class="ace-icon">कार्य</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        @foreach (var LeaveApprovalitem in Model.DBModelLeaveApprovalHistory.Where(x => x.IdLeaveStatus == 1))
+                        {
+                            <tr>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa bigger-110 fa badge badge-info">@LeaveApprovalitem.Id</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="fa bigger-100 badge badge-info">@(LeaveApprovalitem?.HRCompany?.HRCompanyCode?.HRCompanyCodeTitle)</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa bigger-110 badge badge-info">@(LeaveApprovalitem.HREmployee1?.PISNumber)</i>
+                                </td>
+                                <td class="blue" style="min-width:200px;">
+                                    <i class="ace-icon fa bigger-130">@(LeaveApprovalitem.HREmployee1?.HREmployeeNameNP)</i>
+                                </td>
+                                <td class="blue">
+                                    <i class="fa bigger-110">@(LeaveApprovalitem.MasterLeaveTitle?.LeaveTitleNP)</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="fa bigger-110 badge badge-yellow">@(string.Format("{0:yyyy-MM-dd}", LeaveApprovalitem.CreatedOn.DateNp()))</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa bigger-110 badge badge-success">@LeaveApprovalitem.LeaveValidFromNP</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa bigger-110  badge badge-danger">@LeaveApprovalitem.LeaveValidToNP</i>
+                                </td>
+                                <td class="blue">
+                                    <i class="fa bigger-130">@(LeaveApprovalitem.HREmployee2?.HREmployeeNameNP)</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa bigger-110 badge badge-success">@LeaveApprovalitem.RecommandationDate.DateNp()</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa bigger-110 badge @(LeaveApprovalitem.IdLeaveStatus==1||LeaveApprovalitem.IdLeaveStatus==4?"badge-danger":"badge-success")">@(LeaveApprovalitem?.HRCompanyLeaveStatusType?.LeaveStatusTypeNP)</i>
+                                </td>
+                                <td class="ace-icon action-buttons">
+
+                                    <a href="@Url.Action("../EmployeeManagement/HREmployeeLeaveRecommend/_ReadHREmployeeLeaveRecommendAsync",new { id=LeaveApprovalitem.Id,pageNumber=Model.PageNumber,pageSize=Model.PageSize,orderingBy=Model.OrderingBy,orderingDirection=Model.OrderingDirection,searchKey=Model.SearchKey})" data-ajax-model=""><i class="ace-icon fa fa-search-plus blue bigger-150" aria-hidden="true" title="View"></i></a>
+                                    @if (LeaveApprovalitem.IdRecommandationBy == IdHremployee)
+                                    {
+                                        <a href="@Url.Action("../EmployeeManagement/HREmployeeLeaveRecommend/_UpdateHREmployeeLeaveRecommendAsync", new { id = LeaveApprovalitem.Id, pageNumber = Model.PageNumber, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey })" data-ajax-model=""><i class="ace-icon fa fa-pencil green bigger-150" aria-hidden="true" title="Edit"></i></a>
+                                    }
+
+                                </td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="form-group row">
+    <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+        <div class="panel panel-info" style="border-radius:1em">
+            <div class="panel-heading panel-heading" style="border-radius:1em">
+                <h3 class="panel-title" style="text-align:center!important">स्वीकृत नभएको बिदा<span style="font-size:20px;">(@allApprovalleave) स्वीकृत गर्नुपर्ने बिदा(@adminapprovalleave)</span></h3>
+            </div>
+            <div class="table-responsive" style="height:401px;overflow:auto;">
+                <table class="table table-border table-hover">
+                    <thead>
+                        <tr>
+                            <th class="text-center">आईडी</th>
+                            <th class="text-center">कार्यालय</th>
+                            <th class="ace-icon">क.संकेत नं.</th>
+                            <th>कर्मचारीको नाम</th>
+                            <th class="text-center">
+                                बिदा
+                            </th>
+                            <th class="ace-icon">आवेदन मिति</th>
+                            <th class="ace-icon">शुरुको मिति</th>
+                            <th class="ace-icon">अन्तिम मिति</th>
+                            <th class="ace-icon">स्वीकृत गर्ने</th>
+                            <th class="ace-icon">स्वीकृत मिति</th>
+                            <th class="ace-icon">अवस्था</th>
+                            <th class="ace-icon">कार्य</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        @foreach (var LeaveApprovalitem in Model.DBModelLeaveApprovalHistory.Where(x => x.IdLeaveStatus == 2))
+                        {
+                            <tr>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa bigger-110 fa badge badge-info">@LeaveApprovalitem.Id</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa bigger-110 fa badge badge-info">@(LeaveApprovalitem.HRCompany?.HRCompanyCode.HRCompanyCodeTitle)</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa bigger-110 fa badge badge-info">@(LeaveApprovalitem.HREmployee1?.PISNumber)</i>
+                                </td>
+                                <td class="blue">
+                                    <i class="fa bigger-130">@(LeaveApprovalitem.HREmployee1?.HREmployeeNameNP)</i>
+                                </td>
+                                <td class="blue">
+                                    <i class="fa  bigger-110">@(LeaveApprovalitem.MasterLeaveTitle?.LeaveTitleNP)</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="fa bigger-110 badge badge-yellow">@(string.Format("{0:yyyy-MM-dd}", LeaveApprovalitem.CreatedOn.DateNp()))</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa bigger-110 badge badge-success">@LeaveApprovalitem.LeaveValidFromNP</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa bigger-110 badge badge-danger">@LeaveApprovalitem.LeaveValidToNP</i>
+                                </td>
+                                <td class="blue">
+                                    <i class="fa bigger-130">@(LeaveApprovalitem.HREmployee?.HREmployeeNameNP)</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa bigger-110 badge badge-success">
+                                        @LeaveApprovalitem.ApprovedOn.DateNp()
+                                    </i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa bigger-110 badge @(LeaveApprovalitem.IdLeaveStatus==1||LeaveApprovalitem.IdLeaveStatus==4?"badge-danger":"badge-success")">@(LeaveApprovalitem?.HRCompanyLeaveStatusType?.LeaveStatusTypeNP)</i>
+                                </td>
+                                <td class="ace-icon action-buttons">
+
+                                    <a href="@Url.Action("../EmployeeManagement/HREmployeeLeaveApproved/_ReadHREmployeeLeaveApprovedAsync",new { id=LeaveApprovalitem.Id,pageNumber=Model.PageNumber,pageSize=Model.PageSize,orderingBy=Model.OrderingBy,orderingDirection=Model.OrderingDirection,searchKey=Model.SearchKey})" data-ajax-model=""><i class="ace-icon fa fa-search-plus blue bigger-150" aria-hidden="true" title="View"></i></a>
+                                    @if (LeaveApprovalitem.IdApprovedBy == IdHremployee)
+                                    {
+                                        <a href="@Url.Action("../EmployeeManagement/HREmployeeLeaveApproved/_UpdateHREmployeeLeaveApprovedAsync", new { id = LeaveApprovalitem.Id, pageNumber = Model.PageNumber, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey })" data-ajax-model="">
+                                            <i class="ace-icon fa fa-pencil green bigger-150" aria-hidden="true" title="Edit"></i>
+                                        </a>}
+
+                                </td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="form-group row">
+    <div class="col-md-6 col-sm-12 col-xs-12 col-lg-4">
+        <div class="panel panel-default panel-danger">
+            <div class="panel-heading panel-heading" style="border-radius:1em">
+                <h3 class="panel-title" style="text-align:center!important">
+                    शिफ्ट  नभएका सूची
+                    <span style="font-weight:bold;font-size:20px;">(@unAssignedShiftModel.Count())</span>
+                </h3>
+            </div>
+            <div class="panel-body table-responsive" style="height:401px;" id="mask">
+                <table class="table table-border table-hover">
+                    <thead>
+                        <tr>
+                            <th>कर्मचारी नाम</th>
+                            <th class="text-center">पद</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in unAssignedShiftModel)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="~/EmployeeManagement/HRCompanyHREmployeeShiftRoaster/_CreateHRCompanyHREmployeeShiftRoasterAsync?idHREmployee=@item.IdHREmployee&pageNumber=1&pageSize=20&orderingBy=Id&orderingDirection=DESC" data-ajax-model="">
+                                        @item.EmployeeName
+                                    </a>
+                                </td>
+                                <td class="text-center">@item.Designation</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12 col-lg-4">
+        <div class="panel panel-default panel-success">
+            <div class="panel-heading panel-heading" style="border-radius:1em">
+                <h3 class="panel-title" style="text-align:center!important">
+                    काम गर्ने समय तालिका
+                    <span style="font-weight:bold;font-size:20px;">(@assignedShiftModel.Count())</span>
+                </h3>
+            </div>
+            <div class="panel-body table-responsive" style="height:401px;">
+                <table class="table table-border table-hover">
+                    <thead>
+                        <tr>
+                            <th>कर्मचारी नाम</th>
+                            <th>पद</th>
+                            <th>आउने</th>
+                            <th>जाने</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in assignedShiftModel)
+                        {
+                            <tr>
+                                <td>@item.EmployeeName</td>
+                                <td>@item.Designation</td>
+                                <td>@item.LoginTime</td>
+                                <td>@item.LogoutTime</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-4">
+        <div class="panel panel-default panel-info">
+            <div class="panel-heading">
+                कर्मचारी स्थिति
+            </div>
+            <div class="panel-body" style="padding:0px;">
+                @{Html.RenderPartial("_TodayEmployeeStatus");}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+        <div class="panel panel-default panel-success">
+            <div class="panel-heading panel-heading" style="border-radius:1em">
+                <h3 class="panel-title" style="text-align:center!important">
+                    नेपाली पात्रो  आज मिति
+                    <span style="font-weight:bold;font-size:20px;">(@DateTime.Now.DateNp())</span>
+                </h3>
+            </div>
+            <div class="panel-body table-responsive" style="height:401px">
+                <table class="table table-border table-hover">
+                    <thead>
+                        <tr>
+                            <th class="ace-icon">
+                                <p>आइतवार</p>
+                                <p>  Sunday</p>
+                            </th>
+                            <th class="ace-icon">
+                                <p>सोमवार</p>
+                                <p>Monday</p>
+                            </th>
+                            <th class="ace-icon">
+                                <p>मङ्गलवार</p>
+                                <p>Tuesday</p>
+                            </th>
+                            <th class="ace-icon">
+                                <p>बुधवार</p>
+                                <p>Wednesday</p>
+                            </th>
+                            <th class="ace-icon">
+                                <p>बिहीवार</p>
+                                <p>Thursday</p>
+                            </th>
+                            <th class="ace-icon">
+                                <p>शुक्रवार</p>
+                                <p>Friday</p>
+                            </th>
+                            <th class="ace-icon" style="color:red;">
+                                <p>शनिवार</p>
+                                <p>Saturday</p>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model.DBModelCalendar)
+                        {
+                            if (item.Sunday == Model.TodayDayNp)
+                            {
+                                item.CSunday = "#28d791";
+                            }
+                            else if (item.Monday == Model.TodayDayNp)
+                            {
+                                item.CMonday = "#28d791";
+                            }
+                            else if (item.Tuesday == Model.TodayDayNp)
+                            {
+                                item.CTuesday = "#28d791";
+                            }
+                            else if (item.Wednesday == Model.TodayDayNp)
+                            {
+                                item.CWednesday = "#28d791";
+                            }
+                            else if (item.Thursday == Model.TodayDayNp)
+                            {
+                                item.CThursday = "#28d791";
+                            }
+                            else if (item.Friday == Model.TodayDayNp)
+                            {
+                                item.CFriday = "#28d791";
+                            }
+                            else if (item.Saturday == Model.TodayDayNp)
+                            {
+                                item.CSaturday = "#28d791";
+                            }
+
+                            <tr>
+                                <td class="text-center" style="height:60px;font-weight:bolder;font-size:18px;background-color:@item.CSunday" title="@item.ASunday">@item.Sunday<br />@item.ASunday</td>
+                                <td class="text-center" style="height:60px;font-weight:bolder;font-size:18px;background-color:@item.CMonday" title="@item.AMonday">@item.Monday<br />@item.AMonday</td>
+                                <td class="text-center" style="height:60px;font-weight:bolder;font-size:18px;background-color:@item.CTuesday" title="@item.ATuesday">@item.Tuesday<br />@item.ATuesday</td>
+                                <td class="text-center" style="height:60px;font-weight:bolder;font-size:18px;background-color:@item.CWednesday" title="@item.AWednesday">@item.Wednesday<br />@item.AWednesday</td>
+                                <td class="text-center" style="height:60px;font-weight:bolder;font-size:18px;background-color:@item.CThursday" title="@item.AThursday">@item.Thursday<br />@item.AThursday</td>
+                                <td class="text-center" style="height:60px;font-weight:bolder;font-size:18px;background-color:@item.CFriday" title="@item.AFriday">@item.Friday<br />@item.AFriday</td>
+                                <td class="text-center" style="height:60px; font-weight:bolder;font-size:15px;color:red;background-color:@item.CSaturday" title="@item.ASaturday">@item.Saturday<br />@item.ASaturday</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+
+        $.ajax({
+            url: "/Home/AbsentEmployeeListToday",
+            type: "GET",
+            cache: true,
+            success: function (response) {
+                console.log(response)
+
+                $("#absentCountToday").html(response.listCount)
+                $.each(response.list, function (key, value) {
+                    $('#absentList').append("<tr>\
+                                        <td>"+ value.PISNumber + "</td>\
+                                        <td>"+ value.EmployeeName + "</td>\
+                                        <td>"+ value.HRDesignationShortName + "</td>\
+                                        </tr>");
+                })
+
+
+            }
+
+        });
+
+    });
+
+</script>

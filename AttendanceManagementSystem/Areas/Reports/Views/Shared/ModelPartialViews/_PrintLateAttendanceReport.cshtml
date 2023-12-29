@@ -1,0 +1,68 @@
+﻿@model SystemViewModels.Reports.LateAttendanceReportViewModelList
+<div id="printThis">
+    @{ Html.RenderPartial("~/Views/Shared/_ReportHeader.cshtml", Model.Header);}
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th class="text-center">क. संकेत नं</th>
+                <th>कर्मचारीको नाम</th>
+                <th class="ace-icon">पद</th>
+                <th class="text-center">मिति</th>
+                <th class="text-center">आउने समय</th>
+                <th class="text-center">आएको समय</th>
+                <th class="text-center">ढिलो आएको</th>
+                <th class="text-center">ढिलोहुनुको कारण</th>
+                <th class="text-center">अन्य कुराहरु</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+            {
+                <tr>
+                    <td class="text-center">
+                        <i class="ace-icon fa bigger-110 badge badge-yellow">@item.IdEnroll</i>
+                    </td>
+                    <td class="blue">
+                        <i class="ace-icon fa bigger-130">@item.Name</i>
+                    </td>
+                    <td class="ace-icon">
+                        <i class="ace-icon fa bigger-110 badge badge-yellow">@item.Designation</i>
+                    </td>
+                    <td class="text-center">
+                        <i class="ace-icon fa bigger-110 badge badge-success">@item.AttendanceDate.DateNp()</i>
+                    </td>
+                    <td class="text-center">
+                        <i class="ace-icon fa bigger-110 badge badge-success">@item.LogInTime</i>
+                    </td>
+                    <td class="text-center">
+                        <i class="ace-icon fa bigger-110 badge badge-info">@item.CheckInTime</i>
+                    </td>
+                    <td class="text-center">
+                        <i class="ace-icon fa bigger-110 badge badge-danger">@item.LateBy</i>
+                    </td>
+                    <td class="green">
+                        <i class="ace-icon fa bigger-110">@item.LateReason</i>
+                    </td>
+                    <td class="red">
+                        <i class="ace-icon fa bigger-110">@item.Remark</i>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @{ Html.RenderPartial("~/Views/Shared/_ReportFooterWithApproval.cshtml", Model.Header);}
+</div>
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>
+<script type="text/javascript">
+    function ExcelReport(div) {
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('div[id$=' + div + ']').html()));
+        e.preventDefault();
+    }
+</script>

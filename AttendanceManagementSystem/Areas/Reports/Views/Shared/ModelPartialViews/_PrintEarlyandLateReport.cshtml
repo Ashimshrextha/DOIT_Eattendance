@@ -1,0 +1,55 @@
+﻿@model SystemViewModels.Reports.MonthlyEarlyandLateReportViewModel
+<div id="printThis">
+    @{ Html.RenderPartial("~/Views/Shared/_ReportHeader.cshtml", Model.Header);}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th class="text-center">क.संकेत नं.</th>
+                <th>कर्मचारीको नाम</th>
+                <th class="ace-icon">पद</th>
+                <th class="text-center">ढिला आएको दिन</th>
+                <th class="text-center">छिटो गएको दिन</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelAttendanceRangeList)
+            {
+                <tr>
+                    <td class="text-center">
+                        @item.PISNumber
+                    </td>
+                    <td class="text-left">
+                        @item.EmployeeName
+                    </td>
+                    <td class="text-center">
+                        @item.HRDesignationShortName
+                    </td>
+                 
+                    <td class="text-center">
+                        @item.TotalLateBy
+                    </td>
+                    <td class="text-center">
+                        @item.TotalCheckOutEarly
+                    </td>
+                   
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>
+<script type="text/javascript">
+    function ExcelReport(div) {
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('div[id$=' + div + ']').html()));
+        e.preventDefault();
+    }
+</script>
+

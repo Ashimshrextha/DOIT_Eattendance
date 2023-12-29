@@ -1,0 +1,63 @@
+﻿@model SystemViewModels.Reports.UserLogsViewModelList
+
+@using PagedList.Mvc;
+
+<div id="replacetarget">
+    <div id="content" class="content">
+        <div class="dataTables_wrapper">
+            <div id="mask-container">
+                <div id="mask"></div>
+                <div class="table-responsive">
+                    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Id Login</th>
+                                <th>User Name</th>
+                                <th>Full Name</th>
+                                <th>Session Id</th>
+                                <th>Login</th>
+                                <th>Logout</th>
+                                <th>Area</th>
+                                <th>Controller</th>
+                                <th>Access URL</th>
+                                <th>Event Msg</th>
+                                <th>Error Msg</th>
+                                <th>IP</th>
+                                <th>Created On</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.DBModelList)
+                            {
+                                <tr>
+                                    <td>@item.IdLogin</td>
+                                    <td>@item.UserName</td>
+                                    <td>@item.FullName</td>
+                                    <td>@item.SessionId</td>
+                                    <td>@item.LoginTime</td>
+                                    <td>@item.LogoutTime</td>
+                                    <td>@item.Area</td>
+                                    <td>@item.Controller</td>
+                                    <td>@item.AccessURL</td>
+                                    <td>@item.EventMessage</td>
+                                    <td>@item.ErrorMessage</td>
+                                    <td>@item.TerminalIP</td>
+                                    <td>@item.CreatedOn</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div aria-live="polite" role="status" id="example_info" class="dataTables_info">
+                    <div class="row">
+                        <div class="col-md-4">Showing @(Model.DBModelList.PageCount < Model.DBModelList.PageNumber ? 0 : Model.DBModelList.PageNumber) of @Model.DBModelList.PageCount entries</div>
+                        <div class="col-md-8 dataTables_paginate paging_simple_numbers" id="example_paginate">@Html.PagedListPager(Model.DBModelList, page => Url.Action(Model.BreadCrumbActionName, new { pageNumber = page, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey }))</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

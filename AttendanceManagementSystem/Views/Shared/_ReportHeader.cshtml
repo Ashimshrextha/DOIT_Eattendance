@@ -1,0 +1,29 @@
+﻿@model SystemViewModels.Shared.ReportHeaderViewModel
+<style type="text/css">
+    .fontsize {
+        font-family: 'Times New Roman';
+        font-size: 28px;
+        font-weight: bold;
+    }
+</style>
+@if (Model.CompanyName == string.Empty && Model.ParentCompanyName == string.Empty)
+{
+    <div class="fontsize" style="padding-bottom:15px">
+        <div style="text-align:center;">नेपाल सरकार</div>
+        <div style="text-align: center;">@Model.ReportName</div>
+    </div>
+}
+
+else
+{
+    <div class="fontsize" style="padding-bottom:15px">
+        <div style="text-align:center;">नेपाल सरकार</div>
+        <div style="text-align:center;">
+            @Model.ParentCompanyName
+        </div>
+        <div style="text-align:center;">
+            @Model.CompanyName<br>
+        </div>
+        <div style="text-align: center;">@Model.ReportName</div>
+    </div>
+}

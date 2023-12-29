@@ -1,0 +1,319 @@
+﻿@model SystemViewModels.Reports.MonthlyAttendanceReportViewModelList
+<style type="text/css">
+    table.r {
+        border-collapse: collapse;
+        width: 100%;
+        overflow-x: scroll;
+        display: block;
+    }
+
+    .r thead {
+        background-color: #EFEFEF;
+    }
+
+    .r thead,
+    .r tbody {
+        display: block;
+    }
+
+    .r tbody {
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: calc(50vh)-100px;
+    }
+
+    .r th {
+        text-transform: uppercase;
+    }
+
+    .r td,
+    .r th {
+        min-width: 70px;
+        height: 35px;
+        border: dashed 1px lightblue;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 70px;
+    }
+
+    .sat {
+        background-color: #E5B555;
+    }
+</style>
+<style>
+    table.r {
+        position: relative;
+        background-color: #f3f3f3;
+        overflow: hidden;
+        border-collapse: collapse;
+    }
+
+    .r thead {
+        position: relative;
+        display: block;
+        overflow: visible;
+    }
+
+        .r thead th {
+            height: 53px;
+            border: 1px solid #222;
+        }
+
+            .r thead th:nth-child(1) {
+                position: relative;
+                display: block;
+                background-color: #efeff3;
+            }
+
+    .r tbody {
+        position: relative;
+        display: block;
+        height: 40em;
+        overflow: scroll;
+    }
+
+        .r tbody td {
+            background-color: #efeff3;
+            border: 1px solid #222;
+        }
+
+        .r tbody tr td:nth-child(1) {
+            position: relative;
+            display: block;
+            background-color: #efeff3;
+        }
+</style>
+<style>
+    table.r {
+        position: relative;
+        background-color: #f3f3f3;
+        overflow: hidden;
+        border-collapse: collapse;
+    }
+
+    .r thead {
+        position: relative;
+        display: block;
+        overflow: visible;
+    }
+
+        .r thead th {
+            height: 53px;
+            border: 1px solid #222;
+        }
+
+            .r thead th:nth-child(2) {
+                position: absolute;
+                display: block;
+                background-color: #efeff3;
+            }
+
+    .r tbody {
+        position: relative;
+        display: block;
+        height: 750px;
+        overflow: scroll;
+    }
+
+        .r tbody td {
+            background-color: #efeff3;
+            border: 1px solid #222;
+        }
+
+        .r tbody tr td:nth-child(2) {
+            position: absolute;
+            display: block;
+            background-color: #efeff3;
+        }
+</style>
+<style>
+    table.r {
+        position: relative;
+        background-color: #f3f3f3;
+        overflow: hidden;
+        border-collapse: collapse;
+    }
+
+    .r thead {
+        position: relative;
+        display: block;
+        overflow: visible;
+    }
+
+        .r thead th {
+            height: 53px;
+            border: 1px solid #222;
+        }
+
+            .r thead th:nth-child(6) {
+                position: relative;
+                display: block;
+                background-color: #efeff3;
+            }
+
+    .r tbody {
+        position: relative;
+        display: block;
+        height: 40em;
+        overflow: scroll;
+    }
+
+        .r tbody td {
+            background-color: #efeff3;
+            border: 1px solid #222;
+        }
+
+        .r tbody tr td:nth-child(6) {
+            position: relative;
+            display: block;
+            background-color: #efeff3;
+        }
+</style>
+<script>
+    $(document).ready(function () {
+        $('.r tbody').scroll(function (e) {
+            $('.r thead').css("left", -$(".r tbody").scrollLeft());
+            $('.r thead th:nth-child(1)').css("left", $(".r tbody").scrollLeft());
+            $('.r tbody td:nth-child(1)').css("left", $(".r tbody").scrollLeft());
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('.r tbody').scroll(function (e) {
+            $('.r thead').css("left", -$(".r tbody").scrollLeft());
+            $('.r thead th:nth-child(2)').css("left", $(".r tbody").scrollLeft());
+            $('.r tbody td:nth-child(2)').css("left", $(".r tbody").scrollLeft());
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('.r tbody').scroll(function (e) {
+            $('.r thead').css("left", -$(".r tbody").scrollLeft());
+            $('.r thead th:nth-child(6)').css("left", $(".r tbody").scrollLeft());
+            $('.r tbody td:nth-child(6)').css("left", $(".r tbody").scrollLeft());
+        });
+    });
+</script>
+<div id="replacetarget">
+    <div id="content" class="content">
+        <div class="dataTables_wrapper">
+            <div id="mask-container">
+                <div id="mask"></div>
+                <div class="table-responsive">
+                    <table class="table table-bordered r" id="table1">
+                        <thead class="">
+                            <tr>
+                                <th class="text-center">क.संकेत नं.</th>
+                                <th style="min-width:209px; position:absolute;margin-left: 71px;margin-top: -54px;"> कर्मचारी नाम</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th style="position:relative;">पद</th>
+                                @foreach (var item in Model.DBReportHeader)
+                                {
+                                    <th class="text-center @(item.DOW=="Saturday"?"sat":"")">
+                                        @item.NumberInNepali <br />
+                                        @item.DOWShortNP
+                                    </th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody class="">
+                            @foreach (var item in Model.DBModel)
+                            {
+                            <tr>
+                                <td class="green text-center">
+                                    <i class="fa bigger-110">@item.PISNumber</i>
+                                </td>
+                                <td class="blue" style="min-width:209px;position:absolute;margin-left: 71px;margin-top: -35px;">
+                                    <i class="fa bigger-140">@item.EmployeeName</i>
+                                </td>
+                                <td class="blue text-center">
+                                    <i class="fa bigger-110"></i>
+                                </td>
+                                <td class="blue text-center">
+                                    <i class="fa bigger-110"></i>
+                                </td>
+                                <td class="blue text-center">
+                                    <i class="fa bigger-110"></i>
+                                </td>
+                                <td class="blue text-center" style="position:relative;">
+                                    <i class="fa bigger-110">@item.DesignationTitle</i>
+                                </td>
+                                <td style="background-color:@item.C1 ;" class="text-center">@item.A1 </td>
+                                <td style="background-color:@item.C2 ;" class="text-center">@item.A2 </td>
+                                <td style="background-color:@item.C3 ;" class="text-center">@item.A3 </td>
+                                <td style="background-color:@item.C4 ;" class="text-center">@item.A4 </td>
+                                <td style="background-color:@item.C5 ;" class="text-center">@item.A5 </td>
+                                <td style="background-color:@item.C6 ;" class="text-center">@item.A6 </td>
+                                <td style="background-color:@item.C7 ;" class="text-center">@item.A7 </td>
+                                <td style="background-color:@item.C8 ;" class="text-center">@item.A8 </td>
+                                <td style="background-color:@item.C9 ;" class="text-center">@item.A9 </td>
+                                <td style="background-color:@item.C10;" class="text-center">@item.A10</td>
+                                <td style="background-color:@item.C11;" class="text-center">@item.A11</td>
+                                <td style="background-color:@item.C12;" class="text-center">@item.A12</td>
+                                <td style="background-color:@item.C13;" class="text-center">@item.A13</td>
+                                <td style="background-color:@item.C14;" class="text-center">@item.A14</td>
+                                <td style="background-color:@item.C15;" class="text-center">@item.A15</td>
+                                <td style="background-color:@item.C16;" class="text-center">@item.A16</td>
+                                <td style="background-color:@item.C17;" class="text-center">@item.A17</td>
+                                <td style="background-color:@item.C18;" class="text-center">@item.A18</td>
+                                <td style="background-color:@item.C19;" class="text-center">@item.A19</td>
+                                <td style="background-color:@item.C20;" class="text-center">@item.A20</td>
+                                <td style="background-color:@item.C21;" class="text-center">@item.A21</td>
+                                <td style="background-color:@item.C22;" class="text-center">@item.A22</td>
+                                <td style="background-color:@item.C23;" class="text-center">@item.A23</td>
+                                <td style="background-color:@item.C24;" class="text-center">@item.A24</td>
+                                <td style="background-color:@item.C25;" class="text-center">@item.A25</td>
+                                <td style="background-color:@item.C26;" class="text-center">@item.A26</td>
+                                <td style="background-color:@item.C27;" class="text-center">@item.A27</td>
+                                <td style="background-color:@item.C28;" class="text-center">@item.A28</td>
+
+
+                                @if ((!string.IsNullOrEmpty(item.A29)) && string.IsNullOrEmpty(item.A30) && string.IsNullOrEmpty(item.A31) && string.IsNullOrEmpty(item.A32))
+                                {
+                                    <td style="background-color:@item.C29;" class="text-center">@item.A29</td>
+                                }
+                                @if (!string.IsNullOrEmpty(item.A30) && string.IsNullOrEmpty(item.A31) && string.IsNullOrEmpty(item.A32))
+                                {
+                                    <td style="background-color:@item.C29;" class="text-center">@item.A29</td>
+                                    <td style="background-color:@item.C30;" class="text-center">@item.A30</td>
+                                }
+                                @if (!string.IsNullOrEmpty(item.A31) && string.IsNullOrEmpty(item.A32))
+                                {
+                                    <td style="background-color:@item.C29;" class="text-center">@item.A29</td>
+                                    <td style="background-color:@item.C30;" class="text-center">@item.A30</td>
+                                    <td style="background-color:@item.C31;" class="text-center">@item.A31</td>
+                                }
+                                @if (!string.IsNullOrEmpty(item.A32))
+                                {
+                                    <td style="background-color:@item.C29;" class="text-center">@item.A29</td>
+                                    <td style="background-color:@item.C30;" class="text-center">@item.A30</td>
+                                    <td style="background-color:@item.C31;" class="text-center">@item.A31</td>
+                                    <td style="background-color:@item.C32;" class="text-center">@item.A32</td>
+                                }
+
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div aria-live="polite" role="status" id="example_info" class="dataTables_info">
+                    <div class="row">
+                        <div class="col-md-4">Showing @(Model.DBModel.PageCount < Model.PageNumber ? 0 : Model.DBModel.FirstItemOnPage) to @Model.DBModel.LastItemOnPage of @Model.DBModel.TotalItemCount entries in @Model.DBModel.PageCount Pages</div>
+                        <div class="col-md-8 dataTables_paginate paging_simple_numbers" id="example_paginate">@Html.PagedListPager(Model.DBModel, page => Url.Action("_ListMonthlyAttendanceAsync", new { idHRCompany = Model.IdHRCompany, idHRCompanyDivision = Model.IdDivision, idJobStatus = Model.IdJobStatus, idHREmployee = Model.IdHREmployee, year = Model.YearNp, month = Model.MonthNp, pageNumber = page, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey }))</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('table').on('scroll', function () {
+            $("#" + this.id + " > *").width($(this).width() + $(this).scrollLeft());
+        });
+    });
+</script>

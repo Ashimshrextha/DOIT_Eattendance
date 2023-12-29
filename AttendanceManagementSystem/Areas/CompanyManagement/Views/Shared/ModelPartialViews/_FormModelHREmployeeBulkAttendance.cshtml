@@ -1,0 +1,60 @@
+﻿@model SystemViewModels.CompanyManagement.HREmployeeBulkAttendanceViewModel
+<link href="~/Content/jasny-bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jasny-bootstrap.min.js"></script>
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+<link href="~/Content/nepali.datepicker.v2.2.min.css" rel="stylesheet" />
+<script src="~/Scripts/nepali.datepicker.v2.2.min.js"></script>
+<script src="~/Scripts/CustomScript.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.DataModel.IdHREmployee)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+@Html.HiddenFor(model => model.DataModel.IdHRCompany)
+@Html.HiddenFor(model => model.DataModel.IdHREmployee)
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-lg-12">
+        <div class="col-md-12 col-sm-12 col-lg-12">
+            <div class="form-group row">
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    @Html.LabelFor(model => model.DataModel.FileName, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.DataModel.FileName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.FileName)
+                </div>
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    @Html.LabelFor(model => model.DataModel.IdHREmployee, new { @class = "control-label col-md-12 col-sm-12 col-lg-12" })
+                    @Html.DropDownListFor(model => model.DataModel.IdHREmployee, new SelectList(Model.DDLRecommendEmployee, "Key", "Value"), "चयन गर्नुहोस्", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.IdHREmployee)
+                </div>
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    @Html.LabelFor(model => model.DataModel.Remarks, new { @class = "control-label col-md-12 col-sm-12 col-lg-12" })
+                    @Html.TextAreaFor(model => model.DataModel.Remarks, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.Remarks)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    @Html.LabelFor(model => model.DataModel.FolderName, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.FileToUpload, new { @type = "file", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataModel.FolderName)
+                </div>
+            </div>
+            @*<div class="form-group row">
+                <div class="col-md-4 col-sm-4 col-lg-4">
+                    @Html.LabelFor(model => model.DataModel.IdApprovedBy, new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.DataModel.IdApprovedBy, new List<SelectListItem>
+                   { new SelectListItem{Text="Request", Value="1"}}, "Please select")
+                    @Html.ValidationMessageFor(model => model.DataModel.IdApprovedBy)
+                </div>
+            </div>*@
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,84 @@
+﻿@model SystemViewModels.Home.HomeDashboardViewModelList
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="~/@Model.BreadCrumbBaseURL">@Model.BreadCrumbTitle</a>
+        </li>
+        <li class="active">@Model.BreadCrumbTitle</li>
+    </ul><!-- /.breadcrumb -->
+
+    <div class="nav-search" id="nav-search">
+        <form class="form-search">
+            <span class="input-icon">
+                @Html.DropDownListFor(model => model.PageSize, new SelectList(AttendanceManagementSystem.Services.CommonServices.PageNumber), new { @class = "nav-search-input", @style = "width:55px;" })
+            </span>
+            <span class="input-icon">
+                <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                <i class="ace-icon fa fa-search nav-search-icon"></i>
+            </span>
+        </form>
+    </div><!-- /.nav-search -->
+</div>
+<div class="page-content">
+    @{ Html.RenderPartial("_SettingContainer");}
+    <div class="row">
+        <div id="replacetarget_">
+            @{ Html.RenderPartial("_ListHRDevicesAsync");}
+        </div>
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#PageSize').change(function () {
+        $('table,#mask').addClass('loading');
+        $.ajax({
+            url: '/Home/_ListHRDevicesAsync',
+            type: 'GET',
+            data: { pageNumber: 1, pageSize: $(this).val(), orderingBy: '@Model.OrderingBy', orderingDirection: '@Model.OrderingDirection', searchKey: $('#nav-search-input').val() },
+            success: function (result) {
+                if (result == '"_Login_"') {
+                    window.location = "/Account/Login";
+                    return;
+                }
+                $('#content').html(result);
+                $('table,#mask').removeClass('loading');
+            }
+        });
+    });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+         var delay = (function () {
+            var timer = 0;
+            return function (callback, ms, that) {
+                clearTimeout(timer);
+                timer = setTimeout(callback.bind(that), ms);
+            };
+        })();
+
+        $('#nav-search-input').keyup(function () {
+            $('table,#mask').addClass('loading');
+            delay(function () {
+               $.ajax({
+                   url: '/Home/_ListHRDevicesAsync',
+                   type: 'GET',
+                   data: {pageNumber: 1, pageSize: $('#PageSize').val(), orderingBy: '@Model.OrderingBy', orderingDirection: '@Model.OrderingDirection', searchKey: $(this).val() },
+				    success: function (result) {
+				        if (result == '"_Login_"') {
+				            window.location = "/Account/Login";
+				            return;
+				        }
+				        $('#content').html(result);
+				        $('table,#mask').removeClass('loading');
+				    }
+				});
+            }, 1000, this);
+        });
+    });
+</script>

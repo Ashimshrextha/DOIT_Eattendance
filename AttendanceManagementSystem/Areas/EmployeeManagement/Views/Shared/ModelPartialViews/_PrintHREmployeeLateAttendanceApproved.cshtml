@@ -1,0 +1,71 @@
+﻿@model SystemViewModels.SystemSecurity.HREmployeeAttendanceHistoryViewModel
+
+<div id="printThis">
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th class="text-center">क. संकेत नं.</th>
+                <th>कर्मचारीको नाम</th>
+                <th class="ace-icon">पद</th>
+                <th class="ace-icon">शाखा/सेक्सन</th>
+                <th class="text-center">मिति</th>
+                <th class="text-center">आउने समय</th>
+                <th class="text-center">आएको समय</th>
+                <th class="text-center">ढिलो आएको</th>
+                <th class="text-center">ढिलो आएको कारण</th>
+                <th class="text-center">टिप्पणी</th>
+                <th class="ace-icon">अवस्था</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+            {
+            <tr>
+                <td class="text-center">
+                    <i class="ace-icon fa bigger-110 badge badge-yellow">@item.HREmployee1.IdEnroll</i>
+                </td>
+                <td class="blue">
+                    <i class="ace-icon fa bigger-130">@item.HREmployee1.HREmployeeNameNP</i>
+                </td>
+                <td class="ace-icon">
+                    <i class="ace-icon fa bigger-110 badge badge-yellow">@item.HREmployeeJobHistory.HRDesignation.HRDesignationTitle</i>
+                </td>
+                <td class="ace-icon">
+                    <i class="ace-icon fa bigger-110 badge badge-yellow">@item.HREmployeeJobHistory.HRCompanyDivision.HRCompanyDivisionName</i>
+                </td>
+                <td class="text-center">
+                    <i class="ace-icon fa bigger-110 badge badge-success">@item.AttendanceDate.DateNp()</i>
+                </td>
+                <td class="ace-icon">
+                    <i class="ace-icon fa bigger-110 badge badge-success">@item.LogInTime</i>
+                </td>
+                <td class="ace-icon">
+                    <i class="ace-icon fa bigger-110 badge badge-danger">@item.CheckInTime</i>
+                </td>
+                <td class="ace-icon">
+                    <i class="ace-icon fa bigger-110 badge badge-danger">@item.LateBy</i>
+                </td>
+                <td class="green">
+                    <i class="ace-icon fa bigger-110">@item.LateReason</i>
+                </td>
+                <td class="red">
+                    <i class="ace-icon fa bigger-110">@item.Remark</i>
+                </td>
+                <td class="ace-icon">
+                    <i class="ace-icon fa bigger-110 @(item.IsLateReasonApproved?" fa-thumbs-up green":"fa-thumbs-down red")"></i>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>
+

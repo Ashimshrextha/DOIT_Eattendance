@@ -1,0 +1,44 @@
+﻿@model SystemViewModels.Home.HomeDashboardViewModelList
+@using SystemStores.ENUMData;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/marquee.css" rel="stylesheet" />
+<link href="~/Content/app.css" rel="stylesheet" />
+
+<div class="page-content">
+    <div class="row">
+        <div id="replacetarget">
+            @{
+                switch (Model.idRoleType)
+                {
+                    case (int)EnumGlobal.RoleType.SuperUser:
+                        Html.RenderPartial("_SuperAdminDashboard");
+                        break;
+                    case (int)EnumGlobal.RoleType.Admin:
+                        Html.RenderPartial("_AdminDashboard");
+                        break;
+                    case (int)EnumGlobal.RoleType.RootUser:
+                        Html.RenderPartial("_AdminDashboard");
+                        break;
+                    case (int)EnumGlobal.RoleType.NormalUser:
+                        Html.RenderPartial("_NormalUserDashboard");
+                        break;
+                    case (int)EnumGlobal.RoleType.SectionAdmin:
+                        Html.RenderPartial("_SectionAdminDashboard");
+                        break;
+
+                    default:
+                        Html.RenderPartial("_NormalUserDashboard");
+                        break;
+                }
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

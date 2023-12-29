@@ -1,0 +1,57 @@
+﻿@model SystemViewModels.CompanyManagement.HRCompanyOfficeLogsViewModel
+@using PagedList.Mvc;
+
+<div id="printThis">
+    <div id="content" class="content">
+        <div class="dataTables_wrapper">
+            <div id="mask-container">
+                <div id="mask"></div>
+                <div class="table-responsive">
+                    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th class="ace-icon">आईडी</th>
+                                <th class="ace-icon">कार्यालय</th>
+                                <th class="ace-icon">कर्मचारीको नाम</th>
+                                <th class="ace-icon">मिति</th>
+                                <th class="ace-icon">टिप्पणी</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.DBModelList)
+                            {
+                                <tr>
+                                    <td class="ace-icon">@item.Id</td>
+                                    <td class="ace-icon">
+                                        <i class="fa bigger-110 badge badge-yellow">@(item.HRCompany?.HRCompanyCode?.HRCompanyCodeTitle)</i>
+                                    </td>
+                                    <td class="ace-icon">
+                                        <i class="ace-icon fa bigger-110">@(item.HREmployee?.HREmployeeNameNP)</i>
+                                    </td>
+                                    <td class="ace-icon">
+                                        <i class="ace-icon fa bigger-110">@item.OfficeDate.DateNp() @(item.OfficeTime)</i>
+                                    </td>
+                                    <td class="ace-icon">
+                                        <i class="ace-icon fa bigger-110">@item.Remarks</i>
+                                    </td>
+
+
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>

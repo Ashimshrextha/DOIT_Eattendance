@@ -1,0 +1,568 @@
+﻿@using AttendanceManagementSystem.Services;
+@using SystemStores.ENUMData;
+@{
+    var userdetail = CommonServices.UserSession();
+}
+
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog modal-dialog-fullwidth">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="header-section">
+        <div class="top-header">
+            <div class="left-section">
+                <div class="inner-left-section">
+                    <img class="header-img" src="~/images/menu-asset/emblem.png" height="100p">
+                    <p>
+                        एकिकृत हाजिरी ब्यवस्थापन प्रणाली
+                        <br>
+                        ई- हाजिरी
+                    </p>
+                </div>
+                <div class="vertical-line-left"></div>
+                <div class="companyName">
+                    @userdetail.HRCompanyName
+                </div>
+            </div>
+
+            <div class="right-section">
+              @if (userdetail.IdHREmployee > 0)
+              { <div class="header-icon" id="notification-icon" onclick="toggleDropDown()">
+                    <span class="notification-number" id="notification_number"></span>
+                    <img class="sidebar-icon image-white" src="~/images/menu-asset/icons/bell.png">
+                </div>
+                <div class="header-icon">
+                    <img class="sidebar-icon" src="~/images/menu-asset/icons/user.png">
+                </div>
+              }
+                <div class="name-lang">
+                    <span class="name">
+                        @userdetail.Name
+                    </span>
+
+                    <div class="vertical-line-right">
+                        <small class="name">@Enum.GetName(typeof(EnumGlobal.RoleType), userdetail.IdRoleType)</small>
+                    </div>
+
+                    <span>
+                        <a href="~/Account/Logout" class="p-btn-logout">
+                            <i class="ace-icon fa fa-power-off text-danger"></i>
+                        </a>
+                    </span>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+    <div class="notification-section hide">
+        <div tabindex="-1"
+             role="menu"
+             aria-hidden="false"
+             class="shadow dropdown-menu dropdown-menu-right show"
+             style="
+            position: fixed;
+            will-change: transform;
+            top: 0px;
+            transform: translate3d(-150px, 51px, 0px);
+            "
+             x-placement="bottom-end">
+            <div id="loading" class="loader" style="display: none;"></div>
+            <div class="notification-wrapper" id="noticeboard">
+                <div class="align-vertical justify-content-between p-3 bg-gray-96">
+                    <h6 class="text-navy-40">सुचनाहरु</h6>
+                </div>
+                <div class="divider"></div>
+
+
+                <div class="align-vertical justify-content-between" style="background:powderblue">
+                    <h6 class="text-gray-16 p-3" style="font-weight:bold">बिदा सिफारिस <span id="leaveRecomendNo"></span></h6>
+                </div>
+                <ul class="list notification-list scrollable" id="notificationList1" style="min-height: 0px">
+                </ul>
+
+                <div class="divider"></div>
+
+                <div class="align-vertical justify-content-between" style="background:powderblue">
+                    <h6 class="text-gray-16 p-3" style="font-weight:bold">बिदा स्वीकृत <span id="leaveApproveNo"></span></h6>
+                </div>
+                <ul class="list notification-list scrollable" id="notificationList2" style="min-height: 0px">
+                </ul>
+
+                <div class="divider"></div>
+
+                <div class="align-vertical justify-content-between" style="background:powderblue">
+                    <h6 class="text-gray-16 p-3 " style="font-weight:bold">काज स्वीकृत <span id="kaajApproveNo"></span> </h6>
+                </div>
+                <ul class="list notification-list scrollable" id="notificationList3" style="min-height: 0px">
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        $.ajax({
+            url: "/Home/RequestToLeaveRecomend",
+            type: "GET",
+            cache: true,
+            beforeSend: function () {
+                $('#loading').show();
+                $('#noticeboard').hide();
+                $('#notification_number').html(ConvEnglishToNepaliNum(0));
+            },
+            success: function (response) {
+
+                requestToLeaveRecomendList = response.RequestToLeaveRecomendList;
+                requestToLeaveApproveList = response.RequestToLeaveApproveList;
+                requestToKaajApproveList = response.RequestToKaajApproveList;
+                let Total = requestToLeaveRecomendList.length + requestToLeaveApproveList.length + requestToKaajApproveList.length
+                
+                $('#notification_number').html(ConvEnglishToNepaliNum(Total));
+
+                $('#leaveRecomendNo').html(ConvEnglishToNepaliNum(requestToLeaveRecomendList.length));
+                $('#leaveApproveNo').html(ConvEnglishToNepaliNum(requestToLeaveApproveList.length));
+                $('#kaajApproveNo').html(ConvEnglishToNepaliNum(requestToKaajApproveList.length));
+
+            },
+            error: function () {
+                $('#loading').hide();
+            }
+        });
+    });
+</script>
+<script>
+
+    function toggleDropDown() {
+        let notificationElement = ''
+        let notificationElement1 = ''
+        let notificationElement2 = ''
+
+
+        const notificationSection = document.getElementsByClassName('notification-section')
+        notificationSection[0].classList.toggle("hide");
+
+        const notificationList = document.getElementById('notificationList1')
+        if (requestToLeaveRecomendList.length == 0) {
+            notificationList.style.display = 'none';
+
+        }
+
+        const notificationList2 = document.getElementById('notificationList2')
+        if (requestToLeaveApproveList.length == 0) {
+            notificationList2.style.display = 'none';
+        }
+
+        const notificationList3 = document.getElementById('notificationList3')
+        if (requestToKaajApproveList.length == 0) {
+            notificationList3.style.display = 'none';
+        }
+
+        notificationList.innerHTML = ''
+        notificationList2.innerHTML = ''
+        notificationList3.innerHTML = ''
+
+        requestToLeaveRecomendList.forEach(notificationRes => {
+            notificationElement += `<li style="background-color: white; cursor: default"><a class="notification-link" href="/${(notificationRes.LinkURl)}">
+        <div class="align-start">
+          <div class="icon">
+            <img src="/images/menu-asset/emblem.png" alt="master" />
+          </div>
+          <div class="ml-3">
+            <h6 class="text-gray-16">
+             ${notificationRes.Remarks}
+            </h6>
+            <ul class="list-inline list-dots">
+              <div class="d-flex">
+                <li
+                  class="p-0 bg-transparent border-bottom-0"
+                  style="cursor: default"
+                >
+                  <p class="text-gray-48 mt-1">${notificationRes.LeaveTitleNP}</p>
+                </li>
+                <li class="ml-2 py-0 bg-transparent" style="cursor: default">
+                  <p class="text-gray-48 mt-1">${ConvEnglishToNepaliNum1(notificationRes.LeaveValidFromNP)}  देखि ${ConvEnglishToNepaliNum1(notificationRes.LeaveValidToNP)}</p>
+                </li>
+              </div>
+            </ul>
+          </div>
+        </div>
+        </a>
+      </li>`
+        })
+        requestToLeaveApproveList.forEach(notificationRes1 => {
+            notificationElement1 += `<li style="background-color: white; cursor: default"><a class="notification-link" href="/${(notificationRes1.LinkURl)}">
+      <div class="align-start">
+        <div class="icon">
+          <img src="/images/menu-asset/emblem.png" alt="master" />
+        </div>
+        <div class="ml-3">
+          <h6 class="text-gray-16">
+           ${notificationRes1.Remarks}
+          </h6>
+          <ul class="list-inline list-dots">
+            <div class="d-flex">
+              <li
+                class="p-0 bg-transparent border-bottom-0"
+                style="cursor: default"
+              >
+                <p class="text-gray-48 mt-1">${notificationRes1.LeaveTitleNP}</p>
+              </li>
+              <li class="ml-2 py-0 bg-transparent" style="cursor: default">
+                  <p class="text-gray-48 mt-1">${ConvEnglishToNepaliNum1(notificationRes1.LeaveValidFromNP)}  देखि ${ConvEnglishToNepaliNum1(notificationRes1.LeaveValidToNP)}</p>
+              </li>
+            </div>
+          </ul>
+        </div>
+      </div>
+      </a>
+    </li>`
+        })
+        requestToKaajApproveList.forEach(notificationRes2 => {
+            notificationElement2 += `<li style="background-color: white; cursor: default">><a class="notification-link" href="/${(notificationRes2.LinkURl)}">
+           <div class="align-start">
+             <div class="icon">
+               <img src="/images/menu-asset/emblem.png" alt="master" />
+             </div>
+             <div class="ml-3">
+               <h6 class="text-gray-16">
+                ${notificationRes2.Remarks}
+               </h6>
+               <ul class="list-inline list-dots">
+                 <div class="d-flex">
+                   <li
+                     class="p-0 bg-transparent border-bottom-0"
+                     style="cursor: default"
+                   >
+                     <p class="text-gray-48 mt-1">${notificationRes2.LeaveTitleNP}</p>
+                   </li>
+                   <li class="ml-2 py-0 bg-transparent" style="cursor: default">
+                  <p class="text-gray-48 mt-1">${ConvEnglishToNepaliNum1(notificationRes2.LeaveValidFromNP)}  देखि ${ConvEnglishToNepaliNum1(notificationRes2.LeaveValidToNP)}</p>
+                   </li>
+                 </div>
+               </ul>
+             </div>
+           </div>
+           </a>
+         </li>`
+        })
+
+
+
+
+
+
+
+        notificationList.innerHTML = notificationElement
+        notificationList2.innerHTML = notificationElement1
+        notificationList3.innerHTML = notificationElement2
+        $('#loading').hide();
+        $('#noticeboard').show();
+    }
+</script>
+
+
+<style>
+    @@import url(https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap);
+
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        z-index: 1000;
+        display: none;
+        min-width: 15rem;
+        padding: 0;
+        margin: 0;
+        font-size: 1rem;
+        color: #343a40;
+        text-align: left;
+        list-style: none;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px;
+        border-radius: .25rem;
+        box-shadow: 0 4px 8px #d2d2d6;
+    }
+
+    .notification-wrapper {
+        width: 42rem;
+        cursor: default
+    }
+
+    .align-vertical,
+    .avatar-block,
+    .toaster-icon {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center
+    }
+
+    .justify-content-between {
+        -webkit-justify-content: space-between !important;
+        justify-content: space-between !important
+    }
+
+    .bg-gray-96 {
+        background-color: #f5f5f5 !important
+    }
+
+    .p-3 {
+        padding: 1rem !important
+    }
+
+    .text-navy-40 {
+        color: #2159ab !important
+    }
+
+    .des {
+        font-size: .875rem;
+        margin: 0
+    }
+
+    .scrollable {
+        overflow: auto;
+        transition: all .3s ease-out;
+        height: 180px;
+        min-height: 50px
+    }
+
+        .scrollable::-webkit-scrollbar {
+            width: 6px;
+            height: 6px
+        }
+
+        .scrollable::-webkit-scrollbar-track {
+            background: #d2d2d6;
+            border-radius: 4px
+        }
+
+        .scrollable::-webkit-scrollbar-thumb {
+            background: rgba(112, 169, 255, .8);
+            border-radius: 4px
+        }
+
+            .scrollable::-webkit-scrollbar-thumb:hover {
+                background: #70a9ff;
+                cursor: pointer
+            }
+
+    .list {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    .align-baseline, .align-start {
+        display: -webkit-flex;
+        display: flex;
+    }
+
+    .notification-list li .icon {
+        height: 2.5rem;
+        width: 2.5rem;
+        border-radius: 50%;
+        background-color: #ebebeb;
+        -webkit-flex-shrink: 0;
+        flex-shrink: 0;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+    }
+
+    img, svg {
+        vertical-align: middle;
+        width: 40px;
+    }
+
+    .ml-3 {
+        margin-left: 1rem !important;
+    }
+
+    .font-semibold {
+        font-weight: 600;
+    }
+
+    .text-gray-16 {
+        color: #292929 !important;
+        font-size: medium
+    }
+
+    .list-dots, .list-dots_sm {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+
+    .list-circle, .list-inline {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+
+    .list-circle, .list-inline, .list-unstyled {
+        padding-left: 0;
+        list-style: none;
+    }
+
+    .divider {
+        border-top: 1px solid #d2d2d6;
+    }
+
+    .mt-1 {
+        margin-top: 0.25rem !important;
+    }
+
+    .text-gray-48 {
+        color: #7a7a7a !important;
+    }
+
+    .notification-list li {
+        padding: 1rem;
+        background-color: #fff;
+        cursor: pointer;
+    }
+
+    .list-dots_sm li, .list-dots li {
+        border-left: 0;
+        position: relative;
+        font-size: 1rem;
+        color: #2159ab;
+        font-weight: 600;
+    }
+
+    .bg-transparent {
+        background-color: transparent !important;
+    }
+
+    .py-0 {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    .ml-2 {
+        margin-left: 0.5rem !important;
+    }
+
+    .text-navy-40 {
+        color: #2159ab !important;
+        font-size: medium;
+    }
+
+    .d-flex {
+        display: -webkit-flex !important;
+        display: flex !important;
+    }
+
+    .list-dots, .list-dots_sm {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+
+    .list-circle, .list-inline {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+
+    .list-circle, .list-inline, .list-unstyled {
+        padding-left: 0;
+        list-style: none;
+    }
+
+    ul ul {
+        margin-bottom: 0;
+    }
+
+    dl, ol, ul {
+        margin-top: 0;
+        margin-bottom: 1rem;
+    }
+
+    ol, ul {
+        padding-left: 2rem;
+    }
+
+    h6 {
+        font-size: 1rem;
+        margin: 0;
+    }
+
+    .notification-list li {
+        padding: 1rem;
+        background-color: #fff;
+        cursor: pointer;
+    }
+
+    h6 {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        line-height: 1.2;
+    }
+
+    .p-0 {
+        padding: 0 !important;
+    }
+
+    .hide {
+        display: none;
+    }
+</style>
+
+<style>
+
+
+    .loader {
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid #3498db;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 2s linear infinite;
+        margin: 20px auto;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .header-icon {
+        position: relative;
+        display: inline-block; 
+    }
+
+    .notification-number {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: #ed9300b8;
+        color: white;
+        border-radius: 47%;
+        padding: 4px;
+        font-size: 12px;
+    }
+</style>

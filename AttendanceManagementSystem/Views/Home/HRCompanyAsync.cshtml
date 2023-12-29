@@ -1,0 +1,31 @@
+﻿@model SystemViewModels.Home.HomeDashboardViewModelList
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="~/@Model.BreadCrumbBaseURL">@Model.BreadCrumbController</a>
+        </li>
+        <li class="active">@Model.BreadCrumbTitle</li>
+    </ul><!-- /.breadcrumb -->
+
+    <div class="nav-search" id="nav-search">
+        <form class="form-search">
+            <span class="input-icon">
+                <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                <i class="ace-icon fa fa-search nav-search-icon"></i>
+            </span>
+        </form>
+    </div><!-- /.nav-search -->
+</div>
+<div class="page-content">
+    @{ Html.RenderPartial("_SettingContainer");}
+    <div class="row">
+        <div id="replacetarget_">
+            @{ Html.RenderPartial("_ListHRCompanyAsync");}
+        </div>
+    </div><!-- /.row -->
+</div><!-- /.page-content -->

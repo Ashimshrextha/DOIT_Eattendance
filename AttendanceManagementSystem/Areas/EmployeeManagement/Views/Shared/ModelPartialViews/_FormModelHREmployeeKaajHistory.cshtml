@@ -1,0 +1,221 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeKaajHistoryViewModel
+<link href="~/Content/jasny-bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jasny-bootstrap.min.js"></script>
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+<script src="~/Scripts/bootstrap-multiselect.min.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.DataModel.FiscalYear)
+@Html.HiddenFor(model => model.DataModel.IdHREmployee)
+@Html.HiddenFor(model => model.DataModel.Document)
+@Html.HiddenFor(model => model.DataModel.IdHrCompany)
+@Html.HiddenFor(model => model.DataModel.IdJob)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@{
+    var appoinmentDateNp = @Model.EmployeeDetail.AppointmentDateNP;
+    var appoinmentDate = @Model.EmployeeDetail.AppointmentDate;
+}
+<div>
+    <input class="form-control hidden" id="Appoinment" name="Appoinment" type="text" value=@appoinmentDateNp />
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title row">
+                    <div style="width:70px;" class="pull-left">
+                        <img src="@Model.EmployeeDetail.ImageName" alt="@Model.EmployeeDetail.HREmployeeNameNP" height="70" width="70" style="border-radius:100%;" />
+                    </div>
+                    <div class="text-center">
+                        <strong> काज वा प्रशिक्षण को माग पत्र</strong>
+                        <div class="space-6"></div>
+                        <strong> काज वा प्रशिक्षण माग गर्ने कर्मचारीले प्रयोग गर्ने</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>@Html.Label("कर्मचारीको नाम", new { @class = "control-label" })</th>
+                                <th>@Html.Label("पद", new { @class = "control-label" })</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>@Html.TextBoxFor(model => model.EmployeeDetail.HREmployeeNameNP, new { @class = "form-control", @readonly = "readonly" })</th>
+                                <th> @Html.TextBoxFor(model => model.EmployeeDetail.HRDesignationTitle, new { @class = "form-control", @readonly = "readonly" })</th>
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <th>@Html.Label("शाखा/सेक्सन", new { @class = "control-label" })</th>
+                                <th>@Html.Label("कर्मचारी संकेत न.", new { @class = "control-label" })</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>@Html.TextBoxFor(model => model.EmployeeDetail.HRCompanyDivisionName, new { @class = "form-control", @readonly = "readonly" })</th>
+                                <th>@Html.TextBoxFor(model => model.EmployeeDetail.PISNumber, new { @class = "form-control", @readonly = "readonly" })</th>
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <th>@Html.Label("लिङ्ग", new { @class = "control-label" })</th>
+                                <th>@Html.Label("मोबाइल", new { @class = "control-label" })</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>@Html.TextBoxFor(model => model.EmployeeDetail.HREmployeeSexTitle, new { @class = "form-control", @readonly = "readonly" })</th>
+                                <th>@Html.TextBoxFor(model => model.EmployeeDetail.MobileNumber, new { @class = "form-control", @readonly = "readonly" })</th>
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <th>@Html.Label("कार्यालय", new { @class = "control-label" })</th>
+                                <th>@Html.Label("जागिर अवस्था", new { @class = "control-label" })</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>@Html.TextBoxFor(model => model.EmployeeDetail.CompanyNameNP, new { @class = "form-control", @readonly = "readonly" })</th>
+                                <th>@Html.TextBoxFor(model => model.EmployeeDetail.JobStatus, new { @class = "form-control", @readonly = "readonly" })</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5 col-sm-12 col-xs-12 col-lg-5">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <span class="panel-title text-center">काज वा प्रशिक्षण को माग फारम</span>
+            </div>
+            <div class="panel-body">
+                <div class="row form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-lg-6">
+                        @Html.LabelFor(model => model.DataModel.IdKaajType, new { @class = "control-label" })
+                        @Html.DropDownListFor(model => model.DataModel.IdKaajType, new SelectList(Model.DDLKaajType, "Key", "Value"), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.IdKaajType)
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-lg-6">
+                        @Html.LabelFor(model => model.DataModel.KaajYearNP, new { @class = "control-label" })
+                        @Html.DropDownListFor(model => model.DataModel.KaajYearNP, new SelectList(Model.DDLYearNp, "Key", "Value"), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.KaajYearNP)
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-lg-6">
+                        @Html.LabelFor(model => model.DataModel.KaajTitle, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.DataModel.KaajTitle, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.KaajTitle)
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-lg-6">
+                        @Html.LabelFor(model => model.DataModel.KaajShortName, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.DataModel.KaajShortName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.KaajShortName)
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-lg-6">
+                        @Html.LabelFor(model => model.DataModel.KaajExpenses, new { @class = "control-label col-md-12 col-sm-12 col-lg-12 col-xs-12" })
+                        @Html.CheckBoxFor(model => model.DataModel.KaajExpenses, new { @class = "form-control BSswitch" })
+                        @Html.ValidationMessageFor(model => model.DataModel.KaajExpenses)
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-lg-6">
+                        @Html.LabelFor(model => model.DataModel.IsNational, new { @class = "control-label col-md-12 col-sm-12 col-lg-12 col-xs-12" })
+                        @Html.CheckBoxFor(model => model.DataModel.IsNational, new { @class = "form-control switchYesNo" })
+                        @Html.ValidationMessageFor(model => model.DataModel.IsNational)
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-lg-6">
+                        @Html.LabelFor(model => model.DataModel.KaajFromNP, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.DataModel.KaajFromNP, new { @class = "form-control", @id = "DateFromNP", @readonly = "readonly", @style = "cursor:pointer" })
+                        @Html.ValidationMessageFor(model => model.DataModel.KaajFromNP)
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-lg-6">
+                        @Html.LabelFor(model => model.DataModel.KaajToNP, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.DataModel.KaajToNP, new { @class = "form-control", @id = "DateToNP", @readonly = "readonly", @style = "cursor:pointer" })
+                        @Html.ValidationMessageFor(model => model.DataModel.KaajToNP)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-6">
+                        @Html.LabelFor(model => model.DataModel.VehicleUsedInKaaj, new { @class = "control-label dropdown-toggle col-md-12 col-sm-12 col-lg-12 col-xs-12" })
+                        @Html.ListBoxFor(model => Model.ddlKajVehicalSelected, new SelectList(Model.DDLVehicleType, "Key", "Value"), new { @class = "form-control", multiple = "multiple" })
+                        @Html.ValidationMessageFor(model => model.DataModel.VehicleUsedInKaaj)
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-6">
+                        @Html.LabelFor(model => model.DataModel.IdCountry, new { @class = "control-label" })
+                        @Html.DropDownListFor(model => Model.DataModel.IdCountry, new SelectList(Model.DDLCountry, "Key", "Value"), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.IdCountry)
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                        @Html.LabelFor(model => model.DataModel.KaajPurpose, new { @class = "control-label" })
+                        @Html.TextAreaFor(model => model.DataModel.KaajPurpose, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.KaajPurpose)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-8 col-sm-10 col-lg-9 col-xs-12">
+                        @Html.LabelFor(model => model.DataModel.KaajLocation, new { @class = "control-label" })
+                        @Html.TextAreaFor(model => model.DataModel.KaajLocation, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.KaajLocation)
+                    </div>
+                    <div class="col-md-4 col-sm-2 col-xs-12 col-lg-3">
+                        @Html.LabelFor(model => model.DataModel.Document, new { @class = "control-label" })
+                        <div class="form-inline" data-toggle="tooltip" data-placement="top" title="Please Upload Only JPG & PNG File & File Should be less than 1 mb in size">
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 110px; height: 110px;">
+                                    <img src="~/images/leaveformupload.png" />
+                                </div>
+                                <div>
+                                    <span class="hidden">
+                                        <input type="file" name="FormDocument">
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row form-group">
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+                        @Html.LabelFor(model => model.DataModel.IdApprovedBy, new { @class = "control-label" })
+                        @Html.DropDownListFor(model => model.DataModel.IdApprovedBy, new SelectList(Model.DDLApprovalEmployee, "Key", "Value"), "चयन गर्नुहोस्", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DataModel.IdApprovedBy)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7 col-sm-12 col-lg-7 col-xs-12">
+        <div class="panel panel-success">
+            <div class="panel-heading"><h4 class="panel-title">काज वा प्रशिक्षण को सारांश</h4></div>
+            <div class="panel-body">
+                @{ Html.RenderPartial("_GetHREmployeeKaajSummaryAsync");}
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/CustomScripts/HREmployeeKaajHistory.js"></script>
+@*<script type="text/javascript">
+    $(document).ready(function () {
+        $("#DataModel_IdKaajType").change(function () {
+            $("#DataModel_KaajTitle").val($("#DataModel_IdKaajType option:selected").text());
+            $("#DataModel_KaajShortName").val($("#DataModel_IdKaajType option:selected").text());
+       });
+   });
+</script>*@

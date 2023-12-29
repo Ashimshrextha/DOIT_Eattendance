@@ -1,0 +1,50 @@
+﻿@model SystemViewModels.DeviceManagement.HREmployeeBiometricTemplateViewModelList
+@using PagedList.Mvc;
+
+<div id="replacetarget">
+    <div id="content" class="content">
+        <div class="dataTables_wrapper">
+            <div id="mask-container">
+                <div id="mask"></div>
+                <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+                    <thead>
+                        <tr>
+                            <th>आईडी</th>
+                            <th>कर्मचारी नं.</th>
+                            <th>कर्मचारी नाम</th>
+                            <th>टेम्प्लेटहरूको प्रकार</th>
+                            <th>टेम्प्लेटहरूको इन्डेक्स</th>
+                            <th>टेम्प्लेटहरूको तथ्यांक  लेन्थ</th>
+                            <th>टेम्प्लेटह डाटा स्ट्रिंग</th>
+                            <th>टेम्प्लेटह डाटा बाइट</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.DBModelList)
+                        {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.IdEnroll</td>
+                            <td>@item.HREmployee.HREmployeeName</td>
+                            <td>@item.BiometricTemplateType.BiometricTemplateTypeTitle</td>
+                            <td>@item.TemplateIndex</td>
+                            <td>@item.TemplateDataLength</td>
+                            <td>@item.TemplateDataStr</td>
+                            <td>@item.TemplateDataBin</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+                <div aria-live="polite" role="status" id="example_info" class="dataTables_info">
+                    <div class="row">
+                        <div class="col-md-4">Showing @(Model.DBModelList.PageCount < Model.DBModelList.PageNumber ? 0 : Model.DBModelList.PageNumber) of @Model.DBModelList.PageCount entries</div>
+                        <div class="col-md-8 dataTables_paginate paging_simple_numbers" id="example_paginate">@Html.PagedListPager(Model.DBModelList, page => Url.Action("_ListHREmployeeBiometricTemplatesAsync", new { pageNumber = page, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey }))</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,133 @@
+﻿@model SystemViewModels.CompanyManagement.HRCompanyViewModelList
+<div class="table-responsive">
+    <h3 class="page-header">
+        <i class="fa bigger-110">@Model.DBModel.HRCompanyType.CompanyType</i>
+    </h3>
+    <table class="table table-border table-striped table-hover table-responsive">
+        <colgroup>
+            <col style="width:15%" />
+            <col style="width:1%" />
+            <col style="width:34%" />
+            <col style="width:15%" />
+            <col style="width:1%" />
+            <col style="width:34%" />
+        </colgroup>
+        <tbody>
+            <tr>
+                <th class="text-right">नाम</th>
+                <th>:</th>
+                <td class="blue">
+                    <i class="ace-icon fa bigger-120">@Model.DBModel.CompanyName</i>
+                </td>
+                <th class="text-right">देवनागरी</th>
+                <th>:</th>
+                <td class="green">
+                    <i class="ace-icon fa bigger-120">@Model.DBModel.CompanyNameNP</i>
+                </td>
+            </tr>
+            <tr>
+                <th class="text-right">कोड</th>
+                <th>:</th>
+                <td>@Model.DBModel.HRCompanyCode.HRCompanyCodeTitle</td>
+                <th class="text-right">संक्षिप्त</th>
+                <th>:</th>
+                <td>@Model.DBModel.CompanyShortName</td>
+            </tr>
+            <tr>
+                <th class="text-right">ठेगाना</th>
+                <th>:</th>
+                <td>@Model.DBModel.Address</td>
+                <th class="text-right">फोन नं.</th>
+                <th>:</th>
+                <td>@Model.DBModel.PhoneNumber</td>
+            </tr>
+            <tr>
+                <th class="text-right">फैक्स</th>
+                <th>:</th>
+                <td>@Model.DBModel.FaxNumber</td>
+                <th class="text-right">जम्मा कर्मचारी</th>
+                <th>:</th>
+                <td>
+                    <i class="ace-icon fa bigger-120 badge badge-info">@Model.DBModel.HREmployees.Count</i>
+                </td>
+            </tr>
+            <tr>
+                <th class="text-right">जम्मा शाखा/सेक्सन नं.</th>
+                <th>:</th>
+                <th><i class="fa bigger-120 badge badge-info">@Model.DBModel.HRCompanyDivisions.Count</i></th>
+                <th class="text-right">जम्मा पद नं.</th>
+                <th>:</th>
+                <th><i class="fa bigger-120 badge badge-info">@Model.DBModel.HRDesignations.Count</i></th>
+            </tr>
+            <tr>
+                <th class="text-right">जम्मा बिदा प्रकार नं.</th>
+                <th>:</th>
+                <th><i class="fa bigger-120 badge badge-info">@Model.DBModel.HRCompanyLeaveTypes.Count</i></th>
+                <th class="text-right">जम्मा हाजिरी उपकरण नं.</th>
+                <th>:</th>
+                <th><i class="fa bigger-120 badge badge-info">@Model.DBModel.HRDevices.Count</i></th>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    <h4 class="page-header">
+        <i class="fa bigger-110">उप कार्यालय</i>
+    </h4>
+    <div id="replacetarget">
+        <div id="content" class="content">
+            <div class="dataTables_wrapper">
+                <div id="mask-container">
+                    <div id="mask"></div>
+                    <div class="table-responsive">
+                        <table class="table table-border table-striped table-hover table-responsive">
+                            <thead>
+                                <tr>
+                                    <th class="ace-icon">आईडी</th>
+                                    <th class="ace-icon">प्रकार</th>
+                                    <th class="ace-icon">कोड</th>
+                                    <th>कार्यालय</th>
+                                    <th>देवनागरी</th>
+                                    <th class="ace-icon">जम्मा कर्मचारी</th>
+                                    <th class="ace-icon">शाखा/सेक्सन नं.</th>
+                                    <th class="ace-icon">हाजिरी उपकरण नं.</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.DBModelList)
+                                {
+                                <tr>
+                                    <td class="ace-icon">@item.Id</td>
+                                    <td class="ace-icon">
+                                        <i class="fa badge badge-info">@item.HRCompanyType.CompanyType</i>
+                                    </td>
+                                    <td class="ace-icon">@item.HRCompanyCode.HRCompanyCodeTitle</td>
+                                    <td class="blue">
+                                        <i class="fa bigger-120">@item.CompanyName</i>
+                                    </td>
+                                    <td class="green">
+                                        <i class="ace-icon fa bigger-120">@item.CompanyNameNP</i>
+                                    </td>
+                                    <td class="ace-icon">
+                                        <i class="fa badge badge-info">@item.HREmployees.Count</i>
+                                    </td>
+                                    <td class="ace-icon">
+                                        <i class="fa badge badge-info">@item.HRCompanyDivisions.Count</i>
+                                    </td>
+                                    <td class="ace-icon">
+                                        <i class="fa badge badge-info">@item.HRDevices.Count</i>
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div aria-live="polite" role="status" id="example_info" class="dataTables_info">
+                        <div class="row">
+                            <div class="col-md-4">Showing @(Model.DBModelList.PageCount < Model.DBModelList.PageNumber ? 0 : Model.DBModelList.FirstItemOnPage) to @Model.DBModelList.LastItemOnPage of @Model.DBModelList.TotalItemCount entries in @Model.DBModelList.PageCount Pages</div>
+                            <div class="col-md-8 dataTables_paginate paging_simple_numbers" id="example_paginate">@Html.PagedListPager(Model.DBModelList, page => Url.Action("_ListChildHRCompany", new { idHRCompany = Model.IdHRCompany, pageNumber = page, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey }))</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

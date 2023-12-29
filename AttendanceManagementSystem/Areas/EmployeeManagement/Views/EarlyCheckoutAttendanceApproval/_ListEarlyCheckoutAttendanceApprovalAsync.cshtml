@@ -1,0 +1,89 @@
+﻿@model SystemViewModels.Reports.EarlyCheckoutAttendanceReportViewModelList
+@using PagedList.Mvc;
+@using AttendanceManagementSystem.Services;
+@{ long? idHREmployee = CommonServices.UserSession().IdHREmployee;}
+<div id="replacetarget">
+    <div id="content" class="content">
+        <div class="dataTables_wrapper">
+            <div id="mask-container">
+                <div id="mask"></div>
+                <div class="table-responsive">
+                    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th class="text-center">क.संकेत नं.</th>
+                                <th>कर्मचारी नाम</th>
+                                <th class="ace-icon">पद</th>
+                                <th class="text-center">मिति</th>
+                                <th class="text-center">आउने समय</th>
+                                <th class="text-center">जाने समय</th>
+                                <th class="text-center">आएको समय</th>
+                                <th class="text-center">गएको समय</th>
+                                <th class="text-center">छिटो गएको</th>
+                                <th class="text-center">कारण</th>
+                                <th class="text-center">अवस्था</th>
+                                <th class="ace-icon">कार्य</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.DBModelPageList)
+                            {
+                                <tr>
+                                    <td class="text-center">
+                                        <i class="ace-icon fa bigger-110 badge badge-yellow">@item.IdEnroll</i>
+                                    </td>
+                                    <td class="blue">
+                                        <i class="ace-icon fa bigger-130">@item.EmployeeName</i>
+                                    </td>
+                                    <td class="ace-icon">
+                                        <i class="ace-icon fa bigger-110 badge badge-yellow">@item.Designation</i>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="ace-icon fa bigger-110 badge badge-success">@item.AttendanceDate.DateNp()</i>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="ace-icon fa bigger-110 badge badge-success">@item.LogInTime</i>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="ace-icon fa bigger-110 badge badge-success">@item.LogOutTime</i>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="ace-icon fa bigger-110 badge badge-info">@item.CheckInTime</i>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="ace-icon fa bigger-110 badge badge-info">@item.CheckOutTime</i>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="ace-icon fa bigger-110 badge badge-danger">@item.CheckOutEarly</i>
+                                    </td>
+                                    <td class="green">
+                                        <i class="ace-icon fa bigger-110">@item.CheckOutEarlyReason</i>
+                                    </td>
+                                    <td class="ace-icon">
+                                        <i class="ace-icon fa bigger-110 @(item.IsCheckOutEarlyReasonApproved?"fa-thumbs-o-up green":"fa-thumbs-o-down red")"></i>
+                                    </td>
+                                    <td class="ace-icon action-buttons">
+                                        @if (idHREmployee == item.IdHREmployee && item.IsCheckOutEarlyReasonApproved == false)
+                                        {
+                                            <a href="@Url.Action("_UpdateEarlyCheckoutAttendanceApprovalAsync",new { idHRCompany=item.IdHRCompany,idHRCompanyDivision =item.IdHRCompanyDivision,idHREmployee = item.IdHREmployee,date = item.AttendanceDate,pageNumber=Model.PageNumber,pageSize=Model.PageSize,orderingBy=Model.OrderingBy,orderingDirection=Model.OrderingDirection,searchKey=Model.SearchKey})" data-ajax-model="">
+                                                <i class="ace-icon fa fa-pencil green bigger-150" aria-hidden="true" title="Edit"></i>
+                                            </a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div aria-live="polite" role="status" id="example_info" class="dataTables_info">
+                    <div class="row">
+                        <div class="col-md-4">Showing @(Model.DBModelPageList.PageCount < Model.DBModelPageList.PageNumber ? 0 : Model.DBModelPageList.FirstItemOnPage) to @Model.DBModelPageList.LastItemOnPage of @Model.DBModelPageList.TotalItemCount entries in @Model.DBModelPageList.PageCount Pages</div>
+                        <div class="col-md-8 dataTables_paginate paging_simple_numbers" id="example_paginate">@Html.PagedListPager(Model.DBModelPageList, page => Url.Action("_ListEarlyCheckoutAttendanceApprovalAsync", new { idHRCompany = Model.IdHRCompany, idHRCompanyDivision = Model.IdDivision, idJobStatus = Model.IdJobStatus, idHREmployee = Model.IdHREmployee, date = Model.Date, pageNumber = page, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey }))</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

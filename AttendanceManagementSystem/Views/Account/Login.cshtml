@@ -1,0 +1,67 @@
+﻿@model  SystemViewModels.SystemAuthentication.LoginViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center container-height">
+            <div class="left-wrap text-wrap p-4 p-lg-5 d-flex">
+                <div class="text w-100 p-relative">
+                    <div class="text-center right-para">
+                        <img src="~/images/logo.png" alt="" srcset="" height="70">
+                        <p>
+                          <span>  नेपाल सरकार</span>
+                            <div class="horizantal-line"></div>
+                        <p style="padding-top: 2em;">
+                            <span class="second">
+                                एकिकृत हाजिरी व्यबस्थापन प्रणाली
+                            </span>  <br>
+                            <span class="third">
+                                मा तपाईलाई स्वागत छ
+                            </span>
+                        </p>
+                    </div>
+                    <a href="https://doit.gov.np/en" target="_blank">
+                        <p class="copyright">
+                            &#169; सूचना प्रविधि विभाग
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="login-wrap p-login-wrap py-4 py-lg-5">
+                @using (Html.BeginForm("Login", "Account", null, FormMethod.Post, new { @class = "signin-form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div>
+                        <p class="login-text">लग-इन</p>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="p-input-label" for="name">पिआईएस कोड</label>
+                        @Html.TextBoxFor(model => model.DataModel.UserName, new { @class = "form-control", @placeholder = "प्रयोगकर्तानाम/ कर्मचारी सङ्केत नं " })
+                        @Html.ValidationMessageFor(model => model.DataModel.UserName)
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="p-input-label" for="password">पासवर्ड </label>
+                        @Html.PasswordFor(model => model.DataModel.Password, new { @class = "form-control", @placeholder = "पासवर्ड" })
+                        @Html.ValidationMessageFor(model => model.DataModel.Password)
+                    </div>
+                    <div class="form-group d-md-flex">
+                        <div class="w-50 text-left">
+                        </div>
+                        <div class="w-50 text-md-right f-password">
+                         @*   @Html.ActionLink("पासवर्ड भुल्नु भयो?", "ForgotPassword", new { @class = "p-input-label" })*@
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="form-control p-btn p-btn-primary submit px-3">लग-इन</button>
+                    </div>
+
+                }
+            </div>
+
+        </div>
+    </div>
+</section>

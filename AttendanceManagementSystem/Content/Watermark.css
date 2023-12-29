@@ -1,0 +1,14 @@
+﻿.watermark-false {
+    -webkit-transform: rotate(331deg);
+    -moz-transform: rotate(331deg);
+    -o-transform: rotate(331deg);
+    transform: rotate(333deg) translate(-50%, -50%);
+    font-size: 3em;
+    color: rgba(255, 5, 5, 0.25);
+    position: absolute;
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+    left: 50%;
+}
+
+

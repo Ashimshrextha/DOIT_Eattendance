@@ -1,0 +1,129 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeViewModelList
+<div class="table-responsive">
+    <h4 class="page-header blue">
+        <i class="fa bigger-130">व्यक्तिगत जानकारी</i>
+    </h4>
+    <table class="table table-border table-striped table-hover table-responsive">
+        <colgroup>
+            <col style="width:18%" />
+            <col style="width:1%" />
+            <col style="width:31%" />
+            <col style="width:18%" />
+            <col style="width:1%" />
+            <col style="width:31%" />
+        </colgroup>
+        <tbody>
+            <tr>
+                <th>कर्मचारी नाम (अंग्रेजी)</th>
+                <th>:</th>
+                <td class="blue">
+                    <i class="fa bigger-130">@(Model?.DBModel?.HREmployeeName)</i>
+                </td>
+                <th>कर्मचारी नाम (देवनागरी)</th>
+                <th>:</th>
+                <td class="green">
+                    <i class="fa bigger-130">@(Model?.DBModel?.HREmployeeNameNP)</i>
+                </td>
+            </tr>
+            <tr>
+                <th>जन्म स्थान</th>
+                <th>:</th>
+                <td class="green">
+                    <i class="fa bigger-130">@(Model?.DBModel?.BirthPlace)</i>
+                </td>
+                <th>कर्मचारी संकेत न.</th>
+                <th>:</th>
+                <td class="blue">
+                    <i class="fa bigger-130">@(Model?.DBModel?.PISNumber)</i>
+                </td>
+            </tr>
+            <tr>
+                <th>मातृभाषा</th>
+                <th>:</th>
+                <td class="blue"><i class="fa bigger-130">@(Model?.DBModel?.HRLanguage?.HRLanguageTitle)</i></td>
+                <th>रक्त समूह</th>
+                <th>:</th>
+                <td class="green"><i class="fa bigger-130">@(Model.DBModel?.HREmployeeBloodGroup?.HREmployeeBloodGroupTitle)</i></td>
+            </tr>
+            <tr>
+                <th>लिङ्ग</th>
+                <th>:</th>
+                <td class="green"><i class="fa bigger-130">@(Model?.DBModel?.HREmployeeSex?.HREmployeeSexTitleNP)</i> </td>
+                <th>
+                    वैवाहिक स्थिति
+                </th>
+                <th>:</th>
+                <td class="green"><i class="fa bigger-130">@(Model?.DBModel?.HREmployeeMarital?.HREmployeeMaritalTitle)</i></td>
+            </tr>
+            <tr>
+                <th>ईमेल</th>
+                <th>:</th>
+                <td class="blue"><i class="fa bigger-130">@(Model?.DBModel?.Email)</i></td>
+                <th>मोबाइल</th>
+                <th>:</th>
+                <td class="blue">
+                    <i class="fa bigger-130">@(Model?.DBModel?.MobileNumber)</i>
+                </td>
+            </tr>
+            <tr>
+                <th>शुरु नियुक्ति मिति</th>
+                <th>:</th>
+                <td class="blue">
+                    <i class="fa bigger-130">@(Model?.DBModel?.AppointmentDateNP)</i>
+                </td>
+                @*<th>
+                    सेवानिवृत्त मिति
+                </th>
+                <th>:</th>
+                <td class="red">
+                    <i class="fa bigger-130">@(Model?.DBModel?.RetiredDateNP)</i>
+                </td>*@
+            </tr>
+        </tbody>
+    </table>
+    <h4 class="page-header blue">
+        <i class="fa bigger-130">वर्तमान जागीर स्थिति</i>
+    </h4>
+    <table class="table table-border table-striped table-hover table-responsive">
+        <colgroup>
+            <col style="width:15%" />
+            <col style="width:1%" />
+            <col style="width:34%" />
+            <col style="width:15%" />
+            <col style="width:1%" />
+            <col style="width:34%" />
+        </colgroup>
+        <tbody>
+            <tr>
+                <th>पद</th>
+                <th>:</th>
+                <td class="blue">
+                    <i class="fa bigger-130">@(Model?.DBModel?.HREmployeeJobHistories?.FirstOrDefault(x => x.IsCurrentStatus)?.HRDesignation?.HRDesignationTitle)</i>
+                </td>
+                <th>
+                    शाखा / सेक्शन
+                </th>
+                <th>:</th>
+                <td class="blue">
+                    <i class="fa bigger-130">@(Model?.DBModel?.HREmployeeJobHistories?.FirstOrDefault(x => x.IsCurrentStatus)?.HRCompanyDivision?.HRCompanyDivisionName)</i>
+                </td>
+            </tr>
+            <tr>
+                <th>कार्यालय</th>
+                <th>:</th>
+                <td class="blue"><i class="fa bigger-130">@(Model?.DBModel?.HRCompany?.CompanyName)</i></td>
+                <th>कार्यालय (देवनागरी)</th>
+                <th>:</th>
+                <td class="blue"><i class="fa bigger-130">@(Model?.DBModel?.HRCompany?.CompanyNameNP)</i></td>
+            </tr>
+            <tr>
+                <th>कार्यालय कोड</th>
+                <th>:</th>
+                <td class="blue"><i class="fa bigger-130">@(Model.DBModel?.HRCompany?.HRCompanyCode?.HRCompanyCodeTitle)</i></td>
+                <th>कार्यालय ठेगाना</th>
+                <th>:</th>
+                <td class="blue"><i class="fa bigger-130">@(Model?.DBModel?.HRCompany?.Address)</i></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

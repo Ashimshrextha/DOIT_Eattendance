@@ -1,0 +1,60 @@
+﻿@model SystemViewModels.SystemSecurity.MasterLeaveTitleViewModelList
+@using PagedList.Mvc;
+<div id="replacetarget">
+    <div id="content" class="content">
+        <div class="dataTables_wrapper">
+            <div id="mask-container">
+                <div id="mask"></div>
+                <div class="table-responsive">
+                    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th class="ace-icon">आईडी</th>
+                                <th class="ace-icon">बिदा शीर्षक</th>
+                                <th class="text-center">बिदा शीर्षक (देवनागरी)</th>
+                                <th class="text-center">बिदा शीर्षक(सक्षेंप)</th>
+                                <th class="text-center">रङ कोड</th>
+                                <th class="text-center">सक्रिय</th>
+                                <th class="text-center">द्वारा निर्मित</th>
+                                <th class="text-center">द्वारा सम्पादन</th>
+                                <th class="text-center">सिर्जना मिति</th>
+                                <th class="ace-icon">कार्य</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.DBModelList)
+                            {
+                                <tr>
+                                    <td class="ace-icon">@item.Id</td>
+                                    <td class="ace-icon">@item.LeaveTitle</td>
+                                    <td class="ace-icon">@item.LeaveTitleNP</td>
+                                    <td class="ace-icon">@item.LeaveShortTitle</td>
+                                    <td class="ace-icon">@item.ColorCode</td>
+                                    <td class="ace-icon"><i class="ace-icon @(item.IsActive==true?"fa fa-thumbs-up green":"fa fa-thumbs-down red") bigger-130" aria-hidden="true"></i></td>
+                                    <td class="ace-icon">@item.CreatedBy</td>
+                                    <td class="ace-icon">@item.UpdatedBy</td>
+                                    <td class="ace-icon">@item.CreatedOn.ToShortDateString()</td>
+                                    <td class="ace-icon action-buttons">
+                                        <a href="@Url.Action("_UpdateMasterLeaveTitleAsync",new { id=item.Id,pageNumber=Model.PageNumber,pageSize=Model.PageSize,orderingBy=Model.OrderingBy,orderingDirection=Model.OrderingDirection,searchKey=Model.SearchKey})" data-ajax-model="">
+                                            <i class="ace-icon fa fa-pencil green bigger-150" aria-hidden="true" title="Edit"></i>
+                                        </a>
+                                        <a href="@Url.Action("_ReadMasterLeaveTitleAsync",new { id=item.Id,pageNumber=Model.PageNumber,pageSize=Model.PageSize,orderingBy=Model.OrderingBy,orderingDirection=Model.OrderingDirection,searchKey=Model.SearchKey})" data-ajax-model=""><i class="ace-icon fa fa-search-plus blue bigger-150" aria-hidden="true" title="View"></i></a>
+                                        <a href="@Url.Action("_DeleteMasterLeaveTitleAsync",new { id=item.Id,pageNumber=Model.PageNumber,pageSize=Model.PageSize,orderingBy=Model.OrderingBy,orderingDirection=Model.OrderingDirection,searchKey=Model.SearchKey})" data-ajax-model=""><i class="ace-icon fa fa-trash-o red bigger-150" aria-hidden="true" title="Delete"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div aria-live="polite" role="status" id="example_info" class="dataTables_info">
+                    <div class="row">
+                        <div class="col-md-4">Showing @(Model.DBModelList.PageCount < Model.DBModelList.PageNumber ? 0 : Model.DBModelList.FirstItemOnPage) to @Model.DBModelList.LastItemOnPage of @Model.DBModelList.TotalItemCount entries in @Model.DBModelList.PageCount Pages</div>
+                        <div class="col-md-8 dataTables_paginate paging_simple_numbers" id="example_paginate">@Html.PagedListPager(Model.DBModelList, page => Url.Action("_ListHRCalendarAsync", new { pageNumber = page, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey }))</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

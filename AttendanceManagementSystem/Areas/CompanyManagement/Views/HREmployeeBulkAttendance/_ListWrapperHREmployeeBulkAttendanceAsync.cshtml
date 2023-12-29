@@ -1,0 +1,34 @@
+﻿@model SystemViewModels.CompanyManagement.HREmployeeBulkAttendanceViewModelList
+@using SystemStores.GlobalMethod;
+@using SystemStores.ENUMData;
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+    <div class="nav-search" id="nav-search">
+        <form class="form-search">
+            <span class="input-icon">
+                <a class="nav-search-input" href="#" id="Create_HREmployeeBulkAttendance">
+                    <i class="ace-icon fa fa-plus  nav-search-icon">@SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Create)</i>
+                </a>
+            </span>
+        </form>
+    </div>
+</div>
+@{ Html.RenderPartial("_ListHREmployeeBulkAttendanceAsync");}
+<script type="text/javascript">
+    $(function () {
+        $.ajaxSetup({ cache: false });
+        $('#Create_HREmployeeBulkAttendance').click(function (e) {
+            debugger;
+            var url;
+            url = '/CompanyManagement/HREmployeeBulkAttendance' + '/_CreateHREmployeeBulkAttendanceAsync?idHREmployee=' +'@Model.IdHREmployee';
+            $('#myModalContent').load(url, function () {
+                $('#myModal').modal({
+                    keyboard: true
+                }, 'show');
+                bindAjaxForm(this);
+            });
+            return false;
+        });
+    });
+</script>
+
+

@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2A3CB19F-6671-411E-934E-3B49F8FFCAA0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SystemServices</RootNamespace>
+    <AssemblyName>SystemServices</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Linq.Dynamic, Version=1.0.6132.35681, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\System.Linq.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CompanyManagement\HRCompanyOfficeLogsServices.cs" />
+    <Compile Include="CompanyManagement\HRCompanyAttendanceServices.cs" />
+    <Compile Include="CompanyManagement\HRCompanyDivisionServices.cs" />
+    <Compile Include="CompanyManagement\HRCompanyDivisionTypeServices.cs" />
+    <Compile Include="CompanyManagement\HRCompanyHREmployeeBulkKaajServices.cs" />
+    <Compile Include="CompanyManagement\HRCompanyHREmployeeShiftDateServices.cs" />
+    <Compile Include="CompanyManagement\HRCompanyHREmployeeCovidKaajServices.cs" />
+    <Compile Include="CompanyManagement\HRCompanyHREmployeeShiftRoasterServices.cs" />
+    <Compile Include="CompanyManagement\HRCompanyNotificationServices.cs" />
+    <Compile Include="CompanyManagement\HRCompanyServices.cs" />
+    <Compile Include="CompanyManagement\HRCompanyShiftRoasterServices.cs" />
+    <Compile Include="CompanyManagement\HRCompanySystemSupportServices.cs" />
+    <Compile Include="CompanyManagement\HRDeviceServices.cs" />
+    <Compile Include="DeviceManagement\BiometricTemplateTypeServices.cs" />
+    <Compile Include="DeviceManagement\DeviceLogsFetcherServices.cs" />
+    <Compile Include="DeviceManagement\DeviceLogsServices.cs" />
+    <Compile Include="DeviceManagement\HRDeviceModelServices.cs" />
+    <Compile Include="DeviceManagement\HREmployeeBiometricTemplateServices.cs" />
+    <Compile Include="EmployeeManagement\EmployeeDashboardServices.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeAddressServices.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeBankAccountServices.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeCompanyFacilityServices.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeLateAttendanceApprovedServices.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeContactServices.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeEducationServices.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeJobHistoryServices.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeKaajHistoryServices.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeLeaveBalanceServices.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeLeaveManagementServices.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeNationalIdentityServices.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeServices.cs" />
+    <Compile Include="EmployeeManagement\KaajAppliedSummaryServices.cs" />
+    <Compile Include="EmployeeManagement\LeaveAppliedSummaryServices.cs" />
+    <Compile Include="Home\HomeServices.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\AbsentReportServices.cs" />
+    <Compile Include="Reports\DailyReportServices.cs" />
+    <Compile Include="Reports\EarlyCheckoutAttendanceReportServices.cs" />
+    <Compile Include="Reports\KaajReportServices.cs" />
+    <Compile Include="Reports\LateAttendanceReportServices.cs" />
+    <Compile Include="Reports\LeaveBalanceReportServices.cs" />
+    <Compile Include="Reports\LeaveReportServices.cs" />
+    <Compile Include="Reports\MonthlyAttendanceServices.cs" />
+    <Compile Include="Reports\MonthlyAttendanceSheetServices.cs" />
+    <Compile Include="Reports\MonthlyAttendanceSummaryServices.cs" />
+    <Compile Include="Reports\ShiftRoasterReportServices.cs" />
+    <Compile Include="Reports\UserLogsServices.cs" />
+    <Compile Include="Reports\WorkedReportServices.cs" />
+    <Compile Include="Reports\YearlyAttendanceServices.cs" />
+    <Compile Include="Reports\YearlyAttendanceSheetServices.cs" />
+    <Compile Include="SystemAuthentication\AccountRepo.cs" />
+    <Compile Include="SystemAuthentication\MembershipProviderServices.cs" />
+    <Compile Include="SystemAuthentication\SystemAuthenticationServices.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeLeaveHistoryServices.cs" />
+    <Compile Include="SystemFeedback\SystemCommentResponseServices.cs" />
+    <Compile Include="SystemFeedback\SystemCommentServices.cs" />
+    <Compile Include="SystemSecurity\HRCalendarServices.cs" />
+    <Compile Include="SystemSecurity\HRCompanyCodeServices.cs" />
+    <Compile Include="SystemSecurity\HREmployeeAttendanceHistoryServices.cs" />
+    <Compile Include="SystemSecurity\HRLanguageConversionServices.cs" />
+    <Compile Include="SystemSecurity\HRLanguageServices.cs" />
+    <Compile Include="SystemSecurity\MasterLeaveTitleServices.cs" />
+    <Compile Include="SystemSecurity\SystemDatabaseBackupServices.cs" />
+    <Compile Include="SystemSecurity\SystemDetailCategoryServices.cs" />
+    <Compile Include="SystemSecurity\SystemDetailServices.cs" />
+    <Compile Include="SystemAuthentication\LoginsServices.cs" />
+    <Compile Include="SystemSecurity\SystemMenuServices.cs" />
+    <Compile Include="SystemSecurity\SystemStructureServices.cs" />
+    <Compile Include="SystemSetting\HRCompanyLeaveTypeServices.cs" />
+    <Compile Include="SystemSetting\HRCompanyTypeServices.cs" />
+    <Compile Include="SystemSetting\HRDesignationServices.cs" />
+    <Compile Include="SystemSetting\HREmployeeBankListServices.cs" />
+    <Compile Include="SystemSetting\HREmployeeBloodGroupServices.cs" />
+    <Compile Include="SystemSetting\HREmployeeBulkAttendanceApprovedServices.cs" />
+    <Compile Include="SystemSetting\HREmployeeBulkAttendanceServices.cs" />
+    <Compile Include="SystemSetting\HREmployeeCategoryServices.cs" />
+    <Compile Include="SystemSetting\HREmployeeContactTypeServices.cs" />
+    <Compile Include="SystemSetting\HREmployeeGenderServices.cs" />
+    <Compile Include="SystemSetting\HREmployeeJobStatusServices.cs" />
+    <Compile Include="SystemSetting\HREmployeeMaritalServices.cs" />
+    <Compile Include="SystemSetting\HREmployeeNationalIdentityTypeServices.cs" />
+    <Compile Include="SystemSetting\HREmployeeRelationTypeServices.cs" />
+    <Compile Include="SystemSetting\HREmployeeRoleServices.cs" />
+    <Compile Include="SystemSetting\HREmployeeServiceTypeServices.cs" />
+    <Compile Include="SystemSetting\HRLanguageServices.cs" />
+    <Compile Include="SystemSetting\HRPublicHolidayServices.cs" />
+    <Compile Include="SystemSetting\IHREmployeeContactServices.cs" />
+    <Compile Include="SystemSetting\SystemPermissionByHREmployeeServices.cs" />
+    <Compile Include="SystemSetting\SystemPermissionByRoleServices.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SystemDatabase\SystemDatabase.csproj">
+      <Project>{c090bec7-d1df-404e-858a-fc80436c3bd4}</Project>
+      <Name>SystemDatabase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SystemInterfaces\SystemInterfaces.csproj">
+      <Project>{cb0053bc-7252-44f4-a524-9df21215f735}</Project>
+      <Name>SystemInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SystemModels\SystemModels.csproj">
+      <Project>{E288F56D-7475-4640-B301-2B4F8E88146B}</Project>
+      <Name>SystemModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SystemStores\SystemStores.csproj">
+      <Project>{2235D008-7138-45B3-BB53-400F24A4C615}</Project>
+      <Name>SystemStores</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SystemUnitOfWork\SystemUnitOfWork.csproj">
+      <Project>{43005e9a-b659-4e8d-b4cb-74f1ac68818d}</Project>
+      <Name>SystemUnitOfWork</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\PagedList.css" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

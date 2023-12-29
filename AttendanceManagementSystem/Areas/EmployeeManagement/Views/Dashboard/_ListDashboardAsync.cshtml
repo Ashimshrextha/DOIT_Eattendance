@@ -1,0 +1,83 @@
+﻿@model SystemViewModels.EmployeeManagement.DashboardViewModelList
+<div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+    <div class="table-responsive">
+        <table class="table table-border table-responsive">
+            <thead>
+                <tr>
+                    <th class="ace-icon">
+                        <p>आइतवार</p>
+                        <p>  Sunday</p>
+                    </th>
+                    <th class="ace-icon">
+                        <p>सोमवार</p>
+                        <p>Monday</p>
+                    </th>
+                    <th class="ace-icon">
+                        <p>मङ्गलवार</p>
+                        <p>Tuesday</p>
+                    </th>
+                    <th class="ace-icon">
+                        <p>बुधवार</p>
+                        <p>Wednesday</p>
+                    </th>
+                    <th class="ace-icon">
+                        <p>बिहीवार</p>
+                        <p>Thursday</p>
+                    </th>
+                    <th class="ace-icon">
+                        <p>शुक्रवार</p>
+                        <p>Friday</p>
+                    </th>
+                    <th class="ace-icon" style="color:red;">
+                        <p>शनिवार</p>
+                        <p>Saturday</p>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.DBModelCalendar)
+                {
+                    if (item.Sunday == Model.TodayDayNp)
+                    {
+                        item.CSunday = "#28d791";
+                    }
+                    else if (item.Monday == Model.TodayDayNp)
+                    {
+                        item.CMonday = "#28d791";
+                    }
+                    else if (item.Tuesday == Model.TodayDayNp)
+                    {
+                        item.CTuesday = "#28d791";
+                    }
+                    else if (item.Wednesday == Model.TodayDayNp)
+                    {
+                        item.CWednesday = "#28d791";
+                    }
+                    else if (item.Thursday == Model.TodayDayNp)
+                    {
+                        item.CThursday = "#28d791";
+                    }
+                    else if (item.Friday == Model.TodayDayNp)
+                    {
+                        item.CFriday = "#28d791";
+                    }
+                    else if (item.Saturday == Model.TodayDayNp)
+                    {
+                        item.CSaturday = "#28d791";
+
+                    }
+
+                    <tr>
+                        <td class="text-center" style="height:150px;font-weight:bolder;font-size:28px;background-color:@item.CSunday" title="@item.ASunday">@item.Sunday<br />@item.ASunday</td>
+                        <td class="text-center" style="height:150px;font-weight:bolder;font-size:28px;background-color:@item.CMonday" title="@item.AMonday">@item.Monday<br />@item.AMonday</td>
+                        <td class="text-center" style="height:150px;font-weight:bolder;font-size:28px;background-color:@item.CTuesday" title="@item.ATuesday">@item.Tuesday<br />@item.ATuesday</td>
+                        <td class="text-center" style="height:150px;font-weight:bolder;font-size:28px;background-color:@item.CWednesday" title="@item.AWednesday">@item.Wednesday<br />@item.AWednesday</td>
+                        <td class="text-center" style="height:150px;font-weight:bolder;font-size:28px;background-color:@item.CThursday" title="@item.AThursday">@item.Thursday<br />@item.AThursday</td>
+                        <td class="text-center" style="height:150px;font-weight:bolder;font-size:28px;background-color:@item.CFriday" title="@item.AFriday">@item.Friday<br />@item.AFriday</td>
+                        <td class="text-center" style="height:150px;font-weight:bolder;font-size:28px;color:red;background-color:@item.CSaturday" title="@item.ASaturday">@item.Saturday<br />@item.ASaturday</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

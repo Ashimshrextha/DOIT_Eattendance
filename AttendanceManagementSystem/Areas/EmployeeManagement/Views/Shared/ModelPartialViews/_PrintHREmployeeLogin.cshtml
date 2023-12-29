@@ -1,0 +1,51 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeLoginViewModel
+
+<div id="printThis">
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>भाषा</th>
+                <th>प्रयोगकर्ता नाम</th>
+                <th>भूमिका</th>
+                <th>लकआउट सफल</th>
+                <th>लगइन असफल</th>
+                <th>अवस्था</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList.OrderByDescending(x => x.UpdatedOn))
+            {
+            <tr>
+                <td class="ace-icon">
+                    <i class="ace-icon fa bigger-110 badge badge-yellow">@item.Language</i>
+                </td>
+                <td class="ace-icon">
+                    <i class="ace-icon fa bigger-110 badge badge-yellow">@item.UserName</i>
+                </td>
+                <td class="ace-icon">
+                    <i class="ace-icon fa bigger-110 badge badge-info">@item.MembershipProviders.FirstOrDefault(x => x.IdLogin == item.Id).HREmployeeRole.HRRoleTitle</i>
+                </td>
+                <td class="ace-icon">
+                    <i class="ace-icon @(item.LockOutEnabled?"fa fa-thumbs-up green" : "fa fa-thumbs-down red") bigger-130" aria-hidden="true"></i>
+                </td>
+                <td class="ace-icon">
+                    <i class="ace-icon fa bigger-110 badge badge-info">@item.AccessFailedCount</i>
+                </td>
+                <td class="ace-icon">
+                    <i class="ace-icon @(item.IsActive?"fa fa-thumbs-up green" : "fa fa-thumbs-down red") bigger-130" aria-hidden="true"></i>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>

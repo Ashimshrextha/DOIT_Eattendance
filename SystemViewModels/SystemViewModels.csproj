@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{139865BA-64CB-4165-92FE-A98085A56A33}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SystemViewModels</RootNamespace>
+    <AssemblyName>SystemViewModels</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DotNet.Highcharts, Version=4.0.0.0, Culture=neutral, PublicKeyToken=88854f873df851bf, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNet.Highcharts.4.0\lib\DotNet.Highcharts.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Riss.Devices">
+      <HintPath>..\DLL\Riss.Devices.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CompanyManagement\DashboardViewModel.cs" />
+    <Compile Include="CompanyManagement\HRCompanyOfficeLogsViewModel.cs" />
+    <Compile Include="CompanyManagement\HRCompanyAttendanceViewModel.cs" />
+    <Compile Include="CompanyManagement\HRCompanyDivisionTypeViewModel.cs" />
+    <Compile Include="CompanyManagement\HRCompanyDivisionViewModel.cs" />
+    <Compile Include="CompanyManagement\HRCompanyHREmployeeBulkKaajViewModel.cs" />
+    <Compile Include="CompanyManagement\HRCompanyHREmployeeCovidKaajViewModel.cs" />
+    <Compile Include="CompanyManagement\HRCompanyHREmployeeShiftRoasterViewModel.cs" />
+    <Compile Include="CompanyManagement\HRCompanyNotificationViewModel.cs" />
+    <Compile Include="CompanyManagement\HRCompanyShiftRoasterViewModel.cs" />
+    <Compile Include="CompanyManagement\HRCompanySystemSupportViewModel.cs" />
+    <Compile Include="CompanyManagement\HRCompanyViewModel.cs" />
+    <Compile Include="CompanyManagement\HRDeviceViewModel.cs" />
+    <Compile Include="CompanyManagement\HREmployeeBulkAttendanceViewModel.cs" />
+    <Compile Include="DeviceManagement\DeviceCommunicationEntity.cs" />
+    <Compile Include="DeviceManagement\DeviceCommunicationEntityViewModel.cs" />
+    <Compile Include="DeviceManagement\DeviceLogsFetcherViewModel.cs" />
+    <Compile Include="DeviceManagement\BiometricTemplateTypeViewModel.cs" />
+    <Compile Include="DeviceManagement\HRDeviceModelViewModel.cs" />
+    <Compile Include="DeviceManagement\DashbaordViewModel.cs" />
+    <Compile Include="DeviceManagement\DeviceLogsViewModel.cs" />
+    <Compile Include="DeviceManagement\HREmployeeBiometricTemplateViewModel.cs" />
+    <Compile Include="EmployeeManagement\DashboardViewModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeAddressViewModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeBankAccountViewModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeCompanyFacilityViewModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeContactViewModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeEducationViewModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeFamilyDetailsViewModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeJobHistoryViewModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeKaajHistoryViewModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeLeaveBalanceViewModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeLeaveManagementViewModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeLeaveSummaryViewModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeLoginViewModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeNationalIdentityViewModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeePropertyViewModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeViewModel.cs" />
+    <Compile Include="Home\HighChartModel.cs" />
+    <Compile Include="Home\HomeDashboardViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\CompanyDetailModel.cs" />
+    <Compile Include="Reports\AbsentReportViewModel.cs" />
+    <Compile Include="Reports\CurrentYearLeaveSummaryViewModel.cs" />
+    <Compile Include="Reports\DailyReportViewModel.cs" />
+    <Compile Include="Reports\DashboardViewModel.cs" />
+    <Compile Include="Reports\DatePunchedReportViewModel.cs" />
+    <Compile Include="Reports\EarlyCheckoutAttendanceReportViewModel.cs" />
+    <Compile Include="Reports\KaajReportViewModel.cs" />
+    <Compile Include="Reports\LateAttendanceReportViewModel.cs" />
+    <Compile Include="Reports\LeaveBalanceReportViewModel.cs" />
+    <Compile Include="Reports\LeaveReportViewModel.cs" />
+    <Compile Include="Reports\MonthlyAttendanceReportViewModelList.cs" />
+    <Compile Include="Reports\MonthlyAttendanceSheetViewModelList.cs" />
+    <Compile Include="Reports\MonthlyAttendanceSummaryViewModel.cs" />
+    <Compile Include="Reports\MonthlyEarlyandLateReportViewModel.cs" />
+    <Compile Include="Reports\ShiftRoasterReportViewModel.cs" />
+    <Compile Include="Reports\UserLogsViewModel.cs" />
+    <Compile Include="Reports\WorkedReportViewModel.cs" />
+    <Compile Include="Reports\YearlyAttendanceSheetViewModel.cs" />
+    <Compile Include="Reports\YearlyAttendanceViewModel.cs" />
+    <Compile Include="Shared\HomeIndexViewModel.cs" />
+    <Compile Include="Shared\ReportHeaderViewModel.cs" />
+    <Compile Include="SystemAuthentication\ChangePasswordViewModel.cs" />
+    <Compile Include="SystemAuthentication\ForgotPasswordViewModel.cs" />
+    <Compile Include="SystemAuthentication\LoginViewModel.cs" />
+    <Compile Include="SystemAuthentication\RegisterViewModel.cs" />
+    <Compile Include="SystemFeedback\DashboardViewModel.cs" />
+    <Compile Include="SystemFeedback\SystemCommentResponseViewModel.cs" />
+    <Compile Include="SystemFeedback\SystemCommentViewModel.cs" />
+    <Compile Include="SystemSecurity\DashboardViewModel.cs" />
+    <Compile Include="SystemSecurity\HRCalendarViewModel.cs" />
+    <Compile Include="EmployeeManagement\HREmployeeLeaveHistoryViewModel.cs" />
+    <Compile Include="SystemSecurity\HRCompanyCodeViewModel.cs" />
+    <Compile Include="SystemSecurity\HREmployeeAttendanceHistoryViewModel.cs" />
+    <Compile Include="SystemSecurity\HRLanguageConversionViewModel.cs" />
+    <Compile Include="SystemSecurity\MasterLeaveTitleViewModel.cs" />
+    <Compile Include="SystemSecurity\SystemDatabaseBackupViewModel.cs" />
+    <Compile Include="SystemSecurity\SystemDetailCategoryViewModel.cs" />
+    <Compile Include="SystemSecurity\SystemDetailViewModel.cs" />
+    <Compile Include="SystemSecurity\SystemMenuViewModel.cs" />
+    <Compile Include="SystemSecurity\SystemStructureViewModel.cs" />
+    <Compile Include="SystemSetting\DashboardViewModel.cs" />
+    <Compile Include="SystemSetting\HRCompanyLeaveTypeViewModel.cs" />
+    <Compile Include="SystemSetting\HRCompanyTypeViewModel.cs" />
+    <Compile Include="SystemSetting\HRDesignationViewModel.cs" />
+    <Compile Include="SystemSetting\HREmployeeBankListViewModel.cs" />
+    <Compile Include="SystemSetting\HREmployeeBloodGroupViewModel.cs" />
+    <Compile Include="SystemSetting\HREmployeeCategoryViewModel.cs" />
+    <Compile Include="SystemSetting\HREmployeeContactTypeViewModel.cs" />
+    <Compile Include="SystemSetting\HREmployeeGenderViewModel.cs" />
+    <Compile Include="SystemSetting\HREmployeeJobStatusViewModel.cs" />
+    <Compile Include="SystemSetting\HREmployeeMaritalViewModel.cs" />
+    <Compile Include="SystemSetting\HREmployeeNationalIdentityTypeViewModel.cs" />
+    <Compile Include="SystemSetting\HREmployeeRelationTypeViewModel.cs" />
+    <Compile Include="SystemSetting\HREmployeeRoleViewModel.cs" />
+    <Compile Include="SystemSetting\HREmployeeServiceTypeViewModel.cs" />
+    <Compile Include="SystemSetting\HRLanguageViewModel.cs" />
+    <Compile Include="SystemSetting\HRPublicHolidayViewModel.cs" />
+    <Compile Include="SystemSetting\SystemPermissionByHREmployeeViewModel.cs" />
+    <Compile Include="SystemSetting\SystemPermissionByRoleViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\Highcharts-4.0.1\js\adapters\standalone-framework.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\adapters\standalone-framework.src.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\highcharts-3d.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\highcharts-3d.src.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\highcharts-all.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\highcharts-more.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\highcharts-more.src.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\highcharts.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\highcharts.src.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\canvas-tools.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\canvas-tools.src.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\data.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\data.src.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\drilldown.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\drilldown.src.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\exporting.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\exporting.src.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\funnel.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\funnel.src.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\heatmap.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\heatmap.src.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\no-data-to-display.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\no-data-to-display.src.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\solid-gauge.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\modules\solid-gauge.src.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\themes\dark-blue.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\themes\dark-green.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\themes\dark-unica.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\themes\gray.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\themes\grid-light.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\themes\grid.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\themes\sand-signika.js" />
+    <Content Include="Scripts\Highcharts-4.0.1\js\themes\skies.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LanguageResources\LanguageResources.csproj">
+      <Project>{72a4ce27-e7a8-4071-a7bc-0c3c6953a04a}</Project>
+      <Name>LanguageResources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SystemDatabase\SystemDatabase.csproj">
+      <Project>{c090bec7-d1df-404e-858a-fc80436c3bd4}</Project>
+      <Name>SystemDatabase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SystemModels\SystemModels.csproj">
+      <Project>{e288f56d-7475-4640-b301-2b4f8e88146b}</Project>
+      <Name>SystemModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SystemStores\SystemStores.csproj">
+      <Project>{2235D008-7138-45B3-BB53-400F24A4C615}</Project>
+      <Name>SystemStores</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

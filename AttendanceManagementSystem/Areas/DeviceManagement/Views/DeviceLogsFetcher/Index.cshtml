@@ -1,0 +1,23 @@
+﻿@model SystemViewModels.DeviceManagement.DeviceLogsFetcherViewModelList
+
+@{
+    ViewBag.Title = Model.HeaderTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="~/@Model.BreadCrumbBaseURL">@Model.BreadCrumbArea</a>
+        </li>
+        <li class="active">@Model.BreadCrumbTitle</li>
+    </ul><!-- /.breadcrumb -->
+</div>
+<div class="page-content">
+    @{ Html.RenderPartial("_SettingContainer");}
+    <div class="row">
+        <div id="replacetarget_MonthlyAttendance" class="col-xs-12">
+            @{ Html.RenderPartial("_ListDeviceLogsFetcherAsync");}
+        </div>
+    </div><!-- /.row -->

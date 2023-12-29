@@ -1,0 +1,42 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeJobHistoryViewModel
+
+<div id="printThis">
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>आईडी</th>
+                <th>कार्यालय</th>
+                <th>सेवा प्रकार</th>
+                <th>शाखाको नाम</th>
+                <th>पद</th>
+                <th>सम्मिलित मिति</th>
+                <th>हाजिरी मिति</th>
+                <th class="text-center">जागिर अवस्था</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.HRCompany.CompanyName</td>
+                    <td>@item.HREmployeeServiceType.HREmployeeServiceTypeTitle</td>
+                    <td>@item.HRCompanyDivision.HRCompanyDivisionName</td>
+                    <td>@item.HRDesignation.HRDesignationTitle</td>
+                    <td>@item.JoiningDate.ToShortDateString()</td>
+                    <td>@item.ImplementationDate</td>
+                    <td>@item.HREmployeeJobStatu.HREmployeeJobStatusTitle</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>

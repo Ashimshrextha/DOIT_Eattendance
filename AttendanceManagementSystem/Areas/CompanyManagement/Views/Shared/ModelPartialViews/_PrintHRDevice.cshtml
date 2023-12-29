@@ -1,0 +1,64 @@
+﻿@model SystemViewModels.CompanyManagement.HRDeviceViewModel
+
+<div id="printThis">
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th class="ace-icon">कार्यालय कोड</th>
+                <th class="ace-icon">उपकरण नं.</th>
+                <th>नाम</th>
+                <th class="ace-icon">मोडेल</th>
+                <th class="ace-icon">आई.पी</th>
+                <th class="ace-icon">पोर्ट</th>
+                <th class="ace-icon">दर्ता छ/छैन</th>
+                <th class="ace-icon">स्वत: पुश</th>
+                <th class="text-center">अवस्था</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+            {
+                <tr>
+                    <td class="ace-icon">
+                        <i class="ace-icon fa badge badge-yellow">@item.HRCompany.HRCompanyCode.HRCompanyCodeTitle</i>
+                    </td>
+                    <td class="ace-icon">
+                        <i class="fa bigger-110 badge badge-info">@item.DeviceNumber</i>
+                    </td>
+                    <td class="blue">
+                        <i class="ace-icon fa bigger-120">@item.HRDeviceName</i>
+                    </td>
+                    <td class="ace-icon">
+                        <i class="ace-icon fa badge badge-yellow">@item.HRDeviceModel.HRDeviceModel1</i>
+                    </td>
+                    <td class="ace-icon">
+                        <i class="fa bigger-110 badge badge-grey">@item.IPAddress</i>
+                    </td>
+                    <td class="ace-icon">
+                        <i class="fa bigger-110 badge badge-grey">@item.CommunicationPort</i>
+                    </td>
+                    <td class="ace-icon">
+                        <i class="ace-icon @(item.IsRegister==true?"fa fa-thumbs-up green" : "fa fa-thumbs-down red") bigger-130" aria-hidden="true"></i>
+                    </td>
+                    <td class="ace-icon">
+                        <i class="ace-icon @(item.HRDeviceModel.IsRealTime==true?"fa fa-thumbs-up green" : "fa fa-thumbs-down red") bigger-130" aria-hidden="true"></i>
+                    </td>
+                    <td class="text-center">
+                        <div>
+                            <i class="ace-icon @(item.IsActive==true?"fa fa-thumbs-up green" : "fa fa-thumbs-down red") bigger-130" aria-hidden="true"></i>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>

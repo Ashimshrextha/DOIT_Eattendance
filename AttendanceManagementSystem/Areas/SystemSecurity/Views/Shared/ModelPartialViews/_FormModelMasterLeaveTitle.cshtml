@@ -1,0 +1,47 @@
+﻿@model SystemViewModels.SystemSecurity.MasterLeaveTitleViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+
+<div class="row">
+    
+    <div class="col-md-12 col-sm-12 col-lg-12">
+        <div class="row col-md-12 col-sm-12 col-lg-12 form-group">
+            <div class="col-md-3 col-sm-3 col-lg-3 col-xs-12">
+                @Html.LabelFor(model => model.DataModel.LeaveTitle, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.LeaveTitle, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.LeaveTitle)
+            </div>
+            <div class="col-md-3 col-sm-3 col-lg-3 col-xs-12">
+                @Html.LabelFor(model => model.DataModel.LeaveTitleNP, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.LeaveTitleNP, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.LeaveTitleNP)
+            </div>
+            <div class="col-md-3 col-sm-3 col-lg-3 col-xs-12">
+                @Html.LabelFor(model => model.DataModel.LeaveShortTitle, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.LeaveShortTitle, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.LeaveShortTitle)
+            </div>
+            <div class="col-md-3 col-sm-3 col-lg-3 col-xs-12">
+                @Html.LabelFor(model => model.DataModel.IsActive, new { @class = "control-label col-md-12 col-sm-12 col-xs-12" })
+                @Html.CheckBoxFor(model => model.DataModel.IsActive, new { @class = "form-control BSswitch" })
+                @Html.ValidationMessageFor(model => model.DataModel.IsActive)
+            </div>
+        </div>
+        <div class="row col-md-12 col-sm-12 col-lg-12 form-group">
+            <div class="col-md-3 col-sm-3 col-lg-3 col-xs-12">
+                @Html.LabelFor(model => model.DataModel.ColorCode, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.ColorCode, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.ColorCode)
+            </div>
+        </div>
+    </div>
+</div>

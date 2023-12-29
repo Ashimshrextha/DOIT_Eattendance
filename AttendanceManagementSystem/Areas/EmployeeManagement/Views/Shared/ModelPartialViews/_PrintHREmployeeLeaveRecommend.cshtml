@@ -1,0 +1,46 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeLeaveHistoryViewModel
+
+<div id="printThis">
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>वर्ष</th>
+                <th>बिदा दर्ता नं.</th>
+                <th>कर्मचारीको नाम</th>
+                <th class="ace-icon">आवेदन मिति</th>
+                <th>शुरुको मिति</th>
+                <th>अन्तिम मिति</th>
+                <th>जम्मा दिन</th>
+                <th>स्वीकृत गर्ने</th>
+                <th>बिदाको कारण</th>
+                <th>अवस्था</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+            {
+            <tr>
+                <td>@item.LeaveYear</td>
+                <td>@item.LeaveRegistrationNumber</td>
+                <td>@item.HREmployee1.HREmployeeName</td>
+                <td>@(string.Format("{0:yyyy-MM-dd}", item.CreatedOn.DateNp()))</td>
+                <td>@item.LeaveValidFrom.ToShortDateString()</td>
+                <td>@item.LeaveValidTo.ToShortDateString()</td>
+                <td>@item.LeaveRequestedDay</td>
+                <td>@item.RecommandationBy</td>
+                <td>@item.LeaveReason</td>
+                <td>@item.HRCompanyLeaveStatusType.LeaveStatusType</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>

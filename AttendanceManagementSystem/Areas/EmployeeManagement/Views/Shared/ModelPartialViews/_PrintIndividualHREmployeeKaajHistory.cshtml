@@ -1,0 +1,140 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeKaajHistoryViewModel
+<link href="~/Content/jasny-bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jasny-bootstrap.min.js"></script>
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+<script src="~/Scripts/bootstrap-multiselect.min.js"></script>
+@Html.AntiForgeryToken()
+
+<div class="container" style="line-height: 25px; font-size: 16px;" id="printThis">
+    <div style="font-size:18px !important; padding-bottom:0px !important">
+        @{ Html.RenderPartial("~/Views/Shared/_LeaveKaajReportHeader.cshtml", Model.Header);}
+        <div style="text-align:center">
+            अन्तरदेशीय/अन्तराष्ट्रिय भ्रमण आदेश
+        </div>
+        <div class="row" style="text-align: right;font-size:12px">
+                म.ले.प.फारम नं. २२३ <br />
+                साविकको फारम नं. ३
+    </div>
+    </div>
+    <header>
+        <div class="row" style="text-align: right; margin-top: 60px; margin-bottom: 7px;">
+            <div class="col-sm-12">
+                आदेश नं.  <span style="
+                border-bottom: 1px dotted;
+                padding-left: 61px;
+                padding-right: 54px;
+              "></span>
+            </div>
+            <div class="col-sm-12">
+                मिति :- <span style="
+                border-bottom: 1px dotted;
+                padding-left: 20px;
+                padding-right: 20px;
+              ">@Model.DataModel.CreatedOn.DateNp()</span><br />
+
+        </div>
+    </div>
+</header>
+<div class="row mt-3" style="line-height:3rem">
+    <div class="col-sm-12 mt-2">
+        कर्मचारी संकेत नं.- :-  @Model.EmployeeDetail.PISNumber
+    </div>
+    <div class="col-sm-12 mt-2">
+        भ्रमण गर्ने पदाधिकारी वा कर्मचारीको नाम:-  @Model.EmployeeDetail.HREmployeeNameNP
+    </div>
+    <div class="col-sm-12">पद :-   @Model.EmployeeDetail.HRDesignationTitle </div>
+    <div class="col-sm-12">कार्यालय:-   @Model.EmployeeDetail.CompanyNameNP  </div>
+    <div class="col-sm-12">
+        भ्रमण गर्ने स्थान (विदेश भए मुलुक र शहर खुलाउने)-  @Model.DataModel.KaajLocation
+    </div>
+    <div class="col-sm-12">भ्रमणको उधेश्य:- @Model.DataModel.KaajPurpose </div>
+    <div class="col-sm-12">
+
+        भ्रमण गर्ने अवधि :- मिति:- <span style="
+                border-bottom: 1px dotted;
+                padding-left: 20px;
+                padding-right: 20px;
+              ">@Model.DataModel.KaajFromNP</span> देखि
+
+            <span style="
+                border-bottom: 1px dotted;
+                padding-left: 20px;
+                padding-right: 20px;
+              ">@Model.DataModel.KaajToNP</span>
+            सम्म
+        </div>
+        <div class="col-sm-12">भ्रमण गर्ने साधन :-  @Model.DataModel.VehicleUsedInKaaj</div>
+        <div class="col-sm-12">भ्रमण निमित्त माग गरेको पेश्की रकम:- </div>
+        <div class="col-sm-12" style="margin-bottom: 79px;">
+            भ्रमण सम्बन्धी अन्य आवश्यक विवरण:-
+        </div>
+
+
+        <div class="row">
+            <div>
+                <span style="
+                border-bottom: 1px solid;
+                padding-left: 90px;
+                padding-right: 240px;
+                text-align:left;
+                margin-bottom:10px;
+                margin-top:25px;
+              "></span>
+                <span style="
+                border-bottom: 1px solid;
+                padding-left: 90px;
+                padding-right: 240px;
+                text-align:right;
+                margin-bottom:10px;
+                margin-top:25px;
+                float:right;
+              "></span>
+            </div>
+        </div>
+
+
+        <div class="col-sm-12">
+            भ्रमण गर्ने पदाधिकारी वा कर्मचारी
+
+            <span style="float:right">भ्रमण आदेश दिने अधिकारी :- <span style="border-bottom:1px dotted"> @Model.ApprovedBy</span></span>
+        </div>
+        <div class="col-sm-12 mt-2" style="margin-bottom:5rem">
+            मिति: @Model.DataModel.CreatedOn.DateNp()
+
+            <span style="float:right">मिति :- <span style="border-bottom: 1px dotted; padding-right: 15.6rem;text-align:center"> @(string.Format("{0:yyyy-MM-dd}", Model.DataModel.ApprovedOn.DateNp()))</span></span>
+        </div>
+
+
+
+
+
+
+
+
+
+        <div style="font-size: 14px;margin-top:20px">
+            <h2 style="font:bold;">
+                <u>प्रशासन  शाखाले भर्ने :-</u>
+            </h2>
+            <span>
+                हाजिरी खातामा जनाएको मिति:- .........................
+            </span>
+            <br />
+            <span>
+                जनाउने कर्मचारी को दस्तखत:- .........................
+            </span>
+        </div>
+    </div>
+
+</div>
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>

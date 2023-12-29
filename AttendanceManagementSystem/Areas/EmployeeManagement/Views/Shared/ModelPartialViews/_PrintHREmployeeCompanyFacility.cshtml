@@ -1,0 +1,38 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeCompanyFacilityViewModel
+
+<div id="printThis">
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+			<tr>
+                <th>आईडी</th>
+                <th>सुविधा नाम</th>
+                <th>सक्रिय अवस्था</th>
+                <th>फिर्ता आयो/आछैन</th>
+                <th>फिर्ता मिति</th>
+                <th>टिप्पणी</th>
+			</tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+            {
+			<tr>
+				<td>@item.Id</td>
+				<td>@item.FacilityName</td>
+				<td>@item.IsActive</td>
+				<td>@(item.IsReturnBack==true?"Yes":"No")</td>
+				<td>@item.ReturnDate</td>
+				<td>@item.Remark</td>
+			</tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>

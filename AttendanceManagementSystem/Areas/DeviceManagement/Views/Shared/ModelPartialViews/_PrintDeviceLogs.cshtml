@@ -1,0 +1,42 @@
+﻿@model SystemViewModels.DeviceManagement.DeviceLogsViewModel
+
+
+<div id="printThis">
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>आईडी</th>
+                <th>उपकरण नं.</th>
+                <th>कर्मचारी नं.</th>
+                <th>पंच मिति</th>
+                <th>प्रमाणिकरण मोड</th>
+                <th>भित्रबाहिरको मोड</th>
+                <th>ल्याइऐको मिति</th>
+                <th>आई.पी</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.DeviceNumber</td>
+                    <td>@item.IdEnroll</td>
+                    <td>@item.PunchDate</td>
+                    <td>@item.VerificationMode</td>
+                    <td>@item.InOutMode</td>
+                    <td>@item.FetchedDate.ToShortDateString()</td>
+                    <td>@item.TerminalIP</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>

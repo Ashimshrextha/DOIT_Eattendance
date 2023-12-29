@@ -1,0 +1,402 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeViewModel
+<link href="~/Content/jasny-bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jasny-bootstrap.min.js"></script>
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.DataModel.ImageName)
+@Html.HiddenFor(model => model.DataModel.IsActive)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+@Html.HiddenFor(model => model.IdActiveEmployee)
+<div class="row">
+
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h4 class="panel-title">लगइन जानकारी</h4></div>
+            <div class="panel-body">
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-md-6 col-sm-6 col-lg-6">
+                            @Html.LabelFor(model => model.DataModel.IdHRCompany, new { @class = "control-label" })
+                            @Html.DropDownListFor(model => model.DataModel.IdHRCompany, new SelectList(Model.DDLCompany, "Key", "Value"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.DataModel.IdHRCompany)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <div class="form-group row">
+                        @if (Model.SessionDetails.IdRoleType == 0 || Model.SessionDetails.IdRoleType == 1)
+                        {
+                            <div class="col-md-3 col-sm-3 col-lg-3">
+                                @Html.LabelFor(model => model.DataModel.UserName, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.DataModel.UserName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DataModel.UserName)
+                                <span id="username_check" class="field-validation-error"></span>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-3 col-sm-3 col-lg-3">
+                                @Html.LabelFor(model => model.DataModel.UserName, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.DataModel.UserName, new { @class = "form-control", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(model => model.DataModel.UserName)
+                                <span id="username_check" class="field-validation-error"></span>
+                            </div>
+                        }
+                        <div class="col-md-3 col-sm-3 col-lg-3">
+                            @Html.LabelFor(model => model.DataModelMembership.IdHREmployeeRole, new { @class = "control-label" })
+                            @Html.DropDownListFor(model => model.DataModelMembership.IdHREmployeeRole, new SelectList(Model.DDLRole, "Key", "Value"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.DataModelMembership.IdHREmployeeRole)
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-lg-3">
+                            @Html.LabelFor(model => model.DataModel.SystemLanguage, new { @class = "control-label" })
+                            @Html.DropDownListFor(model => model.DataModel.SystemLanguage, new SelectList(Model.DDLSystemLanguage, "Key", "Value"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.DataModel.SystemLanguage)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="space-6"></div>
+        <div class="panel panel-default">
+            <div class="panel-heading"><h4 class="panel-title" id="Personal">व्यक्तिगत जानकारी</h4></div>
+            <div class="panel-body" id="PersonalInfo">
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <div class="col-md-9 col-sm-9 col-lg-9">
+                        <div class="form-group row">
+                            <div class="col-md-3 col-sm-3 col-lg-3">
+                                @Html.LabelFor(model => model.DataModel.IdEnroll, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.DataModel.IdEnroll, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DataModel.IdEnroll)
+                                <span id="check_idenroll" class="field-validation-error"></span>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-lg-3">
+                                @Html.LabelFor(model => model.DataModel.PISNumber, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.DataModel.PISNumber, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DataModel.PISNumber)
+                                <span id="check_pis" class="field-validation-error"></span>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-lg-3">
+                                @Html.LabelFor(model => model.DataModel.HREmployeeName, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.DataModel.HREmployeeName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DataModel.HREmployeeName)
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-lg-3">
+                                @Html.LabelFor(model => model.DataModel.HREmployeeNameNP, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.DataModel.HREmployeeNameNP, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DataModel.HREmployeeNameNP)
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-3 col-sm-3 col-lg-3">
+                                @Html.LabelFor(model => model.DataModel.IdGender, new { @class = "control-label" })
+                                @Html.DropDownListFor(model => model.DataModel.IdGender, new SelectList(Model.DDLGender, "Key", "Value"), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DataModel.IdGender)
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-lg-3">
+                                @Html.LabelFor(model => model.DataModel.BirthPlace, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.DataModel.BirthPlace, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DataModel.BirthPlace)
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-lg-3">
+                                @Html.LabelFor(model => model.DataModel.MobileNumber, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.DataModel.MobileNumber, new { @class = "form-control text-warning" })
+                                @Html.ValidationMessageFor(model => model.DataModel.MobileNumber)
+                                <span id="check_mobile" class="field-validation-error"></span>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-lg-3">
+                                @Html.LabelFor(model => model.DataModel.Email, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.DataModel.Email, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DataModel.Email)
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-3 col-sm-3 col-lg-3">
+                                @Html.LabelFor(model => model.DataModel.IdMarital, new { @class = "control-label" })
+                                @Html.DropDownListFor(model => model.DataModel.IdMarital, new SelectList(Model.DDLMaritalStatus, "Key", "Value"), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DataModel.IdMarital)
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-lg-3">
+                                @Html.LabelFor(model => model.DataModel.AppointmentDateNP, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.DataModel.AppointmentDateNP, new { @class = "form-control", @readonly = "readonly", @style = "cursor:pointer" })
+                                @Html.ValidationMessageFor(model => model.DataModel.AppointmentDateNP)
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-lg-3">
+                                @Html.LabelFor(model => model.DataModel.IdMotherTongue, new { @class = "control-label" })
+                                @Html.DropDownListFor(model => model.DataModel.IdMotherTongue, new SelectList(Model.DDLLanguage, "Key", "Value"), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DataModel.IdMotherTongue)
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-lg-3">
+                                @Html.LabelFor(model => model.DataModel.IdBloodGroup, new { @class = "control-label" })
+                                @Html.DropDownListFor(model => model.DataModel.IdBloodGroup, new SelectList(Model.DDLBloodGroup, "Key", "Value"), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DataModel.IdBloodGroup)
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-3 col-sm-3 col-lg-3">
+                                @Html.LabelFor(model => model.DataModel.IdHREmployeeReligion, new { @class = "control-label" })
+                                @Html.DropDownListFor(model => model.DataModel.IdHREmployeeReligion, new SelectList(Model.DDLReligion, "Key", "Value"), "चयन गर्नुहोस्", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DataModel.IdHREmployeeReligion)
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-lg-3">
+                                @Html.LabelFor(model => model.DataModel.DOBNP, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.DataModel.DOBNP, new { @class = "form-control", @readonly = "readonly", @style = "cursor:pointer" })
+                                @Html.ValidationMessageFor(model => model.DataModel.DOBNP)
+                            </div>
+                            @*<div class="col-md-3 col-sm-3 col-lg-3">
+                                    @Html.LabelFor(model => model.DataModel.Color, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.DataModel.Color, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.DataModel.Color)
+                                </div>*@
+                            <div class="col-md-3 col-sm-3 col-lg-3">
+                                @Html.LabelFor(model => model.DataModel.IsDisabled, new { @class = "control-label col-md-12 col-sm-12 col-lg-12" })
+                                @Html.CheckBoxFor(model => model.DataModel.IsDisabled, new { @class = "BSswitch" })
+                                @Html.ValidationMessageFor(model => model.DataModel.IsDisabled)
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-12 col-sm-12 col-lg-12">
+                                @Html.LabelFor(model => model.DataModel.Remark, new { @class = "control-label" })
+                                @Html.TextAreaFor(model => model.DataModel.Remark, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DataModel.Remark)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-lg-3 pull-right">
+                        <div class="form-group pull-right">
+                            <div class="form-inline" data-toggle="tooltip" data-placement="top" title="Please Upload Only JPG & PNG File & File Should be less than 1 mb in size">
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
+                                        <img src="@Model.DataModel.ImageName" style="width:150px;height:200px;" />
+                                    </div>
+                                    <div>
+                                        <span class="hidden">
+                                            <input type="file" name="ImageProfile">
+                                        </span>
+                                        <span id="DataModel.ImageName" class="field-validation-error"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //check PIS Number
+
+        $('#DataModel_PISNumber').keyup(function () {
+            delay(function () {
+                CheckPISNumber($(this).val(), $('#DataModelMembership_IdHREmployeeRole').val());
+            }, 2000, this);
+        });
+
+        function CheckPISNumber(Pisnumber, IdemployeeRole) {
+            if (Pisnumber.length > 2) {
+                $.ajax({
+                    url: '/HREmployeeManagement/CheckPISNumber_Json',
+                    type: 'GET',
+                    data: { pisNumber: Pisnumber, IdEmployeeRole: IdemployeeRole},
+                    dataType: 'JSON',
+                    success: function (result) {
+                        if (result == "Available") {
+                            $('#check_pis').text(Pisnumber + " " + result).css('color', 'green');
+                        }
+                        else {
+                            $('#DataModel_PISNumber').val('');
+                            $('#check_pis').text(Pisnumber + " " + result).css('color', 'red');
+                        }
+                    }
+                });
+            }
+            else {
+                $('#check_pis').text('').css('color', '');
+            }
+        }
+
+        //check IdEnroll From attendance Device
+
+        $('#DataModel_IdEnroll').keyup(function () {
+            debugger;
+            delay(function () {
+                CheckIdEnroll($(this).val(), $('#DataModel_IdHRCompany').val(), $('#DataModelMembership_IdHREmployeeRole').val());
+            }, 2000, this);
+        });
+
+        function CheckIdEnroll(IdEnroll, IdHRCompany, IdemployeeRole) {
+          if (IdEnroll.length > 1) {
+                $.ajax({
+                    url: '/HREmployeeManagement/CheckIDEnroll_Json',
+                    type: 'GET',
+                    data: { idEnroll: IdEnroll, idHRCompany: IdHRCompany, IdEmployeeRole: IdemployeeRole },
+                    dataType: 'JSON',
+                    success: function (result) {
+                        if (result == "Available") {
+                            $('#check_idenroll').text(IdEnroll + " " + result).css('color', 'green');
+                        }
+                        else {
+                            $('#DataModel_IdEnroll').val('');
+                            $('#check_idenroll').text(IdEnroll + " " + result).css('color', 'red');
+                        }
+                    }
+                });
+            }
+            else {
+                $('#check_idenroll').text('').css('color', '');
+            }
+        }
+
+        //check mobile number
+        $('#DataModel_MobileNumber').keyup(function () {
+            delay(function () {
+                CheckMobileNumber($(this).val());
+            }, 2000, this);
+        });
+        function CheckMobileNumber(MobileNumber) {
+            if (MobileNumber.length <=10) {
+                $.ajax({
+                    url: '/HREmployeeManagement/CheckMobileNumber_Json',
+                    type: 'GET',
+                    data: { mobileNumber: MobileNumber },
+                    dataType: 'JSON',
+                    success: function (result) {
+                        if (result == "Available") {
+                            $('#check_mobile').text(MobileNumber + " " + result).css('color', 'green');
+                        }
+                        else {
+                            $('#DataModel_MobileNumber').val('');
+                            $('#check_mobile').text(MobileNumber + " " + result).css('color', 'red');
+                        }
+                    }
+                });
+            }
+            else {
+                $('#check_mobile').text('').css('color', '');
+            }
+        }
+
+		//handling identity state and district
+        $('#DataModel_UserName').keyup(function () {
+            delay(function () {
+                CheckIsAvailable($(this).val());
+            }, 2000, this);
+        });
+
+		$('#DataModel_IdHRCompany').change(function () {
+			Populate($(this).val());
+        });
+
+		function CheckIsAvailable(UserName) {
+            if (UserName.length >2) {
+                $.ajax({
+                    url: '/@Model.BreadCrumbBaseURL' + '/_CheckUserNameAsync',
+                    type: 'GET',
+                    data: { UserName: UserName },
+                    dataType: 'json',
+                    success: function (result) {
+                        if (result == "Available") {
+                            $('#username_check').text(UserName + " " + result).css('color', 'green');
+                        }
+                        else {
+                            $('#DataModel_UserName').val('');
+                            $('#username_check').text(UserName + " " + result).css('color', 'red');
+                        }
+                    }
+                });
+            }
+            else {
+                $('#username_check').text('').css('color', '');
+            }
+		}
+    });
+
+	function Populate(idHRCompany)
+	{
+		$.ajax({
+			url: '/@Model.BreadCrumbBaseURL/GetRoleByCompany_Json',
+            type: 'GET',
+			data: { idHRCompany: idHRCompany},
+            dataType: 'json',
+			success: function (result) {
+				var options = $('#DataModelMembership_IdHREmployeeRole');
+				$('option', options).remove();
+				$.each(result, function () {
+					options.append($('<option/>').val(this.Key).text(this.Value));
+				});
+            }
+        });
+    }
+    var delay = (function () {
+        var timer = 0;
+        return function (callback, ms, that) {
+            clearTimeout(timer);
+            timer = setTimeout(callback.bind(that), ms);
+        };
+    })();
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        value = parseInt($('#DataModel_IdHRCompany').val(), 10) || 0;
+        if (value == 0) {
+            $('#hiddenfile').css('display', 'none');
+        }
+        if (value > 0) {
+            Populate($('#DataModel_IdHRCompany').val());
+        }
+        $('#DataModel_IdHRCompany').change(function () {
+            Populate($(this).val());
+        });
+       function Populate(idHRCompany)
+	    {
+		$.ajax({
+            url: '/@Model.BreadCrumbBaseURL/GetEmployeeParentsCompany',
+            type: 'GET',
+			data: { idHRCompany: idHRCompany},
+            dataType: 'json',
+            success: function (result) {
+                    var option = $('#ParentName').val(result).css('color', 'green');
+                    $('#hiddenfile').fadeIn('slow');
+            }
+        });
+	    }
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#DataModel_DOBNP').nepaliDatePicker({
+            npdMonth: true,
+            npdYear: true
+        });
+
+        $('#DataModel_AppointmentDateNP').nepaliDatePicker({
+            npdMonth: true,
+            npdYear: true
+            //onChange: function () {
+            //    var dateNP = $('#DataModel_AppointmentDateNP').val().split('-');
+            //    var retiredDate = (parseInt(dateNP[0]) + 58) + '-' + dateNP[1] + '-' + dateNP[2];
+            //    $('#DataModel_RetiredDateNP').val(retiredDate);
+            //}
+        });
+
+        $('#DataModel_RetiredDateNP').nepaliDatePicker({
+            npdMonth: true,
+            npdYear: true
+        });
+    });
+
+    $('select').select2({
+        width: '100%',
+        dropdownAutoWidth: true
+    });
+</script>

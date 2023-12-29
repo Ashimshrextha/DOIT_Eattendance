@@ -1,0 +1,77 @@
+﻿@model SystemViewModels.CompanyManagement.DashboardViewModelList
+
+@*<button type="button" id="btnPrint">print</button>*@
+<div class="table-responsive" id="printThis">
+	<div id='chart_div'@*style="transform: rotate(90deg);margin-top:100px"*@></div>
+	<script src="~/Scripts/jsapi-tree.js"></script>
+</div>
+<script type='text/javascript'>
+
+	google.load('visualization', '1', { packages: ['orgchart'] });
+	google.setOnLoadCallback(drawChart);
+	function drawChart() {
+		var data = new google.visualization.DataTable();
+		data.addColumn('string', 'Node');
+		data.addColumn('string', 'Parent');
+		data.addRows([
+			['@Model.TreeCompany.Value', ''],
+			@foreach (var node in Model.TreeCompany.Branch)
+				{
+					@RenderSubMenuRecursive(node,Model.TreeCompany.Value)
+				}
+		]);
+		var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
+		chart.draw(data);
+	}
+</script>
+
+@*<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('#btnPrint').click(function () {
+			$('#chart_div').printThis();
+		});
+	});
+	function ExcelReport(div) {
+		var myWindow = window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('div[id$=' + div + ']').html()), '', 'title:Absent Report');
+		e.preventDefault();
+	}
+</script>*@
+@helper RenderSubMenuRecursive(SystemStores.GlobalModels.TreeModel<long, string> node, string parent)
+{
+	var childNodes = node.Branch;
+	<text>['@node.Value', '@parent'],</text>
+	foreach (var childNode in childNodes)
+	{
+		@RenderSubMenuRecursive(childNode, node.Value)
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<div class="col-md-6">
+		@Html.Partial("_OfficeTypes")
+	</div>
+	<div class="col-md-6">
+		@Html.Partial("_Office")
+	</div>*@

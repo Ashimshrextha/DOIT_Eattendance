@@ -1,0 +1,26 @@
+﻿@model SystemViewModels.Reports.DashboardViewModelList
+<link href="~/Content/SuperAdminDasboard.css" rel="stylesheet" />
+<link href="~/Content/fullcalendercustom.css" rel="stylesheet" />
+<script src="~/Scripts/moment.min.js"></script>
+<script src="~/Scripts/fullcalendar.min.js"></script>
+
+<div id='calendar'></div>
+<script type="text/javascript">
+    debugger;
+    var curSource = new Array();
+    curSource[0] = '/Teacher/Attendance/GetTeacherAttendance';
+    $(document).ready(function () {
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month'
+            },
+            //defaultDate: '2018-08-29',
+            defaultView: 'month',
+            eventSources: [curSource[0]],
+            editable: true
+        });
+    });
+
+</script>

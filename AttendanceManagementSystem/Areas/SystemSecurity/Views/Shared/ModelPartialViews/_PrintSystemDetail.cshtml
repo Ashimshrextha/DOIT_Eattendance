@@ -1,0 +1,39 @@
+﻿@model SystemViewModels.SystemSecurity.SystemDetailViewModel
+
+<div id="printThis">
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th class="ace-icon">आईडी</th>
+                <th>शीर्षक</th>
+                <th>सारांश</th>
+                <th>कागजात</th>
+                <th>अपडेट गर्ने</th>
+                <th>अपडेट मिति</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+            {
+                <tr>
+                    <td class="ace-icon">@item.Id</td>
+                    <td>@item.SystemDetailCategory.CategoryTitle</td>
+                    <td>@item.Summary</td>
+                    <td>
+                        @item.Document
+                    </td>
+                    <td>@item.UpdatedBy</td>
+                    <td>@item.UpdatedOn</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>

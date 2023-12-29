@@ -1,0 +1,97 @@
+﻿@model SystemViewModels.SystemSecurity.HREmployeeAttendanceHistoryViewModelList
+@using AttendanceManagementSystem.Services;
+@using PagedList.Mvc;
+@{ 
+    int? idRoleType = CommonServices.UserSession().IdRoleType;
+    long? employeeiD = CommonServices.UserSession().IdHREmployee;
+
+    }
+
+<div id="replacetarget">
+    <div id="content" class="content">
+        <div class="dataTables_wrapper">
+            <div id="mask-container">
+                <div id="mask"></div>
+                <div class="table-responsive">
+                    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th class="text-center">आईडी</th>
+                                <th class="text-center">क. संकेत नं.</th>
+                                <th style="min-width:200px;">कर्मचारीको नाम</th>
+                                <th class="ace-icon">पद</th>
+                                <th class="ace-icon">शाखा/सेक्सन</th>
+                                <th class="text-center">मिति</th>
+                                <th class="text-center">आउने समय</th>
+                                <th class="text-center">आएको समय</th>
+                                <th class="text-center">ढिलो आएको</th>
+                                <th class="text-center">ढिलो आएको कारण</th>
+                                <th class="text-center">टिप्पणी</th>
+                                <th class="ace-icon">अवस्था</th>
+                                <th class="ace-icon">कार्य</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.DBModelList)
+                            {
+                                <tr>
+                                    <td class="text-center">@item.Id</td>
+                                    <td class="text-center">
+                                        <i class="ace-icon fa bigger-110 badge badge-yellow">@(item.HREmployee1?.PISNumber)</i>
+                                    </td>
+                                    <td class="blue" style="min-width:250px;">
+                                        <i class="fa bigger-130">@(item.HREmployee1?.HREmployeeNameNP)</i>
+                                    </td>
+                                    <td class="blue">
+                                        <i class="fa bigger-110">@(item.HREmployeeJobHistory?.HRDesignation?.HRDesignationTitle)</i>
+                                    </td>
+                                    <td class="blue">
+                                        <i class="fa bigger-110">@(item.HREmployeeJobHistory?.HRCompanyDivision?.HRCompanyDivisionName)</i>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="ace-icon fa bigger-110 badge badge-success">@item.AttendanceDate.DateNp()</i>
+                                    </td>
+                                    <td class="ace-icon">
+                                        <i class="ace-icon fa bigger-110 badge badge-success">@item.LogInTime</i>
+                                    </td>
+                                    <td class="ace-icon">
+                                        <i class="ace-icon fa bigger-110 badge badge-danger">@item.CheckInTime</i>
+                                    </td>
+                                    <td class="ace-icon">
+                                        <i class="ace-icon fa bigger-110 badge badge-danger">@item.LateBy</i>
+                                    </td>
+                                    <td class="green">
+                                        <i class="ace-icon fa bigger-110">@item.LateReason</i>
+                                    </td>
+                                    <td class="red">
+                                        <i class="ace-icon fa bigger-110">@item.Remark</i>
+                                    </td>
+                                    <td class="ace-icon">
+                                        <i class="ace-icon fa bigger-110 @(item.IsLateReasonApproved?" fa-thumbs-up green":"fa-thumbs-down red")"></i>
+                                    </td>
+                                    <td class="ace-icon action-buttons">
+                                        @if (item.IdApprovedBy== employeeiD)
+                                        {
+                                            <a href="@Url.Action("_UpdateHREmployeeLateAttendanceApprovedAsync", new { id = item.Id, pageNumber = Model.PageNumber, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey })" data-ajax-model="">
+                                                <i class="ace-icon fa fa-pencil green bigger-150" aria-hidden="true" title="Edit"></i>
+                                            </a>
+                                        }
+                                        <a href="@Url.Action("_ReadHREmployeeLateAttendanceApprovedAsync",new { id=item.Id,pageNumber=Model.PageNumber,pageSize=Model.PageSize,orderingBy=Model.OrderingBy,orderingDirection=Model.OrderingDirection,searchKey=Model.SearchKey})" data-ajax-model=""><i class="ace-icon fa fa-search-plus blue bigger-150" aria-hidden="true" title="View"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div aria-live="polite" role="status" id="example_info" class="dataTables_info">
+                    <div class="row">
+                        <div class="col-md-4">Showing @(Model.DBModelList.PageCount < Model.DBModelList.PageNumber ? 0 : Model.DBModelList.FirstItemOnPage) to @Model.DBModelList.LastItemOnPage of @Model.DBModelList.TotalItemCount entries in @Model.DBModelList.PageCount Pages</div>
+                        <div class="col-md-8 dataTables_paginate paging_simple_numbers" id="example_paginate">@Html.PagedListPager(Model.DBModelList, page => Url.Action("_ListHREmployeeLateAttendanceApprovedAsync", new { pageNumber = page, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey }))</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

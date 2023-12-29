@@ -1,0 +1,39 @@
+﻿@model SystemStores.GlobalModels.BreadCrumbModel
+@Html.HiddenFor(x => x.PageNumber)
+@Html.HiddenFor(x => x.PageSize)
+@Html.HiddenFor(x => x.OrderingBy)
+@Html.HiddenFor(x => x.OrderingDirection)
+<style>
+    .control-label {
+        margin-bottom: 0px
+    }
+
+    .form-control {
+        margin-top: -10px
+    }
+</style>
+<div class="ace-settings-container" id="ace-settings-container">
+    <div class="btn btn-app btn-xs btn-success ace-settings-btn" id="ace-settings-btn">
+        <i class="ace-icon fa fa-cog bigger-130"></i>
+    </div>
+    <div class="ace-settings-box clearfix" id="ace-settings-box">
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="form-group-mini">
+                @Html.LabelFor(model => model.IdHRCompany, new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.IdHRCompany, new SelectList(Model.DDLCompany, "Key", "Value", Model.SessionDetails.IdHRCompany), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdHRCompany)
+            </div>
+        </div>
+        <div class="pull-right">
+            <button class="btn btn-sm btn-success" id="Search_SystemPermissionByHREmployee">
+                Search
+            </button>
+            <button class="btn btn-sm btn-info" id="Export_SystemPermissionByHREmployee">
+                Export
+            </button>
+            <button class="btn btn-sm btn-default" id="Print_SystemPermissionByHREmployee" data-ajax-model="">
+                Print
+            </button>
+        </div><!-- /.pull-left -->
+    </div><!-- /.ace-settings-box -->
+</div><!-- /.ace-settings-container -->

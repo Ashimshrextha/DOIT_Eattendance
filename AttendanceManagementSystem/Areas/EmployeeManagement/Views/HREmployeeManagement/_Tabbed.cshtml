@@ -1,0 +1,245 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeViewModelList
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+@Html.HiddenFor(model => model.DBModel.Id)
+<style>
+    .nav-tabs > li > a {
+        line-height: unset
+    }
+</style>
+<div class="col-md-2">
+    <div class="panel panel-default">
+        <i style="display:none">@(Model.SessionDetails.IdHRCompany = (Model?.DBModel?.IdHRCompany)) </i>
+        <div class="panel-body">
+            <img class="center-block img-circle img-responsive img-thumbnail" src="@Model.DBModel.ImageName" alt="user-profile" height="100" width="100" />
+            <h4 class="text-center blue">
+                <i class="fa bigger-130">@(Model?.DBModel?.HREmployeeNameNP)</i>
+            </h4>
+            <h5 class="ace-icon green">
+                <i class="fa bigger-120">@(Model.DBModel.HREmployeeJobHistories.FirstOrDefault(x => x.IsCurrentStatus)?.HRDesignation?.HRDesignationTitle)</i>
+            </h5>
+            <h6 class="ace-icon red">
+                <i class="fa bigger-110">@(Model?.DBModel?.HREmployeeJobHistories?.FirstOrDefault(x => x.IsCurrentStatus)?.HREmployeePositionStatusType?.Title)</i>
+            </h6>
+            <hr />
+            <strong>आईडी</strong>
+            <p class="text-muted">
+                <i class="fa bigger-140 badge badge-success">@(Model?.DBModel?.Id)</i>
+            </p>
+            <strong> कर्मचारी संकेत नं.</strong>
+            <p class="text-muted"> <i class="fa bigger-140 badge badge-success">@(Model?.DBModel?.PISNumber)</i></p>
+            <strong>उपकरण आईडी</strong>
+            <p class="text-muted"> <i class="fa bigger-140 badge badge-success">@(Model?.DBModel?.IdEnroll)</i></p>
+            <strong>धर्म</strong>
+            <p class="text-muted"> <i class="fa bigger-140 badge badge-success">@(Model?.DBModel?.HREmployeeReligion?.Religion)</i></p>
+            <strong>मोबाइल</strong>
+            <p class="text-muted"> <i class="fa bigger-140 badge badge-success">@(Model?.DBModel?.MobileNumber)</i></p>
+            <strong>शुरु नियुक्ति मिति</strong>
+            <p class="text-muted"> <i class="fa bigger-140 badge badge-success">@(Model?.DBModel?.AppointmentDateNP)</i></p>
+            <strong>कार्यालय कोड</strong>
+            <p class="text-muted"> <i class="fa bigger-140 badge badge-success">@(Model.DBModel?.HRCompany?.HRCompanyCode?.HRCompanyCodeTitle)</i></p>
+        </div>
+    </div>
+</div>
+<div class="col-md-10">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <!-- Nav tabs -->
+            <ul id="tabstrip" class="nav nav-tabs">
+                <li class="active">
+                    <a href="#HREmployee" data-toggle="tab">
+                        व्यक्तिगत विवरण
+                    </a>
+                </li>
+                <li>
+                    <a href="#HREmployeeJobHistory" data-toggle="tab">
+                        जागिर विवरण
+                    </a>
+                </li>
+                <li>
+                    <a href="#HREmployeeLeaveSummary" data-toggle="tab">
+                        बिदा विवरण
+                    </a>
+                </li>
+                <li>
+                    <a href="#HREmployeekaajSummary" data-toggle="tab">
+                        काज विवरण
+                    </a>
+                </li>
+                <li>
+                    <a href="#HREmployeeBalanceLeave" data-toggle="tab">
+                        सञ्चित बिदा विवरण
+                    </a>
+                </li>
+                <li>
+                    <a href="#HREmployeeLogin" data-toggle="tab">
+                        लगइन विवरण
+                    </a>
+                </li>
+                <li>
+                    <a href="#HRCompanyHREmployeeShiftRoaster" data-toggle="tab">
+                        शिफ्ट रोस्टर
+                    </a>
+                </li>
+                <li>
+                    <a href="#HREmployeeLeaveManagement" data-toggle="tab">
+                        खर्च भएको बिदा
+                    </a>
+                </li>
+                <li>
+                    <a href="#HRCompanyAttendance" data-toggle="tab">
+                        म्यानुअल हाजिरी
+                    </a>
+                </li>
+
+
+
+                @*<li>
+            <a href="#HREmployeeFamilyDetails" data-toggle="tab">
+                परिवार विवरण
+            </a>
+        </li>
+        <li>
+            <a href="#HREmployeeCompanyFacility" data-toggle="tab">
+                कार्यालय सुविधा
+            </a>
+        </li>
+        <li>
+            <a href="#HREmployeeEducation" data-toggle="tab">
+                शिक्षा विवरण
+            </a>
+        </li>
+        <li>
+            <a href="#HREmployeeContact" data-toggle="tab">
+                सम्पर्क विवरण
+            </a>
+        </li>*@
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane fade in active" style="padding-top:10px;" id="HREmployee">
+                    @{ Html.RenderPartial("_ListWrapperHREmployeeAsync");}
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HREmployeeJobHistory">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HREmployeeLeaveSummary">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HREmployeekaajSummary">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HREmployeeBalanceLeave">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HREmployeeLogin">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HRCompanyHREmployeeShiftRoaster">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HREmployeeLeaveManagement">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HREmployeeLeaveManagement">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HREmployeeFamilyDetails">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HREmployeeCompanyFacility">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HREmployeeEducation">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HREmployeeContact">
+                </div>
+                <div class="tab-pane fade in" style="padding-top:10px;" id="HRCompanyAttendance">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$('#tabstrip a').click(function (e) {
+        e.preventDefault()
+        var tabID = $(this).attr("href").substr(1);
+        $(".tab-pane").each(function () {
+            $(this).empty();
+    });
+    var idEmployee = $('#DBModel_Id').val();
+    var sort = $('#OrderingBy').val();
+    var sortdir = $('#OrderingDirection').val();
+    var searchKey = $('#SearchKey').val();
+        switch (tabID) {
+            case 'HREmployee':
+				url = '/@Model.BreadCrumbBaseURL' + '/_ListWrapperHREmployeeAsync?idHREmployee= '+idEmployee + '&pageNumber=' + 1 + '&pageSize=' + 20 + '&orderingBy=' + sort + '&orderingDirection=' + sortdir + '&searchKey=' + searchKey;
+                break;
+			case 'HREmployeeFamilyDetails':
+				url = '/EmployeeManagement/HREmployeeFamilyDetails/_ListWrapperHREmployeeFamilyDetailsAsync?idHREmployee=' + idEmployee + '&pageNumber='  + 1 + '&pagesize=' + 20 + '&sort=' + sort + '&sortdir=' + sortdir + '&searchKey=' + searchKey;
+				break;
+			case 'HREmployeeCompanyFacility':
+				url = '/EmployeeManagement/HREmployeeCompanyFacility/_ListWrapperHREmployeeCompanyFacilityAsync?idHREmployee=' + idEmployee + '&pageNumber=' + 1 + '&pagesize=' + 20 + '&sort=' + sort + '&sortdir=' + sortdir + '&searchKey=' + searchKey;
+				break;
+			case 'HREmployeeEducation':
+				url = '/EmployeeManagement/HREmployeeEducation/_ListWrapperHREmployeeEducationAsync?idHREmployee=' + idEmployee + '&pageNumber=' + 1 + '&pagesize=' + 20 + '&sort=' + sort + '&sortdir=' + sortdir + '&searchKey=' + searchKey;
+                break;
+			case 'HREmployeeContact':
+                url = '/EmployeeManagement/HREmployeeContact/_ListWrapperHREmployeeContactAsync?idHREmployee=' + idEmployee + '&pageNumber=' + 1 + '&pagesize=' + 20 + '&sort=' + sort + '&sortdir=' + sortdir + '&searchKey=' + searchKey;
+                break;
+            case 'HREmployeeBalanceLeave':
+                url = '/EmployeeManagement/HREmployeeLeaveBalance/_ListWrapperHREmployeeLeaveBalanceAsync?idHREmployee=' + idEmployee + '&pageNumber=' + 1 + '&pagesize=' + 20 + '&sort=' + sort + '&sortdir=' + sortdir + '&searchKey=' + searchKey;
+                break;
+			case 'HREmployeeJobHistory':
+                url = '/EmployeeManagement/HREmployeeJobHistory/_ListWrapperHREmployeeJobAsync?idHREmployee='+idEmployee + '&pageNumber=' + 1 + '&pageSize=' + 20 + '&orderingBy=' + sort + '&orderingDirection=' + sortdir + '&searchKey=' + searchKey;
+                break;
+            case 'HREmployeeLeaveSummary':
+				url = '/EmployeeManagement/HREmployeeLeaveSummary/_ListWrapperLeaveSumaryAsync?idHREmployee=' + idEmployee + '&pageNumber=' + 1 + '&pageSize=' + 20 + '&orderingBy=' + sort + '&orderingDirection=' + 'DESC' + '&searchKey=' + searchKey;
+                break;
+            case 'HREmployeekaajSummary':
+                url = '/EmployeeManagement/HREmployeeKaajSummary/_ListWrapperKaajSumaryAsync?idHREmployee=' + idEmployee + '&pageNumber=' + 1 + '&pageSize=' + 20 + '&orderingBy=' + sort + '&orderingDirection=' + 'DESC' + '&searchKey=' + searchKey;
+                break;
+            case 'HREmployeeLogin':
+                url = '/EmployeeManagement/HREmployeeLogin/_ListWrapperHREmployeeLoginAsync?idHREmployee=' + idEmployee + '&pageNumber=' + 1 + '&pageSize=' + 20 + '&orderingBy=' + 'Id' + '&orderingDirection=' + sortdir + '&searchKey=' + searchKey;
+                break;
+            case 'HREmployeeRoaster':
+                url = '/EmployeeManagement/HREmployeeRoaster/_ListWrapperHREmployeeRoasterAsync?idHREmployee=' + idEmployee + '&pageNumber=' + 1 + '&pageSize=' + 20 + '&orderingBy=' + 'Id' + '&orderingDirection=' + sortdir + '&searchKey=' + searchKey;
+                break;
+            case 'HRCompanyHREmployeeShiftRoaster':
+                url = '/EmployeeManagement/HRCompanyHREmployeeShiftRoaster/_ListWrapperHRCompanyHREmployeeShiftRoasterAsync?idHREmployee=' + idEmployee + '&pageNumber=' + 1 + '&pageSize=' + 20 + '&orderingBy=' + 'Id' + '&orderingDirection=' + sortdir + '&searchKey=' + searchKey;
+                break;
+            case 'HREmployeeLeaveManagement':
+                url = '/EmployeeManagement/HREmployeeLeaveManagement/_ListWrapperHREmployeeLeaveManagementAsync?idHREmployee=' + idEmployee + '&pageNumber=' + 1 + '&pageSize=' + 20 + '&orderingBy=' + 'Id' + '&orderingDirection=' + sortdir + '&searchKey=' + searchKey;
+                break;
+              case 'HREmployeeBulkAttendanceApproved':
+                  url = '/CompanyManagement/HREmployeeBulkAttendanceApproved/_ListWrapperHREmployeeBulkAttendanceApprovedAsync?idHREmployee=' + idEmployee + '&pageNumber=' + 1 + '&pageSize=' + 10 + '&orderingBy=' + 'Id' + '&orderingDirection=' + sortdir + '&searchKey=' + searchKey;
+                break;
+             case 'HRCompanyAttendance':
+                url = '/EmployeeManagement/HRCompanyAttendance/_ListWrapperHRCompanyAttendanceAsync?idHREmployee=' + idEmployee + '&pageNumber=' + 1 + '&pageSize=' + 10 + '&orderingBy=' + 'Id' + '&orderingDirection=' + sortdir + '&searchKey=' + searchKey;
+                break;
+
+
+
+            default:
+                url = "";
+                break;
+        }
+        if (url != "") {
+            var $loading = $('<img src="/images/Icon/ajaxLoading.gif" alt="loading" class="ui-loading-icon img_loading_center">');
+            $("#" + tabID).html($loading);
+            $.ajax({
+                url: url,
+                cache: false,
+                type: "GET",
+                dataType: "html",
+                success: function (result) {
+                    if (result == '"_Login_"') {
+                        window.location = "/Account/Login";
+                        return;
+                    }
+                    $("#" + tabID).html(result);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    if (xhr.status == parseInt(500)) {
+                    window.location = "/Account/Login";
+                    return;
+                }
+                }
+            });
+            $(this).tab('show')
+        }
+    });</script>

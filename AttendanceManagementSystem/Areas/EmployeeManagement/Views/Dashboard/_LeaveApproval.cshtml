@@ -1,0 +1,44 @@
+﻿@model SystemViewModels.EmployeeManagement.DashboardViewModelList
+
+<div class="panel panel-primary" style="border-radius:1em">
+    <div class="panel-heading panel-heading" style="border-radius:1em">
+        <h3 class="panel-title" style="text-align:center!important">बिदा स्वीकृत</h3>
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th class="text-center">कर्मचारीको नाम</th>
+                        <th class="text-center">बिदा</th>
+                        <th class="ace-icon">शुरुको मिति</th>
+                        <th class="ace-icon">अन्तिम मिति</th>
+                        <th class="ace-icon">पद</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.DBEmployeeLeaveApprovalDetail)
+                    {
+                        <tr>
+                            <td class="ace-icon">
+                                <i class="ace-icon fa bigger-130">@item.HREmployeeNameNP</i>
+                            </td>
+                            <td class="ace-icon">
+                                <i class="ace-icon fa bigger-120">@item.HRCompanyLeaveTitle</i>
+                            </td>
+                            <td class="ace-icon">
+                                <i class="fa bigger-110 badge badge-success">@item.LeaveValidFromNP</i>
+                            </td>
+                            <td class="ace-icon">
+                                <i class="fa bigger-110 badge badge-danger">@item.LeaveValidToNP</i>
+                            </td>
+                            <td class="ace-icon">
+                                <i class="ace-icon fa bigger-110 badge badge-grey">@item.HRDesignationShortName</i>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

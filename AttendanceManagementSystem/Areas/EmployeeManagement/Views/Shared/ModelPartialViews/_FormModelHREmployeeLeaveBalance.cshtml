@@ -1,0 +1,122 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeLeaveBalanceViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+@{ 
+    var LastYear = Model.lastYearNp;
+}
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.IdHRCompany)
+@Html.HiddenFor(model => model.IdHREmployee)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+        <div class="table-responsive">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                        <div class="form-group row">
+                            <div class="col-md-3 col-sm-3 col-lg-3 col-xs-12">
+                                @Html.LabelFor(model => model.DataModel.IdHREmployee, new { @class = "control-label" })
+
+                                <select class="form-control" data-val="true" data-val-number="The field कर्मचारी must be a number." data-val-required="The कर्मचारी field is required." id="DataModel_IdHREmployee" name="DataModel.IdHREmployee">
+                                </select>
+
+                                @*@Html.DropDownListFor(model => model.DataModel.IdHREmployee, new SelectList(Model.DDLEmployee, "Key", "Value"), new { @class = "form-control" })*@
+
+
+
+                                @Html.ValidationMessageFor(model => model.DataModel.IdHREmployee)
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-lg-3 col-xs-12">
+                                @Html.LabelFor(model => model.DataModel.IdMasterLeaveTitle, new { @class = "control-label" })
+
+                                <select class="form-control" data-val="true" data-val-number="The field बिदाको प्रकार must be a number." data-val-range="Select बिदाको प्रकार" data-val-range-max="Infinity" data-val-range-min="1" data-val-required="कृपया  बिदाको प्रकार चयन गर्नुहोस्" id="DataModel_IdMasterLeaveTitle" name="DataModel.IdMasterLeaveTitle">
+                                </select>
+                                @*@Html.DropDownListFor(model => model.DataModel.IdMasterLeaveTitle, new SelectList(Model.DDLLeaveType, "Key", "Value", Model.DataModel.IdMasterLeaveTitle), new { @class = "form-control" })*@
+
+
+
+                                @Html.ValidationMessageFor(model => model.DataModel.IdMasterLeaveTitle)
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-lg-3 col-xs-12">
+                                @Html.LabelFor(model => model.DataModel.LeaveYear, new { @class = "control-label" })
+                                @Html.DropDownListFor(model => model.DataModel.LeaveYear, new SelectList(Model.DDLYearNp.Where(x => x.Key == LastYear), "Key", "Value"), new { @class = "form-control" })
+
+
+                                @Html.ValidationMessageFor(model => model.DataModel.LeaveYear)
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-lg-3 col-xs-12">
+                                @Html.LabelFor(model => model.DataModel.TotalLeave, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.DataModel.TotalLeave, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DataModel.TotalLeave)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+
+
+        if (@Model.DataModel.IdHREmployee> 0) {
+            let IdHRCompany = @Model.IdHRCompany;
+            let IdHREmployee = @Model.DataModel.IdHREmployee;
+
+            let IdMasterLeaveTitle = @Model.DataModel.IdMasterLeaveTitle;
+            let LeaveYear = @Model.DataModel.LeaveYear;
+            $.ajax({
+                url: "/HREmployeeLeaveBalance/DetailsList?IdHRCompany=" + IdHRCompany + "&IdHREmployee=" + IdHREmployee,
+                type: "GET",
+                cache: true,
+                success: function (response) {
+
+                    $.each(response.dDLEmployee, function (key, value) {
+                        if (value.Key == IdHREmployee)
+                        {
+                            console.log(value.Key)
+                            $('#DataModel_IdHREmployee').append("<option selected='selected' value='" + value.Key + "'>" + value.Value + "</option>");
+                        } else
+                        {
+                            $('#DataModel_IdHREmployee').append("<option value='" + value.Key + "'>" + value.Value + "</option>");
+                        }
+                    })
+                    $.each(response.dDLLeaveType, function (key, value) {
+                        if (value.Key == IdMasterLeaveTitle) {
+                            console.log(value.Key)
+                            $('#DataModel_IdMasterLeaveTitle').append("<option selected='selected' value='" + value.Key + "'>" + value.Value + "</option>");
+                        }
+                        else
+                        {
+                            $('#DataModel_IdMasterLeaveTitle').append("<option value='" + value.Key + "'>" + value.Value + "</option>");
+
+                        }
+                    })
+
+
+                }
+
+            });
+         
+
+
+
+        }
+
+
+    });
+
+
+</script>

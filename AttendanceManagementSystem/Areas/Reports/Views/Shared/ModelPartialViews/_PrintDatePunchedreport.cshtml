@@ -1,0 +1,52 @@
+﻿@model SystemViewModels.DeviceManagement.DatePunchedReportViewModel
+
+<div id="printThis">
+    @{ Html.RenderPartial("~/Views/Shared/_ReportHeader.cshtml", Model.Header);}
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th colspan="3" class="text-center">कर्मचारीको</th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th class="text-center">संकेत नं.</th>
+                <th style="min-width:200px;">नाम</th>
+                <th class="ace-icon">पद</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelCollection)
+            {
+                <tr>
+                    <td class="blue ace-icon">
+                        <i class="ace-icon fa bigger-110">@item.PISNumber</i>
+                    </td>
+                    <td>
+                        @(item.EmployeeName)
+                    </td>
+                    <td class="ace-icon blue">
+                        <i class="ace-icon fa bigger-110">@item.HRDesignationShortName</i>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>
+<script type="text/javascript">
+    function ExcelReport(div) {
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('div[id$=' + div + ']').html()));
+        e.preventDefault();
+    }
+</script>
+

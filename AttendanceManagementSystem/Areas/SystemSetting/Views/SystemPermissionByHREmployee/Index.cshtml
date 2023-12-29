@@ -1,0 +1,75 @@
+﻿@model SystemViewModels.SystemSetting.SystemPermissionByHREmployeeViewModelList
+@{
+	ViewBag.Title = Model.HeaderTitle;
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id='myModal' class='modal fade in'>
+	<div class="modal-dialog modal-dialog-fullwidth">
+		<div class="modal-content">
+			<div id='myModalContent'></div>
+		</div>
+	</div>
+</div>
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+	@Html.Partial("_Action");
+	<ul class="breadcrumb">
+		<li>
+			<i class="ace-icon fa fa-home home-icon"></i>
+			<a href="~/@Model.BreadCrumbArea/@Model.BreadCrumbController">@Model.BreadCrumbArea</a>
+		</li>
+		<li class="active">@Model.BreadCrumbTitle</li>
+	</ul><!-- /.breadcrumb -->
+	<div class="nav-search" id="nav-search">
+		<form class="form-search">
+			<span class="input-icon">
+				@Html.DropDownListFor(model => model.PageNumber, new SelectList(AttendanceManagementSystem.Services.CommonServices.PageNumber), new { @class = "nav-search-input", @style = "width:55px;" })
+			</span>
+			<span class="input-icon">
+				<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+				<i class="ace-icon fa fa-search nav-search-icon"></i>
+			</span>
+		</form>
+	</div><!-- /.nav-search -->
+</div>
+<div class="page-content">
+	<div class="row">
+		<div id="replacetarget_@Model.BreadCrumbController">
+			@{ Html.RenderPartial("_ListSystemPermissionByHREmployeeAsync");}
+		</div>
+	</div><!-- /.row -->
+</div><!-- /.page-content -->
+
+<script type="text/javascript">
+$(document).ready(function () {
+    $('#PageNumber').change(function () {
+        $('table,#mask').addClass('loading');
+        $.ajax({
+            url: '/@Model.BreadCrumbBaseURL/_ListSystemPermissionByHREmployeeAsync',
+            type: 'GET',
+            data: { pageNumber: 1, pageSize: $(this).val(), orderingBy: '@Model.OrderingBy', orderingDirection: '@Model.OrderingDirection', searchKey:''},
+            success: function (result) {
+                if (result == '"_Login_"') {
+                    window.location = "/Account/Login";
+                    return;
+                }
+                $('#content').html(result);
+                $('table,#mask').removeClass('loading');
+            }
+        });
+    });
+    $(function () {
+		$.ajaxSetup({ cache: false });
+			$('#Search_SystemPermissionByHREmployee').click(function (e) {
+				var url;
+				url = '/@Model.BreadCrumbBaseURL' + '/_ListSystemPermissionByHREmployeeAsync?idHRCompany=' + $('#IdHRCompany').val();
+				$.get(url, function (data) {
+					$('#replacetarget_@Model.BreadCrumbController').html(data);
+            });
+            return false;
+        });
+    });
+});
+</script>
+
+

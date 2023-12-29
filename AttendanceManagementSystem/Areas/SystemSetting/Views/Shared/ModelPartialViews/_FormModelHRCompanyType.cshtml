@@ -1,0 +1,50 @@
+﻿@model SystemViewModels.SystemSetting.HRCompanyTypeViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+<div class="row">
+    
+    <div class="row col-md-12 col-sm-12 col-lg-12 form-group">
+        <div class="col-md-3 col-sm-3 col-lg-3">
+            @Html.LabelFor(model => model.DataModel.IdParent_CompanyType, new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.DataModel.IdParent_CompanyType, new SelectList(Model.DDLCompanyType,"Key","Value"), "--सबै--", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DataModel.IdParent_CompanyType)
+        </div>
+        <div class="col-md-3 col-sm-3 col-lg-3">
+            @Html.LabelFor(model => model.DataModel.CompanyType, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.DataModel.CompanyType, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DataModel.CompanyType)
+        </div>
+        <div class="col-md-3 col-sm-3 col-lg-3">
+            @Html.LabelFor(model => model.DataModel.CompanyTypeShortName, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.DataModel.CompanyTypeShortName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DataModel.CompanyTypeShortName)
+        </div>
+    </div>
+    <div class="row col-md-12 col-sm-12 col-lg-12 form-group">
+        <div class="col-md-3 col-sm-3 col-lg-3">
+            @Html.LabelFor(model => model.DataModel.OrderBy, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.DataModel.OrderBy, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DataModel.OrderBy)
+        </div>
+        <div class="col-md-3 col-sm-3 col-lg-3">
+            @Html.LabelFor(model => model.DataModel.IsActive, new { @class = "control-label" })
+            @Html.CheckBoxFor(model => model.DataModel.IsActive, new { @class = "BSswitch" })
+            @Html.ValidationMessageFor(model => model.DataModel.IsActive)
+        </div>
+    </div>
+</div>
+<script>
+    $('select').select2({
+        width: '100%',
+        dropdownAutoWidth: true
+    });
+</script>

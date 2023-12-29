@@ -1,0 +1,109 @@
+﻿@model SystemViewModels.Reports.EarlyCheckoutAttendanceReportViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.DataModel.AttendanceDate)
+@Html.HiddenFor(model => model.DataModel.IdHREmployee)
+@Html.HiddenFor(model => model.DataModel.IdHRCompanyDivision)
+@Html.HiddenFor(model => model.DataModel.IdApprovedBy)
+@Html.HiddenFor(model => model.DataModel.IdHRCompany)
+@Html.HiddenFor(model => model.DBModelEmployee.HREmployeeName)
+
+
+
+<div class="col-md-12 col-sm-12 col-lg-12">
+    <table class="table table-border table-hover">
+        <colgroup>
+            <col style="width:24%" />
+            <col style="width:1%" />
+            <col style="width:75%" />
+        </colgroup>
+        <tbody>
+            <tr>
+                <th class="text-right">@Html.Label("कार्यालय", new { @class = "control-label" })</th>
+                <th>:</th>
+                <td>
+                    @Html.DisplayFor(model => model.DBModelEmployee.CompanyName, new { @class = "form-control" })
+                </td>
+            </tr>
+            <tr>
+                <th class="text-right">@Html.Label("शाखा/सेक्सन", new { @class = "control-label" })</th>
+                <th>:</th>
+                <td>
+                    @Html.DisplayFor(model => model.DBModelEmployee.HRCompanyDivisionName, new { @class = "form-control" })
+                </td>
+            </tr>
+            <tr>
+                <th class="text-right">@Html.Label("पद", new { @class = "control-label" })</th>
+                <th>:</th>
+                <td>
+                    @Html.DisplayFor(model => model.DBModelEmployee.HRDesignationTitle, new { @class = "form-control" })
+                </td>
+            </tr>
+            <tr>
+                <th class="text-right"> @Html.Label("कर्मचारीको नाम", new { @class = "control-label" })</th>
+                <th>:</th>
+                <td>
+                    @Html.DisplayFor(model => model.DBModelEmployee.HREmployeeName, new { @class = "form-control" })
+                </td>
+            </tr>
+            <tr>
+                <th class="text-right"> @Html.LabelFor(model => model.DataModel.AttendanceDate, new { @class = "control-label" })</th>
+                <th>:</th>
+                <td>
+                    @Model.DataModel.AttendanceDate.DateNp()
+                </td>
+            </tr>
+            <tr>
+                <th class="text-right"> @Html.LabelFor(model => model.DataModel.LogInTime, new { @class = "control-label" })</th>
+                <th>:</th>
+                <td>
+                    @Html.DisplayFor(model => model.DataModel.LogInTime, new { @class = "form-control", @readonly = "readonly" })
+                </td>
+            </tr>
+            <tr>
+                <th class="text-right"> @Html.LabelFor(model => model.DataModel.CheckInTime, new { @class = "control-label" })</th>
+                <th>:</th>
+                <td>
+                    @Html.DisplayFor(model => model.DataModel.CheckInTime, new { @class = "form-control", @readonly = "readonly" })
+                </td>
+            </tr>
+            <tr>
+                <th class="text-right"> @Html.LabelFor(model => model.DataModel.CheckOutEarly, new { @class = "control-label" })</th>
+                <th>:</th>
+                <td>
+                    @Html.DisplayFor(model => model.DataModel.CheckOutEarly, new { @class = "form-control", @readonly = "readonly" })
+                </td>
+            </tr>
+            <tr>
+                <th class="text-right"> @Html.LabelFor(model => model.DataModel.CheckOutEarlyReason, new { @class = "control-label" })</th>
+                <th>:</th>
+                <td>
+                    @Html.TextAreaFor(model => model.DataModel.CheckOutEarlyReason, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.DataModel.CheckOutEarlyReason)
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th class="text-right">@Html.LabelFor(model => model.DataModel.IsCheckOutEarlyReasonApproved, new { @class = "control-label" })</th>
+                <th>:</th>
+                <td>
+                    @Html.CheckBoxFor(model => model.DataModel.IsCheckOutEarlyReasonApproved, new { @class = "form-control switchYesNo" })
+                    @Html.ValidationMessageFor(model => model.DataModel.IsCheckOutEarlyReasonApproved)
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+

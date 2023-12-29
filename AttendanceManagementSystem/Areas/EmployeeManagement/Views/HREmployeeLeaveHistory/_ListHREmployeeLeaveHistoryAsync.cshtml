@@ -1,0 +1,97 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeLeaveHistoryViewModelList
+@using PagedList.Mvc;
+<div id="replacetarget">
+    <div id="content" class="content">
+        <div class="dataTables_wrapper">
+            <div id="mask-container">
+                <div id="mask"></div>
+                <div class="table-responsive">
+                    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th class="ace-icon">आईडी</th>
+                                <th class="ace-icon">कार्यालय</th>
+                                <th class="ace-icon">क.संकेत नं.</th>
+                                <th>कर्मचारी नाम</th>
+                                <th>विदाको प्रकार </th>
+                                <th>आवेदन मिति</th>
+                                <th class="ace-icon">शुरुको मिति</th>
+                                <th class="ace-icon">अन्तिम मिति</th>
+                                <th class="ace-icon">सिफारिस गर्ने</th>
+                                <th class="ace-icon">स्वीकृत गर्ने</th>
+                                <th class="ace-icon">अवस्था</th>
+                                <th class="ace-icon">कार्य</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.DBModelList)
+                            {
+                            <tr>
+                                <td class="ace-icon">
+                                    <i class="fa bigger-100 badge badge-info">@item.Id</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="fa bigger-120 badge badge-yellow">@(item.HRCompany?.HRCompanyCode?.HRCompanyCodeTitle)</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="fa bigger-110 badge badge-yellow">@(item.HREmployee1?.PISNumber)</i>
+                                </td>
+                                <td class="blue">
+                                    <i class="fa bigger-130">@(item.HREmployee1?.HREmployeeNameNP)</i>
+                                </td>
+                                <td class="blue">
+                                    <i class="fa bigger-120">@(item.MasterLeaveTitle?.LeaveTitleNP)</i>
+                                </td>
+
+                                <td class="blue">
+                                    <i class="fa bigger-110 badge badge-yellow">@(string.Format("{0:yyyy-MM-dd}", item.CreatedOn.DateNp()))</i>
+                                </td>
+
+                                <td class="ace-icon">
+                                    <i class="fa bigger-110 badge badge-success">@item.LeaveValidFromNP</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="fa bigger-110 badge badge-danger">@item.LeaveValidToNP</i>
+                                </td>
+                                <td class="blue">
+                                    <i class="fa bigger-120">@(item.HREmployee2?.HREmployeeNameNP)</i>
+                                </td>
+                                <td class="blue">
+                                    <i class="fa bigger-120">@(item.HREmployee?.HREmployeeNameNP)</i>
+                                </td>
+                                <td class="ace-icon">
+                                    <i class="ace-icon fa bigger-100 badge @(item.IdLeaveStatus==1||item.IdLeaveStatus==4?"badge-danger":"badge-success")">@item.HRCompanyLeaveStatusType.LeaveStatusTypeNP</i>
+                                </td>
+                                <td class="ace-icon action-buttons">
+                                    <a href="@Url.Action("_ReadHREmployeeLeaveHistoryAsync", new { id = item.Id, pageNumber = Model.PageNumber, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey })" data-ajax-model=""><i class="ace-icon fa fa-search-plus blue bigger-150" aria-hidden="true" title="View"></i></a>
+                                    @if (item.IdLeaveStatus == 1)
+                                    {
+                                        <a href="@Url.Action("_UpdateHREmployeeLeaveHistoryAsync", new { id = item.Id, pageNumber = Model.PageNumber, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey })" data-ajax-model="">
+                                            <i class="ace-icon fa fa-pencil green bigger-150" aria-hidden="true" title="Edit"></i>
+                                        </a>
+                                    }
+                                    @if (item.Document != null)
+                                    {
+                                        <a href="@Url.Action("DownloadDocumentAsync", new { id = item.HREmployee1.Id, FileName = item.Document })"><i class="ace-icon fa fa-download green bigger-150" aria-hidden="true" title="Download"></i></a>
+                                    }
+                                    @if (item.IdLeaveStatus == 1 || Model.SessionDetails.IdRoleType == 0)
+                                    {
+                                        <a href="@Url.Action("_DeleteHREmployeeLeaveHistoryAsync", new { id = item.Id, pageNumber = Model.PageNumber, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey })" data-ajax-model=""><i class="ace-icon fa fa-trash-o red bigger-150" aria-hidden="true" title="Delete"></i></a>
+                                    }
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div aria-live="polite" role="status" id="example_info" class="dataTables_info">
+                    <div class="row">
+                        <div class="col-md-4">Showing @(Model.DBModelList.PageCount < Model.DBModelList.PageNumber ? 0 : Model.DBModelList.FirstItemOnPage) to @Model.DBModelList.LastItemOnPage of @Model.DBModelList.TotalItemCount entries in @Model.DBModelList.PageCount Pages</div>
+                        <div class="col-md-8 dataTables_paginate paging_simple_numbers" id="example_paginate">@Html.PagedListPager(Model.DBModelList, page => Url.Action("_ListHREmployeeLeaveHistoryAsync", new { pageNumber = page, pageSize = Model.PageSize, orderingBy = Model.OrderingBy, orderingDirection = Model.OrderingDirection, searchKey = Model.SearchKey }))</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

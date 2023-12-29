@@ -1,0 +1,142 @@
+﻿@model SystemViewModels.Reports.YearlyAttendanceViewModel
+<style type="text/css">
+        @@media print,screen {
+            @@page {
+                margin: 0;
+                size: landscape !important;
+            }
+
+            body {
+                writing-mode: horizontal-tb;
+            }
+        }
+    </style>
+    <div id="printThis">
+        @{ Html.RenderPartial("~/Views/Shared/_ReportHeader.cshtml", Model.Header);}
+        <table class="table table-bordered" border="1" style="width:100%;margin:0px;">
+            <thead>
+                <tr>
+                    <th class="text-center" style="min-width:100px;height:60px;">महिना</th>
+                    <th class="text-center" style="min-width:40px;">१</th>
+                    <th class="text-center">२</th>
+                    <th class="text-center">३</th>
+                    <th class="text-center">४</th>
+                    <th class="text-center">५</th>
+                    <th class="text-center">६</th>
+                    <th class="text-center">७</th>
+                    <th class="text-center">८</th>
+                    <th class="text-center">९</th>
+                    <th class="text-center">१०</th>
+                    <th class="text-center">११</th>
+                    <th class="text-center">१२</th>
+                    <th class="text-center">१३</th>
+                    <th class="text-center">१४</th>
+                    <th class="text-center">१५</th>
+                    <th class="text-center">१६</th>
+                    <th class="text-center">१७</th>
+                    <th class="text-center">१८</th>
+                    <th class="text-center">१९</th>
+                    <th class="text-center">२०</th>
+                    <th class="text-center">२१</th>
+                    <th class="text-center">२२</th>
+                    <th class="text-center">२३</th>
+                    <th class="text-center">२४</th>
+                    <th class="text-center">२५</th>
+                    <th class="text-center">२६</th>
+                    <th class="text-center">२७</th>
+                    <th class="text-center">२८</th>
+                    <th class="text-center">२९</th>
+                    <th class="text-center">३०</th>
+                    <th class="text-center">३१</th>
+                    <th class="text-center" style="min-width:40px;">३२</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.DBModelList)
+                {
+                    <tr>
+                        <td class="text-center" style="min-width:100px;height:60px;">
+                            @item.NepaliMonth
+                        </td>
+                        <td style="background-color:@item.C1 ;">@item.A1 </td>
+                        <td style="background-color:@item.C2 ;">@item.A2 </td>
+                        <td style="background-color:@item.C3 ;">@item.A3 </td>
+                        <td style="background-color:@item.C4 ;">@item.A4 </td>
+                        <td style="background-color:@item.C5 ;">@item.A5 </td>
+                        <td style="background-color:@item.C6 ;">@item.A6 </td>
+                        <td style="background-color:@item.C7 ;">@item.A7 </td>
+                        <td style="background-color:@item.C8 ;">@item.A8 </td>
+                        <td style="background-color:@item.C9 ;">@item.A9 </td>
+                        <td style="background-color:@item.C10;">@item.A10</td>
+                        <td style="background-color:@item.C11;">@item.A11</td>
+                        <td style="background-color:@item.C12;">@item.A12</td>
+                        <td style="background-color:@item.C13;">@item.A13</td>
+                        <td style="background-color:@item.C14;">@item.A14</td>
+                        <td style="background-color:@item.C15;">@item.A15</td>
+                        <td style="background-color:@item.C16;">@item.A16</td>
+                        <td style="background-color:@item.C17;">@item.A17</td>
+                        <td style="background-color:@item.C18;">@item.A18</td>
+                        <td style="background-color:@item.C19;">@item.A19</td>
+                        <td style="background-color:@item.C20;">@item.A20</td>
+                        <td style="background-color:@item.C21;">@item.A21</td>
+                        <td style="background-color:@item.C22;">@item.A22</td>
+                        <td style="background-color:@item.C23;">@item.A23</td>
+                        <td style="background-color:@item.C24;">@item.A24</td>
+                        <td style="background-color:@item.C25;">@item.A25</td>
+                        <td style="background-color:@item.C26;">@item.A26</td>
+                        <td style="background-color:@item.C27;">@item.A27</td>
+                        <td style="background-color:@item.C28;">@item.A28</td>
+                        <td style="background-color:@item.C29;">@item.A29</td>
+                        <td style="background-color:@item.C30;">@item.A30</td>
+                        <td style="background-color:@item.C31;">@item.A31</td>
+                        <td style="background-color:@item.C32;">@item.A32</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @{ Html.RenderPartial("~/Views/Shared/_ReportFooter.cshtml", Model.Header);}
+    </div>
+
+
+@*<script>
+        $('#btnPrint').click(function () {
+            var mywindow = window.open('', 'प्रिन्ट', 'height=1200,width=1200');
+            mywindow.document.write('<html><head><title>e-Attendance System बाट प्रिन्ट गरिएको</title>');
+            mywindow.document.write('</head><body >');
+            mywindow.document.write($(document.getElementById("printThis")).html());
+            mywindow.document.write('</body></html>');
+            mywindow.focus();
+            mywindow.print();
+        });
+    </script>*@
+<script type="text/javascript">
+    function ExcelReport(div) {
+        //window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('div[id$=' + div + ']').html()));
+        //e.preventDefault();
+          var y = $('div[id$=' + div + ']');
+        var z = $('.non-print', y).remove();
+        //$('.print', y).remove();
+        console.log(z);
+        var x = encodeURIComponent($('div[id$=' + div + ']').html());
+        var z = $('.non-print', y).remove();
+        debugger
+        window.open('data:application/vnd.ms-excel,' + x);
+        e.preventDefault();
+    }
+</script>
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('table').on('scroll', function () {
+            $("#" + this.id + " > *").width($(this).width() + $(this).scrollLeft());
+        });
+    });
+</script>
+

@@ -1,0 +1,82 @@
+﻿@model SystemViewModels.EmployeeManagement.HREmployeeLeaveBalanceViewModelList
+@using SystemStores.GlobalMethod;
+@using SystemStores.ENUMData;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="~/@Model.BreadCrumbBaseURL">@Model.BreadCrumbArea</a>
+        </li>
+        <li class="active">@Model.BreadCrumbTitle</li>
+    </ul><!-- /.breadcrumb -->
+    <div class="nav-search" id="nav-search">
+        <form class="form-search">
+
+            <span class="input-icon">
+                <a class="nav-search-input" href="@Url.Action("_PrintHREmployeeLeaveBalanceAsync", new { controller = Model.BreadCrumbController })" data-ajax-model="">
+                    <i class="ace-icon fa fa-print nav-search-icon">@SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Print)</i>
+                </a>
+            </span>
+          
+            <span class="input-icon">
+                <a class="nav-search-input" href="~/@Model.BreadCrumbBaseURL/_ExportHREmployeeLeaveBalanceAsync">
+                    <i class="ace-icon fa fa-file-excel-o nav-search-icon">@SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Export)</i>
+                </a>
+            </span>
+            @if (Model.SessionDetails.IdRoleType < 3)
+            {
+                <span class="input-icon">
+                    <a class="nav-search-input" href="#" id="Create_HRLeaveBalance">
+                        <i class="ace-icon fa fa-plus  nav-search-icon">@SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Create)</i>
+                    </a>
+                </span>
+            }
+            </form>
+    </div><!-- /.nav-search -->
+</div>
+<div class="page-content">
+    @{ Html.RenderPartial("_SettingContainer");}
+    <div class="row">
+        <div id="replacetarget_@Model.BreadCrumbController" class="col-xs-12">
+            @{ Html.RenderPartial("_ListHREmployeeLeaveBalanceAsync");}
+        </div>
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#PageNumber').change(function () {
+        $('table,#mask').addClass('loading');
+        $.ajax({
+            url: '/@Model.BreadCrumbBaseURL/_ListHREmployeeLeaveBalanceAsync',
+            type: 'GET',
+            data: { pageNumber: 1, pageSize: $(this).val(), orderingBy: '@Model.OrderingBy', orderingDirection: '@Model.OrderingDirection', searchKey:''},
+            success: function (result) {
+                if (result == '"_Login_"') {
+                    window.location = "/Account/Login";
+                    return;
+                }
+                $('#content').html(result);
+                $('table,#mask').removeClass('loading');
+            }
+        });
+    });
+        $(function () {
+        $.ajaxSetup({ cache: false });
+            $('#Create_HRLeaveBalance').click(function (e) {
+            var url;
+                url = '/@Model.BreadCrumbBaseURL' + '/_CreateHREmployeeLeaveBalanceAsync';
+            $('#myModalContent').load(url, function () {
+                $('#myModal').modal({
+                    keyboard: true
+                }, 'show');
+                bindAjaxForm(this);
+            });
+            return false;
+        });
+        });
+    });
+</script>
+

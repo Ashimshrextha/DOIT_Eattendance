@@ -1,0 +1,247 @@
+﻿@model SystemStores.GlobalModels.BreadCrumbModel
+@using SystemStores.GlobalMethod;
+@using SystemStores.ENUMData;
+@Html.HiddenFor(x => x.Date)
+<style>
+
+    .control-label {
+        margin-bottom: 0px
+    }
+
+    .form-control {
+        margin-top: -10px
+    }
+</style>
+<div class="ace-settings-container" id="ace-settings-container">
+    <div class="btn btn-app btn-xs btn-success ace-settings-btn" id="ace-settings-btn">
+        <i class="ace-icon fa fa-cog bigger-130"></i>
+    </div>
+    <div class="ace-settings-box clearfix" id="ace-settings-box">
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="form-group-mini" id="hiddenfile">
+                @Html.Label("ParentOrganization", new { @class = "control-label" })
+                <input type="text" readonly="readonly" class="form-control" id="ParentName" value="" />
+            </div>
+        </div>
+
+        <br />
+        <br />
+
+        <input id="textBrow" list="brow" class="form-control" placeholder="कार्यालय खोज्नुहोस् !">
+        <datalist id="brow">
+
+            <select class="form-control select2-hidden-accessible" data-val="true" data-val-number="The field कार्यालय must be a number." id="companyList" name="IdHRCompany" data-select2-id="select2-data-tmp" tabindex="-1" aria-hidden="true">
+            </select>
+
+
+          @*  @Html.DropDownListFor(model => model.IdHRCompany, new SelectList(Model.DDLCompany, "Key", "Value"), new { @id = "tmp", @class = "form-control" })*@
+
+        </datalist>
+
+
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="form-group-mini">
+                @Html.LabelFor(model => model.IdHRCompany, new { @class = "control-label" })
+
+                <select class="form-control select2-hidden-accessible" id="IdHRCompany" name="IdHRCompany" data-select2-id="select2-data-IdHRCompany" tabindex="-1" aria-hidden="true">
+                    </select>
+                   @* @Html.DropDownListFor(model => model.IdHRCompany, new SelectList(Model.DDLCompany, "Key", "Value"), new { @class = "form-control" })*@
+
+
+
+                    @Html.ValidationMessageFor(model => model.IdHRCompany)
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="form-group-mini">
+                @Html.LabelFor(model => model.IdDivision, new { @class = "control-label" })
+                
+                <select class="form-control select2-hidden-accessible" data-val="true" data-val-number="The field शाखा/सेक्सन must be a number." id="IdDivision" name="IdDivision" data-select2-id="select2-data-IdDivision" tabindex="-1" aria-hidden="true">
+                </select>
+                @*@Html.DropDownListFor(model => model.IdDivision, new SelectList(Model.DDLDivision, "Key", "Value"), new { @class = "form-control" })*@
+                @Html.ValidationMessageFor(model => model.IdDivision)
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="form-group-mini">
+                @Html.LabelFor(model => model.IdJobStatus, new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.IdJobStatus, new SelectList(Model.DDLHREmployeePositionStatusType, "Key", "Value"), "--सबै--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdJobStatus)
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="form-group-mini">
+                @Html.LabelFor(model => model.DateNp, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DateNp, "{0:yyyy-MM-dd}", new { @Value = Model.DateNp, @class = "form-control", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.DateNp)
+            </div>
+        </div>
+        <div class="pull-right">
+            <button class="btn btn-sm btn-success" id="Search_AbsentReport">
+                @SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Search)
+            </button>
+            <button class="btn btn-sm btn-info" id="Print_AbsentReport">
+                @SystemGlobalMethod.GetButtonText(EnumGlobal.SubmitButtonText.Print)
+            </button>
+        </div><!-- /.pull-left -->
+    </div><!-- /.ace-settings-box -->
+</div><!-- /.ace-settings-container -->
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("input#textBrow").focusout(function () {
+            debugger;
+            var id = $(this).val();
+            $('#IdHRCompany').val(id);
+            $(this).val($('#IdHRCompany option:selected').text());
+            $('#IdHRCompany').trigger('change');
+         //  alert($('#IdHRCompany').val());
+           
+
+        });
+      
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#IdHRCompany').change(function () {
+            populateDivision($(this).val());
+            populateEmployee($(this).val(), 0);
+            PopulateParentCompany($(this).val());
+        });
+        $('#IdDivision').change(function () {
+            populateEmployee($('#IdHRCompany').val(), $(this).val());
+        });
+        $(function () {
+            $.ajaxSetup({ cache: false });
+			$('#Search_AbsentReport').click(function (e) {
+                var $loading = $('<img src="/images/Icon/ajaxLoading.gif" alt="loading..." class="ui-loading-icon img_loading_center">');
+                $("#replacetarget_@Model.BreadCrumbController").html($loading);
+                $.ajax({
+					url: '/@Model.BreadCrumbBaseURL' + '/_ListAbsentReportAsync',
+                    data:
+                    {
+						idHRCompany: $('#IdHRCompany').val(),
+                        idDivision: $('#IdDivision').val(),
+                        idJobStatus: $('#IdJobStatus').val(),
+                        idHREmployee: $('#IdHREmployee').val(),
+                        dateNP: $('#DateNp').val(),
+                        pageNumber: '@Model.PageNumber',
+						pageSize: $('#PageSize').val(),
+						orderingBy: '@Model.OrderingBy',
+						orderingDirection:'@Model.OrderingDirection',
+                        searchKey: $('#SearchKey').val()
+                    },
+                    cache: false,
+                    type: "GET",
+                    dataType: "html",
+                    success: function (result) {
+                        if (result == '"_Login_"') {
+                            window.location = "/Account/Login";
+                            return;
+                        }
+                        $("#replacetarget_@Model.BreadCrumbController").html(result);
+                    }
+                });
+                return false;
+            });
+        });
+    });
+
+    $.ajax({
+        url: "/AbsentReport/CompanyList",
+        type: "GET",
+        cache: true,
+        success: function (response) {
+            $.each(response.list, function (key, value) {
+                $('#companyList').append("<option value='" + value.Key + "'>" + value.Value + "</option>");
+                $('#IdHRCompany').append("<option value='" + value.Key + "'>" + value.Value + "</option>");
+            })
+            $.each(response.dDLDivision, function (key, value) {
+                $('#IdDivision').append("<option value='" + value.Key + "'>" + value.Value + "</option>");
+            })
+            $.each(response.dDLEmployee, function (key, value) {
+                $('#IdHREmployee').append("<option value='" + value.Key + "'>" + value.Value + "</option>");
+            })
+
+
+        }
+
+    });
+	function populateDivision(IdHRCompany) {
+        $.ajax({
+            url: '@Model.BreadCrumbController/GetDivisionByCompany_Json',
+            type: 'GET',
+            dataType: 'JSON',
+            data: { idHRCompany: IdHRCompany },
+            success: function (result) {
+                var options = $('#IdDivision');
+                $('option', options).remove();
+                $.each(result, function () {
+                    options.append($('<option/>').val(this.Key).text(this.Value));
+                });
+            }
+        });
+    }
+     function PopulateParentCompany(idHRCompany)
+	    {
+		$.ajax({
+            url: '/@Model.BreadCrumbBaseURL/GetParentsCompany',
+            type: 'GET',
+			data: { idHRCompany: idHRCompany},
+            dataType: 'json',
+            success: function (result) {
+                var data = result;
+                var res = data.split('-');
+                var name = res[0];
+                var parentname = res[1];
+                $('#ParentOrganization').val(res);
+                var option = $('#ParentName').val(name).css('color', 'green');
+                $("label[for='ParentOrganization']").text(parentname);
+                    $('#hiddenfile').fadeIn('slow');
+            }
+        });
+        }
+</script>
+<script>
+    $(document).ready(function () {
+        $('#DateNp').nepaliDatePicker({
+            npdMonth: true,
+            npdYear: true,
+            onChange: function () {
+                $('#Date').val(BS2AD($('#DateNp').val()));
+            }
+        });
+    });
+</script>
+<script>
+    $('#IdHRCompany').ready(function () {
+        PopulateParentCompany($('#IdHRCompany').val());
+    })
+    $('#IdHRCompany').change(function () {
+        PopulateParentCompany($(this).val());
+    });
+    function PopulateParentCompany(idHRCompany)
+	    {
+		$.ajax({
+            url: '/@Model.BreadCrumbBaseURL/GetParentsCompany',
+            type: 'GET',
+			data: { idHRCompany: idHRCompany},
+            dataType: 'json',
+            success: function (result) {
+                var data = result;
+                var res = data.split('-');
+                var name = res[0];
+                var parentname = res[1];
+                $('#ParentOrganization').val(res);
+                var option = $('#ParentName').val(name).css('color', 'green');
+                $("label[for='ParentOrganization']").text(parentname);
+                    $('#hiddenfile').fadeIn('slow');
+            }
+        });
+        }
+</script>

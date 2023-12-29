@@ -1,0 +1,152 @@
+﻿@model SystemViewModels.CompanyManagement.HRCompanyHREmployeeShiftRoasterViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.IdHRCompany)
+@Html.HiddenFor(model => model.DataModel.IdHRCompany)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+
+
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+        <div class="form-group row">
+            <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                @Html.LabelFor(model => model.DataModel.IdHRCompany, new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.DataModel.IdHRCompany, new SelectList(Model.DDLCompany, "Key", "Value"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DataModel.IdHRCompany)
+            </div>
+            <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                @Html.LabelFor(model => model.DataModel.EffectiveFromDateNP, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.EffectiveFromDateNP, new { @class = "form-control", @readonly = "readonly", @style = "cursor:pointer" })
+                @Html.ValidationMessageFor(model => model.DataModel.EffectiveFromDateNP)
+            </div>
+            <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                @Html.LabelFor(model => model.DataModel.EffectiveToDateNP, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.DataModel.EffectiveToDateNP, new { @class = "form-control", @readonly = "readonly", @style = "cursor:pointer" })
+                @Html.ValidationMessageFor(model => model.DataModel.EffectiveToDateNP)
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+        <div class="col-md-6 col-sm-6 col-xs-12 col-lg-6">
+            <div class="table-responsive">
+                <table class="table table-border table-striped">
+                    <thead>
+                        <tr>
+                            <th>हप्ताको दिन</th>
+                            <th>शिफ्ट शीर्षक</th>
+                            <th>सप्ताहांत हो/होइन</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.DataModelList.Count; i++)
+                        {
+                            <tr>
+                                @Html.HiddenFor(model => model.DataModelList[i].IdDayOfWeekNP)
+                                @Html.HiddenFor(model => model.DataModelList[i].DOWNP)
+                                <td>
+                                    @Model.DataModelList[i].DOWNP<br />
+                                    @Html.ValidationMessageFor(model => model.DataModelList[i].DOWNP)
+                                </td>
+                                <td>
+                                    <span class="dropdown-toggle"></span>
+                                    @Html.DropDownListFor(model => model.DataModelList[i].DDLShiftRoasterSelected, new SelectList(Model.DDLHRCompanyShiftRoaster, "Key", "Value"), new { @class = "form-control" })
+                                </td>
+                                <td>
+                                    @Html.CheckBoxFor(model => model.DataModelList[i].IsWeekend, new { @class = "form-control switchYesNo" })
+                                    @Html.ValidationMessageFor(model => model.DataModelList[i].IsWeekend)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+            <div class="table-responsive">
+                <table class="table table-border table-responsive table-striped">
+                    <thead>
+                        <tr>
+                            <th>क.संकेत न.</th>
+                            <th>कर्मचारीको नाम</th>
+                            <th>पद</th>
+                            <th>
+                                <input type="checkbox" id="select_all" class="form-control" />
+                                <span > 
+                                 <input type="button"  class=" form-control  btn btn-sm  btn-info CheckUncheck" value="हटाउनुहोस्" disabled />
+                                </span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.DBEmployeeList.Count; i++)
+                        {
+                            <tr>
+                                @Html.HiddenFor(model => model.DBEmployeeList[i].IdHREmployee)
+                                <td>@Model.DBEmployeeList[i].PISNumber</td>
+                                <td>@Model.DBEmployeeList[i].EmployeeName</td>
+                                <td>@Model.DBEmployeeList[i].DesignationTitle</td>
+                                <td>
+                                    @Html.CheckBoxFor(model => model.DBEmployeeList[i].IsChecked, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.DBEmployeeList[i].IsChecked)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#select_all').prop('checked', true);
+
+        $('#DataModel_EffectiveFromDateNP').nepaliDatePicker({
+            npdMonth: true,
+            npdYear: true
+        });
+        $('#DataModel_EffectiveToDateNP').nepaliDatePicker({
+            npdMonth: true,
+            npdYear: true
+        });
+
+    });
+</script>
+
+<script type="text/javascript">
+
+    $("#select_all").click(function () {
+
+
+        if ($('#select_all').prop('checked') == false) {
+            this.checked = false;
+            $('.CheckUncheck').val('सबै छान्नुहोस्')
+            $("INPUT[type='checkbox']").each(function () {
+                this.checked = false;
+            });
+
+
+
+        }
+        if ($('#select_all').prop('checked') == true) {
+            $('.CheckUncheck').val('हटाउनुहोस्')
+            this.checked = true;
+            $("INPUT[type='checkbox']").each(function () {
+                this.checked = true;
+            });
+
+        }
+
+
+    });
+</script>

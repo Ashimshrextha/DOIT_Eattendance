@@ -1,0 +1,74 @@
+﻿@model SystemViewModels.EmployeeManagement.DashboardViewModelList
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="~/@Model.BreadCrumbBaseURL">@Model.BreadCrumbTitle</a>
+        </li>
+        <li class="active">@Model.BreadCrumbTitle</li>
+    </ul><!-- /.breadcrumb -->
+    <div class="nav-search" id="nav-search">
+        <form class="form-search">
+            <span class="input-icon">
+                <input type="text" placeholder="नाम अथवा संकेत न. ले खोज्नुहोस.." class="nav-search-input" id="Search_User" autocomplete="on" style="width:300px!important;" />
+                <i class="ace-icon fa fa-search nav-search-icon"></i>
+            </span>
+        </form>
+    </div><!-- /.nav-search -->
+</div>
+<div class="page-content">
+    @{ Html.RenderPartial("_SettingContainer");}
+    <div class="row">
+        <div id="replacetarget" class="col-xs-12">
+            @{ Html.RenderPartial("_ListDashboardAsync");}
+        </div>
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#Search_User').autocomplete({
+            minLength: 2,
+            source: function (request, response) {
+                $.ajax({
+                    url: '/EmployeeManagement/Dashboard/GetHREmployee_Json',
+                    method: 'GET',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: 'json',
+                    data: { searchKey: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Key, value: item.Value };
+                        }))
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert(response.responseText);
+                    },
+                    failure: function () {
+                        response.responseText
+                    }
+                });
+            },
+            select: function (event, ui) {
+                var id = ui.item.value;
+                ui.item.value = ui.item.label;
+                $.ajax({
+                    url: '/EmployeeManagement/Dashboard/_ListDashboardAsync',
+                    type: 'GET',
+                    data: { idHREmployee: id },
+                    success: function (result) {
+                        if (result == '"_Login_"') {
+                            window.location = "/Account/Login";
+                            return;
+                        }
+                        $('#replacetarget').html(result);
+                    }
+                });
+            }
+        });
+    });
+</script>

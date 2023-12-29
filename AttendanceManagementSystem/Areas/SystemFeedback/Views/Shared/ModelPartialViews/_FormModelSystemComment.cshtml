@@ -1,0 +1,43 @@
+﻿@model SystemViewModels.SystemFeedback.SystemCommentViewModel
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/RequiredField.js"></script>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.DataModel.Id)
+@Html.HiddenFor(model => model.PageNumber)
+@Html.HiddenFor(model => model.PageSize)
+@Html.HiddenFor(model => model.OrderingBy)
+@Html.HiddenFor(model => model.OrderingDirection)
+@Html.HiddenFor(model => model.SearchKey)
+<div class="row">
+    <div class="row col-md-12 col-sm-12 col-lg-12 form-group">
+        <div class="col-md-3 col-sm-3 col-lg-3">
+            @Html.LabelFor(model => model.DataModel.IdHRCompany, new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.DataModel.IdHRCompany, new SelectList(Model.DDLCompany, "Key", "Value"), new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DataModel.IdHRCompany)
+        </div>
+        <div class="col-md-3 col-sm-3 col-lg-3">
+            @Html.LabelFor(model => model.DataModel.IdHREmployee, new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.DataModel.IdHREmployee, new MultiSelectList(Model.DDLEmployee, "Key", "Value"), new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DataModel.IdHREmployee)
+        </div>
+        <div class="col-md-3 col-sm-3 col-lg-3">
+            @Html.LabelFor(model => model.DataModel.CommentTitle, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.DataModel.CommentTitle, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DataModel.CommentTitle)
+        </div>
+        <div class="col-md-3 col-sm-3 col-lg-3">
+            <div>
+            @Html.Label("प्राथमिकता", new { @class = "control-label" })
+            @Html.EnumDropDownListFor(model => Model.PriorityEnum, new { @class = "control-label" })
+            @Html.ValidationMessageFor(model => model.PriorityEnum)
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-lg-6">
+        @Html.LabelFor(model => model.DataModel.Comment, new { @class = "control-label" })
+        @Html.TextAreaFor(model => model.DataModel.Comment, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.DataModel.Comment)
+    </div>
+</div>
+</div>

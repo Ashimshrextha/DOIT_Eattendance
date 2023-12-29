@@ -1,0 +1,47 @@
+﻿@model SystemViewModels.SystemSetting.HRCompanyLeaveTypeViewModel
+
+<div id="printThis">
+    <table style="width: 100%;" aria-describedby="gbox_grid-table" role="grid" id="example" class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>आईडी</th>
+                <th>कार्यालय</th>
+                <th>बिदाको प्रकार</th>
+                <th>संक्षिप्त नाम</th>
+                <th>सप्ताहांत समावेश</th>
+                <th>बिदा समावेश</th>
+                <th>योग्य</th>
+                <th>बचत</th>
+                <th>जम्मा दिन</th>
+                <th>Limit Days</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DBModelList)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.HRCompany.CompanyCode</td>
+                    <td>@item.HRCompanyLeaveTitle</td>
+                    <td>@item.HRCompanyLeaveShotName</td>
+                    <td>@item.IsIncludeWeekend</td>
+                    <td>@item.IsIncludePublicHoliday</td>
+                    <td>@item.IsEligiblePermanentStaff</td>
+                    <td>@item.IsSaving</td>
+                    <td>@item.TotalLeaveDay</td>
+                    <td>@item.LimitDay</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            $('#printThis').printThis();
+        });
+    });
+</script>
+
