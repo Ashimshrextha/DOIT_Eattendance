@@ -226,7 +226,7 @@
       <Name>SystemModels</Name>
     </ProjectReference>
     <ProjectReference Include="..\SystemStores\SystemStores.csproj">
-      <Project>{2235D008-7138-45B3-BB53-400F24A4C615}</Project>
+      <Project>{2235d008-7138-45b3-bb53-400f24a4c615}</Project>
       <Name>SystemStores</Name>
     </ProjectReference>
   </ItemGroup>
