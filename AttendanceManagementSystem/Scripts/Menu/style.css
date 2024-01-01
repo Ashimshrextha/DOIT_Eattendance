@@ -63,7 +63,7 @@ body {
 
 #p_sidebar a:hover {
     color: #f1f1f1;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 #main-content {
@@ -89,7 +89,7 @@ body {
         color: #ffffff;
         display: block;
         transition: 0.3s;
-        padding: 10px ;
+        padding: 10px;
     }
 
         #secondary-sidebar a:hover {
@@ -122,11 +122,11 @@ body {
             padding: 4px 0;
         }
 
-.sidebar-link.active, .sidebar-list li.active .title {
-    background-color: #f4b101;
-    padding: 8px 0;
-    color: black !important;
-}
+        .sidebar-link.active, .sidebar-list li.active .title {
+            background-color: #f4b101;
+            padding: 8px 0;
+            color: black !important;
+        }
 
         .sidebar-list li.active .bxs-chevron-down {
             transition: all .5s ease;
@@ -195,7 +195,8 @@ body {
 .text-white {
     color: #ffffff !important;
 }
-.dropdown.active .title .link span{
+
+.dropdown.active .title .link span {
     color: black;
 }
 
@@ -285,12 +286,14 @@ body {
     .top-header .right-section .name-lang .name {
         font-weight: 600;
     }
+
 .top-header .left-section .date-select-header {
     background-color: var(--color_header);
     font-size: 14px;
     padding: 5px;
-    color:white;
+    color: white;
 }
+
 .image-white {
     filter: brightness(0) invert(1) grayscale(1);
 }
@@ -317,6 +320,7 @@ body {
     font-size: 14px;
     font-family: 'Nunito Sans', sans-serif;
 }
+
 .sidebar-active .sidebar-menu:hover {
     color: #fff;
     background: #1a4789;
@@ -363,7 +367,6 @@ body {
     font-size: 18px;
     font-weight: 500;
     color: var(--color_Dark1);
-    
 }
 
 .p-home-content .dash-welcome .dash-welcome-status {
@@ -397,6 +400,7 @@ body {
         border-radius: 10px;
         color: #ffffff;
     }
+
 .p-home-content .dash-card {
     display: flex;
     justify-content: space-between;
@@ -415,6 +419,7 @@ body {
         border-radius: 10px;
         margin-left: 15px;
     }
+
 .leave-status-completed {
     font-size: 10px;
     background-color: #6aa839;
@@ -430,12 +435,12 @@ body {
 }
 
 
-    .p-home-content .dash-card .p-buttom-section .date-part {
-        background-color: var(--color_gray_light);
-        border-radius: 10px;
-        padding: 0 10px;
-        margin-left: 5px;
-    }
+.p-home-content .dash-card .p-buttom-section .date-part {
+    background-color: var(--color_gray_light);
+    border-radius: 10px;
+    padding: 0 10px;
+    margin-left: 5px;
+}
 
 .p-home-content .dash-multi-card {
     padding: 10px 0;
@@ -475,7 +480,7 @@ body {
         align-items: center;
         height: 100%;
         font-size: 21px;
-        font-weight:bold
+        font-weight: bold
     }
 
 .p-home-content .p-my-description {
@@ -569,7 +574,7 @@ body {
         justify-content: space-between;
         width: 90%;
         border-bottom: 0.5px solid #cdcdcd;
-        cursor:pointer
+        cursor: pointer
     }
 
         .p-home-content .employee-table .p-tab-menu .active-table {
@@ -606,61 +611,43 @@ body {
     color: gray;
 }
 
-/* =============== Responsive design =============== */
-
-@media (min-width: 576px) {
-    
-}
-
-// Medium devices (tablets, 768px and up)
-@media (min-width: 768px) {
-    
-}
-
-// Large devices (desktops, 992px and up)
-@media (min-width: 992px) {
-    
-}
-
-// X-Large devices (large desktops, 1200px and up)
-@media (min-width: 1200px) {
-    
-}
-
-// XX-Large devices (larger desktops, 1400px and up)
-@media (min-width: 1400px) {
-    
-}
-
 .child-title {
     margin: 0 4px;
 }
+
 .dropdown.active .p-sub-title {
     background-color: #143566 !important;
 }
-.submenu .link{
+
+.submenu .link {
     padding: 10px 0;
 }
+
     .submenu .link:hover {
         background-color: #143566 !important;
     }
+
     .submenu .link.active {
         background-color: #f4b101;
         color: #0d2344 !important;
     }
+
 .p-btn-logout {
     background-color: red;
     padding: 5px;
     border-radius: 50%;
 }
-.p-btn-logout i{
-    padding: 2px;
-    color: white;
-}
-.p-header{
+
+    .p-btn-logout i {
+        padding: 2px;
+        color: white;
+    }
+
+.p-header {
     font-weight: 700;
     font-size: 1rem;
 }
+
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -688,18 +675,21 @@ body {
 }
 
 .p-canvas-map {
-    background:white;
+    background: white;
     font-weight: bold;
     font-size: large;
 }
+
 .heading-canvas {
     color: #292929;
     font-weight: 600;
-    margin:20px
+    margin: 20px
 }
+
 .bg-kul {
     color: #f4b101;
 }
+
 .bg-remain {
     color: red;
 }
@@ -708,6 +698,7 @@ body {
 .p-home-content {
     background-color: #F7F7FA !important;
 }
+
 .sidebar-link {
     padding: 0.5rem 1rem;
     font-size: .875rem;
@@ -717,13 +708,72 @@ body {
     cursor: pointer;
 }
 
-.notification-link{
-    text-decoration:none !important
-}
-.notification-link:hover{
-    color:blue !important
+.notification-link {
+    text-decoration: none !important
 }
 
-.companyName{
-    font-size:xx-large;
+    .notification-link:hover {
+        color: blue !important
+    }
+
+.companyName {
+    font-size: xx-large;
+}
+
+/* =============== Responsive design =============== */
+
+@media (max-width: 576px) {
+}
+
+@media (max-width: 768px) {
+}
+
+@media (max-width: 992px) {
+    #secondary-sidebar {
+        display: none;
+    }
+
+    .home {
+        left: 80px;
+        width: calc(100% - 80px);
+        overflow-x: hidden;
+    }
+
+    .top-header {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+        .top-header .right-section {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            width: 100%;
+        }
+
+        .top-header .left-section {
+            justify-content: flex-start;
+            width: 100%;
+            align-items: flex-start;
+        }
+
+            .top-header .left-section .companyName {
+                font-size: 2rem;
+            }
+
+    .p-home-content .dash-multi-card .multi-card-section .p-card-section {
+        flex: 48%;
+    }
+
+    .p-home-content .dash-multi-card .multi-card-section {
+        flex-wrap: wrap
+    }
+
+    .p-home-content .p-my-description .multi-card-section .p-card-section {
+        flex: 48%;
+    }
+
+    .p-home-content .p-my-description .multi-card-section {
+        flex-wrap: wrap;
+    }
 }
