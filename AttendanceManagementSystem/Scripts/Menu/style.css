@@ -775,4 +775,7 @@ body {
     .p-home-content .p-my-description .multi-card-section {
         flex-wrap: wrap;
     }
+    .page-content{
+        margin-top: 15px;
+    }
 }
