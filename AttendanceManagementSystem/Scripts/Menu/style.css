@@ -47,7 +47,7 @@ body {
 }
 
     #p_sidebar .menu-list {
-        padding: 15px 15px 15px 20px;
+        padding: 10px 15px 5px 20px;
         text-decoration: none;
         font-size: 18px;
         color: #818181;
@@ -89,7 +89,7 @@ body {
         color: #ffffff;
         display: block;
         transition: 0.3s;
-        padding: 10px;
+        padding-right: 10px;
     }
 
         #secondary-sidebar a:hover {
@@ -100,8 +100,9 @@ body {
 /* ---------- Sidebar List ---------- */
 .sidebar-list {
     height: 100%;
-    padding: 10px 0 50px 0;
+    padding: 0px 0 50px 0;
     overflow: auto;
+    margin: 0px;
 }
 
     .sidebar-list::-webkit-scrollbar {
@@ -124,7 +125,6 @@ body {
 
         .sidebar-link.active, .sidebar-list li.active .title {
             background-color: #f4b101;
-            padding: 8px 0;
             color: black !important;
         }
 
@@ -452,18 +452,14 @@ body {
     }
 
     .p-home-content .dash-multi-card .multi-card-section {
-        display: flex;
-        gap: 15px;
-        width: 100%;
-        justify-content: space-between;
+ 
     }
 
         .p-home-content .dash-multi-card .multi-card-section .p-card-section {
             background-color: white;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            ;
+            margin: 0 8px;
             padding: 10px;
-            width: 25%;
             height: 120px;
             border-radius: 5px;
         }
@@ -476,9 +472,7 @@ body {
     }
 
     .p-home-content .dash-multi-card .multi-card-section .p-card-section .p-card-section-footer {
-        display: flex;
-        align-items: center;
-        height: 100%;
+
         font-size: 21px;
         font-weight: bold
     }
@@ -572,9 +566,12 @@ body {
     .p-home-content .employee-table .p-tab-menu {
         display: flex;
         justify-content: space-between;
-        width: 90%;
+        width: 100%;
         border-bottom: 0.5px solid #cdcdcd;
-        cursor: pointer
+        cursor: pointer;
+        white-space: nowrap;
+        margin-right: 5px;
+        overflow-x: scroll;
     }
 
         .p-home-content .employee-table .p-tab-menu .active-table {
@@ -640,7 +637,7 @@ body {
 
     .p-btn-logout i {
         padding: 2px;
-        color: white;
+        color: white !important;
     }
 
 .p-header {
@@ -650,6 +647,7 @@ body {
 
 ::-webkit-scrollbar {
     width: 8px;
+    height: 2px;
 }
 
 /* Track */
@@ -678,6 +676,7 @@ body {
     background: white;
     font-weight: bold;
     font-size: large;
+    padding: 20px 10px; 
 }
 
 .heading-canvas {

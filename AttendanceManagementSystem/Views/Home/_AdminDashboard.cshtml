@@ -37,13 +37,21 @@
     <div class="card card-warning my-4">
         <div class="d-xl-flex align-items-center justify-content-between">
             <div class="align-start">
-                <i class=" text-warning fa fa-user" style="font-size:60px;margin-right:30px">
+                <i class=" text-warning fa fa-user" style="font-size:50px;margin-right:30px">
                 </i>
                 <div>
-                    <div class="align-vertical">
-                        <h6 class="heading-03">बिदा आवेदन</h6>
-                        <div class="tags-warning">
-                            <h6 style="color: white ;font-size: medium; padding-top: 6px;">पेन्डिङ</h6>
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex">
+                            <h6 class="heading-03">बिदा आवेदन</h6>
+                            <div class="ms-4">
+                                <span class="badge rounded-pill text-bg-warning fs-6 text-white p-2">पेन्डिङ</span>
+                            </div>
+                        </div>
+                        <div>
+                        <a class="btn btn-primary flex-shrink-0" href="/EmployeeManagement/HREmployeeLeaveHistory/_CreateHREmployeeLeaveHistoryAsync?idHREmployee=@IdHremployee" data-ajax-model="">
+                            बिदा आबेदन
+                        </a>
+
                         </div>
                     </div>
                     <div class="text-02  align-vertical mr-2">
@@ -53,47 +61,51 @@
                         </ul>
                     </div>
                 </div>
-                <a class="btn btn-primary flex-shrink-0" href="/EmployeeManagement/HREmployeeLeaveHistory/_CreateHREmployeeLeaveHistoryAsync?idHREmployee=@IdHremployee" data-ajax-model="">
-                    बिदा आबेदन
-                </a>
+              
             </div>
         </div>
     </div>
 
 
     <div class="dash-multi-card">
-        <div class="header">कर्मचारीहरुको विवरण</div>
-        <div class="multi-card-section">
-            <div class="p-card-section">
-                <div class="p-card-section-header">कुल कर्मचारीहरु</div>
-                <div class="p-card-section-footer" id="EmployeeCount">
-                    <div id="loadingemployee" class="loader" style="display: none;">    </div>
+        <div class="fs-3 fw-semibold py-4">कर्मचारीहरुको विवरण</div>
+        <div class="multi-card-section row g-0">
+            <div class="col-6 col-sm-4 col-md-3">
+                <div class="p-card-section row">
+                    <div class="p-card-section-header align-self-start">कुल कर्मचारीहरु</div>
+                    <div class="p-card-section-footer align-self-end" id="EmployeeCount">
+                        <div id="loadingemployee" class="loader" style="display: none;">    </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-6 col-sm-4 col-md-3">
+                <div class="p-card-section row">
+                    <div class="p-card-section-header align-self-start">उपस्थित कर्मचारीहरु</div>
+                    <div class="p-card-section-footer text-success align-self-end" id="EmployeePresentCount">     <div id="loadingpresentemployee" class="loader" style="display: none;"></div>  </div>
                 </div>
             </div>
-
-            <div class="p-card-section">
-                <div class="p-card-section-header">उपस्थित कर्मचारीहरु</div>
-                <div class="p-card-section-footer text-success" id="EmployeePresentCount">     <div id="loadingpresentemployee" class="loader" style="display: none;"></div>  </div>
+            <div class="col-6 col-sm-4 col-md-3">
+                <div class="p-card-section row">
+                    <div class="p-card-section-header align-self-start">अनुपस्थित। बिदामा भएका</div>
+                    <div class="p-card-section-footer text-danger align-self-end"><span id="absentCountToday"></span>| <span id="leaveempCountToday"></span> <div id="loadingAbsentemployee" class="loader" style="display: none;"></div> </div>
+                </div>
             </div>
-
-            <div class="p-card-section">
-                <div class="p-card-section-header">अनुपस्थित। बिदामा भएका</div>
-                <div class="p-card-section-footer text-danger"><span id="absentCountToday"></span>| <span id="leaveempCountToday"></span> <div id="loadingAbsentemployee" class="loader" style="display: none;"></div> </div>
-            </div>
-
-            <div class="p-card-section">
-                <div class="p-card-section-header">काजमा भएका कर्मचारीहरु</div>
-                <div class="p-card-section-footer text-primary" id="employeeOnKaaj"> <div id="loadingKaajemployee" class="loader" style="display: none;"></div> </div>
+            <div class="col-6 col-sm-4 col-md-3">
+                <div class="p-card-section row">
+                    <div class="p-card-section-header align-self-start">काजमा भएका कर्मचारीहरु</div>
+                    <div class="p-card-section-footer text-primary align-self-end" id="employeeOnKaaj"> <div id="loadingKaajemployee" class="loader" style="display: none;"></div> </div>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="p-canvas-map">
         <div>
-            <h4 class="heading-canvas ">बिदा अवलोकन </h4>
+            <h4 class="fs-4 fw-semibold">बिदा अवलोकन </h4>
             <ul class=" mt-2 list-inline">
-                <li><i class="fa fa-circle bg-kul"></i> कुल बिदा</li>
-                <li><i class="fa fa-circle bg-remain"></i> बाँकी बिदा</li>
+                <li class="fs-5 fw-semibold"><i class="fa fa-circle bg-kul"></i> कुल बिदा</li>
+                <li class="fs-5 fw-semibold"><i class="fa fa-circle bg-remain"></i> बाँकी बिदा</li>
             </ul>
         </div>
         <canvas id="myChart" style="display: block; box-sizing: border-box; height: 438px; width: 1460px;"></canvas>
@@ -267,28 +279,28 @@
     <div class="employee-table">
         <div class="employee-table-top">
             <div class="p-tab-menu">
-                <div class="active-table activeEmployeeTable" onclick="activeclass('activeEmployeeTable')">
+                <div class="fs-5 me-4 active-table activeEmployeeTable" onclick="activeclass('activeEmployeeTable')">
                     कुल कर्मचारीहरु
                 </div>
-                <div class="text-gray p-text-size-14 presentEmployeeTable" onclick="activeclass('presentEmployeeTable')">
+                <div class="fs-5 text-gray me-4 presentEmployeeTable" onclick="activeclass('presentEmployeeTable')">
                     उपस्थित कर्मचारीहरु
                 </div>
-                <div class="text-gray p-text-size-14 absentEmployeeTable" onclick="activeclass('absentEmployeeTable')">
+                <div class="fs-5 text-gray me-4 absentEmployeeTable" onclick="activeclass('absentEmployeeTable')">
                     अनुपास्थित कर्मचारीहरु
                 </div>
-                <div class="text-gray p-text-size-14 leaveEmployeeTable" onclick="activeclass('leaveEmployeeTable')">
+                <div class="fs-5 text-gray me-4 leaveEmployeeTable" onclick="activeclass('leaveEmployeeTable')">
                     बिदामा भएका कर्मचारीहरु
                 </div>
-                <div class="text-gray p-text-size-14 kaajEmployeeTable" onclick="activeclass('kaajEmployeeTable')">
+                <div class="fs-5 text-gray me-4 kaajEmployeeTable" onclick="activeclass('kaajEmployeeTable')">
                     काजमा भएका कर्मचारीहरु
                 </div>
-                <div class="text-gray p-text-size-14 logsEmployeeTable" onclick="activeclass('logsEmployeeTable')">
+                <div class="fs-5 text-gray me-4 logsEmployeeTable" onclick="activeclass('logsEmployeeTable')">
                     दैनिक लग
                 </div>
-                <div class="text-gray p-text-size-14 lateEmployeeTable" onclick="activeclass('lateEmployeeTable')">
+                <div class="fs-5 text-gray me-4 lateEmployeeTable" onclick="activeclass('lateEmployeeTable')">
                     ढिलो आएका
                 </div>
-                <div class="text-gray p-text-size-14 yesterdayEmployeeTable" onclick="activeclass('yesterdayEmployeeTable')">
+                <div class="fs-5 text-gray me-4 yesterdayEmployeeTable" onclick="activeclass('yesterdayEmployeeTable')">
                     हिजो छिटो गएका
                 </div>
             </div>
@@ -737,7 +749,7 @@
 
                         const divDropdownText = document.createElement('div');
                         divDropdownText.setAttribute('aria-haspopup', 'true');
-                        divDropdownText.classList.add('dropdown-text', 'align-vertical');
+                        divDropdownText.classList.add('dropdown-text', 'align-vertical','fs-5');
                         divDropdownText.setAttribute('aria-expanded', 'false');
 
                         const span = document.createElement('span');
