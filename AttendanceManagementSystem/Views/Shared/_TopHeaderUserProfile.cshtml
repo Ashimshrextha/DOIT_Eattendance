@@ -30,18 +30,18 @@
             </div>
 
             <div class="right-section">
-              @if (userdetail.IdHREmployee > 0)
-              {
-                  
-                  <div class="header-icon" id="notification-icon" onclick="toggleDropDown()">
-                     
-                      <span class="position-absolute top-10 start-100 translate-middle badge rounded-pill bg-danger" id="notification_number"></span>
-                      <img class="sidebar-icon image-white" src="~/images/menu-asset/icons/bell.png">
-                  </div>
-                <div class="header-icon">
-                    <img class="sidebar-icon" src="~/images/menu-asset/icons/user.png">
-                </div>
-              }
+                @if (userdetail.IdHREmployee > 0)
+                {
+
+                    <div class="header-icon" id="notification-icon" onclick="toggleDropDown()">
+
+                        <span id="notification_number"></span>
+                        <img class="sidebar-icon image-white" src="~/images/menu-asset/icons/bell.png">
+                    </div>
+                    <div class="header-icon">
+                        <img class="sidebar-icon" src="~/images/menu-asset/icons/user.png">
+                    </div>
+                }
                 <div class="name-lang">
                     <span class="name">
                         @userdetail.Name
@@ -129,7 +129,7 @@
                 requestToLeaveApproveList = response.RequestToLeaveApproveList;
                 requestToKaajApproveList = response.RequestToKaajApproveList;
                 let Total = requestToLeaveRecomendList.length + requestToLeaveApproveList.length + requestToKaajApproveList.length
-                
+
                 $('#notification_number').html(ConvEnglishToNepaliNum(Total));
 
                 $('#leaveRecomendNo').html(ConvEnglishToNepaliNum(requestToLeaveRecomendList.length));
@@ -555,7 +555,7 @@
 
     .header-icon {
         position: relative;
-        display: inline-block; 
+        display: inline-block;
     }
 
     .notification-number {

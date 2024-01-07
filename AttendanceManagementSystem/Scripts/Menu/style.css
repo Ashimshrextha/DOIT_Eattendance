@@ -455,9 +455,6 @@ body {
         display: grid;
         grid-template-columns: repeat(4,1fr);
         margin-bottom: 20px;
-            
-
- 
     }
 
         .p-home-content .dash-multi-card .multi-card-section .p-card-section {
@@ -480,7 +477,6 @@ body {
     }
 
     .p-home-content .dash-multi-card .multi-card-section .p-card-section .p-card-section-footer {
-
         font-size: 25px;
         font-weight: bold
     }
@@ -493,10 +489,12 @@ body {
         font-size: 15px;
         font-weight: 600;
     }
+
 .p-card-section .p-card-section-header .header-bold {
     font-size: 15px;
     font-weight: 600;
 }
+
 .btn-p-blue {
     text-decoration: none !important;
     cursor: pointer;
@@ -509,70 +507,70 @@ body {
     text-align: center;
 }
 
-    
 
-    .p-home-content .p-my-description .multi-card-section {
-        display: grid;
-        grid-template-columns:repeat(5, 1fr);
-        gap: 10px;
-        width: 100%;
-        justify-content: space-between;
-    }
 
-        .p-home-content .p-my-description .multi-card-section .p-card-section {
-            background-color: white;
-            box-shadow: 0 1px 4px #e1e1e1;
-            padding: 10px;
-            height: 150px;
-            border-radius: 5px;
-        }
+.p-home-content .p-my-description .multi-card-section {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    width: 100%;
+    justify-content: space-between;
+}
 
-    .p-home-content .p-my-description .header {
-        padding: 20px 0;
-    }
-
-    .p-home-content .p-my-description .multi-card-section .p-card-section .p-card-section-footer {
-        font-size: 18px;
-    }
-
-    .p-home-content .p-my-description .multi-card-section .p-card-section .p-card-section-header .month-select-header {
+    .p-home-content .p-my-description .multi-card-section .p-card-section {
         background-color: white;
-        font-size: 12px;
+        box-shadow: 0 1px 4px #e1e1e1;
+        padding: 10px;
+        height: 170px;
+        border-radius: 5px;
     }
 
-    .p-home-content .p-my-description .multi-card-section .p-card-section .p-card-section-header {
-        display: flex;
-        justify-content: space-between;
-    }
+.p-home-content .p-my-description .header {
+    padding: 20px 0;
+}
 
-    .p-home-content .p-my-description .multi-card-section .p-card-section .p-card-section-footer.first {
-        display: flex;
-        justify-content: space-between;
-    }
+.p-home-content .p-my-description .multi-card-section .p-card-section .p-card-section-footer {
+    font-size: 18px;
+}
 
-    .p-home-content .p-my-description .multi-card-section .p-card-section .p-card-section-footer .kaj-status {
-        background-color: var(--color_green);
-        color: white;
-        padding: 4px;
-        border-radius: 8px;
-    }
+.p-home-content .p-my-description .multi-card-section .p-card-section .p-card-section-header .month-select-header {
+    background-color: white;
+    font-size: 12px;
+}
 
-    .p-home-content .p-my-description .multi-card-section .p-card-section .p-card-section-footer .p-date {
-        padding: 0 10px;
-    }
+.p-home-content .p-my-description .multi-card-section .p-card-section .p-card-section-header {
+    display: flex;
+    justify-content: space-between;
+}
 
-        .p-home-content .p-my-description .multi-card-section .p-card-section .p-card-section-footer .p-date .p-date-p {
-            border: 1px solid red;
-            padding: 4px 9px;
-            color: red;
-            border-radius: 10px;
-            box-shadow: 0px 4px 6px 0px rgba(0,0,0,0.2);
-        }
+.p-home-content .p-my-description .multi-card-section .p-card-section .p-card-section-footer.first {
+    display: flex;
+    justify-content: space-between;
+}
 
-    .p-home-content .p-my-description .multi-card-section .p-card-section .p-card-section-footer .day-description {
+.p-home-content .p-my-description .multi-card-section .p-card-section .p-card-section-footer .kaj-status {
+    background-color: var(--color_green);
+    color: white;
+    padding: 4px;
+    border-radius: 8px;
+}
+
+.p-home-content .p-my-description .multi-card-section .p-card-section .p-card-section-footer .p-date {
+    padding: 0 10px;
+}
+
+    .p-home-content .p-my-description .multi-card-section .p-card-section .p-card-section-footer .p-date .p-date-p {
+        border: 1px solid red;
+        padding: 4px 9px;
         color: red;
-        padding: 10px 0px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px 0px rgba(0,0,0,0.2);
     }
+
+.p-home-content .p-my-description .multi-card-section .p-card-section .p-card-section-footer .day-description {
+    color: red;
+    padding: 10px 0px;
+}
 
 .p-home-content .employee-table {
     background-color: white;
@@ -603,8 +601,9 @@ body {
             font-weight: 600;
             padding: 0 0 7px 0px;
         }
+
         .p-home-content .employee-table .p-tab-menu .in-active-table {
-           font-size: 17px;
+            font-size: 17px;
             padding: 0 0 7px 0px;
             margin-right: 20px;
         }
@@ -706,7 +705,7 @@ body {
     background: white;
     font-weight: bold;
     font-size: large;
-    padding: 20px 10px; 
+    padding: 20px 10px;
 }
 
 .heading-canvas {
@@ -748,20 +747,24 @@ body {
 .companyName {
     font-size: 30px;
 }
-.nibedan-list{
+
+.nibedan-list {
     display: flex;
     flex-wrap: wrap;
     flex: 48%;
 }
+
     .nibedan-list .bida-nibedan {
         margin-top: 10px;
     }
+
 .btn-bida-abedan {
     text-decoration: none;
     background-color: #337ab7;
     color: white;
     padding: 6px;
 }
+
 #bida-nibedan .bida-nibedan-badge {
     margin: 30px;
     background-color: #d1a633;
@@ -769,22 +772,32 @@ body {
     padding: 5px;
     border-radius: 4px;
 }
+
 .text-font-21 {
     font-size: 21px;
     margin-bottom: 10px;
     margin-left: 10px;
     font-weight: 600;
 }
+
 .page-content {
+    background: url(backgroundimages/pattern.jpg) #DFE0E2;
+    padding: 8px 50px 24px 50px;
+}
+
+#Homedashboard {
     background: none !important;
     padding: 8px 50px 24px 50px;
 }
+
 .fw-600 {
     font-weight: 600
 }
+
 .fs-15 {
     font-size: 15px;
 }
+
 #myChart {
     height: 410px !important;
 }
@@ -793,6 +806,7 @@ body {
     .page-content {
         margin-top: 25px !important;
     }
+
     .p-canvas-map #myChart {
         height: 150px !important;
     }
@@ -802,12 +816,15 @@ body {
     #secondary-sidebar {
         display: none;
     }
-    .p-home-content .p-my-description .multi-card-section {
-        grid-template-columns: repeat(2,1fr);
+
+    #replacetarget .p-home-content .p-my-description .multi-card-section {
+        grid-template-columns: repeat(2,1fr) !important;
     }
+
     .header-section .top-header .left-section .companyName {
         font-size: 15px;
     }
+
     .home {
         left: 80px !important;
         width: calc(100% - 80px) !important;
@@ -852,39 +869,60 @@ body {
     .page-content {
         margin-top: 15px;
     }
+
     .p-canvas-map #myChart {
         height: 220px !important;
     }
 }
+
 @media (max-width: 992px) {
-     #secondary-sidebar {
+    #secondary-sidebar {
         width: 180px;
     }
-        #secondary-sidebar a,.sidebar-list li .title .name {
+
+        #secondary-sidebar a, .sidebar-list li .title .name {
             font-size: 12px;
         }
-    .sidebar-list li{
+
+    .sidebar-list li {
         padding: unset;
     }
+
     .home {
         width: calc(100% - 140px);
         left: 200px;
     }
-    #myChart{
+
+    #myChart {
         height: 250px !important;
     }
+
     .p-home-content .dash-multi-card .multi-card-section {
         grid-template-columns: repeat(3, 1fr)
     }
-        .p-home-content .dash-multi-card .multi-card-section .p-card-section{
+
+        .p-home-content .dash-multi-card .multi-card-section .p-card-section {
             margin-top: 10px;
         }
-    .p-home-content .p-my-description .multi-card-section{
-        grid-template-columns: repeat(3, 1fr) !important;
 
+    .p-home-content .p-my-description .multi-card-section {
+        grid-template-columns: repeat(3, 1fr) !important;
     }
+
     .top-header .left-section .companyName {
         font-size: 20px;
+    }
+
+    .p-home-content .p-my-description .multi-card-section .p-card-section {
+        height: 190px !important
+    }
+}
+
+@media (max-width: 1050px) {
+
+
+    #replacetarget .p-home-content .p-my-description .multi-card-section .p-card-section {
+        height: 220px !important;
     }
 }
 
@@ -892,17 +930,25 @@ body {
     .left-section .companyName {
         font-size: 25px;
     }
-    .p-home-content .p-my-description .multi-card-section{
+
+    .p-home-content .p-my-description .multi-card-section {
         grid-template-columns: repeat(4,1fr);
     }
+
     #myChart {
         height: 350px !important;
     }
+
+    .p-home-content .p-my-description .multi-card-section .p-card-section {
+        height: 200px !important;
+    }
 }
+
 @media (max-width: 1420px) {
     .companyName {
         font-size: 28px;
     }
+
     .bida-nibedan div {
         font-size: 14px;
     }
@@ -947,26 +993,45 @@ body {
     .btn-p-blue {
         font-size: 12px;
     }
+
     .p-home-content .p-my-description .multi-card-section .p-card-section {
         height: 150px;
     }
 }
 
-@media (max-width: 1450px){
+@media (max-width: 1450px) {
     .home {
         margin-top: 15px;
     }
-    .p-card-section-footer.first div{
+
+    .p-card-section-footer.first div {
         width: 33%;
     }
-    .p-home-content .p-my-description .multi-card-section .p-card-section {
-        height: 170px;
-    }
 
+    .p-home-content .p-my-description .multi-card-section .p-card-section {
+        height: 190px;
+    }
 }
+
 .home {
     margin-top: 15px;
 }
-#breadcrumbs{
+
+#breadcrumbs {
     padding-left: 10px;
+}
+
+
+.abadhi_sifaris {
+    display: grid;
+    grid-template-columns: repeat(2,1fr)
+}
+
+#notification_number {
+    position: absolute;
+    top: -9px;
+    right: -4px;
+    background: #9d1903;
+    padding: 2px 4px;
+    border-radius: 10px;
 }

@@ -48,9 +48,9 @@
                             </div>
                         </div>
                         <div>
-                        <a class="btn-bida-abedan btn-p-blue" href="/EmployeeManagement/HREmployeeLeaveHistory/_CreateHREmployeeLeaveHistoryAsync?idHREmployee=@IdHremployee" data-ajax-model="">
-                            बिदा आबेदन
-                        </a>
+                            <a class="btn-bida-abedan btn-p-blue" href="/EmployeeManagement/HREmployeeLeaveHistory/_CreateHREmployeeLeaveHistoryAsync?idHREmployee=@IdHremployee" data-ajax-model="">
+                                बिदा आबेदन
+                            </a>
 
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                         </ul>
                     </div>
                 </div>
-              
+
             </div>
         </div>
     </div>
@@ -70,25 +70,25 @@
     <div class="dash-multi-card">
         <div class="text-font-21 py-4">कर्मचारीहरुको विवरण</div>
         <div class="multi-card-section">
-                <div class="p-card-section">
-                    <div class="p-card-section-header align-self-start">कुल कर्मचारीहरु</div>
-                    <div class="p-card-section-footer align-self-end" id="EmployeeCount">
-                        <div id="loadingemployee" class="loader" style="display: none;">    </div>
-                    </div>
+            <div class="p-card-section">
+                <div class="p-card-section-header align-self-start">कुल कर्मचारीहरु</div>
+                <div class="p-card-section-footer align-self-end" id="EmployeeCount">
+                    <div id="loadingemployee" class="loader" style="display: none;">    </div>
                 </div>
+            </div>
 
-                <div class="p-card-section">
-                    <div class="p-card-section-header align-self-start">उपस्थित कर्मचारीहरु</div>
-                    <div class="p-card-section-footer text-success align-self-end" id="EmployeePresentCount">     <div id="loadingpresentemployee" class="loader" style="display: none;"></div>  </div>
-                </div>
-                <div class="p-card-section">
-                    <div class="p-card-section-header align-self-start">अनुपस्थित। बिदामा भएका</div>
-                    <div class="p-card-section-footer text-danger align-self-end"><span id="absentCountToday"></span>| <span id="leaveempCountToday"></span> <div id="loadingAbsentemployee" class="loader" style="display: none;"></div> </div>
-                </div>
-                <div class="p-card-section">
-                    <div class="p-card-section-header align-self-start">काजमा भएका कर्मचारीहरु</div>
-                    <div class="p-card-section-footer text-primary align-self-end" id="employeeOnKaaj"> <div id="loadingKaajemployee" class="loader" style="display: none;"></div> </div>
-                </div>
+            <div class="p-card-section">
+                <div class="p-card-section-header align-self-start">उपस्थित कर्मचारीहरु</div>
+                <div class="p-card-section-footer text-success align-self-end" id="EmployeePresentCount">     <div id="loadingpresentemployee" class="loader" style="display: none;"></div>  </div>
+            </div>
+            <div class="p-card-section">
+                <div class="p-card-section-header align-self-start">अनुपस्थित। बिदामा भएका</div>
+                <div class="p-card-section-footer text-danger align-self-end"><span id="absentCountToday"></span>| <span id="leaveempCountToday"></span> <div id="loadingAbsentemployee" class="loader" style="display: none;"></div> </div>
+            </div>
+            <div class="p-card-section">
+                <div class="p-card-section-header align-self-start">काजमा भएका कर्मचारीहरु</div>
+                <div class="p-card-section-footer text-primary align-self-end" id="employeeOnKaaj"> <div id="loadingKaajemployee" class="loader" style="display: none;"></div> </div>
+            </div>
         </div>
     </div>
 
@@ -209,11 +209,11 @@
                     <p>
                         <span id="kaajinfo"></span>
                     </p>
-                    <div class="row">
-                        <div class="col-md-6 p-text-size-14">
+                    <div class="abadhi_sifaris">
+                        <div class=" p-text-size-14">
                             अबधी :- <span id="kaajdate">-</span>
                         </div>
-                        <div class="col-md-6">
+                        <div class="">
                             <div class="p-text-size-12 ">
                                 <span class="label label-success" id="kaajstatus">
                                 </span>
@@ -375,7 +375,7 @@
                 </table>
             </div>
         </div>
-        
+
     </div>
 
 </div>
@@ -640,7 +640,7 @@
                     $("#holidayMonth").html('छैन');
                     $("#holidayName").html('बिदा राखिएको छैन');
                 }
-               
+
             },
             error: function () {
                 $('#loadingmonthfourth').hide();
