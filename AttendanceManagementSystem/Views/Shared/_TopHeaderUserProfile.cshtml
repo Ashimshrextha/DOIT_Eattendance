@@ -31,10 +31,13 @@
 
             <div class="right-section">
               @if (userdetail.IdHREmployee > 0)
-              { <div class="header-icon" id="notification-icon" onclick="toggleDropDown()">
-                    <span class="notification-number" id="notification_number"></span>
-                    <img class="sidebar-icon image-white" src="~/images/menu-asset/icons/bell.png">
-                </div>
+              {
+                  
+                  <div class="header-icon" id="notification-icon" onclick="toggleDropDown()">
+                     
+                      <span class="position-absolute top-10 start-100 translate-middle badge rounded-pill bg-danger" id="notification_number"></span>
+                      <img class="sidebar-icon image-white" src="~/images/menu-asset/icons/bell.png">
+                  </div>
                 <div class="header-icon">
                     <img class="sidebar-icon" src="~/images/menu-asset/icons/user.png">
                 </div>

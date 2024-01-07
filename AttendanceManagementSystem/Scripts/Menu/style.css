@@ -47,7 +47,7 @@ body {
 }
 
     #p_sidebar .menu-list {
-        padding: 15px 15px 15px 20px;
+        padding: 10px 15px 5px 20px;
         text-decoration: none;
         font-size: 18px;
         color: #818181;
@@ -63,7 +63,7 @@ body {
 
 #p_sidebar a:hover {
     color: #f1f1f1;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 #main-content {
@@ -89,7 +89,7 @@ body {
         color: #ffffff;
         display: block;
         transition: 0.3s;
-        padding: 10px ;
+        padding-right: 10px;
     }
 
         #secondary-sidebar a:hover {
@@ -100,8 +100,9 @@ body {
 /* ---------- Sidebar List ---------- */
 .sidebar-list {
     height: 100%;
-    padding: 10px 0 50px 0;
+    padding: 0px 0 50px 0;
     overflow: auto;
+    margin: 0px;
 }
 
     .sidebar-list::-webkit-scrollbar {
@@ -122,11 +123,10 @@ body {
             padding: 4px 0;
         }
 
-.sidebar-link.active, .sidebar-list li.active .title {
-    background-color: #f4b101;
-    padding: 8px 0;
-    color: black !important;
-}
+        .sidebar-link.active, .sidebar-list li.active .title {
+            background-color: #f4b101;
+            color: black !important;
+        }
 
         .sidebar-list li.active .bxs-chevron-down {
             transition: all .5s ease;
@@ -195,14 +195,14 @@ body {
 .text-white {
     color: #ffffff !important;
 }
-.dropdown.active .title .link span{
+
+.dropdown.active .title .link span {
     color: black;
 }
 
 /* =============== Home Section =============== */
 .home {
     position: relative;
-    background-color: var(--color_Light1);
     left: 300px;
     width: calc(100% - 300px);
     transition: all .5s ease;
@@ -285,12 +285,14 @@ body {
     .top-header .right-section .name-lang .name {
         font-weight: 600;
     }
+
 .top-header .left-section .date-select-header {
     background-color: var(--color_header);
     font-size: 14px;
     padding: 5px;
-    color:white;
+    color: white;
 }
+
 .image-white {
     filter: brightness(0) invert(1) grayscale(1);
 }
@@ -317,6 +319,7 @@ body {
     font-size: 14px;
     font-family: 'Nunito Sans', sans-serif;
 }
+
 .sidebar-active .sidebar-menu:hover {
     color: #fff;
     background: #1a4789;
@@ -363,7 +366,6 @@ body {
     font-size: 18px;
     font-weight: 500;
     color: var(--color_Dark1);
-    
 }
 
 .p-home-content .dash-welcome .dash-welcome-status {
@@ -397,6 +399,7 @@ body {
         border-radius: 10px;
         color: #ffffff;
     }
+
 .p-home-content .dash-card {
     display: flex;
     justify-content: space-between;
@@ -415,6 +418,7 @@ body {
         border-radius: 10px;
         margin-left: 15px;
     }
+
 .leave-status-completed {
     font-size: 10px;
     background-color: #6aa839;
@@ -430,15 +434,16 @@ body {
 }
 
 
-    .p-home-content .dash-card .p-buttom-section .date-part {
-        background-color: var(--color_gray_light);
-        border-radius: 10px;
-        padding: 0 10px;
-        margin-left: 5px;
-    }
+.p-home-content .dash-card .p-buttom-section .date-part {
+    background-color: var(--color_gray_light);
+    border-radius: 10px;
+    padding: 0 10px;
+    margin-left: 5px;
+}
 
 .p-home-content .dash-multi-card {
     padding: 10px 0;
+    margin-top: 20px;
 }
 
     .p-home-content .dash-multi-card .header {
@@ -447,20 +452,24 @@ body {
     }
 
     .p-home-content .dash-multi-card .multi-card-section {
-        display: flex;
-        gap: 15px;
-        width: 100%;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        margin-bottom: 20px;
+            
+
+ 
     }
 
         .p-home-content .dash-multi-card .multi-card-section .p-card-section {
             background-color: white;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            ;
+            box-shadow: 0 1px 4px #e1e1e1;
+            margin: 0 8px;
             padding: 10px;
-            width: 25%;
-            height: 120px;
+            height: 100px;
             border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between
         }
 
     .p-home-content .dash-multi-card .header {
@@ -471,11 +480,9 @@ body {
     }
 
     .p-home-content .dash-multi-card .multi-card-section .p-card-section .p-card-section-footer {
-        display: flex;
-        align-items: center;
-        height: 100%;
-        font-size: 21px;
-        font-weight:bold
+
+        font-size: 25px;
+        font-weight: bold
     }
 
 .p-home-content .p-my-description {
@@ -483,23 +490,39 @@ body {
 }
 
     .p-home-content .p-my-description .header {
-        font-size: 18px;
-        font-weight: 500;
+        font-size: 15px;
+        font-weight: 600;
     }
+.p-card-section .p-card-section-header .header-bold {
+    font-size: 15px;
+    font-weight: 600;
+}
+.btn-p-blue {
+    text-decoration: none !important;
+    cursor: pointer;
+    color: white !important;
+    text-decoration: none !important;
+    cursor: pointer;
+    color: white !important;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+    
 
     .p-home-content .p-my-description .multi-card-section {
-        display: flex;
-        gap: 15px;
+        display: grid;
+        grid-template-columns:repeat(5, 1fr);
+        gap: 10px;
         width: 100%;
         justify-content: space-between;
     }
 
         .p-home-content .p-my-description .multi-card-section .p-card-section {
             background-color: white;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            ;
+            box-shadow: 0 1px 4px #e1e1e1;
             padding: 10px;
-            width: 25%;
             height: 150px;
             border-radius: 5px;
         }
@@ -509,14 +532,12 @@ body {
     }
 
     .p-home-content .p-my-description .multi-card-section .p-card-section .p-card-section-footer {
-        height: 100%;
         font-size: 18px;
     }
 
     .p-home-content .p-my-description .multi-card-section .p-card-section .p-card-section-header .month-select-header {
         background-color: white;
         font-size: 12px;
-        padding: 5px;
     }
 
     .p-home-content .p-my-description .multi-card-section .p-card-section .p-card-section-header {
@@ -567,14 +588,25 @@ body {
     .p-home-content .employee-table .p-tab-menu {
         display: flex;
         justify-content: space-between;
-        width: 90%;
+        width: 100%;
         border-bottom: 0.5px solid #cdcdcd;
-        cursor:pointer
+        cursor: pointer;
+        white-space: nowrap;
+        margin-right: 5px;
+        overflow-x: scroll;
     }
 
         .p-home-content .employee-table .p-tab-menu .active-table {
             border-bottom: 2px solid rgb(1, 1, 158);
             color: rgb(1, 1, 173);
+            font-size: 17px;
+            font-weight: 600;
+            padding: 0 0 7px 0px;
+        }
+        .p-home-content .employee-table .p-tab-menu .in-active-table {
+           font-size: 17px;
+            padding: 0 0 7px 0px;
+            margin-right: 20px;
         }
 
     .p-home-content .employee-table .table-footer {
@@ -606,63 +638,46 @@ body {
     color: gray;
 }
 
-/* =============== Responsive design =============== */
-
-@media (min-width: 576px) {
-    
-}
-
-// Medium devices (tablets, 768px and up)
-@media (min-width: 768px) {
-    
-}
-
-// Large devices (desktops, 992px and up)
-@media (min-width: 992px) {
-    
-}
-
-// X-Large devices (large desktops, 1200px and up)
-@media (min-width: 1200px) {
-    
-}
-
-// XX-Large devices (larger desktops, 1400px and up)
-@media (min-width: 1400px) {
-    
-}
-
 .child-title {
     margin: 0 4px;
 }
+
 .dropdown.active .p-sub-title {
     background-color: #143566 !important;
 }
-.submenu .link{
+
+.submenu .link {
     padding: 10px 0;
 }
+
     .submenu .link:hover {
         background-color: #143566 !important;
     }
+
     .submenu .link.active {
         background-color: #f4b101;
         color: #0d2344 !important;
     }
+
 .p-btn-logout {
     background-color: red;
     padding: 5px;
     border-radius: 50%;
 }
-.p-btn-logout i{
-    padding: 2px;
-    color: white;
-}
-.p-header{
+
+    .p-btn-logout i {
+        padding: 2px;
+        color: white !important;
+    }
+
+.p-header {
     font-weight: 700;
     font-size: 1rem;
 }
+
 ::-webkit-scrollbar {
     width: 8px;
+    height: 2px;
 }
 
 /* Track */
@@ -688,18 +703,22 @@ body {
 }
 
 .p-canvas-map {
-    background:white;
+    background: white;
     font-weight: bold;
     font-size: large;
+    padding: 20px 10px; 
 }
+
 .heading-canvas {
     color: #292929;
     font-weight: 600;
-    margin:20px
+    margin: 20px
 }
+
 .bg-kul {
     color: #f4b101;
 }
+
 .bg-remain {
     color: red;
 }
@@ -708,6 +727,7 @@ body {
 .p-home-content {
     background-color: #F7F7FA !important;
 }
+
 .sidebar-link {
     padding: 0.5rem 1rem;
     font-size: .875rem;
@@ -717,13 +737,236 @@ body {
     cursor: pointer;
 }
 
-.notification-link{
-    text-decoration:none !important
-}
-.notification-link:hover{
-    color:blue !important
+.notification-link {
+    text-decoration: none !important
 }
 
-.companyName{
-    font-size:xx-large;
+    .notification-link:hover {
+        color: blue !important
+    }
+
+.companyName {
+    font-size: 30px;
+}
+.nibedan-list{
+    display: flex;
+    flex-wrap: wrap;
+    flex: 48%;
+}
+    .nibedan-list .bida-nibedan {
+        margin-top: 10px;
+    }
+.btn-bida-abedan {
+    text-decoration: none;
+    background-color: #337ab7;
+    color: white;
+    padding: 6px;
+}
+#bida-nibedan .bida-nibedan-badge {
+    margin: 30px;
+    background-color: #d1a633;
+    color: white;
+    padding: 5px;
+    border-radius: 4px;
+}
+.text-font-21 {
+    font-size: 21px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    font-weight: 600;
+}
+.page-content {
+    background: none !important;
+    padding: 8px 50px 24px 50px;
+}
+.fw-600 {
+    font-weight: 600
+}
+.fs-15 {
+    font-size: 15px;
+}
+#myChart {
+    height: 410px !important;
+}
+/* =============== Responsive design =============== */
+@media (max-width: 576px) {
+    .page-content {
+        margin-top: 25px !important;
+    }
+    .p-canvas-map #myChart {
+        height: 150px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    #secondary-sidebar {
+        display: none;
+    }
+    .p-home-content .p-my-description .multi-card-section {
+        grid-template-columns: repeat(2,1fr);
+    }
+    .header-section .top-header .left-section .companyName {
+        font-size: 15px;
+    }
+    .home {
+        left: 80px !important;
+        width: calc(100% - 80px) !important;
+        overflow-x: hidden;
+        margin-top: 15px;
+    }
+
+    .top-header {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+        .top-header .right-section {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            width: 100%;
+        }
+
+        .top-header .left-section {
+            justify-content: flex-start;
+            width: 100%;
+            align-items: flex-start;
+        }
+
+            .top-header .left-section .companyName {
+                font-size: 1rem;
+            }
+
+    .p-home-content .dash-multi-card .multi-card-section .p-card-section {
+        flex: 48%;
+    }
+
+    .p-home-content .p-my-description .multi-card-section .p-card-section {
+        flex: 48%;
+    }
+
+    .p-home-content .p-my-description .multi-card-section {
+        flex-wrap: wrap;
+    }
+
+    .page-content {
+        margin-top: 15px;
+    }
+    .p-canvas-map #myChart {
+        height: 220px !important;
+    }
+}
+@media (max-width: 992px) {
+     #secondary-sidebar {
+        width: 180px;
+    }
+        #secondary-sidebar a,.sidebar-list li .title .name {
+            font-size: 12px;
+        }
+    .sidebar-list li{
+        padding: unset;
+    }
+    .home {
+        width: calc(100% - 140px);
+        left: 200px;
+    }
+    #myChart{
+        height: 250px !important;
+    }
+    .p-home-content .dash-multi-card .multi-card-section {
+        grid-template-columns: repeat(3, 1fr)
+    }
+        .p-home-content .dash-multi-card .multi-card-section .p-card-section{
+            margin-top: 10px;
+        }
+    .p-home-content .p-my-description .multi-card-section{
+        grid-template-columns: repeat(3, 1fr) !important;
+
+    }
+    .top-header .left-section .companyName {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 1280px) {
+    .left-section .companyName {
+        font-size: 25px;
+    }
+    .p-home-content .p-my-description .multi-card-section{
+        grid-template-columns: repeat(4,1fr);
+    }
+    #myChart {
+        height: 350px !important;
+    }
+}
+@media (max-width: 1420px) {
+    .companyName {
+        font-size: 28px;
+    }
+    .bida-nibedan div {
+        font-size: 14px;
+    }
+
+    .text-font-21 {
+        font-size: 18px;
+    }
+
+    .p-home-content .dash-multi-card .multi-card-section .p-card-section .p-card-section-header {
+        font-size: 15px;
+    }
+
+    .p-home-content .dash-multi-card .multi-card-section .p-card-section .p-card-section-footer {
+        font-size: 20px;
+    }
+
+    .p-canvas-map .fs-4 {
+        font-size: 15px;
+    }
+
+    .list-inline > li {
+        font-size: 12px;
+    }
+
+    .p-home-content .p-my-description .header {
+        font-size: 17px;
+        padding-bottom: 10px;
+    }
+
+    .p-text-size-12 {
+        font-size: 11px !important;
+    }
+
+    .p-card-section .p-card-section-header .header-bold {
+        font-size: 14px;
+    }
+
+    .p-home-content .employee-table .p-tab-menu .in-active-table {
+        font-size: 14px;
+    }
+
+    .btn-p-blue {
+        font-size: 12px;
+    }
+    .p-home-content .p-my-description .multi-card-section .p-card-section {
+        height: 150px;
+    }
+}
+
+@media (max-width: 1450px){
+    .home {
+        margin-top: 15px;
+    }
+    .p-card-section-footer.first div{
+        width: 33%;
+    }
+    .p-home-content .p-my-description .multi-card-section .p-card-section {
+        height: 170px;
+    }
+
+}
+.home {
+    margin-top: 15px;
+}
+#breadcrumbs{
+    padding-left: 10px;
 }

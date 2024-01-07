@@ -31,7 +31,6 @@ function ConvEnglishToNepaliNum1(number) {
 
 
 function ConvertNepaliDayName(number) {
-    debugger
     const currentDate = new Date();
     const daysOfWeek = ['आइतबार', 'सोमबार', 'मंगलबार', 'बुधबार', 'बिहिबार', 'शुक्रबार', 'शनिबार'];
     const dayName = daysOfWeek[number];

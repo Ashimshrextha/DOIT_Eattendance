@@ -26,6 +26,7 @@
             ]
         },
         options: {
+            maintainAspectRatio: false,
             responsive: !0,
             barThickness: 35,
             plugins: {
