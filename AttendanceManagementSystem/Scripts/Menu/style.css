@@ -1035,3 +1035,6 @@ body {
     padding: 2px 4px;
     border-radius: 10px;
 }
+.w-full{
+    width: 100%;
+}

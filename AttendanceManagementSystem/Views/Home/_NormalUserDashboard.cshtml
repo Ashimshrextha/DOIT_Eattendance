@@ -38,24 +38,29 @@
             <div class="align-start">
                 <i class=" text-warning fa fa-user" style="font-size:60px;margin-right:30px">
                 </i>
-                <div>
-                    <div class="align-vertical">
-                        <h6 class="heading-03">बिदा आवेदन</h6>
-                        <div class="tags-warning">
-                            <h6 style="color: white;color: white; font-size: medium; padding-top: 6px;">पेन्डिङ</h6>
+                <div id="bida-nibedan" class="d-flex justify-content-between w-full">
+                    <div>
+                        <div class="align-vertical">
+                            <h6 class="heading-03">बिदा आवेदन</h6>
+                            <div class="">
+                                <span class="bida-nibedan-badge">
+                                    पेन्डिङ
+                                </span>
+                            </div>
+                        </div>
+                        <div class="text-02  align-vertical mr-2">
+                            <ul class="list align-vertical flex-wrap">
+                                <li class="mt-2"><span id="LeavecurrentInfo"></span></li>
+
+                            </ul>
                         </div>
                     </div>
-                    <div class="text-02  align-vertical mr-2">
-                        <ul class="list align-vertical flex-wrap">
-                            <li class="mt-2"><span id="LeavecurrentInfo"></span></li>
-
-                        </ul>
+                    <div>
+                        <a class="btn-bida-abedan btn-p-blue" href="/EmployeeManagement/HREmployeeLeaveHistory/_CreateHREmployeeLeaveHistoryAsync?idHREmployee=@IdHremployee" data-ajax-model="">
+                            बिदा आबेदन
+                        </a>
                     </div>
                 </div>
-                <a class="btn btn-primary flex-shrink-0" href="/EmployeeManagement/HREmployeeLeaveHistory/_CreateHREmployeeLeaveHistoryAsync?idHREmployee=@IdHremployee" data-ajax-model="">
-                    बिदा आबेदन
-                </a>
-
             </div>
         </div>
     </div>
