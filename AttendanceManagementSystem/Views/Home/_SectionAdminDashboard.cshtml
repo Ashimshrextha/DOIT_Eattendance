@@ -36,25 +36,30 @@
     <div class="card card-warning my-4">
         <div class="d-xl-flex align-items-center justify-content-between">
             <div class="align-start">
-                <i class=" text-warning fa fa-user" style="font-size:60px;margin-right:30px">
+                <i class=" text-warning fa fa-user" style="font-size:50px;margin-right:30px">
                 </i>
-                <div>
-                    <div class="align-vertical">
-                        <h6 class="heading-03">बिदा आवेदन</h6>
-                        <div class="tags-warning">
-                            <h6 style="color: white; color: white; font-size: medium; padding-top: 6px;">पेन्डिङ</h6>
+                <div id="bida-nibedan" class="w-full">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex">
+                            <h6 class="heading-03">बिदा आवेदन</h6>
+                            <div class="ms-4">
+                                <span class="bida-nibedan-badge">पेन्डिङ</span>
+                            </div>
+                        </div>
+                        <div>
+                            <a class="btn-bida-abedan btn-p-blue" href="/EmployeeManagement/HREmployeeLeaveHistory/_CreateHREmployeeLeaveHistoryAsync?idHREmployee=@IdHremployee" data-ajax-model="">
+                                बिदा आबेदन
+                            </a>
+
                         </div>
                     </div>
                     <div class="text-02  align-vertical mr-2">
-                        <ul class="list align-vertical flex-wrap">
+                        <ul class="list align-vertical flex-wrap  nibedan-list">
                             <li class="mt-2"><span id="LeavecurrentInfo"></span></li>
 
                         </ul>
                     </div>
                 </div>
-                <a class="btn btn-primary flex-shrink-0" href="/EmployeeManagement/HREmployeeLeaveHistory/_CreateHREmployeeLeaveHistoryAsync?idHREmployee=@IdHremployee" data-ajax-model="">
-                    बिदा आबेदन
-                </a>
 
             </div>
         </div>
@@ -91,10 +96,10 @@
 
     <div class="p-canvas-map">
         <div>
-            <h4 class="heading-canvas ">बिदा अवलोकन </h4>
+            <h4 class="fs-4 fw-600">बिदा अवलोकन </h4>
             <ul class=" mt-2 list-inline">
-                <li><i class="fa fa-circle bg-kul"></i> कुल बिदा</li>
-                <li><i class="fa fa-circle bg-remain"></i> बाँकी बिदा</li>
+                <li class="fs-15 fw-semibold"><i class="fa fa-circle bg-kul"></i> कुल बिदा</li>
+                <li class="fs-15 fw-semibold"><i class="fa fa-circle bg-remain"></i> बाँकी बिदा</li>
             </ul>
         </div>
         <canvas id="myChart" style="display: block; box-sizing: border-box; height: 438px; width: 1460px;"></canvas>
@@ -105,7 +110,7 @@
         <div class="multi-card-section">
             <div class="p-card-section">
                 <div class="p-card-section-header">
-                    <span> महिना  </span>
+                    <span class="header-bold"> महिना  </span>
                     <div class=" col-md-6 col-lg-6 col-sm-6">
                         <div class="form-group-mini">
 
@@ -139,11 +144,11 @@
 
             <div class="p-card-section">
                 <div class="p-card-section-header">
-                    <span> बाँकी दिन बिदा ( दिनमा ) </span>
+                    <span class="header-bold"> बाँकी दिन बिदा ( दिनमा ) </span>
                     <div>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mykModal">
+                        <a class="btn-sm btn-primary btn-p-blue" data-toggle="modal" data-target="#mykModal">
                             संचित बिदा
-                        </button>
+                        </a>
                         <div class="modal" id="mykModal">
                             <div class="modal-dialog">
                                 <div class="modal-content custom-width">
@@ -191,11 +196,11 @@
 
             <div class="p-card-section">
                 <div class="p-card-section-header">
-                    <span>
+                    <span class="header-bold">
                         काज अनुरोध
                     </span>
                     <div>
-                        <a class="btn btn-primary btn-sm flex-shrink-0" href="/EmployeeManagement/HREmployeeKaajHistory/_CreateHREmployeeKaajHistoryAsync?idHREmployee=@IdHremployee" data-ajax-model="">
+                        <a class="btn-primary btn-sm flex-shrink-0 btn-p-blue" href="/EmployeeManagement/HREmployeeKaajHistory/_CreateHREmployeeKaajHistoryAsync?idHREmployee=@IdHremployee" data-ajax-model="">
                             आबेदन
                         </a>
                     </div>
@@ -207,11 +212,11 @@
                     <p>
                         <span id="kaajinfo"></span>
                     </p>
-                    <div class="row">
-                        <div class="col-md-6 p-text-size-14">
+                    <div class="abadhi_sifaris">
+                        <div class="p-text-size-14">
                             अबधी :- <span id="kaajdate">-</span>
                         </div>
-                        <div class="col-md-6">
+                        <div class="">
                             <div class="p-text-size-12 ">
                                 <span class="label label-success" id="kaajstatus">
                                 </span>
@@ -223,7 +228,7 @@
 
             <div class="p-card-section">
                 <div class="p-card-section-header">
-                    <span>
+                    <span class="header-bold">
                         आउदो बिदा
                     </span>
                     @* <button>पत्रो हेर्नुहोस्</button>*@
@@ -249,7 +254,11 @@
             </div>
 
             <div class="p-card-section">
-                <div class="p-card-section-header">शिफ्ट</div>
+                <div class="p-card-section-header">
+                    <span class="header-bold">
+                        शिफ्ट
+                    </span>  
+                </div>
                 <hr />
                 <div id="loadingmonthfifth" class="loader" style="display: none;"></div>
 
@@ -269,28 +278,28 @@
     <div class="employee-table">
         <div class="employee-table-top">
             <div class="p-tab-menu">
-                <div class="active-table activeEmployeeTable" onclick="activeclass('activeEmployeeTable')">
+                <div class="active-table in-active-table  activeEmployeeTable" onclick="activeclass('activeEmployeeTable')">
                     कुल कर्मचारीहरु
                 </div>
-                <div class="text-gray p-text-size-14 presentEmployeeTable" onclick="activeclass('presentEmployeeTable')">
+                <div class=" in-active-table text-gray p-text-size-14 presentEmployeeTable" onclick="activeclass('presentEmployeeTable')">
                     उपस्थित कर्मचारीहरु
                 </div>
-                <div class="text-gray p-text-size-14 absentEmployeeTable" onclick="activeclass('absentEmployeeTable')">
+                <div class=" in-active-table text-gray p-text-size-14 absentEmployeeTable" onclick="activeclass('absentEmployeeTable')">
                     अनुपास्थित कर्मचारीहरु
                 </div>
-                <div class="text-gray p-text-size-14 leaveEmployeeTable" onclick="activeclass('leaveEmployeeTable')">
+                <div class=" in-active-table text-gray p-text-size-14 leaveEmployeeTable" onclick="activeclass('leaveEmployeeTable')">
                     बिदामा भएका कर्मचारीहरु
                 </div>
-                <div class="text-gray p-text-size-14 kaajEmployeeTable" onclick="activeclass('kaajEmployeeTable')">
+                <div class=" in-active-table text-gray p-text-size-14 kaajEmployeeTable" onclick="activeclass('kaajEmployeeTable')">
                     काजमा भएका कर्मचारीहरु
                 </div>
-                <div class="text-gray p-text-size-14 logsEmployeeTable" onclick="activeclass('logsEmployeeTable')">
+                <div class=" in-active-table text-gray p-text-size-14 logsEmployeeTable" onclick="activeclass('logsEmployeeTable')">
                     दैनिक लग
                 </div>
-                <div class="text-gray p-text-size-14 lateEmployeeTable" onclick="activeclass('lateEmployeeTable')">
+                <div class=" in-active-table text-gray p-text-size-14 lateEmployeeTable" onclick="activeclass('lateEmployeeTable')">
                     ढिलो आएका
                 </div>
-                <div class="text-gray p-text-size-14 yesterdayEmployeeTable" onclick="activeclass('yesterdayEmployeeTable')">
+                <div class=" in-active-table text-gray p-text-size-14 yesterdayEmployeeTable" onclick="activeclass('yesterdayEmployeeTable')">
                     हिजो छिटो गएका
                 </div>
             </div>
