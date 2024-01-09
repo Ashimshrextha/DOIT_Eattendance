@@ -810,6 +810,12 @@ body {
     .p-canvas-map #myChart {
         height: 150px !important;
     }
+    .p-home-content .dash-multi-card .multi-card-section {
+        grid-template-columns: repeat(1,1fr) !important;
+    }
+    .page-content #replacetarget .p-home-content .p-my-description .multi-card-section {
+        grid-template-columns: repeat(1,1fr) !important;
+    }
 }
 
 @media (max-width: 768px) {
@@ -879,7 +885,9 @@ body {
     #secondary-sidebar {
         width: 180px;
     }
-
+        .top-header .right-section {
+            margin-right: 45px;
+        }
         #secondary-sidebar a, .sidebar-list li .title .name {
             font-size: 12px;
         }
@@ -898,7 +906,7 @@ body {
     }
 
     .p-home-content .dash-multi-card .multi-card-section {
-        grid-template-columns: repeat(3, 1fr)
+        grid-template-columns: repeat(2, 1fr)
     }
 
         .p-home-content .dash-multi-card .multi-card-section .p-card-section {
@@ -1034,4 +1042,7 @@ body {
     background: #9d1903;
     padding: 2px 4px;
     border-radius: 10px;
+}
+.w-full{
+    width: 100%;
 }
