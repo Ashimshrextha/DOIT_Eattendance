@@ -1,5 +1,4 @@
 ﻿function loadMyChartData(chartData) {
-    debugger;
     const data = chartData.map(res => ({ LeaveTitle: res.LeaveTitle, RemainingLeave: res.RemainingLeave, AvailableLeave: res.AvailableLeave }));
     const chartLabels = chartData.map(res => res.LeaveTitle)
     const ctx = document.getElementById('myChart');

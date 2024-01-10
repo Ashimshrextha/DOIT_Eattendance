@@ -127,6 +127,9 @@ body {
             background-color: #f4b101;
             color: black !important;
         }
+        .sidebar-list li.active .title.link span{
+            color: black !important;
+        }
 
         .sidebar-list li.active .bxs-chevron-down {
             transition: all .5s ease;
@@ -174,7 +177,8 @@ body {
         background-color: #6e2020;
         font-size: 18px;
         padding: 10px 15px;
-        color: white
+        color: white;
+        margin-top: 2px;
     }
 
 .submenu .link {
@@ -263,6 +267,7 @@ body {
 
         .top-header .right-section .header-icon {
             padding: 10px;
+            cursor: pointer;
         }
 
 .vertical-line-left {
