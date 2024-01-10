@@ -128,8 +128,7 @@ function createMenuHTML(menuItems) {
             html += '</div>';
         } else {
             html += `<li class="dropdown ${item.url == locationPath ? 'active' : ''}">`;
-            html += `<div class="title"><a href="${item.url}" class="link"><span class="name">${item.name}</span></a>`;
-            html += '</div>';
+            html += `<a class="title link" href="${item.url}"><span class="name">${item.name}</span></a>`;
         }
         html += '</li>';
     });
