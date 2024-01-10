@@ -8,7 +8,15 @@
 }
 
 
-
+<style>
+    .p-home-content .dash-multi-card{
+        margin: 0;
+        padding: 0;
+    }
+        .p-home-content .dash-multi-card .header {
+            padding: 0;
+        }
+</style>
 <div class="p-home-content">
     <div class="dash-welcome">
         <span class="dash-date">
@@ -17,14 +25,11 @@
         </span>
         <div class="dash-welcome-status">
             <div class="welcome">नमस्ते !  @userdetail.Name </div>
-           
+
         </div>
     </div>
-  
-
-
     <div class="dash-multi-card">
-        <div class="header">कर्मचारीहरुको विवरण</div>
+        <div class="text-font-21 py-4">कर्मचारीहरुको विवरण</div>
         <div class="multi-card-section">
             <div class="p-card-section">
                 <div class="p-card-section-header">कुल कर्मचारीहरु</div>
@@ -49,33 +54,34 @@
             </div>
         </div>
     </div>
-
-
+    <div class="p-canvas-map">
+        <canvas id="superadminChart" style="display: block;margin-top: 50px; box-sizing: border-box; height: 438px; width: 1460px;"></canvas>
+    </div>
     <div class="employee-table">
         <div class="employee-table-top">
             <div class="p-tab-menu">
-                <div class="active-table">
+                <div class="in-active-table active-table">
                     कुल कर्मचारीहरु
                 </div>
-                <div class="text-gray p-text-size-14">
+                <div class="in-active-table text-gray p-text-size-14">
                     उपस्थित कर्मचारीहरु
                 </div>
-                <div class="text-gray p-text-size-14">
+                <div class="in-active-table text-gray p-text-size-14">
                     अनुपास्थित कर्मचारीहरु
                 </div>
-                <div class="text-gray p-text-size-14">
+                <div class="in-active-table text-gray p-text-size-14">
                     बिदामा भएका कर्मचारीहरु
                 </div>
-                <div class="text-gray p-text-size-14">
+                <div class="in-active-table text-gray p-text-size-14">
                     काजमा भएका कर्मचारीहरु
                 </div>
-                <div class="text-gray p-text-size-14">
+                <div class="in-active-table text-gray p-text-size-14">
                     दैनेक लग
                 </div>
-                <div class="text-gray p-text-size-14">
+                <div class="in-active-table text-gray p-text-size-14">
                     ढिलो आएका
                 </div>
-                <div class="text-gray p-text-size-14">
+                <div class="in-active-table text-gray p-text-size-14">
                     हिजो छिटो गएका
                 </div>
             </div>
@@ -94,6 +100,159 @@
 <script>
 
     $(document).ready(function () {
+        const chartData = [
+            {
+                "IdLeaveType": 1,
+                "IdMasterLeaveTitle": 2,
+                "LeaveTitle": "घर बिदा",
+                "DeductedLeaveDay": null,
+                "AvailableLeave": 0,
+                "TotalTakenLeave": 0,
+                "RemainingLeave": null,
+                "TotalFestival": null,
+                "TotalWeekend": null,
+                "TotalHalfDays": null,
+                "TotalRequestDays": null,
+                "EligiblePerYear": null,
+                "SavingLeave": null
+            },
+            {
+                "IdLeaveType": 2,
+                "IdMasterLeaveTitle": 3,
+                "LeaveTitle": "विरामी बिदा",
+                "DeductedLeaveDay": null,
+                "AvailableLeave": 12,
+                "TotalTakenLeave": 0,
+                "RemainingLeave": null,
+                "TotalFestival": null,
+                "TotalWeekend": null,
+                "TotalHalfDays": null,
+                "TotalRequestDays": null,
+                "EligiblePerYear": 12,
+                "SavingLeave": null
+            },
+            {
+                "IdLeaveType": 5,
+                "IdMasterLeaveTitle": 4,
+                "LeaveTitle": "प्रसुती बिदा",
+                "DeductedLeaveDay": null,
+                "AvailableLeave": 98,
+                "TotalTakenLeave": 0,
+                "RemainingLeave": null,
+                "TotalFestival": null,
+                "TotalWeekend": null,
+                "TotalHalfDays": null,
+                "TotalRequestDays": null,
+                "EligiblePerYear": 98,
+                "SavingLeave": null
+            },
+            {
+                "IdLeaveType": 9,
+                "IdMasterLeaveTitle": 6,
+                "LeaveTitle": "अध्ययन बिदा",
+                "DeductedLeaveDay": null,
+                "AvailableLeave": 1095,
+                "TotalTakenLeave": 0,
+                "RemainingLeave": null,
+                "TotalFestival": null,
+                "TotalWeekend": null,
+                "TotalHalfDays": null,
+                "TotalRequestDays": null,
+                "EligiblePerYear": 1095,
+                "SavingLeave": null
+            },
+            {
+                "IdLeaveType": 8,
+                "IdMasterLeaveTitle": 8,
+                "LeaveTitle": "किरिया बिदा",
+                "DeductedLeaveDay": null,
+                "AvailableLeave": 30,
+                "TotalTakenLeave": 0,
+                "RemainingLeave": null,
+                "TotalFestival": null,
+                "TotalWeekend": null,
+                "TotalHalfDays": null,
+                "TotalRequestDays": null,
+                "EligiblePerYear": 30,
+                "SavingLeave": null
+            },
+            {
+                "IdLeaveType": 616,
+                "IdMasterLeaveTitle": 9,
+                "LeaveTitle": "वाटो म्याद",
+                "DeductedLeaveDay": null,
+                "AvailableLeave": 7,
+                "TotalTakenLeave": 0,
+                "RemainingLeave": null,
+                "TotalFestival": null,
+                "TotalWeekend": null,
+                "TotalHalfDays": null,
+                "TotalRequestDays": null,
+                "EligiblePerYear": 7,
+                "SavingLeave": null
+            },
+            {
+                "IdLeaveType": 615,
+                "IdMasterLeaveTitle": 10,
+                "LeaveTitle": "मिटिङ/गोष्ठी",
+                "DeductedLeaveDay": null,
+                "AvailableLeave": 7,
+                "TotalTakenLeave": 0,
+                "RemainingLeave": null,
+                "TotalFestival": null,
+                "TotalWeekend": null,
+                "TotalHalfDays": null,
+                "TotalRequestDays": null,
+                "EligiblePerYear": 7,
+                "SavingLeave": null
+            },
+            {
+                "IdLeaveType": 7,
+                "IdMasterLeaveTitle": 13,
+                "LeaveTitle": "भैपरि आउने बिदा",
+                "DeductedLeaveDay": null,
+                "AvailableLeave": 6,
+                "TotalTakenLeave": 0,
+                "RemainingLeave": null,
+                "TotalFestival": null,
+                "TotalWeekend": null,
+                "TotalHalfDays": null,
+                "TotalRequestDays": null,
+                "EligiblePerYear": 6,
+                "SavingLeave": null
+            },
+            {
+                "IdLeaveType": 10,
+                "IdMasterLeaveTitle": 14,
+                "LeaveTitle": "पर्व बिदा",
+                "DeductedLeaveDay": null,
+                "AvailableLeave": 6,
+                "TotalTakenLeave": 0,
+                "RemainingLeave": null,
+                "TotalFestival": null,
+                "TotalWeekend": null,
+                "TotalHalfDays": null,
+                "TotalRequestDays": null,
+                "EligiblePerYear": 6,
+                "SavingLeave": null
+            },
+            {
+                "IdLeaveType": 10936,
+                "IdMasterLeaveTitle": 15,
+                "LeaveTitle": "जातीय/समुदायको बिदा",
+                "DeductedLeaveDay": null,
+                "AvailableLeave": 1,
+                "TotalTakenLeave": 0,
+                "RemainingLeave": null,
+                "TotalFestival": null,
+                "TotalWeekend": null,
+                "TotalHalfDays": null,
+                "TotalRequestDays": null,
+                "EligiblePerYear": 1,
+                "SavingLeave": null
+            }
+        ]
+        loadSuperAdminChartData(chartData)
         const currentDate = new Date();
         var yearID = @Model.YearNp;
         var monthID = @Model.MonthNp;
