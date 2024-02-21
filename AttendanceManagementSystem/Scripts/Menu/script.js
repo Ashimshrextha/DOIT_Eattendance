@@ -38,7 +38,6 @@ async function fetchMenuInformation() {
         const response = await fetch('/Home/GetMenuInformation');
         if (response.ok) {
             const data = await response.json();
-            console.log('getting:', data);
             menuList.length = 0; 
             menuList.push(...data); // Add the new menu items to the menuList array
             let currentLocation = ''
@@ -72,16 +71,20 @@ fetchMenuInformation().then(() => {
 
 
 
-
+var count =0
 function changeSubmenu(menuName) {
+    count++
     const currentMenu = menuList.find(res => res.name === menuName)
-    console.log(currentMenu)
+    console.log(currentMenu, count)
     toggleMainSidebar()
     if (currentMenu) {
         const secondarySidebar = document.getElementById('secondary-sidebar');
         secondarySidebar.innerHTML = ''
         const currentMenuDom = createMenuHTML(currentMenu)
         secondarySidebar.innerHTML = currentMenuDom
+        if (count != 1 && screen.width <= 768) {
+            secondarySidebar.style.display = "block"
+        } 
         appendEventListener();
     }
 
@@ -100,12 +103,16 @@ function createMainSidebarMenu() {
     })
     primarySidebar.innerHTML = html
 }
-
+function closeSecondarySidebar() {
+    const secondarySidebar = document.getElementById('secondary-sidebar');
+    secondarySidebar.style.display = "none"
+}
 function createMenuHTML(menuItems) {
     let html = `
       <div class="sidebar-list">
       <div class="active-menu-title">
           ${menuItems.name}
+          <span class='close-btn-second' onclick="closeSecondarySidebar()">x</span>
       </div>
       <ul class="sidebar-list">`;
     menuItems.menu.forEach(item => {
